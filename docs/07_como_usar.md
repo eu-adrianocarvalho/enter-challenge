@@ -3,86 +3,89 @@
 ## Instalação (uma vez)
 
 Pré-requisitos:
-- Python 3.11 ou mais novo;
-- Node.js 18 ou mais novo;
+- Node.js 22 ou mais novo (o `npm test` usa glob no `node --test`, disponível a partir do 21);
 - uma chave da OpenAI;
-- Microsoft Word ou LibreOffice, para gerar o PDF.
+- Microsoft Edge ou Google Chrome, para imprimir a carta em PDF;
+- o app do Rivet 1.25 ou mais novo, para rodar pelo app.
 
 ```powershell
-py -3.13 -m venv .venv
-.venv\Scripts\python -m pip install -r requirements.txt
-npm install                               # instala o @ironclad/rivet-cli 1.25.0
+npm install                               # rivet-cli, pdf-parse e yaml (e marked e mammoth para o site)
 Copy-Item .env.example .env               # e coloque a OPENAI_API_KEY no .env
 ```
 
-## Gerar a carta
+## Gerar a carta pelo app do Rivet
+
+1. Abra `rivet/xp_monthly_letter.rivet-project` no Rivet e coloque a chave da OpenAI em *Settings*.
+2. Troque o executor de **Browser** para **Node**. Os nodes de código leem arquivos, chamam o BCB e o Yahoo e usam o navegador para gerar o PDF, e só o executor Node permite isso.
+3. Abra o grafo `monthly_letter` e aperte **Run**. Cada node acende quando roda; os loops mostram cada tentativa. Em 30 a 50 segundos, o PDF está em `Output/`.
+4. Clique em qualquer node para ver o que ele recebeu e devolveu. As saídas do grafo são `status`, `pdf_path` e `brief`.
+
+A entrada `repo_dir` vem preenchida com a pasta onde o projeto foi gerado. Se o repositório estiver em outra pasta, rode `npm run build` uma vez ou digite o caminho na entrada. Se a pasta estiver errada, o primeiro node para com um erro de arquivo não encontrado, em vez de seguir com dado vazio como a v1 fazia.
+
+**Cuidado com o app aberto:** o `.rivet-project` é gerado por `npm run build`. Se o app estiver com uma versão antiga aberta e você salvar, ele grava essa versão por cima. Depois de um build, feche o projeto no app sem salvar e abra de novo.
+
+## Gerar a carta pelo terminal
 
 ```powershell
-.venv\Scripts\python src\run.py
+npm run letter
 ```
 
-Na primeira vez leva cerca de 1 minuto. Da segunda em diante, as respostas do LLM vêm de `data/llm/`, a execução leva segundos e não gasta nada. O brief é impresso no terminal.
+Roda o mesmo `monthly_letter` com o `rivet-cli`, lendo a chave do `.env`, e imprime `status`, `pdf_path` e `brief` em JSON. Se o Edge ou o Chrome estiverem fora do lugar padrão, defina `BROWSER_PATH` ou ajuste `pdf.browsers` no `config/settings.yaml`.
 
-| Opção | Para quê |
-|---|---|
-| `--refresh-llm` | Chama os grafos de novo, ignorando as respostas guardadas |
-| `--refresh-market` | Baixa de novo as cotas da CVM e os benchmarks |
-| `--no-pdf` | Gera só o DOCX, sem precisar de Word ou LibreOffice |
+Cada execução chama a API: cerca de US$ 0,10 com gpt-4.1.
 
 ## O que sai em `Output/`
 
 | Arquivo | Para quem |
 |---|---|
 | `carta_albert_2025-05-07.pdf` | O cliente |
-| `carta_albert_2025-05-07.docx` | O assessor, se quiser ajustar algo antes de enviar |
+| `carta_albert_2025-05-07.html` | A fonte da carta: é o que vira o PDF, e abre em qualquer navegador |
 | `brief_assessor_albert_2025-05-07.md` | O assessor: o que revisar e aprovar |
-| `grafico_albert_2025-05-07.png` | O gráfico que vai na carta |
 | `facts_albert_2025-05-07.json` | Auditoria: os FACTS e o texto final da carta |
-| `run_log_albert_2025-05-07.json` | Auditoria: tokens, custo e tempo de cada chamada |
+| `run_log_albert_2025-05-07.json` | Auditoria: tokens e custo de cada chamada ao LLM |
 
 ## O fluxo do assessor
 
-1. Abrir o brief e ver o **status** no topo ("PRONTA PARA REVISÃO" ou "BLOQUEADA").
+1. Abrir o brief e ver o **status** no topo ("PRONTA PARA REVISÃO DO ASSESSOR" ou "BLOQUEADA").
 2. Resolver os alertas de severidade **alta**. No caso do Albert: confirmar a liquidação do CDB e checar o salto de +76% da HAPV3.
 3. Conferir as sugestões, as citações do research que as sustentam e a nota de IR.
-4. Enviar o PDF, ou ajustar o DOCX e exportar.
+4. Enviar o PDF.
 
-## Ver os grafos no app do Rivet
+Se a carta sair bloqueada, o motivo aparece na seção de checagens do brief. Como o LLM varia de uma execução para outra, rodar de novo costuma resolver apontamentos do revisor; um extrato que não reconcilia, não.
 
-1. Abrir `rivet/xp_monthly_letter.rivet-project` no Rivet.
-2. Colocar a chave da OpenAI em *Settings*.
-3. Escolher um grafo, por exemplo `write_letter` ou `macro_outlook`, e rodar.
+## Rodar um grafo de LLM sozinho
 
-Os inputs já vêm preenchidos com os dados reais da última execução do Albert.
+Cada um dos seis grafos de LLM (`macro_outlook`, `write_letter` e os outros) também roda sozinho no app: as entradas vêm preenchidas com dados reais do Albert (`data/rivet_inputs/`). Serve para mostrar um prompt e a resposta estruturada sem rodar o fluxo inteiro.
 
-Para editar um prompt, mude o arquivo em `rivet/prompts/` e rode `.venv\Scripts\python src\build_rivet.py` para regenerar o projeto.
+## Mudar um prompt ou o código de um node
 
-**Cuidado com o app do Rivet aberto:** o `.rivet-project` é gerado a partir de `rivet/prompts/` e `rivet/schemas/`. Se o app estiver com uma versão antiga aberta e você salvar, ele grava essa versão por cima. Isso já aconteceu durante o desenvolvimento: o arquivo voltou a ter 5 grafos, sem o `review_letter`. O `src/run.py` regenera o projeto antes de cada execução, então o pipeline nunca usa um grafo desatualizado. Mas, para ver a versão atual no app, feche e abra o arquivo de novo.
-
-## Rodar os testes
+Os prompts ficam em `rivet/prompts/`, os schemas em `rivet/schemas/` e o código dos nodes em `rivet/code/`. Depois de editar:
 
 ```powershell
-.venv\Scripts\python -m pytest
+npm test          # 8 testes, sem chave de API, cerca de 1 segundo
+npm run build     # regenera rivet/xp_monthly_letter.rivet-project
 ```
+
+Editar o código dentro do app não adianta: o próximo build sobrescreve. Nos nodes de código, não marque *Allow require*: no app desktop isso quebra o node (ver [Arquitetura e código](04_arquitetura_e_codigo.md)).
 
 ## Gerar a documentação e o relatório
 
 ```powershell
-.venv\Scripts\python src\build_docs.py     # recria docs/index.html (o src\run.py já faz isso no final)
-.venv\Scripts\python src\build_report.py   # recria docs/relatorio.pdf a partir de docs/relatorio.md
+npm run docs      # recria docs/index.html com os números da última carta em Output/
+npm run report    # recria docs/relatorio.pdf a partir de docs/relatorio.md
 ```
 
-O `docs/relatorio.pdf` é o relatório curto que o desafio pede (até 2 páginas): problemas da v1, racional da solução e próximos passos. Para mudar o texto, edite `docs/relatorio.md` e rode o segundo comando; ele avisa se passar de 2 páginas.
+O `docs/relatorio.pdf` é o relatório curto que o desafio pede (até 2 páginas): problemas da v1, racional da solução e próximos passos. O segundo comando avisa se passar de 2 páginas. O site usa o Mermaid e as fontes da internet; sem conexão, o texto aparece, mas os diagramas não.
 
 ## Trocar o logo da carta
 
-O logo fica em `assets/xp/` e o caminho é definido em `config/settings.yaml` (`brand.logo`). Para trocar, basta colocar o arquivo novo na pasta, ajustar o caminho e rodar `src\run.py`, sem mexer no código. Se o arquivo não existir, a execução para com uma mensagem dizendo qual caminho corrigir.
+O logo fica em `Input/xp_inc_logo.jpg`, e o caminho é definido em `config/settings.yaml` (`brand.logo`). Para trocar, coloque o arquivo novo (JPG ou PNG) em `Input/`, ajuste o caminho e gere a carta de novo, sem mexer no código.
 
 Se o PDF estiver aberto num visualizador, feche e abra de novo, porque a maioria dos visualizadores não recarrega o arquivo sozinha.
 
 ## Outro cliente ou outro mês
 
 1. Em `config/settings.yaml`, troque os caminhos dos arquivos de entrada e as datas `period.start` e `period.end`.
-2. Rode com `--refresh-market`, para baixar as cotas e os benchmarks do novo período.
+2. Para outro mês, atualize o recorte das cotas da CVM em `data/market/cvm_inf_diario_subset.csv` (ver [Dados externos](05_dados_externos.md)); os benchmarks são buscados ao vivo.
 
-Hoje existem faixas apenas para o perfil **moderado**. Os outros perfis precisam do seu `config/allocation_*.yaml`, e fundos novos precisam entrar em `config/fund_registry.yaml`.
+Hoje existem faixas apenas para o perfil **moderado**. Outro perfil precisa do seu `config/allocation_*.yaml` e de uma entrada no `bands` do `rivet/code/load_inputs.js`, que hoje carrega só o moderado. Fundos novos precisam entrar em `config/fund_registry.yaml`.

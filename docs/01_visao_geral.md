@@ -21,12 +21,15 @@ As restrições do enunciado:
 
 | Entregável | Onde |
 |---|---|
-| Workflow revisado: 6 grafos no Rivet mais o código Python que calcula, valida e formata | `rivet/xp_monthly_letter.rivet-project`, `src/` |
-| Nova carta para o Albert (DOCX editável e PDF, 2 páginas) | `Output/carta_albert_2025-05-07.pdf` |
+| Workflow revisado: um grafo principal no Rivet (`monthly_letter`) que roda tudo, com 6 grafos de LLM, 2 loops de correção e 10 nodes de código | `rivet/xp_monthly_letter.rivet-project` |
+| O código dos nodes, em arquivos revisáveis, e o gerador do projeto | `rivet/code/`, `rivet/build.mjs` |
+| Nova carta para o Albert (PDF de 2 páginas, gerado a partir de um HTML com a identidade da XP) | `Output/carta_albert_2025-05-07.pdf` |
 | Brief do assessor, o documento de revisão que acompanha a carta | `Output/brief_assessor_albert_2025-05-07.md` |
 | Relatório curto (2 páginas): problemas, racional, próximos passos | `docs/relatorio.pdf` |
 | Documentação completa e este site | `docs/*.md`, `docs/index.html` |
-| Testes automatizados (29), que rodam sem chave de API | `src/tests/` |
+| Testes automatizados (8), que rodam sem chave de API | `rivet/tests/` |
+
+A branch `main` do repositório guarda a mesma solução numa versão anterior, com os cálculos em Python e o Rivet só nas etapas de LLM. Esta versão leva tudo para dentro do Rivet: dá para abrir o grafo no app, apertar Run e ver cada etapa acontecendo até o PDF sair.
 
 ## A ideia central
 
@@ -34,9 +37,9 @@ As restrições do enunciado:
 
 A v1 deixava o modelo inventar os números: o retorno, a diferença para o benchmark e as projeções macro. Na v2 nenhum número que o cliente vê é produzido por um LLM:
 
-- **números:** vêm dos dados e são calculados em Python, já formatados em pt-BR;
+- **números:** vêm dos dados e são calculados em nodes de código do Rivet (JavaScript), já formatados em pt-BR;
 - **LLM:** faz o que ele faz bem, ou seja, ler documentos bagunçados (o extrato em PDF, o relatório macro de 11 páginas) e escrever um texto claro;
-- **checagens:** entre uma etapa e outra, travas automáticas conferem o trabalho do LLM;
+- **checagens:** entre uma etapa e outra, travas automáticas conferem o trabalho do LLM e, quando falham, devolvem o erro ao modelo para corrigir;
 - **assessor:** um brief mostra a ele tudo o que merece atenção antes do envio.
 
 ## Resultado em números (Albert, período de 07/04/2025 a 07/05/2025)
@@ -48,15 +51,17 @@ A v1 deixava o modelo inventar os números: o retorno, a diferença para o bench
 | Caixa parado identificado (saldo + CDB vencido) | R$ 115.151,37 (29,8% do patrimônio) |
 | Sugestões | R$ 107 mil em Tesouro Selic, Tesouro IPCA+ e multimercado; troca de HAPV3 e MRFG3 por ITUB4 e B3SA3 |
 | Alertas de dados para o assessor | 11 |
-| Checagens da carta final | reconciliação 28/28, 23 citações do macro conferidas, 26 números conferidos, revisor sem apontamentos |
-| Custo | US$ 0,12 por execução completa; cerca de US$ 0,08 por cliente, porque o macro é compartilhado |
+| Checagens da carta | reconciliação 28/28, citações do macro conferidas no relatório, todo número da carta conferido nos FACTS, revisor sem apontamento grave |
+| Tempo e custo | 30 a 50 segundos e cerca de US$ 0,10 por execução completa com gpt-4.1 |
+
+Os valores exatos de cada execução (quantas citações foram mantidas, quantos números foram conferidos, quantas versões da carta foram escritas) ficam no brief, porque variam um pouco de uma execução para outra.
 
 ## Como ler esta documentação
 
 1. [Diagnóstico da v1](02_diagnostico_v1.md): o que estava errado e a prova de cada problema.
 2. [Melhorias implementadas](03_melhorias_implementadas.md): as três áreas sugeridas, o que foi feito e como.
-3. [Arquitetura e código](04_arquitetura_e_codigo.md): diagramas do fluxo, por que Rivet e Python, e por que vários módulos. No site, a seção **Grafos do Rivet** mostra os 6 grafos da v2 e o grafo da v1 desenhados como no app.
+3. [Arquitetura e código](04_arquitetura_e_codigo.md): o grafo `monthly_letter`, por que tudo no Rivet e como o código dos nodes é organizado e testado. No site, a seção **Grafos do Rivet** mostra os 9 grafos da v2 e o grafo da v1 desenhados como no app.
 4. [Dados externos](05_dados_externos.md): por que buscar dados na CVM, no Banco Central e no Yahoo.
 5. [Qualidade e travas](06_qualidade_e_travas.md): como o sistema evita erros, com evidências reais.
-6. [Como usar](07_como_usar.md): instalar, rodar e demonstrar.
+6. [Como usar](07_como_usar.md): instalar, rodar no app do Rivet ou no terminal e demonstrar.
 7. [Roteiro da reunião](08_roteiro_da_reuniao.md): ordem da apresentação e respostas às perguntas do desafio.

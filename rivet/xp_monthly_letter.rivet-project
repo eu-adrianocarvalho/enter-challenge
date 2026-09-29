@@ -6612,24 +6612,17 @@ data:
                 ].join('\n');
               }
 
-              /* Node "Publicar": grava a carta em HTML em Output/, gera o PDF com um navegador headless (Edge ou Chrome,
-                 ou o caminho em BROWSER_PATH), conta as páginas, define o status (pronta ou bloqueada), escreve o brief
-                 do assessor, os FACTS e o log de tokens e custo de cada chamada ao LLM. Devolve o caminho do PDF, o
-                 status e o brief. Precisa do executor Node (process). */
+              /* Node "Publicar": grava a carta em HTML em Output/ e gera o PDF com um navegador headless (BROWSER_PATH
+                 ou o primeiro de pdf.browsers no settings.yaml que existir). Conta as páginas, define o status (pronta ou
+                 bloqueada) e escreve o brief do assessor, os FACTS e o log de tokens e custo de cada chamada ao LLM.
+                 Devolve o caminho do PDF, o status e o brief. Precisa do executor Node (process). */
 
               const setup = input(inputs, 'context');
               const load = await projectRequire(setup.repo);
               const path = load('path');
               const fs = load('fs');
               const { execFileSync } = load('child_process');
-              const BROWSERS = [
-                process.env.BROWSER_PATH,
-                'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',
-                'C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe',
-                'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
-                '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
-                '/usr/bin/google-chrome', '/usr/bin/chromium', '/usr/bin/chromium-browser',
-              ].filter(Boolean);
+              const BROWSERS = [process.env.BROWSER_PATH, ...setup.settings.pdf.browsers].filter(Boolean);
               const READY = 'PRONTA PARA REVISÃO DO ASSESSOR';
               const BLOCKED = 'BLOQUEADA: resolver os itens que falharam antes de enviar';
 

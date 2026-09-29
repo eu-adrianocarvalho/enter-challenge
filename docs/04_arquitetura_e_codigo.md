@@ -1,186 +1,144 @@
 # Arquitetura e código
 
-## O fluxo
+## O grafo `monthly_letter`
+
+Tudo roda num único grafo do Rivet. Ele recebe só a pasta do projeto (`repo_dir`) e termina com o PDF da carta em `Output/`.
 
 ```mermaid
 flowchart TD
-  subgraph IN["Entradas do desafio"]
-    A1["Extrato (PDF)"]
-    A2["Perfil de risco (TXT)"]
-    A3["Relatório macro XP (PDF)"]
-    A4["Preços das ações (CSV)"]
+  R[/"Graph Input · repo_dir"/] --> L["Code · Ler entradas<br/>PDFs → texto, config, logo"]
+  L --> X
+  subgraph X["Loop · extraction_attempt (até 2 vezes)"]
+    X1(["LLM · extract_portfolio"]) --> X2["Code · Reconciliar extrato<br/>28 checagens"]
   end
-  subgraph AN["1 · analyze"]
-    B1["pdf_text<br/>PDF → texto"]
-    B2(["Rivet · extract_portfolio"])
-    B3["portfolio.reconcile<br/>28 checagens"]
-    B4(["Rivet · extract_profile"])
-    B5(["Rivet · macro_outlook"])
-    B6["grounding<br/>citações conferidas"]
-    B7["funds + benchmarks<br/>CVM · BCB · Yahoo"]
-    B8["returns<br/>retorno do período"]
-    B9["data_quality<br/>11 alertas"]
-    B10["suitability<br/>candidatos + IR"]
+  L --> P(["LLM · extract_profile"])
+  L --> M(["LLM · macro_outlook"]) --> G["Code · Conferir citações do macro"]
+  L --> D["Code · Dados de mercado<br/>CVM · BCB · Yahoo"]
+  X --> A["Code · Analisar carteira<br/>rentabilidade, alocação, candidatos, IR, alertas"]
+  P --> A
+  G --> A
+  D --> A
+  A --> AD(["LLM · advise"]) --> F["Code · Montar FACTS"]
+  G --> AD
+  F --> W
+  subgraph W["Loop · letter_attempt (até 3 versões)"]
+    W1(["LLM · write_letter"]) --> W2["Code · Fact-check dos números"] --> W3(["LLM · review_letter"]) --> W4["Code · Decidir a versão"]
   end
-  subgraph CO["2 · compose"]
-    C1(["Rivet · advise"])
-    C2["facts<br/>FACTS em pt-BR"]
-  end
-  subgraph PU["3 · publish"]
-    D1(["Rivet · write_letter"])
-    D2["factcheck<br/>números"]
-    D3(["Rivet · review_letter"])
-    D4["render<br/>DOCX + PDF ≤ 2 páginas"]
-    D5["brief do assessor"]
-  end
-  A1 --> B1
-  A3 --> B1
-  B1 --> B2 --> B3
-  B1 --> B5 --> B6
-  A2 --> B4
-  A4 --> B8
-  B3 --> B8
-  B7 --> B8
-  B8 --> B9
-  B3 --> B10
-  B4 --> B10
-  B10 --> C1
-  B6 --> C1
-  C1 --> C2
-  B8 --> C2
-  C2 --> D1 --> D2 --> D3
-  D3 -- "problemas viram correções (até 3 versões)" --> D1
-  D3 --> D4 --> D5
-  B9 --> D5
+  W --> H["Code · Montar a carta (HTML)"] --> PU["Code · Publicar<br/>PDF, brief, FACTS, custo"]
+  PU --> O[/"Graph Outputs · status, pdf_path, brief"/]
   classDef rivet fill:#ffae35,stroke:#000,color:#000
-  classDef py fill:#f3f3f3,stroke:#000,color:#000
+  classDef code fill:#f3f3f3,stroke:#000,color:#000
   classDef io fill:#171717,stroke:#171717,color:#fff
-  classDef bad fill:#fde2e2,stroke:#d62828,color:#000
-  class B2,B4,B5,C1,D1,D3 rivet
-  class B1,B3,B6,B7,B8,B9,B10,C2,D2,D4,D5 py
-  class A1,A2,A3,A4 io
+  class X1,P,M,AD,W1,W3 rivet
+  class L,X2,G,D,A,F,W2,W4,H,PU code
+  class R,O io
 ```
 
-Em laranja, os grafos do Rivet (LLM); em cinza, o código Python determinístico; em preto, as entradas.
+Em laranja, os grafos de LLM; em cinza, os nodes de código; em preto, a entrada e as saídas do grafo. As três chamadas depois de **Ler entradas** (extração, perfil e macro) e os **Dados de mercado** rodam em paralelo.
+
+O projeto tem 9 grafos:
+
+| Grafo | Papel |
+|---|---|
+| `monthly_letter` | O grafo principal: 16 nodes, do input ao PDF |
+| `extraction_attempt` | Corpo do primeiro loop: chama `extract_portfolio` e reconcilia o resultado |
+| `letter_attempt` | Corpo do segundo loop: escreve, confere os números, revisa e decide se a versão serve |
+| `extract_portfolio`, `extract_profile`, `macro_outlook`, `advise`, `write_letter`, `review_letter` | Os 6 grafos de LLM, todos no mesmo formato (abaixo) |
+
+Os dois loops usam o node **Loop Until** do Rivet: ele roda o subgrafo, confere a saída `done` e, se ela não for `"true"`, roda de novo passando as saídas da volta anterior (as correções e o log de tokens) como entradas da próxima.
 
 ## Onde cada peça roda
 
 ```mermaid
 flowchart LR
-  subgraph HOST["Máquina do assessor ou servidor"]
-    PY["Python · src/xp_letter"]
-    NODE["Node.js · rivet-cli 1.25"]
-    FILES[("config/ · data/ · Output/")]
+  subgraph HOST["Máquina do assessor"]
+    APP["Rivet (app desktop)<br/>executor Node"]
+    CLI["rivet-cli<br/>npm run letter"]
+    FILES[("Input/ · config/ · data/ · Output/")]
+    BR["Edge ou Chrome<br/>headless"]
   end
   OAI["OpenAI API · gpt-4.1"]
-  CVM["CVM · dados abertos"]
   BCB["Banco Central · SGS"]
   YH["Yahoo Finance"]
-  WORD["Word ou LibreOffice"]
-  PY <--> NODE
-  NODE --> OAI
-  PY --> CVM
-  PY --> BCB
-  PY --> YH
-  PY <--> FILES
-  PY --> WORD
+  APP --> OAI
+  CLI --> OAI
+  APP <--> FILES
+  CLI <--> FILES
+  APP --> BCB
+  APP --> YH
+  APP --> BR
   classDef rivet fill:#ffae35,stroke:#000,color:#000
-  classDef py fill:#f3f3f3,stroke:#000,color:#000
+  classDef code fill:#f3f3f3,stroke:#000,color:#000
   classDef io fill:#171717,stroke:#171717,color:#fff
-  classDef bad fill:#fde2e2,stroke:#d62828,color:#000
-  class NODE,OAI rivet
-  class PY,FILES,WORD py
-  class CVM,BCB,YH io
+  class APP,CLI,OAI rivet
+  class FILES,BR code
+  class BCB,YH io
 ```
 
-## Por que Rivet e Python juntos
+O mesmo projeto roda no app do Rivet (com o executor Node) ou no terminal pelo `rivet-cli`. O CLI faz as mesmas chamadas que o app (BCB, Yahoo, navegador); o diagrama mostra só as do app para não repetir as setas. As cotas da CVM não são baixadas na execução: o recorte usado está em `data/market/`.
 
-**O Rivet ficou com as etapas de LLM**, porque é a ferramenta do desafio e da equipe. Os seis grafos seguem o mesmo desenho, fácil de ler no app: entradas → prompt → Chat da OpenAI com JSON schema estrito → Extract JSON → saídas `result` e `usage`. Os prompts e schemas ficam em arquivos de texto revisáveis (`rivet/prompts`, `rivet/schemas`), e `src/build_rivet.py` monta o projeto a partir deles.
+## Por que tudo no Rivet
 
-**O Python ficou com o que precisa estar certo sempre:** contas, regras, checagens e formatação. Isso até daria para fazer em nodes de código do Rivet, mas em Python é testável (29 testes rodando em 5 segundos, sem API), versionável e mais fácil de manter.
+**Visibilidade.** O fluxo inteiro fica num lugar só: abrir o `monthly_letter` no app mostra cada etapa, e ao rodar cada node acende com a entrada e a saída que recebeu. Quem mantém o workflow, e usa Rivet no dia a dia, lê o processo sem abrir outra ferramenta.
 
-**A ligação entre os dois** é o `rivet_runner.py`, que chama cada grafo pelo `rivet-cli` oficial, passa os inputs em JSON e lê o resultado. Cada resposta fica guardada em `data/llm/`, identificada por um hash do prompt, do schema, do modelo e dos inputs.
+**O que isso custou:**
+- **Code nodes só rodam JavaScript.** As contas e regras foram escritas em JavaScript e conferidas contra a versão Python da branch `main`: os FACTS saem idênticos, e um teste garante isso.
+- **Code nodes não importam módulos.** O código fica em arquivos: um por node em `rivet/code/` e as funções compartilhadas em `rivet/code/lib/`. O `rivet/build.mjs` cola as bibliotecas de cada node antes do corpo e grava o projeto. Editar o código dentro do app não adianta, porque o próximo build sobrescreve.
+- **Ler e escrever arquivos exige o executor Node.** No app, esse executor roda Node 18 e quebra quando um Code node marca *Allow require*, com o erro "The argument 'filename' … Received undefined". Os nodes carregam os módulos por `projectRequire()` (`lib/modules.js`), que funciona no app e no CLI.
+- **O Rivet não escreve arquivos nem gera DOCX, e o node Chat da OpenAI não recebe PDF.** Por isso a leitura dos PDFs (pdf.js) e a gravação das saídas são nodes de código, e a carta é HTML impresso em PDF pelo navegador.
 
-```mermaid
-sequenceDiagram
-  participant P as pipeline.py
-  participant R as rivet_runner.py
-  participant C as data/llm
-  participant N as rivet-cli (Node.js)
-  participant O as OpenAI
-  P->>R: run_graph("write_letter", inputs)
-  R->>C: já existe resposta para hash(prompt + schema + modelo + inputs)?
-  alt resposta guardada
-    C-->>R: resultado, tokens e custo
-  else primeira execução
-    R->>N: rivet run projeto grafo --inputs-stdin
-    N->>O: Chat Completions com JSON schema estrito
-    O-->>N: JSON + usage
-    N-->>R: saídas result e usage
-    R->>C: grava a resposta
-  end
-  R-->>P: GraphRun(result, tokens, custo em US$)
-```
-
-## Por que vários arquivos Python
-
-Cada módulo tem **uma responsabilidade**. Isso permite testar cada peça isoladamente e trocar uma sem mexer nas outras. Por exemplo, a fonte de cotas pode trocar de CVM para ANBIMA mexendo só em `funds.py`. Também facilita a revisão: quem quer auditar o cálculo lê só `returns.py`.
-
-| Módulo | Faz | Por que separado |
-|---|---|---|
-| `config.py` | Lê os YAML e resolve caminhos | Um único ponto para mudar cliente, período, modelos e limites |
-| `pdf_text.py` | PDF → texto | A extração de PDF é trocável (por exemplo, pela API de posições da XP) |
-| `portfolio.py` | Modelo do extrato e reconciliação | A trava que decide se o dado extraído pelo LLM é confiável |
-| `prices.py` | Lê o CSV de preços | A fonte de preços é trocável |
-| `funds.py` | Cotas da CVM → retorno dos fundos | Dependência externa isolada, com cache |
-| `benchmarks.py` | CDI, IPCA, Ibovespa | Dependência externa isolada, com cache |
-| `returns.py` | Rentabilidade | O cálculo central, 100% testado |
-| `data_quality.py` | Alertas de dados | Regras de negócio que crescem com o tempo |
-| `suitability.py` | Alocação × perfil, candidatos, IR | A lógica de recomendação, auditável |
-| `grounding.py` | Confere as citações do macro | Trava contra alucinação no macro |
-| `facts.py` | Monta o bloco FACTS | O único lugar de onde a carta tira números |
-| `factcheck.py` | Confere os números da carta | Trava determinística contra números inventados |
-| `formatting.py` | Formatação pt-BR | Garante um formato único para cada número (o fact-check depende disso) |
-| `rivet_project.py` | Gera o `.rivet-project` | O grafo nasce dos prompts e schemas versionados |
-| `rivet_runner.py` | Executa grafos, guarda respostas, calcula custo | A ponte com o Rivet |
-| `charts.py` | Gráfico | Visual separado do texto |
-| `render.py` | DOCX e PDF | A formatação automática |
-| `brief.py` | Brief do assessor | O documento de revisão humana |
-| `pipeline.py` | Orquestra as três etapas (analyze, compose, publish) | Mostra o fluxo inteiro em um arquivo curto |
-
-Quem chama quem:
+## Como o código dos nodes é organizado
 
 ```mermaid
 flowchart LR
-  run["run.py"] --> pipe["pipeline.py"]
-  cfg["config.py"] -.-> pipe
-  pipe --> rr["rivet_runner.py"] --> rp["rivet_project.py"]
-  pipe --> pt["pdf_text.py"]
-  pipe --> pf["portfolio.py"]
-  pipe --> pr["prices.py"]
-  pipe --> fu["funds.py"]
-  pipe --> bm["benchmarks.py"]
-  pipe --> rt["returns.py"]
-  pipe --> dq["data_quality.py"]
-  pipe --> st["suitability.py"]
-  pipe --> gr["grounding.py"]
-  pipe --> fa["facts.py"]
-  pipe --> fc["factcheck.py"]
-  pipe --> ch["charts.py"]
-  pipe --> rd["render.py"]
-  pipe --> br["brief.py"]
-  gr --> fc
-  fa --> fm["formatting.py"]
-  rd --> fm
+  LIB["rivet/code/lib/*.js<br/>funções compartilhadas"] --> AS["assembleCode()<br/>rivet/code/nodes.mjs"]
+  BODY["rivet/code/‹node›.js<br/>corpo do node"] --> AS
+  PR["rivet/prompts · rivet/schemas"] --> B["rivet/build.mjs"]
+  AS --> B --> PJ[("xp_monthly_letter.rivet-project")]
+  AS --> T["rivet/tests<br/>roda o mesmo texto"]
   classDef rivet fill:#ffae35,stroke:#000,color:#000
-  classDef py fill:#f3f3f3,stroke:#000,color:#000
-  classDef io fill:#171717,stroke:#171717,color:#fff
-  classDef bad fill:#fde2e2,stroke:#d62828,color:#000
-  class rr,rp rivet
-  class run,pipe io
+  classDef code fill:#f3f3f3,stroke:#000,color:#000
+  class PJ rivet
+  class LIB,BODY,AS,PR,B,T code
 ```
 
-## Os grafos do Rivet
+`rivet/code/nodes.mjs` é o catálogo: para cada node, as bibliotecas, as portas de entrada e saída e as permissões do executor. A mesma função `assembleCode()` monta o código que vai para o projeto e o código que os testes executam, então o que é testado é exatamente o que roda no Rivet.
+
+Os 10 nodes de código:
+
+| Node | Arquivo | Faz |
+|---|---|---|
+| Ler entradas | `load_inputs.js` | Lê o `settings.yaml`, extrai o texto dos PDFs, carrega faixas, prateleira, fundos e o logo |
+| Dados de mercado | `market_data.js` | Preços do CSV, retorno dos fundos pela CVM, CDI, IPCA e Ibovespa ao vivo (com arquivo salvo se a rede falhar) |
+| Reconciliar extrato | `reconcile.js` | 28 checagens do JSON transcrito; o que falhar vira correção para a próxima volta do loop |
+| Conferir citações do macro | `ground_macro.js` | Mantém só o que tem citação e números encontrados no relatório |
+| Analisar carteira | `analyze.js` | Rentabilidade, alocação × perfil, candidatos de compra e venda, IR e alertas de dados |
+| Montar FACTS | `build_facts.js` | Junta a escolha do `advise` aos candidatos e monta o bloco de números da carta |
+| Fact-check dos números | `check_numbers.js` | Todo %, R$ e p.p. da carta tem de estar nos FACTS |
+| Decidir a versão | `decide_letter.js` | Junta fact-check, revisor e limite de palavras; decide se o loop termina |
+| Montar a carta (HTML) | `render_letter.js` | Carta em HTML com a identidade da XP, duas folhas A4 |
+| Publicar | `publish.js` | PDF pelo navegador, contagem de páginas, status, brief, FACTS e log de custo |
+
+As bibliotecas (`rivet/code/lib/`):
+
+| Biblioteca | Faz | Usada por |
+|---|---|---|
+| `io.js` | Lê as portas de entrada e empacota as saídas no formato do Rivet | todos |
+| `modules.js` | Carrega módulos do Node sem o *require* do Rivet | Ler entradas, Dados de mercado, Publicar |
+| `format.js` | Formatação pt-BR de R$, %, p.p. e datas; o fact-check depende de um formato único | quase todos |
+| `pdf.js` | PDF → texto, uma linha por linha de tabela | Ler entradas |
+| `market.js` | CSV de preços, cotas da CVM, BCB e Yahoo | Dados de mercado |
+| `portfolio.js` | Modelo do extrato e reconciliação | Reconciliar, Analisar, Montar FACTS, Publicar |
+| `returns.js` | Rentabilidade do período e desde a aplicação | Analisar, Montar FACTS, Montar a carta |
+| `suitability.js` | Alocação × faixas, candidatos, IR | Analisar, Montar FACTS, Montar a carta, Publicar |
+| `quality.js` | Os alertas de dados do brief | Analisar |
+| `grounding.js` | Confere as citações do macro | Conferir citações |
+| `factcheck.js` | Extrai e confere os números da carta | Conferir citações, Fact-check, Decidir |
+| `facts.js` | Monta o bloco FACTS | Montar FACTS, Montar a carta, Publicar |
+| `letter_html.js` | HTML e gráfico SVG da carta | Montar a carta |
+| `brief.js` | Brief do assessor em Markdown | Publicar |
+
+## Os grafos de LLM
 
 ```mermaid
 flowchart LR
@@ -192,15 +150,14 @@ flowchart LR
   C -- response --> E["Extract JSON"] --> R[/"Graph Output · result"/]
   C -- usage --> U[/"Graph Output · usage"/]
   classDef rivet fill:#ffae35,stroke:#000,color:#000
-  classDef py fill:#f3f3f3,stroke:#000,color:#000
+  classDef code fill:#f3f3f3,stroke:#000,color:#000
   classDef io fill:#171717,stroke:#171717,color:#fff
-  classDef bad fill:#fde2e2,stroke:#d62828,color:#000
   class C rivet
-  class P,S,O,E py
+  class P,S,O,E code
   class I1,I2,R,U io
 ```
 
-O mesmo formato vale para os seis grafos; muda só o prompt, o schema e as entradas. Na seção **Grafos do Rivet**, logo abaixo, cada um aparece desenhado como no app.
+O mesmo formato vale para os seis grafos; muda só o prompt, o schema e as entradas. Cada grafo também roda sozinho no app: as entradas vêm preenchidas com dados reais do Albert (`data/rivet_inputs/`).
 
 | Grafo | Modelo | Entrada | Saída |
 |---|---|---|---|
@@ -218,14 +175,12 @@ O mesmo formato vale para os seis grafos; muda só o prompt, o schema e as entra
 ## Estrutura do repositório
 
 ```
-config/         cliente, período, modelos, preços por token, faixas do perfil, produtos, fundos (CNPJ)
-data/           llm/ (respostas guardadas), market/ (CVM e benchmarks), rivet_inputs/, evidence/
-docs/           esta documentação, o relatório de 2 páginas e o site index.html
-Input/          arquivos do desafio (intactos)
-Output/         carta (DOCX/PDF), gráfico, brief, FACTS e log de custo; a carta da v1 continua aqui
-rivet/          prompts/, schemas/ e o projeto xp_monthly_letter.rivet-project
-src/            xp_letter/ (pacote), docsite/ (visualizador do Rivet), tests/, run.py, build_rivet.py,
-                build_docs.py, build_report.py
-assets/xp/      logo usado no cabeçalho da carta (caminho em config/settings.yaml → brand.logo)
+config/         cliente, período, modelos, preços por token, limites, logo, navegadores do PDF,
+                faixas do perfil, produtos e fundos (CNPJ)
+data/           market/ (cotas da CVM e benchmarks salvos), rivet_inputs/ (entradas padrão), evidence/
+docs/           esta documentação, o relatório de 2 páginas, o site index.html e o gerador em site/
+Input/          arquivos do desafio (intactos) e o logo da XP
+Output/         carta (HTML e PDF), brief, FACTS e log de custo; a carta da v1 continua aqui
+rivet/          xp_monthly_letter.rivet-project, build.mjs, code/, prompts/, schemas/, tests/
 enter_challenge.rivet-project   grafo da v1, intacto para comparação
 ```

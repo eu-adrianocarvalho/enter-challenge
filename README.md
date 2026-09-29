@@ -34,7 +34,7 @@ A run takes 30–50 s and costs about US$ 0.10 with gpt-4.1.
 
 ## Running it in the Rivet app
 
-1. `npm install` (brings `pdf-parse` and `yaml`, which the Code nodes load from `node_modules/`).
+1. `npm install` with Node.js 22 or later (brings `pdf-parse` and `yaml`, which the Code nodes load from `node_modules/`).
 2. Open `rivet/xp_monthly_letter.rivet-project` in Rivet 1.25 and set the OpenAI key under Settings.
 3. Switch the executor from **Browser** to **Node**: the Code nodes read files, run the browser that prints
    the PDF and call the BCB and Yahoo APIs, which only the Node executor allows.
@@ -50,10 +50,13 @@ cp .env.example .env     # then put your OPENAI_API_KEY in .env
 npm run letter           # runs monthly_letter with rivet-cli and prints status, pdf_path and brief as JSON
 npm test                 # 8 tests, no API key: runs each Code node the way Rivet's Node executor does
 npm run build            # regenerates the .rivet-project from rivet/prompts, rivet/schemas and rivet/code
+npm run docs             # rebuilds docs/index.html from docs/*.md and the latest letter in Output/
+npm run report           # rebuilds docs/relatorio.pdf, the 2-page challenge report, and checks the page count
 ```
 
 `npm run letter` loads `.env` with `node --env-file`, because `rivet-cli` reads `OPENAI_API_KEY` only from the
-environment. Set `BROWSER_PATH` if Edge or Chrome is not in its default location.
+environment. Set `BROWSER_PATH` if Edge or Chrome is not in its default location, or edit `pdf.browsers` in
+`config/settings.yaml`.
 
 ## Where things are
 
@@ -66,14 +69,16 @@ environment. Set `BROWSER_PATH` if Edge or Chrome is not in its default location
 | `rivet/prompts/*.md`, `rivet/schemas/*.json` | Prompts (English) and strict JSON schemas of the LLM graphs |
 | `rivet/build.mjs` | Writes the project file from everything above |
 | `rivet/tests/` | `node:test` suite; `fixtures/` holds the hand-transcribed statement and the FACTS of the Python version |
-| `config/settings.yaml` | Input files, reference period, models, prices per token, thresholds, logo |
+| `config/settings.yaml` | Input files, reference period, models, prices per token, thresholds, logo path, PDF browsers |
 | `config/allocation_moderate.yaml`, `research_shelf.yaml` | Target bands and products the engine may recommend (illustrative) |
 | `config/fund_registry.yaml` | Statement fund name → CNPJ and allocation bucket, verified by hand |
 | `data/market/` | CVM daily quotas used for fund returns, and the benchmark snapshot used offline |
 | `data/rivet_inputs/` | Defaults of the LLM graphs, so each one also runs on its own in the app |
 | `data/evidence/` | Real LLM failures that motivated each guard |
 | `Output/` | `carta_*.html` and `.pdf`, `brief_assessor_*.md`, `facts_*.json`, `run_log_*.json` |
-| `docs/` | Documentation in Portuguese and the 2-page report; they describe the Python version on `main` |
+| `docs/` | Documentation in Portuguese (`0*.md`), the 2-page report and the `index.html` site for the meeting |
+| `docs/site/` | Site and report generators (`npm run docs`, `npm run report`), with the site's CSS and browser scripts |
+| `Input/` | The challenge files, untouched, and the XP logo used in the letter header (`brand.logo`) |
 | `enter_challenge.rivet-project`, `Output/output_letter.docx` | The v1 graph and letter, untouched for comparison |
 
 ## Guards

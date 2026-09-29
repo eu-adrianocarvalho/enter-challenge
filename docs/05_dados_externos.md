@@ -17,25 +17,20 @@ Sem dados externos, a carta só poderia falar do mês de 19% da carteira e não 
 
 ```mermaid
 flowchart LR
-  CSV["CSV do desafio<br/>preço atual e anterior"] --> PR["prices.py"] --> ACO["Ações +3,30%"]
-  CVM["CVM · inf_diario_fi<br/>cotas diárias"] --> FU["funds.py"] --> FUN["Fundos +2,29%"]
-  FIDC["CVM · informe mensal FIDC"] -. "estimativa do Brave" .-> FU
-  BCB["Banco Central · SGS<br/>séries 12 e 433"] --> BM["benchmarks.py"]
-  YH["Yahoo Finance · ^BVSP"] --> BM
-  BM --> BEN["CDI +1,00% · IPCA 12m 5,48%<br/>Ibovespa +6,22%"]
-  ACO --> RT["returns.py<br/>carteira +2,51%"]
-  FUN --> RT
-  RT --> FACTS["FACTS da carta"]
+  CSV["CSV do desafio<br/>preço atual e anterior"] --> MD["Code · Dados de mercado<br/>lib/market.js"]
+  CVM[("data/market/cvm_inf_diario_subset.csv<br/>recorte das cotas diárias da CVM")] --> MD
+  FIDC["CVM · informe mensal FIDC<br/>estimativa do Brave em fund_registry.yaml"] -.-> MD
+  BCB["Banco Central · SGS<br/>séries 12 e 433"] --> MD
+  YH["Yahoo Finance · ^BVSP"] --> MD
+  SNAP[("data/market/benchmarks_*.json")] -. "só se a rede falhar" .-> MD
+  MD --> AN["Code · Analisar carteira<br/>ações +3,30% · fundos +2,29%<br/>carteira +2,51%"]
+  MD --> BEN["CDI +1,00% · IPCA 12m 5,48%<br/>Ibovespa +6,22%"]
+  AN --> FACTS["FACTS da carta"]
   BEN --> FACTS
-  FU -. grava .-> CACHE[("data/market/")]
-  BM -. grava .-> CACHE
-  classDef rivet fill:#ffae35,stroke:#000,color:#000
-  classDef py fill:#f3f3f3,stroke:#000,color:#000
+  classDef code fill:#f3f3f3,stroke:#000,color:#000
   classDef io fill:#171717,stroke:#171717,color:#fff
-  classDef bad fill:#fde2e2,stroke:#d62828,color:#000
-  class CSV,CVM,FIDC,BCB,YH io
-  class PR,FU,BM,RT py
-  class ACO,FUN,BEN,FACTS,CACHE py
+  class CSV,CVM,FIDC,BCB,YH,SNAP io
+  class MD,AN,BEN,FACTS code
 ```
 
 | Fonte | O que trouxe | Por que essa fonte |
@@ -45,6 +40,16 @@ flowchart LR
 | **Yahoo Finance** (`^BVSP`) | Fechamento do Ibovespa nas duas datas | O Banco Central parou de publicar o Ibovespa em 2019 (série 7). A B3, dona do índice, não oferece API gratuita de histórico, e o Yahoo é a fonte gratuita prática |
 
 **Sobre a B3:** nenhum dado foi buscado diretamente na B3. O Ibovespa é um índice da B3, mas o histórico veio do Yahoo Finance pelo motivo acima. Em produção, a XP usaria o próprio feed de mercado (B3 ou Bloomberg) no lugar do Yahoo.
+
+## O que é buscado ao vivo e o que está salvo
+
+| Dado | Na execução do grafo |
+|---|---|
+| CDI, IPCA, Ibovespa | Buscados ao vivo pelo node **Dados de mercado** (BCB e Yahoo). Se a rede falhar, ele usa `data/market/benchmarks_2025-04-07_2025-05-07.json` e registra a origem na própria saída |
+| Cotas dos fundos | Lidas de `data/market/cvm_inf_diario_subset.csv`: as linhas dos 7 fundos no informe diário da CVM de abril e maio de 2025, baixadas uma vez. O arquivo é também a prova de onde saiu cada retorno |
+| Retorno do Brave (FIDC) | Estimativa fixa em `config/fund_registry.yaml`, com o método descrito |
+
+**Limite desta versão:** o grafo não baixa o informe da CVM. Para outro mês, o recorte `cvm_inf_diario_subset.csv` precisa ser atualizado (é um arquivo mensal público da CVM, filtrado pelos CNPJs do `fund_registry.yaml`). A versão Python da branch `main` fazia esse download; trazê-lo para um node de código é o próximo passo natural.
 
 ## Como os fundos foram identificados
 
@@ -61,11 +66,6 @@ Os nomes do extrato não batem com o cadastro da CVM. A resolução CVM 175 reno
 | Ibiuna Hedge ST Advisory FIC FIM | 30.493.349/0001-73 | +0,63% |
 
 O **Brave I** virou "Brave 90 FIC FIDC" em 05/11/2024, e FIDCs não publicam cota diária. O retorno usado é uma estimativa pro rata por dias úteis do informe mensal do FIDC (abril 1,19%; maio 1,29%). A carta usa esse número, e o brief marca o fundo como **estimado**.
-
-## Reprodutibilidade
-
-- **Tudo o que foi baixado fica em `data/market/`**, inclusive o recorte das cotas da CVM (`cvm_inf_diario_subset.csv`), que prova de onde veio cada retorno. A execução seguinte não depende de internet e dá o mesmo número.
-- **`--refresh-market` baixa tudo de novo.** Se a rede falhar, o sistema volta ao arquivo salvo; se não houver arquivo, a carta sai sem a comparação com benchmarks, em vez de inventar.
 
 ## A janela do período
 

@@ -1,0 +1,15 @@
+/* Estilo do relatório de 2 páginas (docs/relatorio.pdf): A4, texto compacto em Calibri, títulos em Georgia
+   com filete laranja e tabelas com cabeçalho preto, para caber problemas, racional e próximos passos. */
+
+@page { size: A4; margin: 1.4cm 1.7cm; }
+body { font-family: Calibri, "Segoe UI", sans-serif; font-size: 9pt; line-height: 1.2; color: #000; margin: 0; }
+h1 { font-family: Georgia, serif; font-weight: normal; font-size: 16pt; margin: 0 0 4pt; }
+h2 { break-after: avoid; font-family: Georgia, serif; font-weight: normal; font-size: 12pt; margin: 8pt 0 3pt;
+  border-bottom: 2px solid #ffae35; }
+p { margin: 2pt 0 3pt; text-align: justify; }
+a { color: #000; }
+ul { margin: 0 0 2pt 12pt; padding-left: 0; }
+li { margin: 0 0 1pt; }
+table { border-collapse: collapse; width: 100%; font-size: 8pt; margin: 3pt 0 4pt; }
+th { background: #171717; color: #fff; text-align: left; padding: 1pt 3pt; }
+td { border: 1px solid #cecece; padding: 1pt 3pt; vertical-align: top; line-height: 1.1; }

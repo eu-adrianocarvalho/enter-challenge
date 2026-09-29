@@ -36,16 +36,17 @@
 
 **Princípio: o LLM lê e escreve, o código calcula, e nada chega ao cliente sem checagem.** Num produto que vai para dezenas de milhares de clientes, um número errado custa muito mais que um parágrafo menos elegante. Por isso cada tarefa ficou com quem erra menos nela.
 
-- **LLM onde há texto não estruturado:** leitura do extrato e do perfil; síntese do relatório macro, uma vez por mês e reutilizada para todos os clientes; escolha e explicação das recomendações; redação e revisão da carta. São seis grafos no Rivet, todos com saída JSON validada por schema.
-- **Código onde há conta ou regra:** rentabilidade do período por ativo e por classe, com cotas diárias reais da CVM para os fundos; CDI, IPCA e Ibovespa da mesma janela; bandas de alocação do perfil; dimensionamento das movimentações; estimativa de IR.
+- **LLM onde há texto não estruturado:** leitura do extrato e do perfil; síntese do relatório macro, a mesma para todos os clientes do mês; escolha e explicação das recomendações; redação e revisão da carta. São seis grafos de LLM no Rivet, todos com saída JSON validada por schema.
+- **Código onde há conta ou regra**, em nodes de código do próprio Rivet: rentabilidade do período por ativo e por classe, com cotas diárias reais da CVM para os fundos; CDI, IPCA e Ibovespa da mesma janela; bandas de alocação do perfil; dimensionamento das movimentações; estimativa de IR.
 - **Checagens entre as etapas:** o extrato extraído precisa fechar com os subtotais; cada afirmação do macro precisa de uma citação literal encontrada no relatório; a carta só pode usar números do bloco FACTS, conferidos por regex, e passa por um revisor de fidelidade. Os apontamentos voltam ao redator em até três versões.
+- **Tudo num grafo do Rivet:** o `monthly_letter` chama os grafos de LLM, roda o código e as checagens em loops de correção e termina com o PDF. O fluxo inteiro fica visível e executável no app; o código dos nodes fica em arquivos, e os testes executam o mesmo texto que vai para o Rivet.
 - **Assessor no loop:** junto com a carta sai um brief com os alertas de dados, a evidência de cada sugestão e o custo. O assessor revisa em minutos em vez de escrever do zero, e é isso que permite atender três vezes mais clientes sem perder qualidade nem conformidade.
 
 Das três áreas sugeridas, fiz as três, com a rentabilidade no centro:
 
 - **Rentabilidade:** cálculo exato das ações, cotas da CVM para os fundos, benchmarks e um gráfico.
 - **Compra e venda:** lógica ancorada em regras e no research.
-- **Formatação:** DOCX e PDF gerados por código, com limite de duas páginas verificado.
+- **Formatação:** carta em HTML com a identidade da XP, impressa em PDF, com limite de duas páginas verificado.
 
 ## 3. Resultado
 
@@ -57,22 +58,24 @@ Das três áreas sugeridas, fiz as três, com a rentabilidade no centro:
 | Macro | Fed corta em julho, Selic 9%, IPCA 4,0%, dólar 4,70 | Fed sem cortes em 2025, Selic 15,50%, IPCA 6,1%, PIB 2,0%, com citação conferida no relatório |
 | Recomendação | "continue diversificando" | R$ 107 mil de caixa parado para Tesouro Selic, Tesouro IPCA+ e multimercado; troca de HAPV3 e MRFG3 por ITUB4 e B3SA3, com estimativa de IR |
 | Dados | nenhum alerta | 11 alertas ao assessor (CDB vencido, cotas de 2024, AZZA3, Brave virou FIDC etc.) |
-| Formato | texto colado no Word | DOCX e PDF gerados por código, 2 páginas, gráfico, tabelas e disclaimer |
-| Verificação | nenhuma | reconciliação 28/28, 23 citações conferidas, 26 números conferidos, revisão de fidelidade sem apontamentos |
+| Formato | texto colado no Word | HTML e PDF gerados por código, 2 páginas, identidade da XP, gráfico, tabelas e disclaimer |
+| Verificação | nenhuma | reconciliação 28/28, citações conferidas no relatório, todos os números conferidos nos FACTS, revisão de fidelidade sem apontamentos |
 
 **Os testes com a API mostraram onde cada trava é necessária.**
 
 - **Extração:** o gpt-4.1-mini transcreveu tudo certo, menos um subtotal com dígitos trocados (60.131,79 em vez de 60.311,79), e repetiu o erro mesmo recebendo o aviso. A reconciliação barrou a carta. Comparado ao gabarito, o gpt-4.1 acertou todos os campos por US$ 0,02, e por isso ficou com a extração.
 - **Macro na carta:** a carta trocou "a Selic pode parar de subir antes" por "possibilidade de estabilização". O regex não pega esse tipo de erro, mas o revisor de fidelidade pegou, e a 2ª versão corrigiu.
 - **Nota do CDB:** ao parafrasear a nota, o modelo transformou "após confirmarmos a liquidação" em "já liquidados". Frases operacionais sensíveis passaram a ser escritas pelo código.
+- **Fontes:** uma carta atribuiu à XP uma inferência do próprio modelo. Deixar o revisor mais rígido bloqueou cartas corretas (2 de 4); a correção foi no redator, que passou a escrever essas inferências como visão do assessor, e as 3 execuções seguintes saíram prontas.
 
-**Custo e tempo:** US$ 0,12 por execução completa, incluindo uma rodada de correção. O macro (US$ 0,04) roda uma vez por mês para todos os clientes, então cada cliente custa cerca de US$ 0,08. As chamadas ao LLM somam cerca de um minuto.
+**Custo e tempo:** cerca de US$ 0,10 por execução completa, incluindo as rodadas de correção, em 30 a 50 segundos. O macro (US$ 0,04) é o mesmo para todos os clientes do mês; guardado e reaproveitado, cada cliente custaria cerca de US$ 0,06.
 
 ## 4. Com um mês de trabalho
 
 - **Dados na fonte:** API de posições da XP, eliminando o parsing de PDF, e cotas CVM/ANBIMA de todos os fundos, com histórico para YTD e 12 meses.
+- **Macro uma vez por mês:** guardar o resultado do `macro_outlook` e reutilizá-lo em todas as cartas do mês; hoje cada execução o chama de novo.
 - **Research oficial:** trocar as bandas e a prateleira ilustrativas pela carteira recomendada do XP Research e pelo motor de suitability ANBIMA, com recomendações versionadas e auditáveis.
-- **Avaliação contínua:** conjunto de cerca de 30 clientes com gabarito (extração, números e tom), revisor calibrado com rubrica e execução em CI. Isso permite trocar modelo ou prompt com segurança e escolher o modelo mais barato que mantém a qualidade em cada etapa.
+- **Avaliação contínua:** conjunto de cerca de 30 clientes com gabarito (extração, números e tom), revisor calibrado com rubrica e execução em CI, junto com os testes dos nodes. Isso permite trocar modelo ou prompt com segurança e escolher o modelo mais barato que mantém a qualidade em cada etapa.
 - **Produto para o assessor:** tela de revisão (aprovar, editar, enviar), com as edições virando dados de melhoria, e envio por e-mail ou app com rastreio de abertura.
 - **Escala:** lote mensal (Batch API), observabilidade por etapa, controle de custo por carta, LGPD e revisão de compliance dos textos padrão.
 - **Medição de impacto:** A/B de NPS e share of wallet entre clientes com e sem a carta.

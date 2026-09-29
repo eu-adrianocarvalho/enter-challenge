@@ -5,10 +5,14 @@
   "scripts": {
     "build": "node rivet/build.mjs",
     "letter": "node --env-file=.env node_modules/@ironclad/rivet-cli/bin/cli.js run rivet/xp_monthly_letter.rivet-project monthly_letter",
-    "test": "node --test \"rivet/tests/*.test.mjs\""
+    "test": "node --test \"rivet/tests/*.test.mjs\"",
+    "docs": "node docs/site/build.mjs",
+    "report": "node docs/site/report.mjs"
   },
   "devDependencies": {
-    "@ironclad/rivet-cli": "1.25.0"
+    "@ironclad/rivet-cli": "1.25.0",
+    "mammoth": "^1.13.0",
+    "marked": "^18.0.14"
   },
   "dependencies": {
     "pdf-parse": "^1.1.1",

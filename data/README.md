@@ -1,12 +1,14 @@
 # data/
 
-Dados que o fluxo lê, baixa ou guarda para reutilizar.
+Dados que o fluxo lê e que foram guardados de execuções anteriores. Nada aqui é escrito pelo grafo
+`monthly_letter`; as saídas dele vão para `Output/`.
 
-| Pasta | O que tem | Por que guardar |
-|---|---|---|
-| `market/` | Recorte das cotas diárias da CVM usado no retorno dos fundos, e os benchmarks (CDI, IPCA, Ibovespa) do período. | O node "Dados de mercado" calcula os fundos a partir desse CSV e usa o arquivo de benchmarks quando não consegue buscar ao vivo no BCB e no Yahoo. |
-| `rivet_inputs/` | Os inputs de uma chamada real de cada grafo de LLM. | `rivet/build.mjs` usa esses valores como padrão dos grafos, para que cada um rode sozinho no app do Rivet durante a demo. |
-| `evidence/` | Respostas reais do LLM que mostraram por que cada trava existe (ver abaixo). | Material para a reunião: não entram no pipeline. |
+| Arquivo ou pasta | O que tem | De onde veio | Quem usa |
+|---|---|---|---|
+| `market/cvm_inf_diario_subset.csv` | Cotas diárias dos 7 fundos do Albert em abril e maio de 2025 | Informe diário da CVM (`dados.cvm.gov.br`, `inf_diario_fi_202504` e `_202505`), filtrado pelos CNPJs de `config/fund_registry.yaml`. Baixado pela versão Python da branch `main` | O node "Dados de mercado" calcula o retorno de cada fundo no período |
+| `market/benchmarks_2025-04-07_2025-05-07.json` | CDI, IPCA 12 meses e Ibovespa do período | Banco Central (SGS, séries 12 e 433) e Yahoo Finance (`^BVSP`), buscados na mesma janela | O node "Dados de mercado" busca esses valores ao vivo e só usa o arquivo se a rede falhar |
+| `rivet_inputs/` | As entradas de uma chamada real de cada grafo de LLM | Gravadas numa execução real para o Albert | `rivet/build.mjs` usa como valores padrão, para que cada grafo de LLM rode sozinho no app durante a demo |
+| `evidence/` | Respostas reais do LLM que mostraram por que cada trava existe (ver abaixo) | Execuções reais durante o desenvolvimento | Material para a reunião: não entram no fluxo |
 
 ## evidence/
 

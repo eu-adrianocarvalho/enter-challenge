@@ -2,6 +2,8 @@
 
 O desafio sugeria três áreas e pedia pelo menos uma. As três foram implementadas, com a rentabilidade no centro, porque é dela que vêm os números que a v1 inventava. Cada área abaixo segue a mesma ordem: o pedido do desafio, o que foi feito, como foi implementado e o resultado para o Albert.
 
+Todas as três rodam dentro do grafo `monthly_letter` do Rivet. As contas e regras ficam em nodes de código (JavaScript), e o texto em grafos de LLM.
+
 ## 1. Cálculo de rentabilidade (Portfolio Profitability Calculation)
 
 **Pedido:** calcular o retorno do último mês e ir além da conta básica, com dados externos, contexto ou elementos visuais.
@@ -11,16 +13,15 @@ O desafio sugeria três áreas e pedia pelo menos uma. As três foram implementa
 - **Ações:** quantidade (do extrato) × preço atual e do mês anterior (do CSV). O cálculo é exato; o teste confere +3,30% e +R$ 1.925,97.
 - **Fundos:** o extrato só traz a rentabilidade desde a aplicação, e com cotas de abril de 2024. O retorno do mês vem das **cotas diárias oficiais da CVM**, na mesma janela das ações. Seis dos sete fundos têm cota diária. O Brave virou FIDC e não tem, então o retorno dele é uma estimativa pro rata do informe mensal da CVM, marcada como estimativa no brief.
 - **CDB C6:** venceu em 2024, então fica fora do cálculo do mês e vira um alerta.
-- **Benchmarks da mesma janela:** CDI (+1,00%) e IPCA em 12 meses (5,48%) do Banco Central, e Ibovespa (+6,22%) do Yahoo Finance.
+- **Benchmarks da mesma janela:** CDI (+1,00%) e IPCA em 12 meses (5,48%) do Banco Central, e Ibovespa (+6,22%) do Yahoo Finance, buscados ao vivo a cada execução.
 - **Contexto de longo prazo:** resultado desde a aplicação por classe. Ações −38,74%, fundos +11,15%, renda fixa +34,93%.
-- **Visual:** caixas de indicadores, um gráfico da carteira contra CDI e Ibovespa e a tabela "sua alocação × faixa do perfil".
+- **Visual:** faixa de indicadores, um gráfico da carteira contra CDI e Ibovespa e a tabela "sua alocação × faixa do perfil".
 
 **Como:**
-- `returns.py` faz os cálculos;
-- `funds.py` busca as cotas na CVM;
-- `benchmarks.py` busca CDI, IPCA e Ibovespa;
-- `charts.py` desenha o gráfico;
-- `facts.py` formata tudo em pt-BR.
+- o node **Dados de mercado** lê o CSV de preços, calcula o retorno dos fundos a partir das cotas da CVM e busca CDI, IPCA e Ibovespa (`rivet/code/lib/market.js`);
+- o node **Analisar carteira** calcula a rentabilidade (`lib/returns.js`);
+- o node **Montar FACTS** formata tudo em pt-BR (`lib/facts.js`, `lib/format.js`);
+- o gráfico é um SVG desenhado pelo código da carta (`lib/letter_html.js`).
 
 Nenhum desses números passa por um LLM.
 
@@ -31,12 +32,12 @@ Nenhum desses números passa por um LLM.
 **Pedido:** um módulo que recomende quais ativos o cliente deveria considerar comprar ou vender.
 
 **O que foi feito:** um motor em duas camadas.
-1. **Regras em Python (`suitability.py`) decidem o quê e quanto.**
+1. **Regras em código (node Analisar carteira, `lib/suitability.js`) decidem o quê e quanto.**
    - Classificam cada posição num bloco (renda fixa, multimercado, renda variável, caixa) e comparam com as faixas do perfil moderado (`config/allocation_moderate.yaml`).
    - O caixa acima do alvo é distribuído nas classes abaixo do alvo, com arredondamento em R$ 1.000.
    - Ações fora do perfil viram candidatas à troca por pagadoras de dividendos (`config/research_shelf.yaml`).
    - As regras também estimam o IR da venda: isenção de R$ 20 mil por mês e compensação entre prejuízo e ganho.
-2. **O LLM (grafo `advise`) escolhe e explica.** Ele recebe os candidatos, o perfil e o resumo macro, monta 2 ou 3 recomendações e justifica cada uma citando os IDs das evidências do relatório (P1, T2…). Ele não pode criar ativo nem mudar valor: ids desconhecidos são descartados pelo código.
+2. **O LLM (grafo `advise`) escolhe e explica.** Ele recebe os candidatos, o perfil e o resumo macro, monta 2 ou 3 recomendações e justifica cada uma citando os IDs das evidências do relatório (P1, T2…). Ele não pode criar ativo nem mudar valor: o node Montar FACTS descarta ids desconhecidos e mantém os valores do código.
 
 ```mermaid
 flowchart TD
@@ -46,16 +47,14 @@ flowchart TD
   C --> E["candidatos com valor<br/>Tesouro Selic · Tesouro IPCA+ · Ibiuna"]
   D --> E
   F["ações fora do perfil<br/>HAPV3 · MRFG3"] --> G["candidatos de troca<br/>ITUB4 · B3SA3 + estimativa de IR"]
-  E --> H(["Rivet · advise<br/>escolhe e justifica com evidências"])
+  E --> H(["LLM · advise<br/>escolhe e justifica com evidências"])
   G --> H
   H --> I["ids desconhecidos descartados<br/>valores continuam os do código"]
   I --> J["FACTS → texto da carta<br/>tabela de sugestões gerada pelo código"]
   classDef rivet fill:#ffae35,stroke:#000,color:#000
-  classDef py fill:#f3f3f3,stroke:#000,color:#000
-  classDef io fill:#171717,stroke:#171717,color:#fff
-  classDef bad fill:#fde2e2,stroke:#d62828,color:#000
+  classDef code fill:#f3f3f3,stroke:#000,color:#000
   class H rivet
-  class A,B,C,D,E,F,G,I,J py
+  class A,B,C,D,E,F,G,I,J code
 ```
 
 **Resultado para o Albert:**
@@ -75,25 +74,25 @@ O brief do assessor também mostra a estimativa de IR. As vendas somam R$ 21.572
 
 **Pedido:** gerar programaticamente uma carta com aparência profissional, pronta para enviar, sem edição manual.
 
-**O que foi feito:** `render.py` monta o DOCX inteiro por código (python-docx):
-- cabeçalho, data, destinatário e assunto;
+**O que foi feito:** o node **Montar a carta (HTML)** monta a carta inteira por código, em duas folhas A4 com a identidade da XP (`lib/letter_html.js`):
+- faixa preta com o logo e filete amarelo, data, destinatário e assunto;
 - o texto da carta, em parágrafos;
-- as caixas de indicadores e o gráfico;
+- a faixa de indicadores e o gráfico;
 - a tabela de alocação e a tabela de sugestões;
 - a observação operacional e a assinatura do assessor;
 - o disclaimer de suitability no rodapé.
 
-O PDF é gerado abrindo uma instância separada do Word. Em seguida o código conta as páginas; se passar de duas, a carta é reescrita com um limite menor de palavras.
+O node **Publicar** grava o HTML em `Output/` e o imprime em PDF com o Edge ou o Chrome em modo headless, o mesmo motor de impressão do navegador. Em seguida conta as páginas: se passar de duas, a carta sai **bloqueada** no brief.
 
-**Por que DOCX e PDF:** o PDF vai para o cliente. O DOCX fica com o assessor, que pode ajustar antes do envio: é o humano no loop.
+**Por que HTML e PDF:** o PDF vai para o cliente. O HTML é a fonte da carta: abre em qualquer navegador, o layout fica todo em código e o mesmo arquivo gera o PDF. O Rivet não tem node para escrever arquivos nem para gerar DOCX, e montar HTML num node de código é direto.
 
 ## Outras melhorias que foram necessárias
 
-- **Extração do extrato com validação:** o PDF vira JSON via LLM, e o código confere se tudo fecha.
-- **Macro calculado uma vez por mês**, com cada afirmação ancorada numa citação literal do relatório.
-- **Fact-check numérico da carta** e um **revisor de fidelidade** (6º grafo), com até três versões.
+- **Extração do extrato com validação:** o PDF vira JSON via LLM, e o código confere se tudo fecha; se não fechar, o LLM recebe as falhas e transcreve de novo.
+- **Macro com cada afirmação ancorada** numa citação literal do relatório.
+- **Fact-check numérico da carta** e um **revisor de fidelidade** (grafo `review_letter`), num loop de até três versões.
+- **Fontes separadas:** projeções são atribuídas à XP; a leitura do modelo sobre o relatório aparece como visão do assessor ("entendemos que…").
 - **Frases sensíveis escritas pelo código**, como a nota sobre a liquidação do CDB.
 - **Brief do assessor** com 11 alertas de dados, evidências e custo.
-- **Cache e reprodutibilidade:** a mesma entrada gera a mesma carta sem gastar tokens de novo.
 
 O detalhe de cada uma está em [Qualidade e travas](06_qualidade_e_travas.md).

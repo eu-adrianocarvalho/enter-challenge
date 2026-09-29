@@ -9,7 +9,7 @@ research:
   prices_csv: "Input/profitability_calc_wip.csv"
 
 brand:
-  logo: "assets/xp/xp_inc_logo.jpg"
+  logo: "Input/xp_inc_logo.jpg"
 
 period:
   start: "2025-04-07"
@@ -18,6 +18,17 @@ period:
 paths:
   output_dir: Output
   data_dir: data
+
+pdf:
+  # Browsers tried in order to print HTML to PDF; the BROWSER_PATH environment variable comes first.
+  browsers:
+    - 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe'
+    - 'C:\Program Files\Microsoft\Edge\Application\msedge.exe'
+    - 'C:\Program Files\Google\Chrome\Application\chrome.exe'
+    - '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+    - '/usr/bin/google-chrome'
+    - '/usr/bin/chromium'
+    - '/usr/bin/chromium-browser'
 
 rivet:
   project: rivet/xp_monthly_letter.rivet-project
