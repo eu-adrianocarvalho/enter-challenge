@@ -1,13 +1,12 @@
 # data/
 
-Dados que o pipeline gera ou baixa e guarda para reutilizar. Tudo aqui pode ser apagado e recriado com
-`python src/run.py --refresh-llm --refresh-market`. Isso gasta tokens e exige internet.
+Dados que o fluxo lê, baixa ou guarda para reutilizar.
 
 | Pasta | O que tem | Por que guardar |
 |---|---|---|
-| `llm/` | Resposta de cada chamada a um grafo do Rivet (resultado, modelo, tokens, custo). O nome do arquivo é um hash de prompt + schema + modelo + inputs. | Repetir a execução não gasta tokens e dá exatamente a mesma carta. Mudar um prompt gera um hash novo, então só aquele grafo roda de novo. |
-| `market/` | Retorno dos fundos pelas cotas da CVM, benchmarks (CDI, IPCA, Ibovespa) do período e o recorte das cotas diárias da CVM usado no cálculo. | O pipeline roda offline e o número do período não muda entre execuções. O CSV da CVM é a prova de onde saiu cada retorno. |
-| `rivet_inputs/` | Os inputs da última chamada real de cada grafo. | `src/build_rivet.py` usa esses valores como padrão dos grafos, para que eles rodem direto no app do Rivet durante a demo. |
+| `llm/` | Cache de respostas do LLM da versão Python (branch `main`). O grafo `monthly_letter` não usa. | Só a versão Python lê essa pasta. |
+| `market/` | Recorte das cotas diárias da CVM usado no retorno dos fundos, e os benchmarks (CDI, IPCA, Ibovespa) do período. | O node "Dados de mercado" calcula os fundos a partir desse CSV e usa o arquivo de benchmarks quando não consegue buscar ao vivo no BCB e no Yahoo. |
+| `rivet_inputs/` | Os inputs de uma chamada real de cada grafo de LLM. | `rivet/build.mjs` usa esses valores como padrão dos grafos, para que cada um rode sozinho no app do Rivet durante a demo. |
 | `evidence/` | Respostas reais do LLM que mostraram por que cada trava existe (ver abaixo). | Material para a reunião: não entram no pipeline. |
 
 ## evidence/

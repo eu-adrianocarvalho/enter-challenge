@@ -1,11 +1,17 @@
 {
   "name": "xp-monthly-letter",
   "private": true,
-  "description": "Runs the Rivet graphs of the XP monthly letter workflow.",
+  "description": "XP monthly client letter, run end to end as a Rivet graph (monthly_letter).",
   "scripts": {
-    "rivet": "rivet"
+    "build": "node rivet/build.mjs",
+    "letter": "node --env-file=.env node_modules/@ironclad/rivet-cli/bin/cli.js run rivet/xp_monthly_letter.rivet-project monthly_letter",
+    "test": "node --test \"rivet/tests/*.test.mjs\""
   },
   "devDependencies": {
     "@ironclad/rivet-cli": "1.25.0"
+  },
+  "dependencies": {
+    "pdf-parse": "^1.1.1",
+    "yaml": "^2.9.1"
   }
 }

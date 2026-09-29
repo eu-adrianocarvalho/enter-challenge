@@ -2,81 +2,57 @@
   {
     "graph": "extract_portfolio",
     "model": "gpt-4.1",
-    "result": null,
-    "prompt_tokens": 1893,
-    "completion_tokens": 1947,
-    "cost_usd": 0.019362,
-    "seconds": 11.4,
-    "cached": true
+    "prompt_tokens": 1894,
+    "completion_tokens": 1941,
+    "cost_usd": 0.019316
   },
   {
     "graph": "extract_profile",
     "model": "gpt-4.1",
-    "result": null,
     "prompt_tokens": 1006,
-    "completion_tokens": 284,
-    "cost_usd": 0.004284,
-    "seconds": 4.0,
-    "cached": true
+    "completion_tokens": 292,
+    "cost_usd": 0.004348
   },
   {
     "graph": "macro_outlook",
     "model": "gpt-4.1",
-    "result": null,
-    "prompt_tokens": 13921,
-    "completion_tokens": 1876,
-    "cost_usd": 0.04285,
-    "seconds": 15.3,
-    "cached": true
+    "prompt_tokens": 12556,
+    "completion_tokens": 1716,
+    "cost_usd": 0.03884
   },
   {
     "graph": "advise",
     "model": "gpt-4.1",
-    "result": null,
-    "prompt_tokens": 3807,
-    "completion_tokens": 352,
-    "cost_usd": 0.01043,
-    "seconds": 4.7,
-    "cached": true
+    "prompt_tokens": 3688,
+    "completion_tokens": 380,
+    "cost_usd": 0.010416
   },
   {
     "graph": "write_letter",
     "model": "gpt-4.1",
-    "result": null,
-    "prompt_tokens": 3332,
-    "completion_tokens": 782,
-    "cost_usd": 0.01292,
-    "seconds": 8.5,
-    "cached": true
+    "prompt_tokens": 3336,
+    "completion_tokens": 780,
+    "cost_usd": 0.012912
   },
   {
     "graph": "review_letter",
     "model": "gpt-4.1",
-    "result": null,
-    "prompt_tokens": 3759,
-    "completion_tokens": 123,
-    "cost_usd": 0.008502,
-    "seconds": 3.5,
-    "cached": true
+    "prompt_tokens": 3703,
+    "completion_tokens": 92,
+    "cost_usd": 0.008142
   },
   {
     "graph": "write_letter",
     "model": "gpt-4.1",
-    "result": null,
-    "prompt_tokens": 3438,
-    "completion_tokens": 823,
-    "cost_usd": 0.01346,
-    "seconds": 6.8,
-    "cached": true
+    "prompt_tokens": 3412,
+    "completion_tokens": 711,
+    "cost_usd": 0.012512
   },
   {
     "graph": "review_letter",
     "model": "gpt-4.1",
-    "result": null,
-    "prompt_tokens": 3800,
+    "prompt_tokens": 3634,
     "completion_tokens": 4,
-    "cost_usd": 0.007632,
-    "seconds": 2.7,
-    "cached": true
+    "cost_usd": 0.0073
   }
 ]

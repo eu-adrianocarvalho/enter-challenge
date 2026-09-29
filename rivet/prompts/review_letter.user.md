@@ -10,7 +10,7 @@ Flag as "major" any statement that:
 
 Flag as "minor" anything else a careful editor would fix (clumsy wording, repetition).
 
-Do not flag: figures copied correctly from FACTS; courtesy phrases; advisory opinions that follow directly from FACTS (such as the value of diversification or of staying aligned with the profile); framing such as "sugerimos avaliar".
+Do not flag: figures copied correctly from FACTS; projections from FACTS.macro written with "deve", "tende a", "projeta" or "é projetado", because those words already mark a forecast; courtesy phrases; advisory opinions that follow directly from FACTS (such as the value of diversification or of staying aligned with the profile); framing such as "sugerimos avaliar".
 
 For each issue, excerpt is copied verbatim from LETTER, and problem explains in one English sentence what FACTS says instead. Return an empty list when there is nothing to flag.
 

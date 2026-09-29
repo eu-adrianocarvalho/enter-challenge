@@ -2,12 +2,12 @@
 
 **Status: PRONTA PARA REVISÃO DO ASSESSOR**
 
-Assessor: Antonio Bicudo (A7699) · Extrato de 07/05/2025
+Assessor: Antonio Bicudo (A7699) · Extrato de 07/05/2025 · Gerado pelo grafo monthly_letter do Rivet
 
 ## 1. Checagens automáticas
-- Reconciliação do extrato extraído pelo LLM: 28/28 (OK)
-- Citações do relatório macro conferidas no texto original: 23 mantidas, 1 descartadas ['T6']
-- Fact-check da carta: 26 números conferidos, 0 sem fonte (OK; 2 versão(ões) geradas)
+- Reconciliação do extrato extraído pelo LLM: 28/28 (OK; 1 transcrição(ões))
+- Citações do relatório macro conferidas no texto original: 22 mantidas, 1 descartadas ["I6"]
+- Fact-check da carta: 20 números conferidos, 0 sem fonte (OK; 2 versão(ões) geradas)
 - Revisão de fidelidade (LLM revisor): 0 apontamento(s) grave(s) na versão final (OK)
 - Páginas do PDF: 2
 
@@ -52,46 +52,49 @@ Carteira coberta (87,0% do investido): +2,51%, +R$ 6.650,04.
 | Caixa e vencidos | R$ 115.151,37 (29,8%) | 0% a 5% | acima |
 
 ## 5. Recomendações propostas (aprovar antes do envio)
-**1. Reinvestir caixa em renda fixa e inflação**. Aplicação em Tesouro Selic 2029 e Tesouro IPCA+ 2029 reduz caixa excessivo, aumenta proteção contra inflação e aproveita juros elevados, alinhando a carteira ao perfil moderado e ao cenário macroeconômico atual.
+
+**1. Reinvestir caixa em renda fixa**. Aplicação em Tesouro Selic 2029 e Tesouro IPCA+ 2029 coloca o caixa excedente para trabalhar, reforçando proteção contra inflação e aproveitando juros elevados, alinhado ao perfil moderado e ao cenário macro de cautela.
 - Aplicar Tesouro Selic 2029: R$ 40.000,00. Regra: Caixa e renda fixa vencida acima da banda; leva Renda fixa para o alvo do perfil.
 - Aplicar Tesouro IPCA+ 2029: R$ 40.000,00. Regra: Caixa e renda fixa vencida acima da banda; leva Renda fixa para o alvo do perfil.
 - Evidências do research:
-  - I1, leitura do modelo apoiada em P1, T2, T1: Com Selic elevada e inflação pressionada, ativos pós-fixados continuam atrativos para proteção e rendimento.
-  - I3, leitura do modelo apoiada em P3, T1, R3: Inflação acima da meta e risco de persistência tornam títulos atrelados ao IPCA importantes na carteira.
-**2. Diversificar com multimercado macro**. Aporte no Ibiuna Hedge ST Advisory FIC FIM amplia diversificação, reduz concentração em caixa e busca fontes alternativas de retorno, adequado ao perfil moderado e ao ambiente de incerteza econômica.
-- Aplicar Ibiuna Hedge ST Advisory FIC FIM: R$ 27.000,00. Regra: Caixa e renda fixa vencida acima da banda; leva Multimercado para o alvo do perfil.
-- Evidências do research:
-  - T3, citação do relatório: "Projetamos avanço de 2,0% para o PIB de 2025, após aumento de 3,6% em 2024. A atividade deve continuar a arrefecer em 2026 – prevemos alta de 1,0%."
-  - T4, citação do relatório: "Não contemplamos mais cortes de juros nos EUA em nosso cenário base."
-**3. Troca de ações para perfil moderado**. Venda de MRFG3 e HAPV3, substituindo por ITUB4 e B3SA3, ajusta a carteira para empresas consolidadas e pagadoras de dividendos, conforme perfil e diretriz de qualidade.
+  - I1, leitura do modelo apoiada em P1, T2, T1: Com Selic elevada e inflação pressionada, pós-fixados continuam atrativos para proteção e liquidez.
+  - I2, leitura do modelo apoiada em P3, P4, T1, T4: Títulos atrelados à inflação ganham relevância diante do IPCA acima da meta e cenário fiscal frágil.
+
+**2. Ajuste qualitativo em ações**. Troca de MRFG3 e HAPV3 por ITUB4 e B3SA3 aumenta a qualidade da carteira, priorizando empresas consolidadas e pagadoras de dividendos, conforme o perfil e diante do cenário de crescimento moderado e juros altos.
 - Vender MRFG3: R$ 15.431,04. Regra: Ação fora do perfil moderado (não é pagadora consistente de dividendos).
 - Vender HAPV3: R$ 6.141,59. Regra: Ação fora do perfil moderado (não é pagadora consistente de dividendos).
 - Comprar ITUB4: R$ 10.000,00. Regra: Reposição com os recursos das vendas, sem alterar o peso de renda variável.
 - Comprar B3SA3: R$ 10.000,00. Regra: Reposição com os recursos das vendas, sem alterar o peso de renda variável.
 - Evidências do research:
-  - I4, leitura do modelo apoiada em P5, T3, T2: Desaceleração do PIB e juros altos limitam potencial das ações, mas valuations já refletem parte do cenário.
-- IR: Vendas de R$ 21.572,63 superam a isenção mensal de R$ 20.000,00. Resultado realizado: MRFG3 +R$ 4.677,44, HAPV3 -R$ 18.022,55. Saldo -R$ 13.345,11, sem IR a pagar; prejuízo de R$ 13.345,11 a compensar no futuro. Estimativa; confirmar com a área tributária.
-- Nota do modelo: Deixei de fora prefixados por cenário macro desfavorável.
-- Nota do modelo: Confirmar se o cliente deseja manter exposição mínima em multimercado.
-- Nota do modelo: Ajuste em renda variável não altera o peso da classe, apenas a qualidade.
-- Nota do modelo: Reforçar importância do acompanhamento periódico.
+  - I5, leitura do modelo apoiada em T3, T2, R3: Crescimento menor e juros altos limitam o potencial das ações, mas valuations já refletem parte do cenário.
+  - T2, citação do relatório: "Vemos a taxa Selic terminal em 15,50%, com altas de 1,00-0,75-0,50 p.p. nas próximas três reuniões de política monetária."
 
-## 6. Custo e rastreabilidade
-| Grafo | Modelo | Tokens (in/out) | Custo (US$) | Cache |
-|---|---|---|---|---|
-| extract_portfolio | gpt-4.1 | 1893/1947 | 0.0194 | sim |
-| extract_profile | gpt-4.1 | 1006/284 | 0.0043 | sim |
-| macro_outlook | gpt-4.1 | 13921/1876 | 0.0428 | sim |
-| advise | gpt-4.1 | 3807/352 | 0.0104 | sim |
-| write_letter | gpt-4.1 | 3332/782 | 0.0129 | sim |
-| review_letter | gpt-4.1 | 3759/123 | 0.0085 | sim |
-| write_letter | gpt-4.1 | 3438/823 | 0.0135 | sim |
-| review_letter | gpt-4.1 | 3800/4 | 0.0076 | sim |
-| **Total** | | | **0.1194** | |
+**3. Diversificação com multimercado**. Aporte em Ibiuna Hedge ST Advisory FIC FIM amplia a diversificação, buscando equilíbrio entre segurança e retorno em ambiente de incerteza econômica, sem elevar o risco além do perfil moderado.
+- Aplicar Ibiuna Hedge ST Advisory FIC FIM: R$ 27.000,00. Regra: Caixa e renda fixa vencida acima da banda; leva Multimercado para o alvo do perfil.
+- Evidências do research:
+  - T3, citação do relatório: "Projetamos avanço de 2,0% para o PIB de 2025, após aumento de 3,6% em 2024. A atividade deve continuar a arrefecer em 2026 – prevemos alta de 1,0%."
+- IR: Vendas de R$ 21.572,63 superam a isenção mensal de R$ 20.000,00. Resultado realizado: MRFG3 +R$ 4.677,44, HAPV3 -R$ 18.022,55. Saldo -R$ 13.345,11, sem IR a pagar; prejuízo de R$ 13.345,11 a compensar no futuro. Estimativa; confirmar com a área tributária.
+- Nota do modelo: Deixei de fora crédito privado por cenário macro neutro e foco em títulos públicos.
+- Nota do modelo: Aporte em multimercado é complementar, mas não prioritário frente ao excesso de caixa.
+- Nota do modelo: Confirmar se o cliente concorda com a troca das ações para manter aderência ao perfil.
+- Nota do modelo: Ajustes mantêm o portfólio dentro do perfil moderado e horizonte de médio a longo prazo.
+
+## 6. Custo das chamadas ao LLM
+| Grafo | Modelo | Tokens (in/out) | Custo (US$) |
+|---|---|---|---|
+| extract_portfolio | gpt-4.1 | 1894/1941 | 0.0193 |
+| extract_profile | gpt-4.1 | 1006/292 | 0.0043 |
+| macro_outlook | gpt-4.1 | 12556/1716 | 0.0388 |
+| advise | gpt-4.1 | 3688/380 | 0.0104 |
+| write_letter | gpt-4.1 | 3336/780 | 0.0129 |
+| review_letter | gpt-4.1 | 3703/92 | 0.0081 |
+| write_letter | gpt-4.1 | 3412/711 | 0.0125 |
+| review_letter | gpt-4.1 | 3634/4 | 0.0073 |
+| **Total** | | | **0.1138** |
 
 ## 7. Arquivos gerados
-- carta_albert_2025-05-07.docx
+- carta_albert_2025-05-07.html
 - carta_albert_2025-05-07.pdf
-- grafico_albert_2025-05-07.png
+- brief_assessor_albert_2025-05-07.md
 - facts_albert_2025-05-07.json
 - run_log_albert_2025-05-07.json
