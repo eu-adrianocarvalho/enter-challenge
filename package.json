@@ -1,0 +1,11 @@
+{
+  "name": "xp-monthly-letter",
+  "private": true,
+  "description": "Runs the Rivet graphs of the XP monthly letter workflow.",
+  "scripts": {
+    "rivet": "rivet"
+  },
+  "devDependencies": {
+    "@ironclad/rivet-cli": "1.25.0"
+  }
+}

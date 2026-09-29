@@ -1,0 +1,82 @@
+[
+  {
+    "graph": "extract_portfolio",
+    "model": "gpt-4.1",
+    "result": null,
+    "prompt_tokens": 1893,
+    "completion_tokens": 1947,
+    "cost_usd": 0.019362,
+    "seconds": 11.4,
+    "cached": true
+  },
+  {
+    "graph": "extract_profile",
+    "model": "gpt-4.1",
+    "result": null,
+    "prompt_tokens": 1006,
+    "completion_tokens": 284,
+    "cost_usd": 0.004284,
+    "seconds": 4.0,
+    "cached": true
+  },
+  {
+    "graph": "macro_outlook",
+    "model": "gpt-4.1",
+    "result": null,
+    "prompt_tokens": 13921,
+    "completion_tokens": 1876,
+    "cost_usd": 0.04285,
+    "seconds": 15.3,
+    "cached": true
+  },
+  {
+    "graph": "advise",
+    "model": "gpt-4.1",
+    "result": null,
+    "prompt_tokens": 3807,
+    "completion_tokens": 352,
+    "cost_usd": 0.01043,
+    "seconds": 4.7,
+    "cached": true
+  },
+  {
+    "graph": "write_letter",
+    "model": "gpt-4.1",
+    "result": null,
+    "prompt_tokens": 3332,
+    "completion_tokens": 782,
+    "cost_usd": 0.01292,
+    "seconds": 8.5,
+    "cached": true
+  },
+  {
+    "graph": "review_letter",
+    "model": "gpt-4.1",
+    "result": null,
+    "prompt_tokens": 3759,
+    "completion_tokens": 123,
+    "cost_usd": 0.008502,
+    "seconds": 3.5,
+    "cached": true
+  },
+  {
+    "graph": "write_letter",
+    "model": "gpt-4.1",
+    "result": null,
+    "prompt_tokens": 3438,
+    "completion_tokens": 823,
+    "cost_usd": 0.01346,
+    "seconds": 6.8,
+    "cached": true
+  },
+  {
+    "graph": "review_letter",
+    "model": "gpt-4.1",
+    "result": null,
+    "prompt_tokens": 3800,
+    "completion_tokens": 4,
+    "cost_usd": 0.007632,
+    "seconds": 2.7,
+    "cached": true
+  }
+]

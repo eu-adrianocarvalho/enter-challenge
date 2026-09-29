@@ -1,0 +1,184 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "client_name",
+    "account",
+    "statement_date",
+    "advisor_code",
+    "advisor_name",
+    "net_worth",
+    "invested",
+    "cash",
+    "class_totals",
+    "positions"
+  ],
+  "properties": {
+    "client_name": {
+      "type": "string"
+    },
+    "account": {
+      "type": "string"
+    },
+    "statement_date": {
+      "type": "string",
+      "description": "DD/MM/YYYY"
+    },
+    "advisor_code": {
+      "type": "string"
+    },
+    "advisor_name": {
+      "type": "string"
+    },
+    "net_worth": {
+      "type": "number",
+      "description": "Headline patrimônio"
+    },
+    "invested": {
+      "type": "number",
+      "description": "Total investido"
+    },
+    "cash": {
+      "type": "number",
+      "description": "Saldo Disponível"
+    },
+    "class_totals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "asset_class",
+          "subtotal",
+          "allocation_pct"
+        ],
+        "properties": {
+          "asset_class": {
+            "type": "string",
+            "enum": [
+              "stock",
+              "fund",
+              "fixed_income"
+            ]
+          },
+          "subtotal": {
+            "type": "number"
+          },
+          "allocation_pct": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "positions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "asset_class",
+          "name",
+          "ticker",
+          "value",
+          "allocation_pct",
+          "return_since_start_pct",
+          "start_date",
+          "invested_amount",
+          "net_value",
+          "average_price",
+          "last_price",
+          "quantity",
+          "quote_date",
+          "rate",
+          "maturity_date"
+        ],
+        "properties": {
+          "asset_class": {
+            "type": "string",
+            "enum": [
+              "stock",
+              "fund",
+              "fixed_income"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "ticker": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "value": {
+            "type": "number",
+            "description": "Posição / Posição a mercado"
+          },
+          "allocation_pct": {
+            "type": "number"
+          },
+          "return_since_start_pct": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "start_date": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "invested_amount": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "net_value": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "average_price": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "last_price": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "quantity": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "quote_date": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "rate": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "maturity_date": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

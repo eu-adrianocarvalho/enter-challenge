@@ -1,0 +1,29 @@
+# Products and stock coverage the recommendation engine may choose from.
+# Illustrative for the PoC: replace with XP Research's recommended lists.
+source: "Prateleira ilustrativa do PoC; substituir pelas listas recomendadas do XP Research."
+products:
+  post_fixed:
+    name: "Tesouro Selic 2029"
+    bucket: fixed_income
+    thesis: "pós-fixado de alta qualidade e liquidez diária, favorecido pela Selic elevada"
+  inflation_linked:
+    name: "Tesouro IPCA+ 2029"
+    bucket: fixed_income
+    thesis: "título público atrelado à inflação, que protege o poder de compra"
+  multimarket:
+    name: "Ibiuna Hedge ST Advisory FIC FIM"
+    bucket: multimarket
+    thesis: "multimercado macro já presente na carteira, que diversifica as fontes de retorno"
+stocks:
+  LREN3: {dividend_payer: true, profile_fit: true}
+  ARZZ3: {dividend_payer: true, profile_fit: true, renamed_to: AZZA3}
+  MRFG3: {dividend_payer: false, profile_fit: false}
+  HAPV3: {dividend_payer: false, profile_fit: false}
+  ITUB4: {dividend_payer: true, profile_fit: true, buy_list: true}
+  B3SA3: {dividend_payer: true, profile_fit: true, buy_list: true}
+  BBAS3: {dividend_payer: true, profile_fit: true}
+  PETR4: {dividend_payer: true, profile_fit: true}
+  VALE3: {dividend_payer: true, profile_fit: true}
+  ABEV3: {dividend_payer: true, profile_fit: true}
+  WEGE3: {dividend_payer: true, profile_fit: true}
+  GGBR4: {dividend_payer: true, profile_fit: true}

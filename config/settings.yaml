@@ -1,0 +1,47 @@
+# Run configuration for one client letter: inputs, reference period, models and thresholds.
+client:
+  id: albert
+  portfolio_pdf: "Input/XP - Albert_s portfolio.pdf"
+  risk_profile_txt: "Input/XP - Albert_s risk profile.txt"
+
+research:
+  macro_pdf: "Input/XP - Macro analysis.pdf"
+  prices_csv: "Input/profitability_calc_wip.csv"
+
+brand:
+  logo: "assets/xp/xp_inc_logo.jpg"
+
+period:
+  start: "2025-04-07"
+  end: "2025-05-07"
+
+paths:
+  output_dir: Output
+  data_dir: data
+
+rivet:
+  project: rivet/xp_monthly_letter.rivet-project
+  cli: node_modules/@ironclad/rivet-cli/bin/cli.js
+  timeout_seconds: 300
+
+models:
+  extraction: gpt-4.1
+  writing: gpt-4.1
+
+pricing_usd_per_million_tokens:
+  gpt-4.1: {input: 2.00, output: 8.00}
+  gpt-4.1-mini: {input: 0.40, output: 1.60}
+
+letter:
+  word_budget: 560
+  retry_word_budget: 460
+  max_pages: 2
+
+thresholds:
+  idle_cash_pct: 5
+  single_stock_pct: 5
+  large_monthly_move_pct: 30
+  stale_quote_days: 45
+  research_age_days: 60
+  reconciliation_brl: 0.05
+  reconciliation_pct: 0.5

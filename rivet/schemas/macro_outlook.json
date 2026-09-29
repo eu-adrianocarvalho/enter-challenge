@@ -1,0 +1,169 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "report_title",
+    "report_date",
+    "headline_pt",
+    "sentiment",
+    "projections",
+    "themes",
+    "risks",
+    "implications"
+  ],
+  "properties": {
+    "report_title": {
+      "type": "string"
+    },
+    "report_date": {
+      "type": "string",
+      "description": "DD/MM/YYYY"
+    },
+    "headline_pt": {
+      "type": "string"
+    },
+    "sentiment": {
+      "type": "string",
+      "enum": [
+        "positivo",
+        "cauteloso",
+        "negativo",
+        "misto"
+      ]
+    },
+    "projections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "indicator",
+          "value",
+          "horizon",
+          "quote"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "indicator": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string",
+            "description": "Figure exactly as printed, e.g. 15,50%"
+          },
+          "horizon": {
+            "type": "string"
+          },
+          "quote": {
+            "type": "string",
+            "description": "Verbatim excerpt from the report, 8 to 30 words"
+          }
+        }
+      }
+    },
+    "themes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "title_pt",
+          "summary_pt",
+          "quote"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title_pt": {
+            "type": "string"
+          },
+          "summary_pt": {
+            "type": "string"
+          },
+          "quote": {
+            "type": "string",
+            "description": "Verbatim excerpt from the report, 8 to 30 words"
+          }
+        }
+      }
+    },
+    "risks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "summary_pt",
+          "quote"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "summary_pt": {
+            "type": "string"
+          },
+          "quote": {
+            "type": "string",
+            "description": "Verbatim excerpt from the report, 8 to 30 words"
+          }
+        }
+      }
+    },
+    "implications": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "asset_class",
+          "view",
+          "summary_pt",
+          "evidence_ids"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "asset_class": {
+            "type": "string",
+            "enum": [
+              "pos_fixado",
+              "inflacao",
+              "prefixado",
+              "credito_privado",
+              "multimercado",
+              "acoes_brasil",
+              "cambio",
+              "caixa"
+            ]
+          },
+          "view": {
+            "type": "string",
+            "enum": [
+              "favoravel",
+              "neutra",
+              "desfavoravel"
+            ]
+          },
+          "summary_pt": {
+            "type": "string"
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

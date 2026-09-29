@@ -1,0 +1,300 @@
+{
+  "facts": {
+    "client": {
+      "first_name": "Albert",
+      "full_name": "Albert da Silva",
+      "account": "792854"
+    },
+    "advisor": {
+      "name": "Antonio Bicudo",
+      "code": "A7699"
+    },
+    "letter_date": "7 de maio de 2025",
+    "period": {
+      "start": "07/04/2025",
+      "end": "07/05/2025",
+      "label": "de 07/04/2025 a 07/05/2025"
+    },
+    "profile": {
+      "label": "moderado",
+      "horizon": "médio a longo prazo",
+      "summary": "Albert possui perfil moderado, buscando equilíbrio entre segurança e retorno. Recomenda-se diversificação entre ações de empresas consolidadas com dividendos e renda fixa com rating BB+ ou superior, sempre com acompanhamento periódico e foco no médio a longo prazo, evitando decisões precipitadas diante de oscilações de mercado."
+    },
+    "wealth": {
+      "net_worth": "R$ 386.858,82",
+      "invested": "R$ 312.186,20",
+      "cash_available": "R$ 74.672,62"
+    },
+    "month": {
+      "return": "+2,51%",
+      "result": "+R$ 6.650,04",
+      "covers": "ações e fundos, 87,0% do total investido",
+      "not_covered": [
+        "CDB BANCO C6 CONSIGNADO S.A. - SET/2024"
+      ],
+      "by_class": [
+        {
+          "class": "Fundos de investimento",
+          "return": "+2,29%",
+          "result": "+R$ 4.724,07",
+          "contribution": "+1,78 p.p."
+        },
+        {
+          "class": "Ações",
+          "return": "+3,30%",
+          "result": "+R$ 1.925,97",
+          "contribution": "+0,73 p.p."
+        }
+      ],
+      "top_drivers": [
+        {
+          "asset": "HAPV3",
+          "return": "+76,44%",
+          "result": "+R$ 2.660,84",
+          "contribution": "+1,00 p.p."
+        },
+        {
+          "asset": "LREN3",
+          "return": "+8,94%",
+          "result": "+R$ 2.282,38",
+          "contribution": "+0,86 p.p."
+        },
+        {
+          "asset": "Riza Lotus Plus",
+          "return": "+1,15%",
+          "result": "+R$ 1.090,47",
+          "contribution": "+0,41 p.p."
+        }
+      ],
+      "detractors": [
+        {
+          "asset": "MRFG3",
+          "return": "-16,38%",
+          "result": "-R$ 3.023,04",
+          "contribution": "-1,14 p.p."
+        }
+      ],
+      "benchmarks": {
+        "cdi": "+1,00%",
+        "portfolio_vs_cdi": "+1,51 p.p.",
+        "ibovespa": "+6,22%",
+        "portfolio_vs_ibovespa": "-3,71 p.p.",
+        "ipca_12_months": "5,48%",
+        "ipca_12_months_through": "março de 2025"
+      }
+    },
+    "since_start": [
+      {
+        "class": "Ações",
+        "return": "-38,74%",
+        "result": "-R$ 38.143,63"
+      },
+      {
+        "class": "Fundos de investimento",
+        "return": "+11,15%",
+        "result": "+R$ 21.200,49"
+      },
+      {
+        "class": "Renda fixa",
+        "return": "+34,93%",
+        "result": "+R$ 10.478,75"
+      }
+    ],
+    "allocation": [
+      {
+        "bucket": "Renda fixa",
+        "current": "43,7%",
+        "target_band": "50% a 70%",
+        "status": "abaixo"
+      },
+      {
+        "bucket": "Multimercado",
+        "current": "3,0%",
+        "target_band": "5% a 15%",
+        "status": "abaixo"
+      },
+      {
+        "bucket": "Renda variável",
+        "current": "23,5%",
+        "target_band": "10% a 25%",
+        "status": "dentro"
+      },
+      {
+        "bucket": "Caixa e vencidos",
+        "current": "29,8%",
+        "target_band": "0% a 5%",
+        "status": "acima"
+      }
+    ],
+    "recommendations": [
+      {
+        "priority": 1,
+        "title": "Reinvestir caixa em renda fixa e inflação",
+        "rationale": "Aplicação em Tesouro Selic 2029 e Tesouro IPCA+ 2029 reduz caixa excessivo, aumenta proteção contra inflação e aproveita juros elevados, alinhando a carteira ao perfil moderado e ao cenário macroeconômico atual.",
+        "moves": [
+          {
+            "action": "Aplicar",
+            "asset": "Tesouro Selic 2029",
+            "amount": "R$ 40.000,00"
+          },
+          {
+            "action": "Aplicar",
+            "asset": "Tesouro IPCA+ 2029",
+            "amount": "R$ 40.000,00"
+          }
+        ]
+      },
+      {
+        "priority": 2,
+        "title": "Diversificar com multimercado macro",
+        "rationale": "Aporte no Ibiuna Hedge ST Advisory FIC FIM amplia diversificação, reduz concentração em caixa e busca fontes alternativas de retorno, adequado ao perfil moderado e ao ambiente de incerteza econômica.",
+        "moves": [
+          {
+            "action": "Aplicar",
+            "asset": "Ibiuna Hedge ST Advisory FIC FIM",
+            "amount": "R$ 27.000,00"
+          }
+        ]
+      },
+      {
+        "priority": 3,
+        "title": "Troca de ações para perfil moderado",
+        "rationale": "Venda de MRFG3 e HAPV3, substituindo por ITUB4 e B3SA3, ajusta a carteira para empresas consolidadas e pagadoras de dividendos, conforme perfil e diretriz de qualidade.",
+        "moves": [
+          {
+            "action": "Vender",
+            "asset": "MRFG3",
+            "amount": "R$ 15.431,04"
+          },
+          {
+            "action": "Vender",
+            "asset": "HAPV3",
+            "amount": "R$ 6.141,59"
+          },
+          {
+            "action": "Comprar",
+            "asset": "ITUB4",
+            "amount": "R$ 10.000,00"
+          },
+          {
+            "action": "Comprar",
+            "asset": "B3SA3",
+            "amount": "R$ 10.000,00"
+          }
+        ]
+      }
+    ],
+    "macro": {
+      "source": "Brasil Macro Mensal: Pax brasileira ou calmaria antes de outra tempestade? (XP Macro Research, 06/02/2025)",
+      "headline": "Cenário de curto prazo equilibrado, mas inflação alta e juros elevados exigem cautela.",
+      "projections": [
+        {
+          "indicator": "SELIC terminal",
+          "value": "15,50%",
+          "horizon": "2025 (P)"
+        },
+        {
+          "indicator": "SELIC fim de 2026",
+          "value": "12,50%",
+          "horizon": "2026 (P)"
+        },
+        {
+          "indicator": "IPCA 2025",
+          "value": "6,1%",
+          "horizon": "2025 (P)"
+        },
+        {
+          "indicator": "IPCA 2026",
+          "value": "4,5%",
+          "horizon": "2026 (P)"
+        },
+        {
+          "indicator": "PIB 2025",
+          "value": "2,0%",
+          "horizon": "2025 (P)"
+        },
+        {
+          "indicator": "PIB 2026",
+          "value": "1,0%",
+          "horizon": "2026 (P)"
+        },
+        {
+          "indicator": "BRL/USD fim de 2025",
+          "value": "6,20",
+          "horizon": "2025 (P)"
+        },
+        {
+          "indicator": "BRL/USD fim de 2026",
+          "value": "6,40",
+          "horizon": "2026 (P)"
+        },
+        {
+          "indicator": "Juros EUA",
+          "value": "sem cortes em 2025",
+          "horizon": "2025"
+        }
+      ],
+      "themes": [
+        {
+          "title": "Inflação pressionada e disseminada em 2025",
+          "summary": "A inflação segue alta, com IPCA projetado em 6,1% em 2025, pressionada por serviços, alimentos e câmbio."
+        },
+        {
+          "title": "Política monetária restritiva e Selic elevada",
+          "summary": "O Copom mantém tom duro e a Selic deve chegar a 15,50%, podendo parar antes se o câmbio estabilizar."
+        },
+        {
+          "title": "Desaceleração da atividade econômica",
+          "summary": "A economia mostra sinais claros de desaceleração, com PIB crescendo 2,0% em 2025 e 1,0% em 2026."
+        },
+        {
+          "title": "Ambiente externo volátil e sem cortes de juros nos EUA",
+          "summary": "O cenário global melhorou, mas a incerteza segue alta e não há expectativa de cortes de juros pelo Fed em 2025."
+        },
+        {
+          "title": "Fiscal menos desafiador em 2025, mas dívida segue preocupando",
+          "summary": "O governo deve cumprir a meta primária em 2025, mas a dívida pública continuará subindo e preocupa no médio prazo."
+        }
+      ],
+      "risks": [
+        "Nova onda de aversão ao risco pode pressionar câmbio e inflação.",
+        "Desafios fiscais aumentam em 2026, com risco de não cumprimento da meta.",
+        "Inflação pode permanecer acima da meta por mais tempo se o real se desvalorizar."
+      ],
+      "implications": [
+        {
+          "view": "favorável",
+          "summary": "Com Selic elevada e inflação pressionada, ativos pós-fixados continuam atrativos para proteção e rendimento."
+        },
+        {
+          "view": "neutra",
+          "summary": "Juros altos e incerteza fiscal limitam ganhos em prefixados; cenário exige cautela e prazos curtos."
+        },
+        {
+          "view": "favorável",
+          "summary": "Inflação acima da meta e risco de persistência tornam títulos atrelados ao IPCA importantes na carteira."
+        },
+        {
+          "view": "neutra",
+          "summary": "Desaceleração do PIB e juros altos limitam potencial das ações, mas valuations já refletem parte do cenário."
+        },
+        {
+          "view": "neutra",
+          "summary": "Câmbio deve seguir volátil, com fundamentos frágeis para o real; exposição tática pode ser considerada."
+        },
+        {
+          "view": "neutra",
+          "summary": "Cenário de desaceleração e juros altos exige foco em qualidade e liquidez no crédito privado."
+        }
+      ]
+    }
+  },
+  "letter": {
+    "subject": "Resultado positivo no período e sugestões para diversificação equilibrada",
+    "greeting": "Prezado Albert,",
+    "performance": "No período de 07/04/2025 a 07/05/2025, sua carteira de ações e fundos, que representa 87,0% do total investido, registrou retorno de +2,51%, equivalente a +R$ 6.650,04. Esse desempenho superou o CDI, que avançou +1,00% no mesmo intervalo, com uma diferença positiva de +1,51 p.p., mas ficou abaixo do Ibovespa, que subiu +6,22%. Entre os principais destaques positivos, HAPV3 teve alta de +76,44% (+R$ 2.660,84), LREN3 subiu +8,94% (+R$ 2.282,38) e o fundo Riza Lotus Plus contribuiu com +1,15% (+R$ 1.090,47). Por outro lado, o principal detrator foi MRFG3, com queda de 16,38% (-R$ 3.023,04). No contexto de longo prazo, desde a aplicação, os fundos de investimento acumulam +11,15% (+R$ 21.200,49), enquanto as ações apresentam -38,74% (-R$ 38.143,63) e a renda fixa +34,93% (+R$ 10.478,75), refletindo a importância da diversificação ao longo do tempo.",
+    "outlook": "O cenário macroeconômico, segundo o relatório Brasil Macro Mensal: Pax brasileira ou calmaria antes de outra tempestade? (XP Macro Research, 06/02/2025), permanece equilibrado no curto prazo, mas com inflação elevada e juros altos, exigindo cautela. A XP projeta IPCA de 6,1% em 2025, pressionado por serviços, alimentos e câmbio, e Selic terminal de 15,50% neste ano, podendo parar antes se o câmbio estabilizar. Para 2026, as projeções indicam IPCA de 4,5% e Selic em 12,50%. O PIB deve crescer 2,0% em 2025 e 1,0% em 2026, sinalizando desaceleração da atividade econômica. No ambiente externo, a expectativa é de manutenção dos juros nos EUA em 2025, com volatilidade no câmbio e fundamentos frágeis para o real. Nesse contexto, a XP considera que ativos pós-fixados seguem atrativos para proteção e rendimento, títulos atrelados ao IPCA ganham importância diante da inflação acima da meta, e o cenário para ações é neutro, exigindo foco em empresas de qualidade e boa liquidez.",
+    "recommendations": "Diante desse cenário, sugerimos discutir três movimentos para adequar sua carteira ao perfil moderado e ao ambiente atual. Primeiro, a aplicação em Tesouro Selic 2029 e Tesouro IPCA+ 2029 visa reduzir o excesso de caixa, aumentar a proteção contra a inflação e aproveitar o patamar elevado dos juros, alinhando-se ao seu perfil e ao cenário macroeconômico. Em seguida, a diversificação com o fundo Ibiuna Hedge ST Advisory FIC FIM busca ampliar fontes alternativas de retorno e reduzir a concentração em caixa, o que é especialmente relevante em um ambiente de incerteza econômica. Por fim, propomos a troca de MRFG3 e HAPV3 por ITUB4 e B3SA3, ajustando a exposição em ações para empresas consolidadas e pagadoras de dividendos, conforme a diretriz de qualidade e seu perfil. Os valores sugeridos para cada operação estão detalhados na tabela abaixo, sendo todas as movimentações sujeitas à sua confirmação.",
+    "closing": "Estou à disposição para conversarmos sobre essas sugestões e avaliar juntos os próximos passos. Conte comigo para quaisquer esclarecimentos ou para agendarmos uma reunião."
+  }
+}

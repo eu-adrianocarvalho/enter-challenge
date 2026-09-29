@@ -1,0 +1,17 @@
+{
+  "graph": "write_letter",
+  "model": "gpt-4.1",
+  "result": {
+    "subject": "Resultado positivo no período e sugestões para diversificação equilibrada",
+    "greeting": "Prezado Albert,",
+    "performance": "No período de 07/04/2025 a 07/05/2025, sua carteira de ações e fundos, que representa 87,0% do total investido, registrou retorno de +2,51%, equivalente a +R$ 6.650,04. Esse desempenho superou o CDI, que avançou +1,00% no mesmo intervalo, com uma diferença positiva de +1,51 p.p., mas ficou abaixo do Ibovespa, que subiu +6,22%. Entre os principais destaques positivos, HAPV3 teve alta de +76,44% (+R$ 2.660,84), LREN3 subiu +8,94% (+R$ 2.282,38) e o fundo Riza Lotus Plus contribuiu com +1,15% (+R$ 1.090,47). Por outro lado, o principal detrator foi MRFG3, com queda de 16,38% (-R$ 3.023,04). No contexto de longo prazo, desde a aplicação, os fundos de investimento acumulam +11,15% (+R$ 21.200,49), enquanto as ações apresentam -38,74% (-R$ 38.143,63) e a renda fixa +34,93% (+R$ 10.478,75), refletindo a importância da diversificação ao longo do tempo.",
+    "outlook": "O cenário macroeconômico, segundo o relatório Brasil Macro Mensal: Pax brasileira ou calmaria antes de outra tempestade? (XP Macro Research, 06/02/2025), permanece equilibrado no curto prazo, mas com inflação elevada e juros altos, exigindo cautela. A XP projeta IPCA de 6,1% em 2025, pressionado por serviços, alimentos e câmbio, e Selic terminal de 15,50% neste ano, podendo parar antes se o câmbio estabilizar. Para 2026, as projeções indicam IPCA de 4,5% e Selic em 12,50%. O PIB deve crescer 2,0% em 2025 e 1,0% em 2026, sinalizando desaceleração da atividade econômica. No ambiente externo, a expectativa é de manutenção dos juros nos EUA em 2025, com volatilidade no câmbio e fundamentos frágeis para o real. Nesse contexto, a XP considera que ativos pós-fixados seguem atrativos para proteção e rendimento, títulos atrelados ao IPCA ganham importância diante da inflação acima da meta, e o cenário para ações é neutro, exigindo foco em empresas de qualidade e boa liquidez.",
+    "recommendations": "Diante desse cenário, sugerimos discutir três movimentos para adequar sua carteira ao perfil moderado e ao ambiente atual. Primeiro, a aplicação em Tesouro Selic 2029 e Tesouro IPCA+ 2029 visa reduzir o excesso de caixa, aumentar a proteção contra a inflação e aproveitar o patamar elevado dos juros, alinhando-se ao seu perfil e ao cenário macroeconômico. Em seguida, a diversificação com o fundo Ibiuna Hedge ST Advisory FIC FIM busca ampliar fontes alternativas de retorno e reduzir a concentração em caixa, o que é especialmente relevante em um ambiente de incerteza econômica. Por fim, propomos a troca de MRFG3 e HAPV3 por ITUB4 e B3SA3, ajustando a exposição em ações para empresas consolidadas e pagadoras de dividendos, conforme a diretriz de qualidade e seu perfil. Os valores sugeridos para cada operação estão detalhados na tabela abaixo, sendo todas as movimentações sujeitas à sua confirmação.",
+    "closing": "Estou à disposição para conversarmos sobre essas sugestões e avaliar juntos os próximos passos. Conte comigo para quaisquer esclarecimentos ou para agendarmos uma reunião."
+  },
+  "prompt_tokens": 3438,
+  "completion_tokens": 823,
+  "cost_usd": 0.01346,
+  "seconds": 6.8,
+  "cached": false
+}

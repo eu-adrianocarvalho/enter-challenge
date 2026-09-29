@@ -1,0 +1,9 @@
+{
+  "period_start": "2025-04-07",
+  "period_end": "2025-05-07",
+  "cdi_pct": 1.0028218313411275,
+  "ibovespa_pct": 6.218747014045922,
+  "ipca_12m_pct": 5.477189641674851,
+  "ipca_12m_through": "2025-03-01",
+  "source": "BCB SGS (CDI série 12, IPCA série 433) e Yahoo Finance (^BVSP)"
+}

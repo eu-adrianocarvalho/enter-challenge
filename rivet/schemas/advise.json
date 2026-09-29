@@ -1,0 +1,53 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "recommendations",
+    "advisor_notes_pt"
+  ],
+  "properties": {
+    "recommendations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "priority",
+          "title_pt",
+          "candidate_ids",
+          "rationale_pt",
+          "macro_evidence_ids"
+        ],
+        "properties": {
+          "priority": {
+            "type": "integer"
+          },
+          "title_pt": {
+            "type": "string"
+          },
+          "candidate_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rationale_pt": {
+            "type": "string"
+          },
+          "macro_evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "advisor_notes_pt": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

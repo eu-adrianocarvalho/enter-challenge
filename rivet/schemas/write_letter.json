@@ -1,0 +1,32 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "subject",
+    "greeting",
+    "performance",
+    "outlook",
+    "recommendations",
+    "closing"
+  ],
+  "properties": {
+    "subject": {
+      "type": "string"
+    },
+    "greeting": {
+      "type": "string"
+    },
+    "performance": {
+      "type": "string"
+    },
+    "outlook": {
+      "type": "string"
+    },
+    "recommendations": {
+      "type": "string"
+    },
+    "closing": {
+      "type": "string"
+    }
+  }
+}

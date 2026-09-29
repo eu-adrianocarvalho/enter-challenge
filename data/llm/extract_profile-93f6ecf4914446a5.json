@@ -1,0 +1,39 @@
+{
+  "graph": "extract_profile",
+  "model": "gpt-4.1",
+  "result": {
+    "client_name": "Albert",
+    "profile": "moderado",
+    "horizon": "médio a longo prazo",
+    "volatility_tolerance": "moderada",
+    "objectives_pt": [
+      "Preservar o poder de compra",
+      "Incrementar o patrimônio marginalmente",
+      "Buscar crescimento sustentável no tempo"
+    ],
+    "eligible_products": [
+      {
+        "category": "equities",
+        "requirement_pt": "Ações de empresas consolidadas listadas em bolsa, com histórico de pagamento de dividendos anuais, boa governança e política clara de distribuição de lucros."
+      },
+      {
+        "category": "fixed_income",
+        "requirement_pt": "Títulos de renda fixa com classificação de crédito BB+ ou superior, incluindo títulos públicos, debêntures de empresas bem avaliadas e CDBs de instituições sólidas."
+      }
+    ],
+    "min_credit_rating": "BB+",
+    "guidance_pt": [
+      "Diversificar entre ações sólidas e renda fixa de boa qualidade.",
+      "Monitorar periodicamente os investimentos.",
+      "Rebalancear o portfólio conforme mudanças no cenário econômico ou objetivos.",
+      "Manter horizonte de médio a longo prazo.",
+      "Evitar movimentos bruscos diante de oscilações de curto prazo."
+    ],
+    "summary_pt": "Albert possui perfil moderado, buscando equilíbrio entre segurança e retorno. Recomenda-se diversificação entre ações de empresas consolidadas com dividendos e renda fixa com rating BB+ ou superior, sempre com acompanhamento periódico e foco no médio a longo prazo, evitando decisões precipitadas diante de oscilações de mercado."
+  },
+  "prompt_tokens": 1006,
+  "completion_tokens": 284,
+  "cost_usd": 0.004284,
+  "seconds": 4.0,
+  "cached": false
+}

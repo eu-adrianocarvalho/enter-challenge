@@ -1,0 +1,14 @@
+# Target allocation bands (% of net worth) for the "moderado" profile.
+# Illustrative for the PoC: replace with XP Research's official moderate model portfolio.
+profile: moderado
+source: "Bandas ilustrativas do PoC; substituir pela carteira recomendada oficial do XP Research."
+buckets:
+  fixed_income: {min: 50, target: 60, max: 70}
+  multimarket: {min: 5, target: 10, max: 15}
+  equities: {min: 10, target: 20, max: 25}
+  cash: {min: 0, target: 2, max: 5}
+surplus_bucket: fixed_income
+fixed_income_split:
+  post_fixed: 0.5
+  inflation_linked: 0.5
+rounding_brl: 1000

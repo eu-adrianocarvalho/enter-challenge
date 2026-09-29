@@ -1,0 +1,72 @@
+[
+  {
+    "statement_name": "Riza Lotus Plus Advisory FIC FIRF REF DI CP",
+    "cnpj": "43.917.493/0001-31",
+    "return_pct": 1.1468,
+    "method": "Cota diária CVM (inf_diario_fi)",
+    "start_date": "2025-04-07",
+    "start_quota": 1.5085859,
+    "end_date": "2025-05-07",
+    "end_quota": 1.5258869
+  },
+  {
+    "statement_name": "Brave I FIC FIM CP",
+    "cnpj": "35.726.300/0001-37",
+    "return_pct": 1.1378,
+    "method": "Estimativa pro rata por dias úteis do informe mensal FIDC da CVM (abr/2025 1,19%; mai/2025 1,29%)",
+    "start_date": null,
+    "start_quota": null,
+    "end_date": null,
+    "end_quota": null
+  },
+  {
+    "statement_name": "Trend Investback FIC FIRF Simples",
+    "cnpj": "37.910.132/0001-60",
+    "return_pct": 0.9748,
+    "method": "Cota diária CVM (inf_diario_fi)",
+    "start_date": "2025-04-07",
+    "start_quota": 1.53315966,
+    "end_date": "2025-05-07",
+    "end_quota": 1.54810537
+  },
+  {
+    "statement_name": "Truxt Long Bias Advisory FIC FIM",
+    "cnpj": "30.830.162/0001-18",
+    "return_pct": 9.1596,
+    "method": "Cota diária CVM (inf_diario_fi)",
+    "start_date": "2025-04-07",
+    "start_quota": 1.4818308,
+    "end_date": "2025-05-07",
+    "end_quota": 1.6175612
+  },
+  {
+    "statement_name": "STK Long Biased FIC FIA",
+    "cnpj": "12.282.747/0001-69",
+    "return_pct": 8.8001,
+    "method": "Cota diária CVM (inf_diario_fi)",
+    "start_date": "2025-04-07",
+    "start_quota": 313.48229082,
+    "end_date": "2025-05-07",
+    "end_quota": 341.0689643
+  },
+  {
+    "statement_name": "Constellation Institucional Advisory FIC FIA",
+    "cnpj": "34.462.109/0001-62",
+    "return_pct": 11.9134,
+    "method": "Cota diária CVM (inf_diario_fi)",
+    "start_date": "2025-04-07",
+    "start_quota": 2.36754704,
+    "end_date": "2025-05-07",
+    "end_quota": 2.64960318
+  },
+  {
+    "statement_name": "Ibiuna Hedge ST Advisory FIC FIM",
+    "cnpj": "30.493.349/0001-73",
+    "return_pct": 0.6339,
+    "method": "Cota diária CVM (inf_diario_fi)",
+    "start_date": "2025-04-07",
+    "start_quota": 198.8411055,
+    "end_date": "2025-05-07",
+    "end_quota": 200.1016428
+  }
+]

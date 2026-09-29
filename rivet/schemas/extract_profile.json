@@ -1,0 +1,92 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "client_name",
+    "profile",
+    "horizon",
+    "volatility_tolerance",
+    "objectives_pt",
+    "eligible_products",
+    "min_credit_rating",
+    "guidance_pt",
+    "summary_pt"
+  ],
+  "properties": {
+    "client_name": {
+      "type": "string"
+    },
+    "profile": {
+      "type": "string",
+      "enum": [
+        "conservador",
+        "moderado",
+        "arrojado",
+        "agressivo"
+      ]
+    },
+    "horizon": {
+      "type": "string",
+      "enum": [
+        "curto prazo",
+        "médio prazo",
+        "longo prazo",
+        "médio a longo prazo"
+      ]
+    },
+    "volatility_tolerance": {
+      "type": "string",
+      "enum": [
+        "baixa",
+        "moderada",
+        "alta"
+      ]
+    },
+    "objectives_pt": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "eligible_products": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "category",
+          "requirement_pt"
+        ],
+        "properties": {
+          "category": {
+            "type": "string",
+            "enum": [
+              "equities",
+              "fixed_income",
+              "funds",
+              "other"
+            ]
+          },
+          "requirement_pt": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "min_credit_rating": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "guidance_pt": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "summary_pt": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,56 @@
+# Hand-verified mapping of statement fund names to CVM identifiers and allocation buckets.
+# CNPJs were checked against CVM registry data (registro_fundo_classe / cad_fi) and gestora listings.
+funds:
+  - statement_name: "Riza Lotus Plus Advisory FIC FIRF REF DI CP"
+    display_name: "Riza Lotus Plus"
+    cnpj: "43.917.493/0001-31"
+    cvm_name: "RIZA LOTUS PLUS ADVISORY FI FINANCEIRO EM COTAS DE FUNDOS DE INVESTIMENTO RENDA FIXA"
+    bucket: fixed_income
+    strategy: "Renda fixa crédito privado (DI)"
+    credit_private: true
+  - statement_name: "Brave I FIC FIM CP"
+    display_name: "Brave I"
+    cnpj: "35.726.300/0001-37"
+    cvm_name: "BRAVE 90 FUNDO DE INVESTIMENTO EM COTAS DE FUNDOS DE INVESTIMENTO EM DIREITOS CREDITÓRIOS"
+    bucket: fixed_income
+    strategy: "Crédito privado (FIDC)"
+    credit_private: true
+    registry_note: "Convertido de FIC FIM CP em FIC FIDC em 05/11/2024; o extrato ainda usa o nome antigo."
+    monthly_estimate:
+      return_pct: 1.1378
+      method: "Estimativa pro rata por dias úteis do informe mensal FIDC da CVM (abr/2025 1,19%; mai/2025 1,29%)"
+  - statement_name: "Trend Investback FIC FIRF Simples"
+    display_name: "Trend Investback"
+    cnpj: "37.910.132/0001-60"
+    cvm_name: "TREND INB FUNDO DE INVESTIMENTO EM COTAS RENDA FIXA SIMPLES RESPONSABILIDADE LIMITADA"
+    bucket: fixed_income
+    strategy: "Renda fixa simples"
+    credit_private: false
+  - statement_name: "Truxt Long Bias Advisory FIC FIM"
+    display_name: "Truxt Long Bias"
+    cnpj: "30.830.162/0001-18"
+    cvm_name: "TRUXT LONG BIAS ADVISORY FIF EM COTAS DE FI FINANCEIROS MULTIMERCADOS RESPONSABILIDADE LIMITADA"
+    bucket: equities
+    strategy: "Long biased (ações)"
+    credit_private: false
+  - statement_name: "STK Long Biased FIC FIA"
+    display_name: "STK Long Biased"
+    cnpj: "12.282.747/0001-69"
+    cvm_name: "STK LONG BIASED FIC DE FUNDOS DE INVESTIMENTO FINANCEIRO DE AÇÕES - RESPONSABILIDADE LIMITADA"
+    bucket: equities
+    strategy: "Long biased (ações)"
+    credit_private: false
+  - statement_name: "Constellation Institucional Advisory FIC FIA"
+    display_name: "Constellation Institucional"
+    cnpj: "34.462.109/0001-62"
+    cvm_name: "CONSTELLATION INSTITUCIONAL ADVISORY FI FINANCEIRO EM COTAS DE FI EM AÇÕES"
+    bucket: equities
+    strategy: "Ações"
+    credit_private: false
+  - statement_name: "Ibiuna Hedge ST Advisory FIC FIM"
+    display_name: "Ibiuna Hedge ST"
+    cnpj: "30.493.349/0001-73"
+    cvm_name: "IBIUNA HEDGE ST ADVISORY FIF - CLASSE DE INVESTIMENTO EM COTAS MULTIMERCADO - RESP LIMITADA"
+    bucket: multimarket
+    strategy: "Multimercado macro"
+    credit_private: false

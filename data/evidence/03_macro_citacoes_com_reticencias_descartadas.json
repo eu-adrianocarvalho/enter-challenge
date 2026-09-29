@@ -1,0 +1,206 @@
+{
+  "graph": "macro_outlook",
+  "model": "gpt-4.1",
+  "result": {
+    "report_title": "Brasil Macro Mensal",
+    "report_date": "06/02/2025",
+    "headline_pt": "Inflação segue pressionada, juros altos e desaceleração da economia marcam o cenário; incertezas fiscais e externas permanecem.",
+    "sentiment": "cauteloso",
+    "projections": [
+      {
+        "id": "P1",
+        "indicator": "Selic terminal",
+        "value": "15,50%",
+        "horizon": "2025",
+        "quote": "Vemos a taxa Selic terminal em 15,50%, com altas de 1,00-0,75-0,50 p.p. nas próximas três reuniões de política monetária."
+      },
+      {
+        "id": "P2",
+        "indicator": "Selic fim de ano",
+        "value": "15,50%",
+        "horizon": "2025",
+        "quote": "SELIC (% a.a, fim de período) ... 15,50 ... 2025 (P)"
+      },
+      {
+        "id": "P3",
+        "indicator": "Selic fim de ano",
+        "value": "12,50%",
+        "horizon": "2026",
+        "quote": "SELIC (% a.a, fim de período) ... 12,50 ... 2026 (P)"
+      },
+      {
+        "id": "P4",
+        "indicator": "IPCA",
+        "value": "6,1%",
+        "horizon": "2025",
+        "quote": "Mantivemos a projeção de 6,1% para o IPCA de 2025."
+      },
+      {
+        "id": "P5",
+        "indicator": "IPCA",
+        "value": "4,5%",
+        "horizon": "2026",
+        "quote": "Projetamos inflação de 4,5% no próximo ano."
+      },
+      {
+        "id": "P6",
+        "indicator": "PIB",
+        "value": "2,0%",
+        "horizon": "2025",
+        "quote": "Projetamos avanço de 2,0% para o PIB de 2025, após aumento de 3,6% em 2024."
+      },
+      {
+        "id": "P7",
+        "indicator": "PIB",
+        "value": "1,0%",
+        "horizon": "2026",
+        "quote": "A atividade deve continuar a arrefecer em 2026 – prevemos alta de 1,0%."
+      },
+      {
+        "id": "P8",
+        "indicator": "Câmbio BRL/USD",
+        "value": "6,20",
+        "horizon": "final de 2025",
+        "quote": "mantivemos nossas projeções em 6,20 reais por dólar para o final de 2025"
+      },
+      {
+        "id": "P9",
+        "indicator": "Câmbio BRL/USD",
+        "value": "6,40",
+        "horizon": "final de 2026",
+        "quote": "e 6,40 para o final de 2026."
+      },
+      {
+        "id": "P10",
+        "indicator": "Juros EUA",
+        "value": "sem cortes",
+        "horizon": "2025",
+        "quote": "Não contemplamos mais cortes de juros nos EUA em nosso cenário base."
+      }
+    ],
+    "themes": [
+      {
+        "id": "T1",
+        "title_pt": "Inflação pressionada e disseminada em 2025",
+        "summary_pt": "A inflação segue elevada, com pressão em serviços, bens industriais e alimentos, e só deve ceder em 2026.",
+        "quote": "nosso cenário indica inflação pressionada e disseminada este ano. Mantivemos a projeção de 6,1% para o IPCA de 2025."
+      },
+      {
+        "id": "T2",
+        "title_pt": "Política monetária restritiva e juros altos",
+        "summary_pt": "O Banco Central mantém postura dura, com Selic elevada para conter inflação e expectativas desancoradas.",
+        "quote": "O Copom manteve o tom duro, em resposta à alta das expectativas de inflação. Vemos a taxa Selic terminal em 15,50%."
+      },
+      {
+        "id": "T3",
+        "title_pt": "Desaceleração da economia brasileira",
+        "summary_pt": "A atividade mostra sinais claros de desaceleração, com crescimento menor previsto para 2025 e 2026.",
+        "quote": "A economia mostra sinais mais claros de desaceleração. Projetamos avanço de 2,0% para o PIB de 2025, após aumento de 3,6% em 2024."
+      },
+      {
+        "id": "T4",
+        "title_pt": "Fragilidade fiscal e alta da dívida pública",
+        "summary_pt": "Apesar de menor dificuldade para cumprir a meta em 2025, a dívida pública segue em trajetória de alta.",
+        "quote": "A dívida pública continuará a subir em ritmo acelerado, ampliando preocupações sobre a sustentabilidade fiscal."
+      },
+      {
+        "id": "T5",
+        "title_pt": "Ambiente externo incerto e dólar valorizado",
+        "summary_pt": "O cenário global melhorou, mas juros altos nos EUA e volatilidade permanecem, com dólar valorizado.",
+        "quote": "Não contemplamos mais cortes de juros nos EUA em nosso cenário base."
+      }
+    ],
+    "risks": [
+      {
+        "id": "R1",
+        "summary_pt": "Nova onda de aversão ao risco pode pressionar câmbio e inflação",
+        "quote": "Caso a aversão ao risco volte a subir, vemos pouco espaço para novas medidas de austeridade fiscal ou para uma resposta significativa adicional do Banco Central na política monetária ou cambial."
+      },
+      {
+        "id": "R2",
+        "summary_pt": "Pressão sobre despesas discricionárias pode exigir bloqueios no orçamento",
+        "quote": "essas mudanças ... ampliam a pressão sobre as despesas discricionárias e podem provocar um bloqueio da ordem de R$ 17,1 bilhões caso não sejam incluídas no PLOA."
+      },
+      {
+        "id": "R3",
+        "summary_pt": "Incerteza eleitoral e fiscal pode gerar volatilidade no câmbio",
+        "quote": "As incertezas em torno da política fiscal e parafiscal persistem e tendem a se intensificar à medida que o ano eleitoral se aproxima."
+      }
+    ],
+    "implications": [
+      {
+        "id": "I1",
+        "asset_class": "pos_fixado",
+        "view": "favoravel",
+        "summary_pt": "Com Selic elevada e inflação pressionada, ativos pós-fixados continuam atrativos para proteção e rendimento.",
+        "evidence_ids": [
+          "P1",
+          "P2",
+          "T2",
+          "T1"
+        ]
+      },
+      {
+        "id": "I2",
+        "asset_class": "prefixado",
+        "view": "neutra",
+        "summary_pt": "Prefixados exigem cautela: juros altos já estão precificados, mas incertezas fiscais e inflação ainda elevadas limitam ganhos.",
+        "evidence_ids": [
+          "P1",
+          "T4",
+          "R3"
+        ]
+      },
+      {
+        "id": "I3",
+        "asset_class": "inflacao",
+        "view": "favoravel",
+        "summary_pt": "Títulos atrelados à inflação são recomendados, pois IPCA deve superar a meta em 2025 e só recuar em 2026.",
+        "evidence_ids": [
+          "P4",
+          "P5",
+          "T1"
+        ]
+      },
+      {
+        "id": "I4",
+        "asset_class": "credito_privado",
+        "view": "neutra",
+        "summary_pt": "Cenário de desaceleração e pressão fiscal pede seletividade em crédito privado, priorizando emissores sólidos.",
+        "evidence_ids": [
+          "T3",
+          "T4",
+          "R2"
+        ]
+      },
+      {
+        "id": "I5",
+        "asset_class": "acoes_brasil",
+        "view": "neutra",
+        "summary_pt": "Ações tendem a oscilar com desaceleração do PIB, juros altos e incertezas fiscais, exigindo postura seletiva.",
+        "evidence_ids": [
+          "T3",
+          "T4",
+          "R3"
+        ]
+      },
+      {
+        "id": "I6",
+        "asset_class": "cambio",
+        "view": "desfavoravel",
+        "summary_pt": "Câmbio deve seguir volátil e depreciado, com projeção de R$6,20/US$ no fim de 2025 e riscos fiscais e externos.",
+        "evidence_ids": [
+          "P8",
+          "T5",
+          "R1",
+          "R3"
+        ]
+      }
+    ]
+  },
+  "prompt_tokens": 13824,
+  "completion_tokens": 1509,
+  "cost_usd": 0.03972,
+  "seconds": 13.1,
+  "cached": false
+}

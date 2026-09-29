@@ -1,0 +1,48 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "issues"
+  ],
+  "properties": {
+    "issues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "field",
+          "excerpt",
+          "problem",
+          "severity"
+        ],
+        "properties": {
+          "field": {
+            "type": "string",
+            "enum": [
+              "subject",
+              "greeting",
+              "performance",
+              "outlook",
+              "recommendations",
+              "closing"
+            ]
+          },
+          "excerpt": {
+            "type": "string"
+          },
+          "problem": {
+            "type": "string"
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "major",
+              "minor"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
