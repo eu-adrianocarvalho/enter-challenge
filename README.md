@@ -84,8 +84,8 @@ location, or edit `pdf.browsers` in `config/settings.yaml`.
 | `data/evidence/` | Real LLM failures that motivated each guard |
 | `Input/` | The challenge files, untouched, and the XP logo used in the letter header (`brand.logo`) |
 | `Output/` | `carta_*.html` and `.pdf`, `brief_assessor_*.md`, `facts_*.json`, `run_log_*.json`; `output_letter.docx` is the v1 letter |
-| `docs/` | Documentation in Portuguese (`0*.md`), the 2-page report and the `index.html` site for the meeting |
-| `docs/site/` | Site and report generators (`npm run docs`, `npm run report`), with the site's CSS and browser scripts |
+| `docs/` | Documentation in Portuguese (`0*.md`, the sources of the site), the 2-page report (`relatorio.md` → `relatorio.pdf`) and the delivery site `index.html` |
+| `docs/site/` | Site and report generators (`npm run docs`, `npm run report`), the shared page layout, CSS and browser scripts |
 
 ## Guards
 

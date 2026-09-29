@@ -38,7 +38,6 @@ function show(id, scroll) {
   topics.forEach((t) => t.classList.toggle('open', t.dataset.page === page.id));
   if (window.renderMermaidIn) window.renderMermaidIn(page);
   fitLetters();
-  if (window.fitRivetGraph && page.querySelector('#rv-canvas')) window.fitRivetGraph();
   const target = document.getElementById(id);
   if (scroll && target && target !== page) target.scrollIntoView({ block: 'start' });
   else window.scrollTo(0, 0);

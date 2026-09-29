@@ -23,7 +23,7 @@ flowchart LR
   linkStyle 6,7,8 stroke:#d62828,stroke-width:2px
 ```
 
-Em vermelho, as ligações trocadas e os nós com problema: caminhos absolutos de outra máquina nos Read File, cliente fixo no prompt final e nenhuma saída do grafo. O grafo completo, como está no arquivo, aparece em **O trabalho › Grafos do Rivet** (aba **V1 Graph**).
+Em vermelho, as ligações trocadas e os nós com problema: caminhos absolutos de outra máquina nos Read File, cliente fixo no prompt final e nenhuma saída do grafo. O grafo completo está no `enter_challenge.rivet-project`, como **V1 Graph: Original Challenge (unchanged)**, e abre no app do Rivet.
 
 | Problema | Evidência | Efeito |
 |---|---|---|

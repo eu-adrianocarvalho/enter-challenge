@@ -1,7 +1,7 @@
-/* Gera docs/index.html, o site que resume o projeto para a reunião, no visual da Enter (getenter.ai): quatro
-   tópicos (Apresentação, O trabalho, Uso, Arquivos), seções vindas de docs/0*.md e do relatório, números da
-   última execução lidos de Output/, os grafos do Rivet desenhados e a prévia de cada arquivo. O CSS e o JS
-   de docs/site/ entram embutidos, então o index.html abre sozinho. Rode depois da carta: npm run docs. */
+/* Gera docs/index.html, o site de entrega do desafio, no visual da Enter (getenter.ai): quatro tópicos
+   (Apresentação, O trabalho, Uso, Arquivos), seções vindas de docs/0*.md, a carta da v1 ao lado da v2, os
+   números da última execução lidos de Output/ e a prévia de cada arquivo. O layout vem de layout.mjs e a
+   página abre sozinha. Rode depois de gerar a carta: npm run docs. */
 
 import { existsSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, extname, join } from 'node:path';
@@ -9,8 +9,8 @@ import { fileURLToPath } from 'node:url';
 import mammoth from 'mammoth';
 import YAML from 'yaml';
 
+import { AUTHOR, REPO_URL, renderSite } from './layout.mjs';
 import { escapeHtml, renderMarkdown } from './markdown.mjs';
-import { viewerData } from './rivet_graphs.mjs';
 
 const SITE = dirname(fileURLToPath(import.meta.url));
 const DOCS = join(SITE, '..');
@@ -19,15 +19,11 @@ const SETTINGS = YAML.parse(readFileSync(join(REPO, 'config', 'settings.yaml'), 
 const OUTPUT_DIR = SETTINGS.paths.output_dir;
 const TEXT_PREVIEW_LIMIT = 60000;
 const CSV_PREVIEW_ROWS = 60;
-const AUTHOR = 'Adriano da Silva de Carvalho';
-const REPO_URL = 'https://github.com/eu-adrianocarvalho/enter-challenge';
-const FONTS = 'https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500'
-  + '&family=Noto+Serif:wght@300;400&display=swap';
 
 const TOPICS = [
-  { id: 'apresentacao', label: 'Apresentação', summary: 'O que foi entregue, os números e a carta final ao lado da v1.' },
+  { id: 'apresentacao', label: 'Apresentação', summary: 'O que foi entregue, os números e a carta da v1 ao lado da v2.' },
   { id: 'trabalho', label: 'O trabalho', summary: 'O diagnóstico da v1, as melhorias, a arquitetura, os dados externos e as travas.' },
-  { id: 'uso', label: 'Uso', summary: 'Como rodar, o roteiro da reunião e o relatório de duas páginas.' },
+  { id: 'uso', label: 'Uso', summary: 'Como instalar, rodar pelo app do Rivet ou pelo terminal, e adaptar.' },
   { id: 'arquivos', label: 'Arquivos', summary: 'Prévia e download de tudo o que entrou e saiu do sistema.' },
 ];
 
@@ -37,12 +33,9 @@ const SECTIONS = [
   { source: '02_diagnostico_v1.md', anchor: 'diagnostico', nav: 'Diagnóstico da v1', topic: 'trabalho' },
   { source: '03_melhorias_implementadas.md', anchor: 'melhorias', nav: 'Melhorias implementadas', topic: 'trabalho' },
   { source: '04_arquitetura_e_codigo.md', anchor: 'arquitetura', nav: 'Arquitetura e código', topic: 'trabalho' },
-  { source: '', anchor: 'rivet', nav: 'Grafos do Rivet', topic: 'trabalho' },
   { source: '05_dados_externos.md', anchor: 'dados-externos', nav: 'Dados externos', topic: 'trabalho' },
   { source: '06_qualidade_e_travas.md', anchor: 'qualidade', nav: 'Qualidade e travas', topic: 'trabalho' },
   { source: '07_como_usar.md', anchor: 'como-usar', nav: 'Como usar', topic: 'uso' },
-  { source: '08_roteiro_da_reuniao.md', anchor: 'roteiro', nav: 'Roteiro da reunião', topic: 'uso' },
-  { source: 'relatorio.md', anchor: 'relatorio', nav: 'Relatório (2 páginas)', topic: 'uso' },
 ];
 const ANCHORS = Object.fromEntries(SECTIONS.filter((s) => s.source).map((s) => [s.source, s.anchor]));
 
@@ -207,14 +200,14 @@ async function v1LetterText() {
 async function letterSection(section) {
   const brief = read(output('brief_assessor', 'md'));
   return `<section class="doc" id="${section.anchor}" data-spy><h1>A carta e o brief</h1>`
-    + '<p>À esquerda, a carta que o <strong>Main Graph: Enter Challenge</strong> gerou para o Albert, no mesmo HTML que o node '
-    + '<strong>Code: Publish</strong> imprime em PDF; à direita, a carta da v1, para comparar. Abaixo, o brief que o assessor recebe junto com a carta.</p>'
-    + `<div class="two-col"><div><div class="col-title"><span>v2 · carta gerada</span>`
-    + `<a href="${href(output('carta', 'pdf'))}" target="_blank">Abrir PDF</a></div>`
+    + '<p>À esquerda, a carta da v1, como veio no desafio; à direita, a carta que o <strong>Main Graph: Enter Challenge</strong> '
+    + 'gerou para o Albert, no mesmo HTML que o node <strong>Code: Publish</strong> imprime em PDF. Abaixo, o brief que o assessor '
+    + 'recebe junto com a carta.</p>'
+    + '<div class="two-col letters"><div><div class="col-title"><span>v1 · carta original</span></div>'
+    + `<div class="v1-letter">${await v1LetterText()}</div></div>`
+    + `<div><div class="col-title"><span>v2 · carta gerada</span><a href="${href(output('carta', 'pdf'))}" target="_blank">Abrir PDF</a></div>`
     + `<div class="letter-scroll"><div class="letter-frame"><iframe src="${href(output('carta', 'html'))}" `
-    + 'title="Carta v2" scrolling="no"></iframe></div></div></div>'
-    + '<div><div class="col-title"><span>v1 · carta original</span></div>'
-    + `<div class="v1-letter">${await v1LetterText()}</div></div></div>`
+    + 'title="Carta v2" scrolling="no"></iframe></div></div></div></div>'
     + `<h2>Brief do assessor</h2><div class="brief">${renderMarkdown(brief, ANCHORS)}</div></section>`;
 }
 
@@ -223,15 +216,20 @@ function testCount() {
     .reduce((total, f) => total + (read(`src/tests/${f}`).match(/^test\(/gm) || []).length, 0);
 }
 
-function kpiCards(graphs) {
+function projectCounts() {
+  const project = YAML.parse(read(SETTINGS.rivet.project));
+  const generated = Object.entries(project.data.graphs).filter(([id]) => id.startsWith('graph_'));
+  const codeNodes = generated.flatMap(([, graph]) => Object.keys(graph.nodes)).filter((key) => key.includes(']:code ')).length;
+  return `${generated.length} | ${codeNodes}`;
+}
+
+function kpiCards() {
   const { facts } = JSON.parse(read(output('facts', 'json')));
   const runs = JSON.parse(read(output('run_log', 'json')));
   const alerts = (read(output('brief_assessor', 'md')).match(/^\| (alta|média|info) \|/gm) || []).length;
   const bench = facts.month.benchmarks || {};
   const idle = facts.allocation.find((a) => a.bucket.startsWith('Caixa')).current;
   const cost = runs.reduce((total, r) => total + r.cost_usd, 0).toFixed(2).replace('.', ',');
-  const v2 = graphs.filter((g) => g.version === 'v2');
-  const codeNodes = v2.flatMap((g) => g.nodes).filter((n) => n.type === 'code').length;
   return [
     ['Retorno no período', facts.month.return],
     ['Resultado no período', facts.month.result],
@@ -239,13 +237,13 @@ function kpiCards(graphs) {
     ['Saldo + CDB vencido (% do patrimônio)', idle],
     ['Alertas para o assessor', String(alerts)],
     ['Custo da execução', `US$ ${cost}`],
-    ['Grafos | Code nodes no Rivet', `${v2.length} | ${codeNodes}`],
+    ['Grafos | Code nodes no Rivet', projectCounts()],
     ['Testes automatizados', String(testCount())],
   ];
 }
 
-function hero(graphs) {
-  const cards = kpiCards(graphs).map(([label, value]) => `<div class="kpi"><span>${escapeHtml(label)}</span>`
+function hero() {
+  const cards = kpiCards().map(([label, value]) => `<div class="kpi"><span>${escapeHtml(label)}</span>`
     + `<strong>${escapeHtml(value)}</strong></div>`).join('');
   return `<div class="hero"><div class="eyebrow">${AUTHOR} · Challenge Enter · AI Deployment</div>`
     + '<h2>O LLM lê e escreve, o código calcula e <em>nada chega ao cliente sem checagem.</em></h2>'
@@ -253,86 +251,31 @@ function hero(graphs) {
     + `no período de ${SETTINGS.period.start.split('-').reverse().join('/')} a ${SETTINGS.period.end.split('-').reverse().join('/')}.</p>`
     + `<div class="kpis">${cards}</div>`
     + '<div class="actions"><a class="btn" href="#carta">Ver a carta</a>'
-    + '<a class="btn secondary" href="#rivet">Grafos do Rivet</a>'
     + '<a class="btn secondary" href="#diagnostico">Diagnóstico da v1</a>'
-    + '<a class="btn secondary" href="#roteiro">Roteiro da reunião</a>'
+    + '<a class="btn secondary" href="#arquitetura">Arquitetura</a>'
+    + '<a class="btn secondary" href="#como-usar">Como usar</a>'
     + `<a class="btn secondary" href="${REPO_URL}" target="_blank" rel="noopener">GitHub ↗</a></div></div>`;
 }
 
-function rivetSection(anchor, graphs) {
-  const tabs = graphs.map((g) => `<button type="button" class="rv-tab${g.version === 'v1' ? ' v1' : ''}${g.main ? ' main' : ''}" `
-    + `data-graph="${escapeHtml(g.key)}"><span>${g.version}</span>${escapeHtml(g.name)}</button>`).join('');
-  const payload = JSON.stringify(graphs).replace(/<\//g, '<\\/');
-  return `<section class="doc" id="${anchor}" data-spy><h1>Grafos do Rivet</h1>`
-    + '<p>O projeto como está no arquivo, desenhado com as posições do app do Rivet. A primeira aba é o '
-    + '<strong>Main Graph: Enter Challenge</strong>, que roda tudo. Clique num node para ver o código, o prompt, o schema ou a '
-    + 'configuração; num subgrafo ou loop, o botão do painel abre o grafo chamado. A aba <strong>V1 Graph</strong> mostra o grafo '
-    + 'original do desafio, que continua no mesmo projeto: as ligações trocadas e os nodes com problema aparecem em vermelho.</p>'
-    + `<div class="rv-tabs">${tabs}</div>`
-    + '<div class="rv-toolbar"><span id="rv-caption"></span><div>'
-    + '<button type="button" data-zoom="-1">−</button><button type="button" data-zoom="0">Ajustar</button>'
-    + '<button type="button" data-zoom="1">+</button></div></div>'
-    + '<div class="rv-layout"><div class="rv-canvas" id="rv-canvas"></div>'
-    + '<aside class="rv-panel" id="rv-panel"><p class="note">Clique num node para ver os detalhes.</p></aside></div>'
-    + '<div class="rv-legend"><span class="k input">Graph Input / Output</span><span class="k code">Code (JavaScript)</span>'
-    + '<span class="k chat">Chat (LLM)</span><span class="k sub">Subgrafo / Loop</span><span class="k prompt">Prompt / Text</span>'
-    + '<span class="k util">Object / Extract JSON</span><span class="k file">Read File (v1)</span><span class="k bad">problema (v1)</span></div>'
-    + `<script type="application/json" id="rv-data">${payload}</script></section>`;
-}
-
-async function docSection(section, graphs) {
+async function sectionHtml(section) {
   if (section.anchor === 'carta') return letterSection(section);
-  if (section.anchor === 'rivet') return rivetSection(section.anchor, graphs);
   return `<section class="doc" id="${section.anchor}" data-spy>${renderMarkdown(read(`docs/${section.source}`), ANCHORS)}</section>`;
 }
 
-function pager(index) {
-  const previous = TOPICS[index - 1];
-  const following = TOPICS[index + 1];
-  const back = previous ? `<a class="prev" href="#${previous.id}"><small>← Anterior</small><strong>${previous.label}</strong></a>` : '';
-  const next = following ? `<a class="next" href="#${following.id}"><small>Próximo →</small><strong>${following.label}</strong></a>` : '';
-  return `<div class="pager">${back}${next}</div>`;
-}
-
-async function topicPage(index, topic, graphs) {
-  const head = `<div class="page-head"><span class="num">${String(index + 1).padStart(2, '0')}</span><h1>${topic.label}</h1>`
-    + `<p>${escapeHtml(topic.summary)}</p></div>`;
-  const sections = SECTIONS.filter((s) => s.topic === topic.id);
-  const body = topic.id === 'arquivos' ? fileSections() : (await Promise.all(sections.map((s) => docSection(s, graphs)))).join('');
-  const intro = topic.id === 'apresentacao' ? hero(graphs) : '';
-  return `<div class="page" id="${topic.id}">${head}${intro}${body}${pager(index)}</div>`;
-}
-
-function subnav(topic) {
-  if (topic.id === 'arquivos') return FILE_GROUPS.map(([anchor, title]) => [anchor, title]);
-  return SECTIONS.filter((s) => s.topic === topic.id).map((s) => [s.anchor, s.nav]);
-}
-
-function sidebar() {
-  const topics = TOPICS.map((topic, index) => {
-    const items = subnav(topic).map(([anchor, title]) => `<a href="#${anchor}" data-target="${anchor}">${escapeHtml(title)}</a>`).join('');
-    return `<div class="nav-topic" data-page="${topic.id}"><a class="topic-link" href="#${topic.id}">`
-      + `<span class="num">${String(index + 1).padStart(2, '0')}</span>${topic.label}</a><div class="subnav">${items}</div></div>`;
-  }).join('');
-  return '<nav class="sidebar"><div class="brand"><div class="mark">ENTER<b></b></div>'
-    + '<small>Challenge · Carta mensal XP com IA</small>'
-    + `<div class="author"><strong>${AUTHOR}</strong>`
-    + `<a href="${REPO_URL}" target="_blank" rel="noopener">GitHub · enter-challenge ↗</a></div></div>`
-    + `${topics}<button class="theme-toggle" id="theme" type="button">Tema claro / escuro</button></nav>`;
+function topicParts(topic) {
+  if (topic.id === 'apresentacao') return { intro: hero() };
+  if (topic.id === 'arquivos') return { body: fileSections(), subnav: FILE_GROUPS.map(([anchor, title]) => [anchor, title]) };
+  return {};
 }
 
 async function build() {
-  const graphs = viewerData(REPO);
-  const asset = (name) => readFileSync(join(SITE, name), 'utf8');
+  const sections = await Promise.all(SECTIONS.map(async (s) => ({ ...s, html: await sectionHtml(s) })));
   const topbar = `<div class="topbar">${AUTHOR} · Carta mensal XP com IA: da v1 à v2, tudo num grafo do Rivet`
     + `<a href="${REPO_URL}" target="_blank" rel="noopener">GitHub</a><a href="#carta">Ver a carta</a></div>`;
-  const pages = (await Promise.all(TOPICS.map((topic, index) => topicPage(index, topic, graphs)))).join('');
-  const page = '<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">'
-    + '<meta name="viewport" content="width=device-width, initial-scale=1">'
-    + '<title>Carta mensal XP · Documentação</title><link rel="preconnect" href="https://fonts.googleapis.com">'
-    + `<link href="${FONTS}" rel="stylesheet"><style>${asset('style.css')}</style></head>`
-    + `<body>${topbar}<div class="layout">${sidebar()}<main>${pages}</main></div>`
-    + `<script>${asset('rivet_viewer.js')}\n${asset('app.js')}</script><script type="module">${asset('mermaid.js')}</script></body></html>`;
+  const page = renderSite({
+    title: 'Carta mensal XP · Documentação', tagline: 'Challenge · Carta mensal XP com IA', topbar,
+    topics: TOPICS.map((topic) => ({ ...topic, ...topicParts(topic) })), sections,
+  });
   writeFileSync(join(DOCS, 'index.html'), page, 'utf8');
   return join(DOCS, 'index.html');
 }

@@ -60,8 +60,7 @@ Os valores exatos de cada execução (quantas citações foram mantidas, quantos
 
 1. [Diagnóstico da v1](02_diagnostico_v1.md): o que estava errado e a prova de cada problema.
 2. [Melhorias implementadas](03_melhorias_implementadas.md): as três áreas sugeridas, o que foi feito e como.
-3. [Arquitetura e código](04_arquitetura_e_codigo.md): o **Main Graph: Enter Challenge**, por que tudo no Rivet e como o código dos nodes é organizado e testado. No site, a seção **Grafos do Rivet** mostra os 9 grafos da v2 e o grafo da v1 desenhados como no app.
+3. [Arquitetura e código](04_arquitetura_e_codigo.md): o **Main Graph: Enter Challenge**, por que tudo no Rivet e como o código dos nodes é organizado e testado.
 4. [Dados externos](05_dados_externos.md): por que buscar dados na CVM, no Banco Central e no Yahoo.
 5. [Qualidade e travas](06_qualidade_e_travas.md): como o sistema evita erros, com evidências reais.
-6. [Como usar](07_como_usar.md): instalar, rodar no app do Rivet ou no terminal e demonstrar.
-7. [Roteiro da reunião](08_roteiro_da_reuniao.md): ordem da apresentação e respostas às perguntas do desafio.
+6. [Como usar](07_como_usar.md): instalar, rodar no app do Rivet ou no terminal e adaptar para outro cliente.
