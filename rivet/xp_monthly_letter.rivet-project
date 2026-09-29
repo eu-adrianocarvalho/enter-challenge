@@ -3989,6 +3989,16 @@ data:
                 return { graph, model, prompt_tokens: prompt, completion_tokens: completion, cost_usd: cost };
               }
 
+              /* Carrega módulos do Node dentro de um Code node sem usar o require que o Rivet oferece: no executor do app
+                 desktop (Node 18 com o build CommonJS do Rivet) ligar allowRequire quebra o node com "The argument
+                 'filename' ... Received undefined". O import() dinâmico funciona no app e no rivet-cli, e o createRequire
+                 ancorado no package.json do projeto encontra o node_modules/ do repositório. */
+
+              async function projectRequire(repo) {
+                const { createRequire } = await import('node:module');
+                return createRequire(`${repo}/package.json`);
+              }
+
               /* Formatação no padrão brasileiro: reais (R$ 1.234,56), percentuais (+3,30%), pontos percentuais
                  (+1,51 p.p.) e datas (07/05/2025, 7 de maio de 2025). Todo número mostrado ao cliente passa por
                  aqui; o fact-check compara a carta com essas mesmas strings, por isso cada número tem um único formato.
@@ -4063,7 +4073,7 @@ data:
               /* Extrai o texto dos PDFs de entrada (extrato e relatório macro) com o pdf.js que vem no pacote pdf-parse.
                  Agrupa os pedaços de texto pela altura na página e os ordena da esquerda para a direita, juntando letras
                  coladas: assim cada linha de tabela sai numa linha só, como o LLM precisa para transcrever sem erro.
-                 Precisa do executor Node do Rivet (usa require). */
+                 Recebe o loader de projectRequire() e precisa do executor Node do Rivet. */
 
               function joinRow(items) {
                 const sorted = [...items].sort((a, b) => a.x - b.x);
@@ -4092,10 +4102,10 @@ data:
                 return rows.sort((a, b) => b.y - a.y).map((r) => joinRow(r.items)).filter(Boolean).join('\n');
               }
 
-              async function pdfToText(require, repo, relativePath) {
-                const path = require('path');
-                const fs = require('fs');
-                const pdfjs = require(path.join(repo, 'node_modules', 'pdf-parse', 'lib', 'pdf.js', 'v1.10.100', 'build', 'pdf.js'));
+              async function pdfToText(load, repo, relativePath) {
+                const path = load('path');
+                const fs = load('fs');
+                const pdfjs = load('pdf-parse/lib/pdf.js/v1.10.100/build/pdf.js');
                 pdfjs.disableWorker = true;
                 pdfjs.verbosity = 0;
                 const doc = await pdfjs.getDocument(new Uint8Array(fs.readFileSync(path.join(repo, relativePath))));
@@ -4111,20 +4121,21 @@ data:
                  Entrada: repo_dir (pasta do projeto; vazio usa a pasta atual). Saídas: os textos para os grafos de LLM,
                  o contexto com a configuração, os modelos e os valores iniciais dos loops. Precisa do executor Node. */
 
-              const path = require('path');
-              const fs = require('fs');
               const repo = input(inputs, 'repo_dir') || process.cwd();
+              const load = await projectRequire(repo);
+              const path = load('path');
+              const fs = load('fs');
               const readText = (relative) => fs.readFileSync(path.join(repo, relative), 'utf8');
-              const YAML = require(path.join(repo, 'node_modules', 'yaml'));
+              const YAML = load('yaml');
               const config = (name) => YAML.parse(readText(`config/${name}.yaml`));
               const settings = config('settings');
               const logoPath = path.join(repo, settings.brand.logo);
               const logoType = logoPath.toLowerCase().endsWith('.png') ? 'image/png' : 'image/jpeg';
 
               return typed({
-                statement_text: await pdfToText(require, repo, settings.client.portfolio_pdf),
+                statement_text: await pdfToText(load, repo, settings.client.portfolio_pdf),
                 profile_text: readText(settings.client.risk_profile_txt),
-                report_text: await pdfToText(require, repo, settings.research.macro_pdf),
+                report_text: await pdfToText(load, repo, settings.research.macro_pdf),
                 context: {
                   repo,
                   settings,
@@ -4152,7 +4163,7 @@ data:
               - no_corrections
               - empty_log
             allowFetch: false
-            allowRequire: true
+            allowRequire: false
             allowRivet: false
             allowProcess: true
             allowConsole: false
@@ -4203,6 +4214,16 @@ data:
                 const prices = pricing[model];
                 const cost = prices ? (prompt * prices.input + completion * prices.output) / 1e6 : 0;
                 return { graph, model, prompt_tokens: prompt, completion_tokens: completion, cost_usd: cost };
+              }
+
+              /* Carrega módulos do Node dentro de um Code node sem usar o require que o Rivet oferece: no executor do app
+                 desktop (Node 18 com o build CommonJS do Rivet) ligar allowRequire quebra o node com "The argument
+                 'filename' ... Received undefined". O import() dinâmico funciona no app e no rivet-cli, e o createRequire
+                 ancorado no package.json do projeto encontra o node_modules/ do repositório. */
+
+              async function projectRequire(repo) {
+                const { createRequire } = await import('node:module');
+                return createRequire(`${repo}/package.json`);
               }
 
               /* Formatação no padrão brasileiro: reais (R$ 1.234,56), percentuais (+3,30%), pontos percentuais
@@ -4366,12 +4387,13 @@ data:
               /* Node "Dados de mercado": lê os preços das ações (CSV do desafio), calcula o retorno dos fundos a partir
                  das cotas diárias da CVM (data/market/cvm_inf_diario_subset.csv) e busca ao vivo CDI e IPCA no Banco
                  Central e o Ibovespa no Yahoo Finance, para o mesmo período da carteira. Sem internet, usa o arquivo
-                 salvo em data/market/ e registra a origem. Precisa do executor Node (require e fetch). */
+                 salvo em data/market/ e registra a origem. Precisa do executor Node (fetch). */
 
-              const path = require('path');
-              const fs = require('fs');
               const setup = input(inputs, 'context');
               const { settings, repo, registry } = setup;
+              const load = await projectRequire(repo);
+              const path = load('path');
+              const fs = load('fs');
               const start = parseIsoDate(settings.period.start);
               const end = parseIsoDate(settings.period.end);
               const marketDir = path.join(repo, settings.paths.data_dir, 'market');
@@ -4400,7 +4422,7 @@ data:
             outputNames:
               - market
             allowFetch: true
-            allowRequire: true
+            allowRequire: false
             allowRivet: false
             allowProcess: false
             allowConsole: false
@@ -6146,6 +6168,16 @@ data:
                 return { graph, model, prompt_tokens: prompt, completion_tokens: completion, cost_usd: cost };
               }
 
+              /* Carrega módulos do Node dentro de um Code node sem usar o require que o Rivet oferece: no executor do app
+                 desktop (Node 18 com o build CommonJS do Rivet) ligar allowRequire quebra o node com "The argument
+                 'filename' ... Received undefined". O import() dinâmico funciona no app e no rivet-cli, e o createRequire
+                 ancorado no package.json do projeto encontra o node_modules/ do repositório. */
+
+              async function projectRequire(repo) {
+                const { createRequire } = await import('node:module');
+                return createRequire(`${repo}/package.json`);
+              }
+
               /* Formatação no padrão brasileiro: reais (R$ 1.234,56), percentuais (+3,30%), pontos percentuais
                  (+1,51 p.p.) e datas (07/05/2025, 7 de maio de 2025). Todo número mostrado ao cliente passa por
                  aqui; o fact-check compara a carta com essas mesmas strings, por isso cada número tem um único formato.
@@ -6583,11 +6615,13 @@ data:
               /* Node "Publicar": grava a carta em HTML em Output/, gera o PDF com um navegador headless (Edge ou Chrome,
                  ou o caminho em BROWSER_PATH), conta as páginas, define o status (pronta ou bloqueada), escreve o brief
                  do assessor, os FACTS e o log de tokens e custo de cada chamada ao LLM. Devolve o caminho do PDF, o
-                 status e o brief. Precisa do executor Node (require e process). */
+                 status e o brief. Precisa do executor Node (process). */
 
-              const path = require('path');
-              const fs = require('fs');
-              const { execFileSync } = require('child_process');
+              const setup = input(inputs, 'context');
+              const load = await projectRequire(setup.repo);
+              const path = load('path');
+              const fs = load('fs');
+              const { execFileSync } = load('child_process');
               const BROWSERS = [
                 process.env.BROWSER_PATH,
                 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',
@@ -6599,7 +6633,6 @@ data:
               const READY = 'PRONTA PARA REVISÃO DO ASSESSOR';
               const BLOCKED = 'BLOQUEADA: resolver os itens que falharam antes de enviar';
 
-              const setup = input(inputs, 'context');
               const analysis = input(inputs, 'analysis');
               const facts = input(inputs, 'facts');
               const letter = input(inputs, 'letter');
@@ -6680,7 +6713,7 @@ data:
               - brief
               - pages
             allowFetch: false
-            allowRequire: true
+            allowRequire: false
             allowRivet: false
             allowProcess: true
             allowConsole: false

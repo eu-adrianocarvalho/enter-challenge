@@ -18,7 +18,7 @@
     "profile": {
       "label": "moderado",
       "horizon": "médio a longo prazo",
-      "summary": "Albert possui perfil moderado, buscando equilíbrio entre segurança e retorno. Recomenda-se diversificação entre ações de empresas consolidadas com dividendos e renda fixa com rating BB+ ou superior, sempre com acompanhamento periódico e foco no médio a longo prazo, evitando decisões precipitadas diante de oscilações de mercado."
+      "summary": "Albert possui perfil moderado, buscando equilíbrio entre segurança e retorno. Recomenda-se diversificação entre ações de empresas consolidadas com dividendos e renda fixa BB+ ou superior, sempre com acompanhamento periódico e rebalanceamento conforme necessário, mantendo foco no médio a longo prazo e evitando decisões precipitadas diante de oscilações de mercado."
     },
     "wealth": {
       "net_worth": "R$ 386.858,82",
@@ -129,8 +129,8 @@
     "recommendations": [
       {
         "priority": 1,
-        "title": "Reinvestir caixa em renda fixa",
-        "rationale": "Aplicação em Tesouro Selic 2029 e Tesouro IPCA+ 2029 coloca o caixa excedente para trabalhar, reforçando proteção contra inflação e aproveitando juros elevados, alinhado ao perfil moderado e ao cenário macro de cautela.",
+        "title": "Reinvestir caixa em renda fixa e inflação",
+        "rationale": "Aplicação em Tesouro Selic 2029 e Tesouro IPCA+ 2029 coloca o caixa excedente para trabalhar, reforçando proteção contra inflação e aproveitando juros elevados, em linha com o perfil moderado e foco em preservação do poder de compra.",
         "moves": [
           {
             "action": "Aplicar",
@@ -146,8 +146,8 @@
       },
       {
         "priority": 2,
-        "title": "Ajuste qualitativo em ações",
-        "rationale": "Troca de MRFG3 e HAPV3 por ITUB4 e B3SA3 aumenta a qualidade da carteira, priorizando empresas consolidadas e pagadoras de dividendos, conforme o perfil e diante do cenário de crescimento moderado e juros altos.",
+        "title": "Ajuste em ações para perfil moderado",
+        "rationale": "Troca de MRFG3 e HAPV3 por ITUB4 e B3SA3 aumenta a aderência do portfólio ao perfil moderado, priorizando empresas consolidadas e pagadoras de dividendos, sem alterar o peso em renda variável.",
         "moves": [
           {
             "action": "Vender",
@@ -174,7 +174,7 @@
       {
         "priority": 3,
         "title": "Diversificação com multimercado",
-        "rationale": "Aporte em Ibiuna Hedge ST Advisory FIC FIM amplia a diversificação, buscando equilíbrio entre segurança e retorno em ambiente de incerteza econômica, sem elevar o risco além do perfil moderado.",
+        "rationale": "Aporte no Ibiuna Hedge ST Advisory FIC FIM amplia a diversificação, buscando equilíbrio entre segurança e retorno, conforme o perfil e recomendação de diversificação em diferentes classes de ativos.",
         "moves": [
           {
             "action": "Aplicar",
@@ -219,12 +219,12 @@
           "horizon": "2026 (P)"
         },
         {
-          "indicator": "BRL/USD fim 2025",
+          "indicator": "BRL/USD fim de 2025",
           "value": "6,20",
           "horizon": "2025 (P)"
         },
         {
-          "indicator": "BRL/USD fim 2026",
+          "indicator": "BRL/USD fim de 2026",
           "value": "6,40",
           "horizon": "2026 (P)"
         },
@@ -237,11 +237,11 @@
       "themes": [
         {
           "title": "Inflação pressionada e disseminada em 2025",
-          "summary": "A inflação segue elevada, com pressão em serviços, bens industriais e alimentos, e só deve ceder em 2026."
+          "summary": "A inflação segue elevada, com pressões em serviços, bens e alimentos, e só deve ceder em 2026."
         },
         {
           "title": "Política monetária restritiva e juros altos",
-          "summary": "O Copom mantém tom duro e a Selic deve subir até 15,50%, permanecendo elevada por mais tempo."
+          "summary": "O Copom mantém tom duro e a Selic deve permanecer elevada para conter a inflação."
         },
         {
           "title": "Desaceleração da atividade econômica",
@@ -253,13 +253,13 @@
         },
         {
           "title": "Ambiente externo volátil e dólar valorizado",
-          "summary": "O cenário global melhorou pontualmente, mas juros altos nos EUA e incertezas políticas mantêm o dólar valorizado."
+          "summary": "O cenário global melhorou, mas juros altos nos EUA e incertezas políticas mantêm o dólar valorizado."
         }
       ],
       "risks": [
         "Nova onda de aversão ao risco pode pressionar o real e a inflação.",
-        "Desafios fiscais aumentam em 2026, com risco de não cumprimento da meta.",
-        "Inflação pode permanecer acima da meta por mais tempo."
+        "Desafios fiscais aumentam em 2026, com risco de piora no resultado primário.",
+        "Inflação pode ficar acima da meta por mais tempo se o real se desvalorizar."
       ],
       "implications": [
         {
@@ -267,20 +267,24 @@
           "summary": "Com Selic elevada e inflação pressionada, pós-fixados continuam atrativos para proteção e liquidez."
         },
         {
+          "view": "neutra",
+          "summary": "Prefixados exigem cautela: juros altos já estão precificados, mas riscos fiscais e inflação ainda são relevantes."
+        },
+        {
           "view": "favorável",
-          "summary": "Títulos atrelados à inflação ganham relevância diante do IPCA acima da meta e cenário fiscal frágil."
+          "summary": "Títulos atrelados à inflação são recomendados, pois IPCA deve seguir acima da meta em 2025."
+        },
+        {
+          "view": "neutra",
+          "summary": "Cenário de desaceleração econômica e juros altos pede seletividade no crédito privado."
+        },
+        {
+          "view": "neutra",
+          "summary": "Ações brasileiras podem oscilar com atividade mais fraca e juros altos, mas valuations já refletem parte do cenário."
         },
         {
           "view": "desfavorável",
-          "summary": "Juros altos e incerteza sobre o ciclo de cortes tornam prefixados arriscados neste momento."
-        },
-        {
-          "view": "neutra",
-          "summary": "Desaceleração da economia e risco fiscal exigem seletividade em crédito privado."
-        },
-        {
-          "view": "neutra",
-          "summary": "Crescimento menor e juros altos limitam o potencial das ações, mas valuations já refletem parte do cenário."
+          "summary": "Real deve seguir volátil e pressionado, com dólar valorizado e incertezas fiscais e externas."
         }
       ]
     }
@@ -288,9 +292,9 @@
   "letter": {
     "subject": "Resultado positivo no período e foco em renda fixa e diversificação",
     "greeting": "Prezado Albert,",
-    "performance": "No período de 07/04/2025 a 07/05/2025, a carteira de ações e fundos, que representa 87,0% do total investido, registrou retorno de +2,51%, equivalente a +R$ 6.650,04. Esse desempenho ficou acima do CDI, que avançou +1,00%, superando-o em +1,51 p.p., mas abaixo do Ibovespa, que subiu +6,22%. Os principais destaques positivos vieram de HAPV3, com alta de +76,44% (+R$ 2.660,84), LREN3, com +8,94% (+R$ 2.282,38), e do fundo Riza Lotus Plus, que contribuiu com +1,15% (+R$ 1.090,47). Por outro lado, MRFG3 teve queda de 16,38%, impactando negativamente em -R$ 3.023,04. Olhando para o histórico, desde a aplicação, os fundos de investimento acumulam +11,15% (+R$ 21.200,49), enquanto ações apresentam -38,74% (-R$ 38.143,63), refletindo a importância da diversificação e do acompanhamento constante.",
-    "outlook": "A XP projeta um cenário de curto prazo equilibrado, mas com inflação pressionada e juros elevados, exigindo cautela. Para 2025, a XP projeta Selic terminal em 15,50% e IPCA em 6,1%, com desaceleração da economia e dólar valorizado. Temas como inflação disseminada, política monetária restritiva e fragilidade fiscal seguem no radar. Na nossa leitura, entendemos que o ambiente favorece ativos pós-fixados para proteção e liquidez, enquanto títulos atrelados à inflação ganham relevância diante do IPCA acima da meta e do cenário fiscal frágil. Juros altos e incerteza sobre o ciclo de cortes tornam prefixados arriscados, e a desaceleração econômica exige seletividade em crédito privado. Para renda variável, crescimento menor e juros altos limitam o potencial das ações, mas parte desse cenário já está refletida nos preços.",
-    "recommendations": "Diante desse contexto, sugerimos discutir o reinvestimento do caixa disponível em renda fixa, com aplicações em Tesouro Selic 2029 e Tesouro IPCA+ 2029, aproveitando o cenário de juros elevados e reforçando a proteção contra inflação, em linha com seu perfil moderado. Também propomos um ajuste qualitativo em ações, com a venda de MRFG3 e HAPV3 para priorizar empresas consolidadas e pagadoras de dividendos, como ITUB4 e B3SA3, buscando maior resiliência diante do ambiente de crescimento moderado e juros altos. Por fim, sugerimos ampliar a diversificação com aporte em Ibiuna Hedge ST Advisory FIC FIM, equilibrando segurança e retorno em um cenário de incerteza econômica. Os valores sugeridos para cada movimentação estão detalhados na tabela abaixo e todas as operações dependem da sua confirmação.",
-    "closing": "Estou à disposição para conversarmos sobre essas sugestões e ajustar a estratégia conforme suas preferências. Conte comigo para acompanhar de perto sua carteira e esclarecer quaisquer dúvidas."
+    "performance": "No período de 07/04/2025 a 07/05/2025, sua carteira de ações e fundos, que representa 87,0% do total investido, apresentou retorno de +2,51%, com resultado de +R$ 6.650,04. Esse desempenho superou o CDI do período (+1,00%), ficando +1,51 p.p. acima, mas ficou abaixo do Ibovespa, que teve alta de +6,22%. Entre os principais destaques positivos, HAPV3 teve valorização de +76,44% (+R$ 2.660,84), LREN3 subiu +8,94% (+R$ 2.282,38) e o fundo Riza Lotus Plus contribuiu com +1,15% (+R$ 1.090,47). Por outro lado, MRFG3 foi o principal detrator, com queda de 16,38% (-R$ 3.023,04). Olhando para o histórico desde a aplicação, os fundos de investimento acumulam +11,15% (+R$ 21.200,49), enquanto as ações registram -38,74% (-R$ 38.143,63) e a renda fixa, +34,93% (+R$ 10.478,75), reforçando a importância do equilíbrio entre classes de ativos ao longo do tempo.",
+    "outlook": "A XP projeta um cenário de curto prazo equilibrado, mas com inflação alta e juros elevados exigindo cautela. Para 2025, a XP projeta SELIC terminal em 15,50% e IPCA de 6,1%, com desaceleração econômica (PIB de 2,0%) e dólar valorizado (BRL/USD a 6,20 no fim do ano). A inflação deve seguir pressionada, principalmente em serviços e alimentos, e só tende a ceder em 2026. O Copom mantém postura restritiva e a dívida pública segue em alta, enquanto o ambiente externo permanece volátil, com juros elevados nos EUA. Entendemos que, nesse contexto, pós-fixados continuam atrativos para proteção e liquidez, enquanto títulos atrelados à inflação são recomendados, pois o IPCA deve permanecer acima da meta. Prefixados e crédito privado exigem seletividade, e as ações brasileiras podem oscilar diante da atividade mais fraca e juros altos, embora parte desse cenário já esteja refletida nos preços. O real deve seguir volátil, com riscos fiscais e externos.",
+    "recommendations": "Diante desse cenário, sugerimos discutir três movimentos para adequar a carteira ao seu perfil moderado e ao contexto macroeconômico. Primeiro, reinvestir parte do caixa disponível em Tesouro Selic 2029 e Tesouro IPCA+ 2029, aproveitando os juros elevados e reforçando a proteção contra inflação. Em seguida, propomos um ajuste em ações: a troca de MRFG3 e HAPV3 por ITUB4 e B3SA3, priorizando empresas consolidadas e pagadoras de dividendos, alinhadas ao perfil moderado, sem alterar o peso em renda variável. Por fim, sugerimos ampliar a diversificação com aporte no fundo multimercado Ibiuna Hedge ST Advisory FIC FIM, buscando equilíbrio entre segurança e retorno. Os valores sugeridos para cada operação estão detalhados na tabela abaixo, e todas as movimentações dependem da sua confirmação.",
+    "closing": "Fico à disposição para conversarmos sobre essas sugestões e esclarecer quaisquer dúvidas. Conte comigo para acompanhar a evolução do seu portfólio e tomar decisões alinhadas aos seus objetivos."
   }
 }

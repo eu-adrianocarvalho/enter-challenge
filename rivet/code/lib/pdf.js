@@ -1,7 +1,7 @@
 /* Extrai o texto dos PDFs de entrada (extrato e relatório macro) com o pdf.js que vem no pacote pdf-parse.
    Agrupa os pedaços de texto pela altura na página e os ordena da esquerda para a direita, juntando letras
    coladas: assim cada linha de tabela sai numa linha só, como o LLM precisa para transcrever sem erro.
-   Precisa do executor Node do Rivet (usa require). */
+   Recebe o loader de projectRequire() e precisa do executor Node do Rivet. */
 
 function joinRow(items) {
   const sorted = [...items].sort((a, b) => a.x - b.x);
@@ -30,10 +30,10 @@ async function pageRows(page) {
   return rows.sort((a, b) => b.y - a.y).map((r) => joinRow(r.items)).filter(Boolean).join('\n');
 }
 
-async function pdfToText(require, repo, relativePath) {
-  const path = require('path');
-  const fs = require('fs');
-  const pdfjs = require(path.join(repo, 'node_modules', 'pdf-parse', 'lib', 'pdf.js', 'v1.10.100', 'build', 'pdf.js'));
+async function pdfToText(load, repo, relativePath) {
+  const path = load('path');
+  const fs = load('fs');
+  const pdfjs = load('pdf-parse/lib/pdf.js/v1.10.100/build/pdf.js');
   pdfjs.disableWorker = true;
   pdfjs.verbosity = 0;
   const doc = await pdfjs.getDocument(new Uint8Array(fs.readFileSync(path.join(repo, relativePath))));

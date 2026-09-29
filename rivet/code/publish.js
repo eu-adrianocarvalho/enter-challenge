@@ -1,11 +1,13 @@
 /* Node "Publicar": grava a carta em HTML em Output/, gera o PDF com um navegador headless (Edge ou Chrome,
    ou o caminho em BROWSER_PATH), conta as páginas, define o status (pronta ou bloqueada), escreve o brief
    do assessor, os FACTS e o log de tokens e custo de cada chamada ao LLM. Devolve o caminho do PDF, o
-   status e o brief. Precisa do executor Node (require e process). */
+   status e o brief. Precisa do executor Node (process). */
 
-const path = require('path');
-const fs = require('fs');
-const { execFileSync } = require('child_process');
+const setup = input(inputs, 'context');
+const load = await projectRequire(setup.repo);
+const path = load('path');
+const fs = load('fs');
+const { execFileSync } = load('child_process');
 const BROWSERS = [
   process.env.BROWSER_PATH,
   'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',
@@ -17,7 +19,6 @@ const BROWSERS = [
 const READY = 'PRONTA PARA REVISÃO DO ASSESSOR';
 const BLOCKED = 'BLOQUEADA: resolver os itens que falharam antes de enviar';
 
-const setup = input(inputs, 'context');
 const analysis = input(inputs, 'analysis');
 const facts = input(inputs, 'facts');
 const letter = input(inputs, 'letter');

@@ -1,5 +1,5 @@
 /* Catálogo dos nodes de código do Rivet: para cada node, as bibliotecas de rivet/code/lib que entram antes
-   do corpo, as portas de entrada e saída e as permissões do executor Node (require, process, fetch).
+   do corpo, as portas de entrada e saída e as permissões do executor Node (process, fetch).
    assembleCode() monta o texto exato que vai dentro do node; o gerador do projeto (rivet/build.mjs) e os
    testes (rivet/tests) usam a mesma função, então o código testado é o código que roda no Rivet. */
 
@@ -11,14 +11,14 @@ const CODE_DIR = dirname(fileURLToPath(import.meta.url));
 
 export const CODE_NODES = {
   load_inputs: {
-    title: 'Ler entradas', libs: ['io', 'format', 'pdf'], inputs: ['repo_dir'],
+    title: 'Ler entradas', libs: ['io', 'modules', 'format', 'pdf'], inputs: ['repo_dir'],
     outputs: ['statement_text', 'profile_text', 'report_text', 'context', 'model_extraction', 'model_writing', 'word_budget',
       'no_corrections', 'empty_log'],
-    allow: { require: true, process: true },
+    allow: { process: true },
   },
   market_data: {
-    title: 'Dados de mercado (CVM, BCB, Yahoo)', libs: ['io', 'format', 'market'], inputs: ['context'], outputs: ['market'],
-    allow: { require: true, fetch: true },
+    title: 'Dados de mercado (CVM, BCB, Yahoo)', libs: ['io', 'modules', 'format', 'market'], inputs: ['context'], outputs: ['market'],
+    allow: { fetch: true },
   },
   reconcile: {
     title: 'Reconciliar extrato', libs: ['io', 'format', 'portfolio'], inputs: ['extraction', 'usage', 'usage_log', 'model'],
@@ -51,10 +51,10 @@ export const CODE_NODES = {
     inputs: ['letter', 'facts', 'analysis', 'context'], outputs: ['html'], allow: {},
   },
   publish: {
-    title: 'Publicar: PDF, brief e log', libs: ['io', 'format', 'portfolio', 'suitability', 'facts', 'brief'],
+    title: 'Publicar: PDF, brief e log', libs: ['io', 'modules', 'format', 'portfolio', 'suitability', 'facts', 'brief'],
     inputs: ['html', 'analysis', 'facts', 'letter', 'factcheck', 'review', 'letter_done', 'letter_iterations', 'extraction_iterations',
       'grounding', 'macro', 'recommendations', 'extraction_log', 'letter_log', 'profile_usage', 'macro_usage', 'advise_usage', 'context'],
-    outputs: ['pdf_path', 'status', 'brief', 'pages'], allow: { require: true, process: true },
+    outputs: ['pdf_path', 'status', 'brief', 'pages'], allow: { process: true },
   },
 };
 

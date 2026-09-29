@@ -55,7 +55,7 @@ class Graph {
     const allow = spec.allow;
     return this.add(name, 'code', spec.title, x, y, {
       code: assembleCode(name), inputNames: spec.inputs, outputNames: spec.outputs, allowFetch: Boolean(allow.fetch),
-      allowRequire: Boolean(allow.require), allowRivet: false, allowProcess: Boolean(allow.process), allowConsole: false,
+      allowRequire: false, allowRivet: false, allowProcess: Boolean(allow.process), allowConsole: false,
     }, 300);
   }
 

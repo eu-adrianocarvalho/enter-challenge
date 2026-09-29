@@ -1,12 +1,13 @@
 /* Node "Dados de mercado": lê os preços das ações (CSV do desafio), calcula o retorno dos fundos a partir
    das cotas diárias da CVM (data/market/cvm_inf_diario_subset.csv) e busca ao vivo CDI e IPCA no Banco
    Central e o Ibovespa no Yahoo Finance, para o mesmo período da carteira. Sem internet, usa o arquivo
-   salvo em data/market/ e registra a origem. Precisa do executor Node (require e fetch). */
+   salvo em data/market/ e registra a origem. Precisa do executor Node (fetch). */
 
-const path = require('path');
-const fs = require('fs');
 const setup = input(inputs, 'context');
 const { settings, repo, registry } = setup;
+const load = await projectRequire(repo);
+const path = load('path');
+const fs = load('fs');
 const start = parseIsoDate(settings.period.start);
 const end = parseIsoDate(settings.period.end);
 const marketDir = path.join(repo, settings.paths.data_dir, 'market');

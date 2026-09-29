@@ -106,7 +106,14 @@ Code nodes cannot import modules, so `build.mjs` pastes the needed `rivet/code/l
 body. Edit the files and rebuild: code edited inside the app is overwritten by the next `npm run build`.
 
 Rivet 1.25 has no Write File node, and its OpenAI Chat node accepts images but not PDFs, so reading the PDFs and
-writing the outputs are Code nodes with `require`. Text comes from the pdf.js build bundled in
+writing the outputs are Code nodes that load Node modules.
+
+Those nodes must not tick **Allow require**. The desktop app's Node executor runs the CommonJS build of Rivet on
+Node 18, where `import.meta` is an empty object, so Rivet calls `createRequire(undefined)` and the node fails with
+"The argument 'filename' must be a file URL object, file URL string, or absolute path string. Received undefined"
+before any of its code runs. `rivet-cli` loads the ESM build and works, which hides the bug. The nodes use
+`projectRequire()` from `rivet/code/lib/modules.js` instead: a dynamic `import('node:module')` and a
+`createRequire` anchored at the project's `package.json`, which work in both executors. Text comes from the pdf.js build bundled in
 `pdf-parse`: text items are grouped by height and sorted left to right, so each statement table row stays on one
 line, as the extraction prompt expects.
 

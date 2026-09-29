@@ -3,20 +3,21 @@
    Entrada: repo_dir (pasta do projeto; vazio usa a pasta atual). Saídas: os textos para os grafos de LLM,
    o contexto com a configuração, os modelos e os valores iniciais dos loops. Precisa do executor Node. */
 
-const path = require('path');
-const fs = require('fs');
 const repo = input(inputs, 'repo_dir') || process.cwd();
+const load = await projectRequire(repo);
+const path = load('path');
+const fs = load('fs');
 const readText = (relative) => fs.readFileSync(path.join(repo, relative), 'utf8');
-const YAML = require(path.join(repo, 'node_modules', 'yaml'));
+const YAML = load('yaml');
 const config = (name) => YAML.parse(readText(`config/${name}.yaml`));
 const settings = config('settings');
 const logoPath = path.join(repo, settings.brand.logo);
 const logoType = logoPath.toLowerCase().endsWith('.png') ? 'image/png' : 'image/jpeg';
 
 return typed({
-  statement_text: await pdfToText(require, repo, settings.client.portfolio_pdf),
+  statement_text: await pdfToText(load, repo, settings.client.portfolio_pdf),
   profile_text: readText(settings.client.risk_profile_txt),
-  report_text: await pdfToText(require, repo, settings.research.macro_pdf),
+  report_text: await pdfToText(load, repo, settings.research.macro_pdf),
   context: {
     repo,
     settings,
