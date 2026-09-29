@@ -1,13 +1,13 @@
-/* Lê os arquivos .rivet-project (v2 e v1) e monta os dados que o visualizador do site desenha: cada node na
+/* Lê o enter_challenge.rivet-project e monta os dados que o visualizador do site desenha: cada node na
    posição do app do Rivet, com resumo, conteúdo completo e ligações. Nos Code nodes mostra o arquivo de
-   rivet/code/ de onde o código veio; nos subgrafos e loops, qual grafo eles chamam. Na v1 marca em vermelho
-   as ligações trocadas e os nodes com problema, detectados a partir do conteúdo. */
+   src/code/ de onde o código veio; nos subgrafos e loops, qual grafo eles chamam. No grafo original da v1
+   marca em vermelho as ligações trocadas e os nodes com problema, detectados a partir do conteúdo. */
 
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import YAML from 'yaml';
 
-import { CODE_NODES, source } from '../../rivet/code/nodes.mjs';
+import { CODE_NODES, source } from '../../src/code/nodes.mjs';
 
 const NODE_KEY = /^\[([^\]]+)\]:(\S+) "(.*)"$/;
 const CONNECTION = /^(.+?)->"(.+)"\s+([^/\s]+)\/(.+)$/;
@@ -15,10 +15,7 @@ const DETAIL_LIMIT = 6000;
 const SUMMARY_TOPICS = { Portfolio: 'portfolio_results', 'Risk Profile': 'risk_profile', Macroeconomic: 'macro_outlook' };
 const TOPIC_LABELS = { portfolio_results: 'carteira', risk_profile: 'perfil', macro_outlook: 'macro' };
 
-export const PROJECTS = [
-  ['rivet/xp_monthly_letter.rivet-project', 'v2'],
-  ['enter_challenge.rivet-project', 'v1'],
-];
+export const PROJECT = 'enter_challenge.rivet-project';
 
 function firstLine(text) {
   const line = (text || '').split('\n').map((l) => l.replace(/^[#\s]+/, '').trim()).find(Boolean) || '';
@@ -27,10 +24,6 @@ function firstLine(text) {
 
 function truncate(text) {
   return text.length <= DETAIL_LIMIT ? text : `${text.slice(0, DETAIL_LIMIT)}\n\n[cortado no site; ver o arquivo completo]`;
-}
-
-function graphName(graphId) {
-  return String(graphId).replace(/^graph_/, '');
 }
 
 function codeName(nodeId) {
@@ -45,7 +38,7 @@ function prettyJson(text) {
   }
 }
 
-function summary(type, data, nodeId) {
+function summary(type, data, nodeId, names) {
   const kinds = {
     graphInput: () => `entrada ${data.id} (${data.dataType})`,
     graphOutput: () => `saída ${data.id} (${data.dataType})`,
@@ -56,9 +49,9 @@ function summary(type, data, nodeId) {
     object: () => 'JSON schema da resposta',
     extractJson: () => 'texto → objeto JSON',
     readFile: () => (data.usePathInput ? 'lê o arquivo do caminho recebido' : String(data.path)),
-    code: () => `JavaScript · rivet/code/${codeName(nodeId)}.js`,
-    subGraph: () => `roda o grafo ${graphName(data.graphId)}`,
-    loopUntil: () => `repete ${graphName(data.targetGraph)} até done = true (máx. ${data.maxIterations})`,
+    code: () => `JavaScript · src/code/${codeName(nodeId)}.js`,
+    subGraph: () => `roda ${names[data.graphId] ?? data.graphId}`,
+    loopUntil: () => `repete ${names[data.targetGraph] ?? data.targetGraph} até done = true (máx. ${data.maxIterations})`,
   };
   return (kinds[type] || (() => type))();
 }
@@ -67,7 +60,7 @@ function codeDetail(nodeId, data) {
   const spec = CODE_NODES[codeName(nodeId)];
   if (!spec) return data.code;
   const allowed = Object.keys(spec.allow).join(', ') || 'nenhuma';
-  return `// rivet/code/${codeName(nodeId)}.js\n// bibliotecas coladas antes: ${spec.libs.map((l) => `lib/${l}.js`).join(', ')}\n`
+  return `// src/code/${codeName(nodeId)}.js\n// bibliotecas coladas antes: ${spec.libs.map((l) => `lib/${l}.js`).join(', ')}\n`
     + `// permissões do executor: ${allowed}\n\n${source(`${codeName(nodeId)}.js`)}`;
 }
 
@@ -94,7 +87,12 @@ function v1Flags(type, data, outgoing) {
   ].filter(Boolean);
 }
 
-function parseNodes(rawNodes, version) {
+function calledGraph(type, data) {
+  const kinds = { subGraph: data.graphId, loopUntil: data.targetGraph };
+  return kinds[type] ?? null;
+}
+
+function parseNodes(rawNodes, version, names) {
   const nodes = [];
   const edges = [];
   for (const [key, body] of Object.entries(rawNodes)) {
@@ -102,12 +100,11 @@ function parseNodes(rawNodes, version) {
     const [x, y, width] = (body.visualData || '0/0/260').split('/');
     const data = body.data || {};
     const connections = body.outgoingConnections || [];
-    const target = type === 'subGraph' ? data.graphId : type === 'loopUntil' ? data.targetGraph : null;
     nodes.push({
       id, type, title, x: Number(x), y: Number(y), w: Number(width) || 260,
-      summary: summary(type, data, id), detail: truncate(detail(type, data, id)),
+      summary: summary(type, data, id, names), detail: truncate(detail(type, data, id)),
       flags: version === 'v1' ? v1Flags(type, data, connections.length) : [],
-      target: target ? `${version}-${graphName(target)}` : null, text: data.promptText || '',
+      target: calledGraph(type, data), text: data.promptText || '',
     });
     for (const connection of connections) {
       const [, fromPort, , to, toPort] = connection.match(CONNECTION);
@@ -144,20 +141,23 @@ function withPorts(nodes, edges) {
   }));
 }
 
+function versionOf(graphId) {
+  return graphId.startsWith('graph_') ? 'v2' : 'v1';
+}
+
 export function viewerData(repo) {
-  const graphs = [];
-  for (const [relative, version] of PROJECTS) {
-    const project = YAML.parse(readFileSync(join(repo, relative), 'utf8'));
-    const mainId = project.data.metadata.mainGraphId;
-    const ordered = Object.values(project.data.graphs).sort((a, b) => (b.metadata.id === mainId) - (a.metadata.id === mainId));
-    for (const graph of ordered) {
-      const { nodes, edges } = parseNodes(graph.nodes, version);
-      if (version === 'v1') flagSwappedInputs(nodes, edges);
-      graphs.push({
-        key: `${version}-${graph.metadata.name}`, version, name: graph.metadata.name, main: graph.metadata.id === mainId,
-        description: graph.metadata.description || '', file: relative, nodes: withPorts(nodes, edges), edges,
-      });
-    }
-  }
-  return graphs;
+  const project = YAML.parse(readFileSync(join(repo, PROJECT), 'utf8'));
+  const mainId = project.data.metadata.mainGraphId;
+  const graphs = Object.entries(project.data.graphs);
+  const names = Object.fromEntries(graphs.map(([id, graph]) => [id, graph.metadata.name]));
+  const rank = ([id]) => (id === mainId ? 0 : versionOf(id) === 'v2' ? 1 : 2);
+  return [...graphs].sort((a, b) => rank(a) - rank(b)).map(([id, graph]) => {
+    const version = versionOf(id);
+    const { nodes, edges } = parseNodes(graph.nodes, version, names);
+    if (version === 'v1') flagSwappedInputs(nodes, edges);
+    return {
+      key: id, version, name: graph.metadata.name, main: id === mainId, description: graph.metadata.description || '',
+      file: PROJECT, nodes: withPorts(nodes, edges), edges,
+    };
+  });
 }

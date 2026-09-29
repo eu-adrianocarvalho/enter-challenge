@@ -1,6 +1,6 @@
-/* Node "Reconciliar extrato" (dentro do loop extraction_attempt): confere se o JSON transcrito pelo LLM fecha
-   com os subtotais do extrato. Se fechar, done = "true" e o loop termina; se não, as checagens que falharam
-   viram o texto de corrections para a próxima transcrição. Também registra o uso de tokens da chamada. */
+/* Node "Code: Reconcile Statement" (dentro do loop Extraction Attempt): confere se o JSON transcrito pelo
+   LLM fecha com os subtotais do extrato. Se fechar, done = "true" e o loop termina; se não, as checagens
+   que falharam viram o texto de corrections da próxima transcrição. Também registra os tokens. */
 
 const RECONCILIATION_BRL = 0.05;
 const RECONCILIATION_PCT = 0.5;

@@ -4,9 +4,9 @@ A pergunta que guiou a v2 foi: **"se o LLM errar aqui, quem percebe?"**. Cada tr
 
 ## 1. Reconciliação do extrato
 
-**Etapa:** o LLM transcreve o PDF do extrato para JSON (`extract_portfolio`), dentro do loop `extraction_attempt`.
+**Etapa:** o LLM transcreve o PDF do extrato para JSON (**Subgraph: Extract Portfolio**), dentro do loop **Extraction Attempt**.
 
-**Trava:** o node **Reconciliar extrato** (`lib/portfolio.js`) faz 28 checagens.
+**Trava:** o node **Code: Reconcile Statement** (`lib/portfolio.js`) faz 28 checagens.
 - investido + saldo = patrimônio;
 - soma das classes = investido;
 - soma das posições = subtotal de cada classe;
@@ -14,11 +14,11 @@ A pergunta que guiou a v2 foi: **"se o LLM errar aqui, quem percebe?"**. Cada tr
 - aplicado × (1 + rentabilidade) = posição;
 - % de alocação de cada posição.
 
-Se alguma falhar, o loop roda de novo e o LLM recebe a lista de falhas; se falhar outra vez, o node **Analisar carteira** para o grafo com o erro "Carta BLOQUEADA" e nenhuma carta é gerada.
+Se alguma falhar, o loop roda de novo e o LLM recebe a lista de falhas; se falhar outra vez, o node **Code: Analyze Portfolio** para o grafo com o erro "Carta BLOQUEADA" e nenhuma carta é gerada.
 
 ```mermaid
 flowchart TD
-  A(["LLM · extract_portfolio"]) --> B{"Reconciliar extrato<br/>28 checagens OK?"}
+  A(["Subgraph: Extract Portfolio"]) --> B{"Code: Reconcile Statement<br/>28 checagens OK?"}
   B -- sim --> C["segue o grafo"]
   B -- "não, 1ª vez" --> D["checagens que falharam<br/>viram o input corrections"] --> A
   B -- "não, 2ª vez" --> E["grafo para: carta BLOQUEADA"]
@@ -33,15 +33,15 @@ flowchart TD
 **O que aconteceu de verdade:**
 - O gpt-4.1-mini acertou os 180 campos das 12 posições, mas escreveu o subtotal de ações como **60.131,79** em vez de **60.311,79**. A reconciliação barrou.
 - Na segunda tentativa, mesmo com o aviso, o mini repetiu o erro e ainda errou outro campo (evidências 01 e 02).
-- Com o gpt-4.1, a transcrição bateu 100% com o gabarito feito à mão (`rivet/tests/fixtures/albert_statement.json`), por US$ 0,02.
+- Com o gpt-4.1, a transcrição bateu 100% com o gabarito feito à mão (`src/tests/fixtures/albert_statement.json`), por US$ 0,02.
 
 **Lição:** o gabarito transformou "qual modelo usar?" numa decisão medida.
 
 ## 2. Ancoragem do macro
 
-**Etapa:** o LLM resume o relatório de 11 páginas (`macro_outlook`).
+**Etapa:** o LLM resume o relatório de 11 páginas (**Subgraph: Macro Outlook**).
 
-**Trava:** o node **Conferir citações do macro** (`lib/grounding.js`) confere tudo contra o texto do relatório.
+**Trava:** o node **Code: Check Macro Quotes** (`lib/grounding.js`) confere tudo contra o texto do relatório.
 - Cada projeção, tema e risco precisa de uma **citação literal**, encontrada no texto como palavras em ordem, tolerando palavras quebradas pelo PDF, mas **nunca um número diferente**.
 - O valor de cada projeção precisa estar dentro da citação.
 - Os resumos só podem conter números que existem no relatório.
@@ -50,7 +50,7 @@ O que não passa é descartado e listado no brief.
 
 ```mermaid
 flowchart LR
-  M(["LLM · macro_outlook"]) --> I["projeções, temas e riscos<br/>cada um com citação"]
+  M(["Subgraph: Macro Outlook"]) --> I["projeções, temas e riscos<br/>cada um com citação"]
   I --> Q{"citação está no relatório?<br/>números idênticos?"}
   Q -- sim --> K["mantido"]
   Q -- não --> D["descartado e listado no brief"]
@@ -69,9 +69,9 @@ flowchart LR
 
 ## 3. Números da carta só dos FACTS
 
-**Etapa:** o LLM escreve a carta (`write_letter`), dentro do loop `letter_attempt`.
+**Etapa:** o LLM escreve a carta (**Subgraph: Write Letter**), dentro do loop **Letter Attempt**.
 
-**Trava:** o redator recebe o bloco FACTS, onde cada número já está formatado em pt-BR. O node **Fact-check dos números** (`lib/factcheck.js`) extrai todo percentual, valor em R$ e p.p. da carta e exige que cada um exista **idêntico** nos FACTS.
+**Trava:** o redator recebe o bloco FACTS, onde cada número já está formatado em pt-BR. O node **Code: Fact-check Figures** (`lib/factcheck.js`) extrai todo percentual, valor em R$ e p.p. da carta e exige que cada um exista **idêntico** nos FACTS.
 - "R$ 40 mil" é rejeitado, porque o valor dos FACTS é "R$ 40.000,00".
 - O mesmo vale para "3,5%" inventado.
 
@@ -81,22 +81,22 @@ Também confere a saudação ("Prezado Albert,"), proíbe listas e aponta palavr
 
 **Etapa:** a mesma carta, agora quanto ao sentido do texto. O regex confere números, não sentido.
 
-**Trava:** o grafo `review_letter` compara a carta com os FACTS e aponta como **grave** qualquer afirmação que:
+**Trava:** o **Subgraph: Review Letter** compara a carta com os FACTS e aponta como **grave** qualquer afirmação que:
 - contradiga os FACTS;
 - acrescente um status ou uma ação;
 - tire uma condição;
 - inverta uma projeção;
 - altere um nome.
 
-O node **Decidir a versão** junta esses apontamentos aos do fact-check e ao limite de palavras. Se sobrar algo, eles voltam ao redator como correções, em até três versões. Se ainda sobrar algo grave na terceira, a carta é gerada, mas sai **BLOQUEADA** no brief.
+O node **Code: Decide Letter Version** junta esses apontamentos aos do fact-check e ao limite de palavras. Se sobrar algo, eles voltam ao redator como correções, em até três versões. Se ainda sobrar algo grave na terceira, a carta é gerada, mas sai **BLOQUEADA** no brief.
 
 ```mermaid
 flowchart TD
-  W(["LLM · write_letter"]) --> F["Fact-check dos números<br/>todo número está nos FACTS?"]
-  F --> R(["LLM · review_letter<br/>alguma afirmação distorce os FACTS?"])
-  R --> Q{"Decidir a versão<br/>sobrou problema?"}
+  W(["Subgraph: Write Letter"]) --> F["Code: Fact-check Figures<br/>todo número está nos FACTS?"]
+  F --> R(["Subgraph: Review Letter<br/>alguma afirmação distorce os FACTS?"])
+  R --> Q{"Code: Decide Letter Version<br/>sobrou problema?"}
   Q -- "sim, versão < 3" --> K["problemas viram corrections"] --> W
-  Q -- "não" --> P["Montar a carta · Publicar"]
+  Q -- "não" --> P["Code: Render Letter · Code: Publish"]
   Q -- "sim, na 3ª versão" --> P
   P --> G{"sem problema e<br/>PDF ≤ 2 páginas?"}
   G -- sim --> OK["brief: PRONTA PARA REVISÃO"]
@@ -115,7 +115,7 @@ flowchart TD
 
 ## 5. Fontes separadas: o que é da XP e o que é leitura nossa
 
-**O problema:** o `macro_outlook` devolve as projeções do relatório e também "implicações", que são a leitura do modelo sobre o relatório. Uma carta escreveu "a XP considera que a renda fixa pós-fixada segue atrativa para o perfil moderado". O relatório não diz isso; é uma inferência.
+**O problema:** o **Subgraph: Macro Outlook** devolve as projeções do relatório e também "implicações", que são a leitura do modelo sobre o relatório. Uma carta escreveu "a XP considera que a renda fixa pós-fixada segue atrativa para o perfil moderado". O relatório não diz isso; é uma inferência.
 
 **A solução:** o prompt do redator passou a exigir que as projeções sejam atribuídas à XP e que as implicações apareçam como visão do assessor ("entendemos que…", "na nossa leitura…"), mantendo as ressalvas de cada uma ("pode", "tende a").
 
@@ -129,13 +129,13 @@ flowchart TD
 
 **O que aconteceu de verdade:** a nota "o CDB venceu; **após confirmarmos a liquidação**, esses recursos entram na reaplicação" virou "recursos **já liquidados**" (evidência 04). Isso é uma afirmação que o assessor ainda não confirmou.
 
-**A solução:** notas operacionais são impressas pelo node **Montar a carta**, abaixo da tabela de sugestões, com o texto exato. Na mesma versão, "Riza Lotus Plus Plus" levou a duas mudanças:
+**A solução:** notas operacionais são impressas pelo node **Code: Render Letter**, abaixo da tabela de sugestões, com o texto exato. Na mesma versão, "Riza Lotus Plus Plus" levou a duas mudanças:
 - os FACTS passaram a usar os nomes curtos dos fundos;
 - o fact-check passou a apontar palavras repetidas.
 
 ## 7. Valores definidos por regra, não pelo LLM
 
-O grafo `advise` só escolhe entre os candidatos que o node **Analisar carteira** já calculou, com valor e regra. Um id que não existe é descartado pelo node **Montar FACTS**. O LLM justifica; ele não dimensiona.
+O **Subgraph: Advise** só escolhe entre os candidatos que o node **Code: Analyze Portfolio** já calculou, com valor e regra. Um id que não existe é descartado pelo node **Code: Build FACTS**. O LLM justifica; ele não dimensiona.
 
 ## 8. O assessor no loop
 
@@ -153,9 +153,9 @@ O ganho de produtividade vem daqui: o assessor **revisa** em minutos em vez de e
 
 ## Testes automatizados
 
-São 8 testes em `rivet/tests/`, com o executor de testes que já vem no Node (`node:test`). Rodam em cerca de 1 segundo e sem chave de API: `npm test`.
+São 8 testes em `src/tests/`, com o executor de testes que já vem no Node (`node:test`). Rodam em cerca de 1 segundo e sem chave de API: `npm test`.
 
-**Como funcionam:** o `harness.mjs` pega o código de um node exatamente como ele vai para o projeto (a mesma `assembleCode()` do build) e o executa com os mesmos parâmetros que o executor Node do Rivet passa. As respostas do LLM vêm de arquivos em `rivet/tests/fixtures/`, gravados de execuções reais. O parâmetro `require` não é passado, como no app desktop, então um uso esquecido falha no teste.
+**Como funcionam:** o `harness.mjs` pega o código de um node exatamente como ele vai para o projeto (a mesma `assembleCode()` do build) e o executa com os mesmos parâmetros que o executor Node do Rivet passa. As respostas do LLM vêm de arquivos em `src/tests/fixtures/`, gravados de execuções reais. O parâmetro `require` não é passado, como no app desktop, então um uso esquecido falha no teste.
 
 | Teste | O que confere |
 |---|---|

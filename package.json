@@ -1,11 +1,11 @@
 {
   "name": "xp-monthly-letter",
   "private": true,
-  "description": "XP monthly client letter, run end to end as a Rivet graph (monthly_letter).",
+  "description": "XP monthly client letter, run end to end by the Rivet project enter_challenge.rivet-project.",
   "scripts": {
-    "build": "node rivet/build.mjs",
-    "letter": "node --env-file=.env node_modules/@ironclad/rivet-cli/bin/cli.js run rivet/xp_monthly_letter.rivet-project monthly_letter",
-    "test": "node --test \"rivet/tests/*.test.mjs\"",
+    "build": "node src/build.mjs",
+    "letter": "node --env-file=.env node_modules/@ironclad/rivet-cli/bin/cli.js run enter_challenge.rivet-project",
+    "test": "node --test \"src/tests/*.test.mjs\"",
     "docs": "node docs/site/build.mjs",
     "report": "node docs/site/report.mjs"
   },

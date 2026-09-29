@@ -1,6 +1,6 @@
-/* Node "Decidir a versão" (fim do loop letter_attempt): junta os problemas do fact-check, os apontamentos
-   graves do revisor e o limite de palavras. Sem problemas, done = "true" e o loop termina; com problemas,
-   eles viram o texto de corrections da próxima versão (até 3). Também registra o uso de tokens. */
+/* Node "Code: Decide Letter Version" (fim do loop Letter Attempt): junta os problemas do fact-check, os
+   apontamentos graves do revisor e o limite de palavras. Sem problemas, done = "true" e o loop termina;
+   com problemas, eles viram o texto de corrections da próxima versão (até 3). Também registra os tokens. */
 
 const letter = input(inputs, 'letter');
 const factcheck = input(inputs, 'factcheck');

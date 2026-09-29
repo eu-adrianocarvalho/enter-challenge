@@ -1,6 +1,6 @@
 # Diagnóstico da primeira versão
 
-A v1 é o arquivo `enter_challenge.rivet-project` (mantido intacto) e a carta `Output/output_letter.docx`. Os problemas se dividem em quatro grupos.
+A v1 é o grafo original do desafio e a carta `Output/output_letter.docx`. O grafo continua dentro do `enter_challenge.rivet-project`, com os nodes intactos, com o nome **V1 Graph: Original Challenge (unchanged)**; o arquivo como foi entregue está no histórico do git. Os problemas se dividem em quatro grupos.
 
 ## A. Bugs no grafo do Rivet
 
@@ -23,7 +23,7 @@ flowchart LR
   linkStyle 6,7,8 stroke:#d62828,stroke-width:2px
 ```
 
-Em vermelho, as ligações trocadas e os nós com problema: caminhos absolutos de outra máquina nos Read File, cliente fixo no prompt final e nenhuma saída do grafo. O grafo completo, como está no arquivo, aparece em **O trabalho › Grafos do Rivet** (aba v1).
+Em vermelho, as ligações trocadas e os nós com problema: caminhos absolutos de outra máquina nos Read File, cliente fixo no prompt final e nenhuma saída do grafo. O grafo completo, como está no arquivo, aparece em **O trabalho › Grafos do Rivet** (aba **V1 Graph**).
 
 | Problema | Evidência | Efeito |
 |---|---|---|

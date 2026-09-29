@@ -81,7 +81,7 @@ function renderBrief(b) {
   const s = b.statement;
   return [
     `# Brief do assessor: ${s.clientName} (conta ${s.account})`, '', `**Status: ${b.status}**`, '',
-    `Assessor: ${s.advisorName} (${s.advisorCode}) · Extrato de ${dateBr(s.statementDate)} · Gerado pelo grafo monthly_letter do Rivet`,
+    `Assessor: ${s.advisorName} (${s.advisorCode}) · Extrato de ${dateBr(s.statementDate)} · Gerado pelo Rivet (Main Graph: Enter Challenge)`,
     '', ...checksSection(b), '', ...flagsSection(b.flags), '', ...returnsSection(b.monthly), '', ...allocationSection(b.allocation), '',
     ...recommendationsSection(b), '', ...costSection(b.runs), '', '## 7. Arquivos gerados', ...b.files.map((f) => `- ${f}`), '',
   ].join('\n');

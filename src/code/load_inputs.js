@@ -1,7 +1,8 @@
-/* Node "Ler entradas": lê config/settings.yaml e os arquivos do cliente, extrai o texto dos PDFs (extrato e
-   relatório macro), carrega faixas do perfil, prateleira de produtos, registro de fundos e o logo da XP.
-   Entrada: repo_dir (pasta do projeto; vazio usa a pasta atual). Saídas: os textos para os grafos de LLM,
-   o contexto com a configuração, os modelos e os valores iniciais dos loops. Precisa do executor Node. */
+/* Node "Code: Load Inputs": lê config/settings.yaml e os arquivos do cliente, extrai o texto dos PDFs
+   (extrato e relatório macro), carrega faixas do perfil, prateleira de produtos, registro de fundos e o
+   logo da XP. Entrada: repo_dir (pasta do projeto; vazio usa a pasta atual). Saídas: os textos para os
+   grafos de LLM, o contexto com a configuração, os modelos e os valores iniciais dos loops. Precisa do
+   executor Node. */
 
 const repo = input(inputs, 'repo_dir') || process.cwd();
 const load = await projectRequire(repo);

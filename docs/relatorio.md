@@ -39,7 +39,7 @@
 - **LLM onde há texto não estruturado:** leitura do extrato e do perfil; síntese do relatório macro, a mesma para todos os clientes do mês; escolha e explicação das recomendações; redação e revisão da carta. São seis grafos de LLM no Rivet, todos com saída JSON validada por schema.
 - **Código onde há conta ou regra**, em nodes de código do próprio Rivet: rentabilidade do período por ativo e por classe, com cotas diárias reais da CVM para os fundos; CDI, IPCA e Ibovespa da mesma janela; bandas de alocação do perfil; dimensionamento das movimentações; estimativa de IR.
 - **Checagens entre as etapas:** o extrato extraído precisa fechar com os subtotais; cada afirmação do macro precisa de uma citação literal encontrada no relatório; a carta só pode usar números do bloco FACTS, conferidos por regex, e passa por um revisor de fidelidade. Os apontamentos voltam ao redator em até três versões.
-- **Tudo num grafo do Rivet:** o `monthly_letter` chama os grafos de LLM, roda o código e as checagens em loops de correção e termina com o PDF. O fluxo inteiro fica visível e executável no app; o código dos nodes fica em arquivos, e os testes executam o mesmo texto que vai para o Rivet.
+- **Tudo num grafo do Rivet:** o **Main Graph: Enter Challenge** chama os grafos de LLM, roda o código e as checagens em loops de correção e termina com o PDF. O fluxo inteiro fica visível e executável no app; o código dos nodes fica em arquivos, e os testes executam o mesmo texto que vai para o Rivet.
 - **Assessor no loop:** junto com a carta sai um brief com os alertas de dados, a evidência de cada sugestão e o custo. O assessor revisa em minutos em vez de escrever do zero, e é isso que permite atender três vezes mais clientes sem perder qualidade nem conformidade.
 
 Das três áreas sugeridas, fiz as três, com a rentabilidade no centro:
@@ -73,7 +73,7 @@ Das três áreas sugeridas, fiz as três, com a rentabilidade no centro:
 ## 4. Com um mês de trabalho
 
 - **Dados na fonte:** API de posições da XP, eliminando o parsing de PDF, e cotas CVM/ANBIMA de todos os fundos, com histórico para YTD e 12 meses.
-- **Macro uma vez por mês:** guardar o resultado do `macro_outlook` e reutilizá-lo em todas as cartas do mês; hoje cada execução o chama de novo.
+- **Macro uma vez por mês:** guardar o resultado do **Subgraph: Macro Outlook** e reutilizá-lo em todas as cartas do mês; hoje cada execução o chama de novo.
 - **Research oficial:** trocar as bandas e a prateleira ilustrativas pela carteira recomendada do XP Research e pelo motor de suitability ANBIMA, com recomendações versionadas e auditáveis.
 - **Avaliação contínua:** conjunto de cerca de 30 clientes com gabarito (extração, números e tom), revisor calibrado com rubrica e execução em CI, junto com os testes dos nodes. Isso permite trocar modelo ou prompt com segurança e escolher o modelo mais barato que mantém a qualidade em cada etapa.
 - **Produto para o assessor:** tela de revisão (aprovar, editar, enviar), com as edições virando dados de melhoria, e envio por e-mail ou app com rastreio de abertura.

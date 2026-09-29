@@ -12,7 +12,7 @@ export const REPO = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const AsyncFunction = (async () => {}).constructor;
 
 export function fixture(name) {
-  return JSON.parse(readFileSync(join(REPO, 'rivet', 'tests', 'fixtures', name), 'utf8'));
+  return JSON.parse(readFileSync(join(REPO, 'src', 'tests', 'fixtures', name), 'utf8'));
 }
 
 function typedInputs(plain) {

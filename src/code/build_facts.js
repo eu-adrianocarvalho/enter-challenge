@@ -1,6 +1,6 @@
-/* Node "Montar FACTS": junta a resposta do grafo advise aos candidatos calculados (descartando ids que não
-   existem e mantendo os valores do código) e monta o bloco FACTS, com todos os números da carta já
-   formatados em pt-BR. O JSON dos FACTS é o que o grafo write_letter recebe. */
+/* Node "Code: Build FACTS": junta a resposta do Subgraph: Advise aos candidatos calculados (descartando
+   ids que não existem e mantendo os valores do código) e monta o bloco FACTS, com todos os números da
+   carta já formatados em pt-BR. O JSON dos FACTS é o que o Subgraph: Write Letter recebe. */
 
 const analysis = input(inputs, 'analysis');
 const advice = input(inputs, 'advice');

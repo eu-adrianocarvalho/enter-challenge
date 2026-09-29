@@ -1,7 +1,7 @@
-/* Node "Analisar carteira": com o extrato reconciliado, o perfil, o macro conferido e os dados de mercado,
-   calcula a rentabilidade do período e desde a aplicação, a alocação contra as faixas do perfil, os
-   candidatos de compra e venda com valor e IR e os alertas de dados. Para a execução se o extrato não
-   reconciliou (a carta é bloqueada) e devolve os JSONs que o grafo advise recebe. */
+/* Node "Code: Analyze Portfolio": com o extrato reconciliado, o perfil, o macro conferido e os dados de
+   mercado, calcula a rentabilidade do período e desde a aplicação, a alocação contra as faixas do perfil,
+   os candidatos de compra e venda com valor e IR e os alertas de dados. Para a execução se o extrato não
+   reconciliou (a carta é bloqueada) e devolve os JSONs que o Subgraph: Advise recebe. */
 
 const setup = input(inputs, 'context');
 const market = input(inputs, 'market');

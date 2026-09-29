@@ -2,12 +2,12 @@
 
 **Status: PRONTA PARA REVISÃO DO ASSESSOR**
 
-Assessor: Antonio Bicudo (A7699) · Extrato de 07/05/2025 · Gerado pelo grafo monthly_letter do Rivet
+Assessor: Antonio Bicudo (A7699) · Extrato de 07/05/2025 · Gerado pelo Rivet (Main Graph: Enter Challenge)
 
 ## 1. Checagens automáticas
 - Reconciliação do extrato extraído pelo LLM: 28/28 (OK; 1 transcrição(ões))
 - Citações do relatório macro conferidas no texto original: 23 mantidas, 0 descartadas 
-- Fact-check da carta: 24 números conferidos, 0 sem fonte (OK; 1 versão(ões) geradas)
+- Fact-check da carta: 25 números conferidos, 0 sem fonte (OK; 1 versão(ões) geradas)
 - Revisão de fidelidade (LLM revisor): 0 apontamento(s) grave(s) na versão final (OK)
 - Páginas do PDF: 2
 
@@ -53,42 +53,41 @@ Carteira coberta (87,0% do investido): +2,51%, +R$ 6.650,04.
 
 ## 5. Recomendações propostas (aprovar antes do envio)
 
-**1. Reinvestir caixa em renda fixa**. Aplicação em Tesouro Selic 2029 e Tesouro IPCA+ 2029 coloca o caixa excedente para trabalhar, aumenta a proteção contra inflação e aproveita o cenário de juros elevados, alinhado ao perfil moderado e foco em preservação de poder de compra.
+**1. Reaplicar caixa em renda fixa e multimercado**. Reaplicação do caixa excedente em Tesouro Selic 2029, Tesouro IPCA+ 2029 e Ibiuna Hedge ST Advisory FIC FIM aumenta a diversificação, protege contra inflação e aproveita os juros elevados, alinhando a carteira ao perfil moderado e ao cenário macroeconômico atual.
 - Aplicar Tesouro Selic 2029: R$ 40.000,00. Regra: Caixa e renda fixa vencida acima da banda; leva Renda fixa para o alvo do perfil.
 - Aplicar Tesouro IPCA+ 2029: R$ 40.000,00. Regra: Caixa e renda fixa vencida acima da banda; leva Renda fixa para o alvo do perfil.
+- Aplicar Ibiuna Hedge ST Advisory FIC FIM: R$ 27.000,00. Regra: Caixa e renda fixa vencida acima da banda; leva Multimercado para o alvo do perfil.
 - Evidências do research:
-  - I1, leitura do modelo apoiada em P1, T2, T1: Com Selic elevada e inflação pressionada, ativos pós-fixados continuam atrativos para proteção e rendimento.
-  - I2, leitura do modelo apoiada em P3, T1, T5, R3: Títulos atrelados à inflação são recomendados diante do IPCA acima da meta e cenário fiscal incerto.
+  - I1, leitura do modelo apoiada em P1, T2, T1: Com Selic elevada e inflação pressionada, pós-fixados continuam atrativos para proteção e rendimento.
+  - I3, leitura do modelo apoiada em P3, T1, R3: Títulos atrelados à inflação são recomendados diante do IPCA acima da meta e cenário de preços pressionados.
+  - T2, citação do relatório: "Com isso, vemos a taxa Selic terminal em 15,50%, com altas de 1,00-0,75-0,50 p.p. nas próximas três reuniões do Copom."
+  - T1, citação do relatório: "Em suma, nosso cenário segue indicando inflação pressionada e disseminada neste ano. Mantivemos a projeção de alta de 6,1% para o IPCA de 2025."
 
-**2. Ajuste qualitativo em ações**. Troca de MRFG3 e HAPV3 por ITUB4 e B3SA3 reforça a exposição a empresas consolidadas e pagadoras de dividendos, conforme o perfil e a orientação de cautela diante do cenário macroeconômico.
+**2. Ajuste qualitativo em ações**. Troca de MRFG3 e HAPV3 por ITUB4 e B3SA3 mantém a exposição em renda variável, mas privilegia empresas consolidadas e pagadoras de dividendos, conforme o perfil moderado e o foco em resiliência no cenário de juros altos.
 - Vender MRFG3: R$ 15.431,04. Regra: Ação fora do perfil moderado (não é pagadora consistente de dividendos).
 - Vender HAPV3: R$ 6.141,59. Regra: Ação fora do perfil moderado (não é pagadora consistente de dividendos).
 - Comprar ITUB4: R$ 10.000,00. Regra: Reposição com os recursos das vendas, sem alterar o peso de renda variável.
 - Comprar B3SA3: R$ 10.000,00. Regra: Reposição com os recursos das vendas, sem alterar o peso de renda variável.
 - Evidências do research:
-  - I5, leitura do modelo apoiada em T3, T2, T5, R1: Desaceleração da economia, juros altos e incerteza fiscal limitam o potencial das ações brasileiras no curto prazo.
-
-**3. Diversificação com multimercado**. Aporte no Ibiuna Hedge ST Advisory FIC FIM amplia a diversificação e busca fontes alternativas de retorno, importante em um ambiente de juros altos e crescimento econômico moderado.
-- Aplicar Ibiuna Hedge ST Advisory FIC FIM: R$ 27.000,00. Regra: Caixa e renda fixa vencida acima da banda; leva Multimercado para o alvo do perfil.
-- Evidências do research:
-  - T2, citação do relatório: "Vemos a taxa Selic terminal em 15,50%, com altas de 1,00-0,75-0,50 p.p. nas próximas três reuniões de política monetária."
-  - T3, citação do relatório: "Projetamos avanço de 2,0% para o PIB de 2025, após aumento de 3,6% em 2024. A atividade deve continuar a arrefecer em 2026 – prevemos alta de 1,0% – em meio aos efeitos defasados da política monetária contracionista."
+  - I5, leitura do modelo apoiada em P1, T3, T4, R2: Juros altos, crescimento menor e incerteza fiscal limitam o potencial das ações brasileiras no curto prazo.
+  - T3, citação do relatório: "Projetamos avanço de 2,0% para o PIB de 2025, após aumento de 3,6% em 2024. A atividade deve continuar a arrefecer em 2026 – prevemos alta de 1,0%."
+  - T4, citação do relatório: "A dívida pública continuará a subir em ritmo acelerado, ampliando preocupações sobre a sustentabilidade fiscal."
 - IR: Vendas de R$ 21.572,63 superam a isenção mensal de R$ 20.000,00. Resultado realizado: MRFG3 +R$ 4.677,44, HAPV3 -R$ 18.022,55. Saldo -R$ 13.345,11, sem IR a pagar; prejuízo de R$ 13.345,11 a compensar no futuro. Estimativa; confirmar com a área tributária.
 - Nota do modelo: Deixei de fora crédito privado por não haver candidatos elegíveis.
-- Nota do modelo: Confirmar se o cliente deseja manter exposição máxima em renda variável.
-- Nota do modelo: Ajustes em ações não alteram o peso da classe, apenas a qualidade.
-- Nota do modelo: Reforçar a importância do acompanhamento periódico.
+- Nota do modelo: Confirmar com o cliente se há preferência entre pós-fixado e inflação.
+- Nota do modelo: A alocação multimercado é pequena, mas importante para diversificação.
+- Nota do modelo: As trocas em ações não alteram o peso da renda variável.
 
 ## 6. Custo das chamadas ao LLM
 | Grafo | Modelo | Tokens (in/out) | Custo (US$) |
 |---|---|---|---|
-| extract_portfolio | gpt-4.1 | 1894/1947 | 0.0194 |
-| extract_profile | gpt-4.1 | 1006/284 | 0.0043 |
-| macro_outlook | gpt-4.1 | 12556/1774 | 0.0393 |
-| advise | gpt-4.1 | 3827/354 | 0.0105 |
-| write_letter | gpt-4.1 | 3391/781 | 0.0130 |
-| review_letter | gpt-4.1 | 3759/4 | 0.0076 |
-| **Total** | | | **0.0940** |
+| extract_portfolio | gpt-4.1 | 1894/1941 | 0.0193 |
+| extract_profile | gpt-4.1 | 1006/286 | 0.0043 |
+| macro_outlook | gpt-4.1 | 12556/1704 | 0.0387 |
+| advise | gpt-4.1 | 3755/323 | 0.0101 |
+| write_letter | gpt-4.1 | 3368/793 | 0.0131 |
+| review_letter | gpt-4.1 | 3748/133 | 0.0086 |
+| **Total** | | | **0.0941** |
 
 ## 7. Arquivos gerados
 - carta_albert_2025-05-07.html

@@ -1,7 +1,7 @@
-/* Gera rivet/xp_monthly_letter.rivet-project: os 6 grafos de LLM (prompts e schemas em rivet/prompts e
-   rivet/schemas), os grafos de loop extraction_attempt e letter_attempt e o grafo principal monthly_letter,
-   que roda tudo dentro do Rivet e termina com a carta em HTML e PDF. O código dos nodes vem de rivet/code.
-   Rode depois de editar qualquer prompt, schema ou código: node rivet/build.mjs. */
+/* Gera enter_challenge.rivet-project, o projeto do Rivet na raiz: os 6 grafos de LLM (prompts e schemas em
+   src/prompts e src/schemas), os corpos dos dois loops e o Main Graph, que roda tudo e termina com a carta
+   em HTML e PDF. O código dos nodes vem de src/code. Grafos que não são gerados aqui, como o original da
+   v1, são mantidos. Rode depois de editar qualquer prompt, schema ou código: npm run build. */
 
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
@@ -10,10 +10,22 @@ import YAML from 'yaml';
 
 import { CODE_NODES, assembleCode } from './code/nodes.mjs';
 
-const RIVET_DIR = dirname(fileURLToPath(import.meta.url));
-const REPO = join(RIVET_DIR, '..');
+const SRC_DIR = dirname(fileURLToPath(import.meta.url));
+const REPO = join(SRC_DIR, '..');
 const SETTINGS = YAML.parse(readFileSync(join(REPO, 'config', 'settings.yaml'), 'utf8'));
 const TARGET = join(REPO, SETTINGS.rivet.project);
+const GRAPH_NAMES = {
+  monthly_letter: 'Main Graph: Enter Challenge',
+  extraction_attempt: 'Subgraph: Extraction Attempt (loop body)',
+  letter_attempt: 'Subgraph: Letter Attempt (loop body)',
+  extract_portfolio: 'Subgraph: Extract Portfolio',
+  extract_profile: 'Subgraph: Extract Profile',
+  macro_outlook: 'Subgraph: Macro Outlook',
+  advise: 'Subgraph: Advise',
+  write_letter: 'Subgraph: Write Letter',
+  review_letter: 'Subgraph: Review Letter',
+};
+const LEGACY_NAMES = { YvuUKw6GH7rKzoZvTtSTC: 'V1 Graph: Original Challenge (unchanged)' };
 
 const LLM_GRAPHS = [
   ['extract_portfolio', 'Transcribes the portfolio statement into validated JSON.', ['statement_text', 'corrections'], 'extraction', 0, 8000],
@@ -43,11 +55,11 @@ class Graph {
   }
 
   input(id, x, y, dataType = 'string', defaultValue = '') {
-    return this.add(`in_${id}`, 'graphInput', `Input ${id}`, x, y, { id, dataType, defaultValue, useDefaultValueInput: false }, 240);
+    return this.add(`in_${id}`, 'graphInput', `Graph Input: ${id}`, x, y, { id, dataType, defaultValue, useDefaultValueInput: false }, 240);
   }
 
   output(id, x, y, dataType = 'string') {
-    return this.add(`out_${id}`, 'graphOutput', `Output ${id}`, x, y, { id, dataType }, 240);
+    return this.add(`out_${id}`, 'graphOutput', `Graph Output: ${id}`, x, y, { id, dataType }, 240);
   }
 
   code(name, x, y) {
@@ -59,8 +71,8 @@ class Graph {
     }, 300);
   }
 
-  subgraph(target, title, x, y) {
-    return this.add(`sub_${target}`, 'subGraph', title, x, y, { graphId: graphId(target), useErrorOutput: false, useAsGraphPartialOutput: false });
+  subgraph(target, x, y) {
+    return this.add(`sub_${target}`, 'subGraph', GRAPH_NAMES[target], x, y, { graphId: graphId(target), useErrorOutput: false, useAsGraphPartialOutput: false });
   }
 
   loop(target, title, x, y, maxIterations) {
@@ -74,7 +86,7 @@ class Graph {
       visualData: `${n.x}/${n.y}/${n.width}/1//`, data: n.data,
       ...(n.connections.length ? { outgoingConnections: [...n.connections].sort() } : {}),
     }]));
-    return { metadata: { id: graphId(this.name), name: this.name, description: this.description }, nodes };
+    return { metadata: { id: graphId(this.name), name: GRAPH_NAMES[this.name], description: this.description }, nodes };
   }
 }
 
@@ -83,7 +95,7 @@ function graphId(name) {
 }
 
 function prompt(name, part) {
-  return readFileSync(join(RIVET_DIR, 'prompts', `${name}.${part}.md`), 'utf8').replace(/\r\n/g, '\n').trim();
+  return readFileSync(join(SRC_DIR, 'prompts', `${name}.${part}.md`), 'utf8').replace(/\r\n/g, '\n').trim();
 }
 
 function defaults(name) {
@@ -106,13 +118,13 @@ function llmGraph([name, description, inputs, modelKey, temperature, maxTokens])
   const g = new Graph(name, description);
   const model = SETTINGS.models[modelKey];
   const values = defaults(name);
-  const userPrompt = g.add('prompt', 'prompt', 'User prompt', 420, 40,
+  const userPrompt = g.add('prompt', 'prompt', 'Prompt: User Message', 420, 40,
     { type: 'user', useTypeInput: false, promptText: prompt(name, 'user'), enableFunctionCall: false }, 420);
-  const system = g.add('system', 'text', 'System prompt', 420, -260, { text: prompt(name, 'system'), normalizeLineEndings: true }, 420);
-  const schema = g.add('schema', 'object', 'Response schema', 420, 420,
-    { jsonTemplate: JSON.stringify(JSON.parse(readFileSync(join(RIVET_DIR, 'schemas', `${name}.json`), 'utf8')), null, 2) }, 420);
-  const chat = g.add('chat', 'chat', 'Chat', 960, 40, chatData(name, model, temperature, maxTokens), 260);
-  const json = g.add('json', 'extractJson', 'Extract JSON', 1300, 40, {}, 250);
+  const system = g.add('system', 'text', 'Text: System Prompt', 420, -260, { text: prompt(name, 'system'), normalizeLineEndings: true }, 420);
+  const schema = g.add('schema', 'object', 'Object: Response Schema', 420, 420,
+    { jsonTemplate: JSON.stringify(JSON.parse(readFileSync(join(SRC_DIR, 'schemas', `${name}.json`), 'utf8')), null, 2) }, 420);
+  const chat = g.add('chat', 'chat', 'Chat: OpenAI (JSON Schema)', 960, 40, chatData(name, model, temperature, maxTokens), 260);
+  const json = g.add('json', 'extractJson', 'Extract JSON: Result', 1300, 40, {}, 250);
   inputs.forEach((id, index) => g.link(g.input(id, 0, index * 220, 'string', values[id] || ''), 'data', userPrompt, id));
   g.link(g.input('model', 0, inputs.length * 220, 'string', model), 'data', chat, 'model');
   g.link(system, 'output', chat, 'systemPrompt');
@@ -130,7 +142,7 @@ function extractionAttempt() {
   const corrections = g.input('corrections', 0, 200);
   const model = g.input('model', 0, 400);
   const log = g.input('usage_log', 0, 600);
-  const extract = g.subgraph('extract_portfolio', 'LLM · extract_portfolio', 420, 100);
+  const extract = g.subgraph('extract_portfolio', 420, 100);
   const check = g.code('reconcile', 900, 100);
   g.link(text, 'data', extract, 'statement_text');
   g.link(corrections, 'data', extract, 'corrections');
@@ -153,9 +165,9 @@ function letterAttempt() {
   const corrections = g.input('corrections', 0, 400);
   const model = g.input('model', 0, 600);
   const log = g.input('usage_log', 0, 800);
-  const write = g.subgraph('write_letter', 'LLM · write_letter', 420, 100);
+  const write = g.subgraph('write_letter', 420, 100);
   const numbers = g.code('check_numbers', 860, 60);
-  const review = g.subgraph('review_letter', 'LLM · review_letter', 1300, 100);
+  const review = g.subgraph('review_letter', 1300, 100);
   const decide = g.code('decide_letter', 1740, 100);
   g.link(facts, 'data', write, 'facts_json');
   g.link(budget, 'data', write, 'word_budget');
@@ -188,14 +200,14 @@ function monthlyLetter() {
   const repo = g.input('repo_dir', 0, 300, 'string', REPO);
   const load = g.code('load_inputs', 360, 300);
   const market = g.code('market_data', 800, 700);
-  const extraction = g.loop('extraction_attempt', 'Loop · transcrever até reconciliar (máx. 2)', 800, 0, 2);
-  const profile = g.subgraph('extract_profile', 'LLM · extract_profile', 800, 380);
-  const macro = g.subgraph('macro_outlook', 'LLM · macro_outlook', 800, 1000);
+  const extraction = g.loop('extraction_attempt', 'Loop Until: Extraction Attempt (max 2)', 800, 0, 2);
+  const profile = g.subgraph('extract_profile', 800, 380);
+  const macro = g.subgraph('macro_outlook', 800, 1000);
   const ground = g.code('ground_macro', 1240, 1000);
   const analyze = g.code('analyze', 1680, 300);
-  const advise = g.subgraph('advise', 'LLM · advise', 2120, 300);
+  const advise = g.subgraph('advise', 2120, 300);
   const facts = g.code('build_facts', 2560, 300);
-  const letter = g.loop('letter_attempt', 'Loop · escrever, checar e revisar (máx. 3)', 3000, 300, 3);
+  const letter = g.loop('letter_attempt', 'Loop Until: Letter Attempt (max 3)', 3000, 300, 3);
   const render = g.code('render_letter', 3440, 100);
   const publish = g.code('publish', 3880, 300);
   g.link(repo, 'data', load, 'repo_dir');
@@ -247,16 +259,24 @@ function monthlyLetter() {
   return g;
 }
 
+function preservedGraphs(current, generatedIds) {
+  return Object.entries(current?.data?.graphs ?? {}).filter(([id]) => !generatedIds.has(id)).map(([id, graph]) => [id,
+    LEGACY_NAMES[id] ? { ...graph, metadata: { ...graph.metadata, name: LEGACY_NAMES[id] } } : graph]);
+}
+
 function build() {
-  const graphs = [...LLM_GRAPHS.map(llmGraph), extractionAttempt(), letterAttempt(), monthlyLetter()];
+  const current = existsSync(TARGET) ? YAML.parse(readFileSync(TARGET, 'utf8')) : null;
+  const graphs = [monthlyLetter(), extractionAttempt(), letterAttempt(), ...LLM_GRAPHS.map(llmGraph)];
+  const generated = graphs.map((g) => [graphId(g.name), g.serialize()]);
   const project = {
     version: 4,
     data: {
       attachedData: { trivet: { testSuites: [], version: 1 } },
-      graphs: Object.fromEntries(graphs.map((g) => [graphId(g.name), g.serialize()])),
+      graphs: Object.fromEntries([...generated, ...preservedGraphs(current, new Set(generated.map(([id]) => id)))]),
       metadata: {
-        id: 'xp-monthly-letter-rivet-native', title: 'XP Monthly Letter (Rivet-native)',
-        description: 'The whole XP monthly letter runs inside Rivet: open monthly_letter, select the Node executor and run.',
+        id: current?.data?.metadata?.id ?? 'enter-challenge', title: 'Enter Challenge',
+        description: 'XP monthly client letter. Run "Main Graph: Enter Challenge" with the Node executor. '
+          + '"V1 Graph: Original Challenge (unchanged)" is the graph from the challenge, kept for comparison.',
         mainGraphId: graphId('monthly_letter'),
       },
       plugins: [],

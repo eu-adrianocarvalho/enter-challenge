@@ -2,7 +2,7 @@
 
 O desafio sugeria três áreas e pedia pelo menos uma. As três foram implementadas, com a rentabilidade no centro, porque é dela que vêm os números que a v1 inventava. Cada área abaixo segue a mesma ordem: o pedido do desafio, o que foi feito, como foi implementado e o resultado para o Albert.
 
-Todas as três rodam dentro do grafo `monthly_letter` do Rivet. As contas e regras ficam em nodes de código (JavaScript), e o texto em grafos de LLM.
+Todas as três rodam dentro do **Main Graph: Enter Challenge** do Rivet. As contas e regras ficam em nodes de código (JavaScript), e o texto em grafos de LLM.
 
 ## 1. Cálculo de rentabilidade (Portfolio Profitability Calculation)
 
@@ -18,9 +18,9 @@ Todas as três rodam dentro do grafo `monthly_letter` do Rivet. As contas e regr
 - **Visual:** faixa de indicadores, um gráfico da carteira contra CDI e Ibovespa e a tabela "sua alocação × faixa do perfil".
 
 **Como:**
-- o node **Dados de mercado** lê o CSV de preços, calcula o retorno dos fundos a partir das cotas da CVM e busca CDI, IPCA e Ibovespa (`rivet/code/lib/market.js`);
-- o node **Analisar carteira** calcula a rentabilidade (`lib/returns.js`);
-- o node **Montar FACTS** formata tudo em pt-BR (`lib/facts.js`, `lib/format.js`);
+- o node **Code: Market Data** lê o CSV de preços, calcula o retorno dos fundos a partir das cotas da CVM e busca CDI, IPCA e Ibovespa (`src/code/lib/market.js`);
+- o node **Code: Analyze Portfolio** calcula a rentabilidade (`lib/returns.js`);
+- o node **Code: Build FACTS** formata tudo em pt-BR (`lib/facts.js`, `lib/format.js`);
 - o gráfico é um SVG desenhado pelo código da carta (`lib/letter_html.js`).
 
 Nenhum desses números passa por um LLM.
@@ -32,12 +32,12 @@ Nenhum desses números passa por um LLM.
 **Pedido:** um módulo que recomende quais ativos o cliente deveria considerar comprar ou vender.
 
 **O que foi feito:** um motor em duas camadas.
-1. **Regras em código (node Analisar carteira, `lib/suitability.js`) decidem o quê e quanto.**
+1. **Regras em código decidem o quê e quanto** (node **Code: Analyze Portfolio**, `lib/suitability.js`).
    - Classificam cada posição num bloco (renda fixa, multimercado, renda variável, caixa) e comparam com as faixas do perfil moderado (`config/allocation_moderate.yaml`).
    - O caixa acima do alvo é distribuído nas classes abaixo do alvo, com arredondamento em R$ 1.000.
    - Ações fora do perfil viram candidatas à troca por pagadoras de dividendos (`config/research_shelf.yaml`).
    - As regras também estimam o IR da venda: isenção de R$ 20 mil por mês e compensação entre prejuízo e ganho.
-2. **O LLM (grafo `advise`) escolhe e explica.** Ele recebe os candidatos, o perfil e o resumo macro, monta 2 ou 3 recomendações e justifica cada uma citando os IDs das evidências do relatório (P1, T2…). Ele não pode criar ativo nem mudar valor: o node Montar FACTS descarta ids desconhecidos e mantém os valores do código.
+2. **O LLM escolhe e explica** (**Subgraph: Advise**). Ele recebe os candidatos, o perfil e o resumo macro, monta 2 ou 3 recomendações e justifica cada uma citando os IDs das evidências do relatório (P1, T2…). Ele não pode criar ativo nem mudar valor: o node **Code: Build FACTS** descarta ids desconhecidos e mantém os valores do código.
 
 ```mermaid
 flowchart TD
@@ -47,7 +47,7 @@ flowchart TD
   C --> E["candidatos com valor<br/>Tesouro Selic · Tesouro IPCA+ · Ibiuna"]
   D --> E
   F["ações fora do perfil<br/>HAPV3 · MRFG3"] --> G["candidatos de troca<br/>ITUB4 · B3SA3 + estimativa de IR"]
-  E --> H(["LLM · advise<br/>escolhe e justifica com evidências"])
+  E --> H(["Subgraph: Advise<br/>escolhe e justifica com evidências"])
   G --> H
   H --> I["ids desconhecidos descartados<br/>valores continuam os do código"]
   I --> J["FACTS → texto da carta<br/>tabela de sugestões gerada pelo código"]
@@ -74,7 +74,7 @@ O brief do assessor também mostra a estimativa de IR. As vendas somam R$ 21.572
 
 **Pedido:** gerar programaticamente uma carta com aparência profissional, pronta para enviar, sem edição manual.
 
-**O que foi feito:** o node **Montar a carta (HTML)** monta a carta inteira por código, em duas folhas A4 com a identidade da XP (`lib/letter_html.js`):
+**O que foi feito:** o node **Code: Render Letter (HTML)** monta a carta inteira por código, em duas folhas A4 com a identidade da XP (`lib/letter_html.js`):
 - faixa preta com o logo e filete amarelo, data, destinatário e assunto;
 - o texto da carta, em parágrafos;
 - a faixa de indicadores e o gráfico;
@@ -82,7 +82,7 @@ O brief do assessor também mostra a estimativa de IR. As vendas somam R$ 21.572
 - a observação operacional e a assinatura do assessor;
 - o disclaimer de suitability no rodapé.
 
-O node **Publicar** grava o HTML em `Output/` e o imprime em PDF com o Edge ou o Chrome em modo headless, o mesmo motor de impressão do navegador. Em seguida conta as páginas: se passar de duas, a carta sai **bloqueada** no brief.
+O node **Code: Publish** grava o HTML em `Output/` e o imprime em PDF com o Edge ou o Chrome em modo headless, o mesmo motor de impressão do navegador. Em seguida conta as páginas: se passar de duas, a carta sai **bloqueada** no brief.
 
 **Por que HTML e PDF:** o PDF vai para o cliente. O HTML é a fonte da carta: abre em qualquer navegador, o layout fica todo em código e o mesmo arquivo gera o PDF. O Rivet não tem node para escrever arquivos nem para gerar DOCX, e montar HTML num node de código é direto.
 
@@ -90,7 +90,7 @@ O node **Publicar** grava o HTML em `Output/` e o imprime em PDF com o Edge ou o
 
 - **Extração do extrato com validação:** o PDF vira JSON via LLM, e o código confere se tudo fecha; se não fechar, o LLM recebe as falhas e transcreve de novo.
 - **Macro com cada afirmação ancorada** numa citação literal do relatório.
-- **Fact-check numérico da carta** e um **revisor de fidelidade** (grafo `review_letter`), num loop de até três versões.
+- **Fact-check numérico da carta** e um **revisor de fidelidade** (**Subgraph: Review Letter**), num loop de até três versões.
 - **Fontes separadas:** projeções são atribuídas à XP; a leitura do modelo sobre o relatório aparece como visão do assessor ("entendemos que…").
 - **Frases sensíveis escritas pelo código**, como a nota sobre a liquidação do CDB.
 - **Brief do assessor** com 11 alertas de dados, evidências e custo.

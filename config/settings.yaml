@@ -31,7 +31,7 @@ pdf:
     - '/usr/bin/chromium-browser'
 
 rivet:
-  project: rivet/xp_monthly_letter.rivet-project
+  project: enter_challenge.rivet-project
 
 models:
   extraction: gpt-4.1

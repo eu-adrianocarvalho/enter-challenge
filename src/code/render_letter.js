@@ -1,6 +1,6 @@
-/* Node "Montar a carta (HTML)": recebe a carta aprovada, os FACTS e a análise e monta o HTML final com a
+/* Node "Code: Render Letter (HTML)": recebe a carta aprovada, os FACTS e a análise e monta o HTML final com a
    identidade da XP, em duas folhas A4, com o gráfico em SVG, as tabelas e a observação operacional do CDB
-   escrita pelo código. O HTML aparece na saída do grafo e é o que o node seguinte converte em PDF. */
+   escrita pelo código. O HTML vai para o node Code: Publish, que o grava em Output/ e o converte em PDF. */
 
 const analysis = input(inputs, 'analysis');
 const setup = input(inputs, 'context');

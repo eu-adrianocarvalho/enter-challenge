@@ -98,24 +98,23 @@ const FILE_GROUPS = [
   ]],
   ['arquivos-saidas', 'Saídas geradas (v2)', [
     [output('carta', 'pdf'), 'Carta para o cliente, 2 páginas'],
-    [output('carta', 'html'), 'A mesma carta em HTML: é o que o node Publicar imprime em PDF'],
+    [output('carta', 'html'), 'A mesma carta em HTML: é o que o node Code: Publish imprime em PDF'],
     [output('brief_assessor', 'md'), 'Brief do assessor: status, travas, alertas, recomendações e custo'],
     [output('facts', 'json'), 'FACTS usados pela carta e o texto final'],
     [output('run_log', 'json'), 'Tokens e custo de cada chamada ao LLM'],
     ['docs/relatorio.pdf', 'Relatório curto do desafio (2 páginas)'],
   ]],
   ['arquivos-v1', 'Primeira versão (v1)', [
-    ['enter_challenge.rivet-project', 'Grafo original do Rivet, intacto'],
     [`${OUTPUT_DIR}/output_letter.docx`, 'Carta gerada pela v1, intacta'],
   ]],
   ['arquivos-rivet', 'Workflow Rivet (v2)', [
-    ['rivet/xp_monthly_letter.rivet-project', 'O projeto: monthly_letter, 2 loops e 6 grafos de LLM (gerado por rivet/build.mjs)'],
-    ['rivet/build.mjs', headerSummary],
-    ['rivet/code/nodes.mjs', headerSummary],
-    ...listing('rivet/code', /\.js$/, headerSummary),
-    ...listing('rivet/code/lib', /\.js$/, headerSummary),
-    ...listing('rivet/prompts', /\.md$/, 'Prompt'),
-    ...listing('rivet/schemas', /\.json$/, 'JSON schema da resposta'),
+    ['enter_challenge.rivet-project', 'O projeto do Rivet: Main Graph, 2 loops, 6 grafos de LLM e o grafo original da v1 (gerado por src/build.mjs)'],
+    ['src/build.mjs', headerSummary],
+    ['src/code/nodes.mjs', headerSummary],
+    ...listing('src/code', /\.js$/, headerSummary),
+    ...listing('src/code/lib', /\.js$/, headerSummary),
+    ...listing('src/prompts', /\.md$/, 'Prompt'),
+    ...listing('src/schemas', /\.json$/, 'JSON schema da resposta'),
   ]],
   ['arquivos-config', 'Configuração', [
     ['config/settings.yaml', 'Entradas, período, modelos, preços por token, limites, logo e navegadores do PDF'],
@@ -130,8 +129,8 @@ const FILE_GROUPS = [
   ]],
   ['arquivos-evidencias', 'Evidências', listing('data/evidence', /\.json$/, 'Resposta real do LLM que motivou uma trava')],
   ['arquivos-testes', 'Testes', [
-    ...listing('rivet/tests', /\.mjs$/, headerSummary),
-    ...listing('rivet/tests/fixtures', /\.json$/, fixtureDescription),
+    ...listing('src/tests', /\.mjs$/, headerSummary),
+    ...listing('src/tests/fixtures', /\.json$/, fixtureDescription),
   ]],
   ['arquivos-repo', 'Repositório e documentação', [
     ['README.md', 'README do repositório (em inglês)'],
@@ -208,8 +207,8 @@ async function v1LetterText() {
 async function letterSection(section) {
   const brief = read(output('brief_assessor', 'md'));
   return `<section class="doc" id="${section.anchor}" data-spy><h1>A carta e o brief</h1>`
-    + '<p>À esquerda, a carta que o grafo <code>monthly_letter</code> gerou para o Albert, no mesmo HTML que o node '
-    + 'Publicar imprime em PDF; à direita, a carta da v1, para comparar. Abaixo, o brief que o assessor recebe junto com a carta.</p>'
+    + '<p>À esquerda, a carta que o <strong>Main Graph: Enter Challenge</strong> gerou para o Albert, no mesmo HTML que o node '
+    + '<strong>Code: Publish</strong> imprime em PDF; à direita, a carta da v1, para comparar. Abaixo, o brief que o assessor recebe junto com a carta.</p>'
     + `<div class="two-col"><div><div class="col-title"><span>v2 · carta gerada</span>`
     + `<a href="${href(output('carta', 'pdf'))}" target="_blank">Abrir PDF</a></div>`
     + `<div class="letter-scroll"><div class="letter-frame"><iframe src="${href(output('carta', 'html'))}" `
@@ -220,8 +219,8 @@ async function letterSection(section) {
 }
 
 function testCount() {
-  return readdirSync(join(REPO, 'rivet', 'tests')).filter((f) => f.endsWith('.test.mjs'))
-    .reduce((total, f) => total + (read(`rivet/tests/${f}`).match(/^test\(/gm) || []).length, 0);
+  return readdirSync(join(REPO, 'src', 'tests')).filter((f) => f.endsWith('.test.mjs'))
+    .reduce((total, f) => total + (read(`src/tests/${f}`).match(/^test\(/gm) || []).length, 0);
 }
 
 function kpiCards(graphs) {
@@ -250,7 +249,7 @@ function hero(graphs) {
     + `<strong>${escapeHtml(value)}</strong></div>`).join('');
   return `<div class="hero"><div class="eyebrow">${AUTHOR} · Challenge Enter · AI Deployment</div>`
     + '<h2>O LLM lê e escreve, o código calcula e <em>nada chega ao cliente sem checagem.</em></h2>'
-    + `<p>Tudo roda num único grafo do Rivet, o <code>monthly_letter</code>. Números da última execução para o Albert, `
+    + `<p>Tudo roda num único grafo do Rivet, o <strong>Main Graph: Enter Challenge</strong>. Números da última execução para o Albert, `
     + `no período de ${SETTINGS.period.start.split('-').reverse().join('/')} a ${SETTINGS.period.end.split('-').reverse().join('/')}.</p>`
     + `<div class="kpis">${cards}</div>`
     + '<div class="actions"><a class="btn" href="#carta">Ver a carta</a>'
@@ -262,13 +261,13 @@ function hero(graphs) {
 
 function rivetSection(anchor, graphs) {
   const tabs = graphs.map((g) => `<button type="button" class="rv-tab${g.version === 'v1' ? ' v1' : ''}${g.main ? ' main' : ''}" `
-    + `data-graph="${escapeHtml(g.key)}"><span>${g.version}${g.main ? ' · principal' : ''}</span>${escapeHtml(g.name)}</button>`).join('');
+    + `data-graph="${escapeHtml(g.key)}"><span>${g.version}</span>${escapeHtml(g.name)}</button>`).join('');
   const payload = JSON.stringify(graphs).replace(/<\//g, '<\\/');
   return `<section class="doc" id="${anchor}" data-spy><h1>Grafos do Rivet</h1>`
     + '<p>O projeto como está no arquivo, desenhado com as posições do app do Rivet. A primeira aba é o '
-    + '<code>monthly_letter</code>, o grafo principal que roda tudo. Clique num node para ver o código, o prompt, o schema ou a '
-    + 'configuração; num subgrafo ou loop, o botão do painel abre o grafo chamado. A aba <strong>v1</strong> mostra o grafo '
-    + 'original: as ligações trocadas e os nodes com problema aparecem em vermelho.</p>'
+    + '<strong>Main Graph: Enter Challenge</strong>, que roda tudo. Clique num node para ver o código, o prompt, o schema ou a '
+    + 'configuração; num subgrafo ou loop, o botão do painel abre o grafo chamado. A aba <strong>V1 Graph</strong> mostra o grafo '
+    + 'original do desafio, que continua no mesmo projeto: as ligações trocadas e os nodes com problema aparecem em vermelho.</p>'
     + `<div class="rv-tabs">${tabs}</div>`
     + '<div class="rv-toolbar"><span id="rv-caption"></span><div>'
     + '<button type="button" data-zoom="-1">−</button><button type="button" data-zoom="0">Ajustar</button>'

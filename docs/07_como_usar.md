@@ -15,9 +15,9 @@ Copy-Item .env.example .env               # e coloque a OPENAI_API_KEY no .env
 
 ## Gerar a carta pelo app do Rivet
 
-1. Abra `rivet/xp_monthly_letter.rivet-project` no Rivet e coloque a chave da OpenAI em *Settings*.
+1. Abra `enter_challenge.rivet-project` no Rivet e coloque a chave da OpenAI em *Settings*.
 2. Troque o executor de **Browser** para **Node**. Os nodes de código leem arquivos, chamam o BCB e o Yahoo e usam o navegador para gerar o PDF, e só o executor Node permite isso.
-3. Abra o grafo `monthly_letter` e aperte **Run**. Cada node acende quando roda; os loops mostram cada tentativa. Em 30 a 50 segundos, o PDF está em `Output/`.
+3. Abra o **Main Graph: Enter Challenge** e aperte **Run**. Cada node acende quando roda; os loops mostram cada tentativa. Em 30 a 50 segundos, o PDF está em `Output/`.
 4. Clique em qualquer node para ver o que ele recebeu e devolveu. As saídas do grafo são `status`, `pdf_path` e `brief`.
 
 A entrada `repo_dir` vem preenchida com a pasta onde o projeto foi gerado. Se o repositório estiver em outra pasta, rode `npm run build` uma vez ou digite o caminho na entrada. Se a pasta estiver errada, o primeiro node para com um erro de arquivo não encontrado, em vez de seguir com dado vazio como a v1 fazia.
@@ -30,7 +30,7 @@ A entrada `repo_dir` vem preenchida com a pasta onde o projeto foi gerado. Se o 
 npm run letter
 ```
 
-Roda o mesmo `monthly_letter` com o `rivet-cli`, lendo a chave do `.env`, e imprime `status`, `pdf_path` e `brief` em JSON. Se o Edge ou o Chrome estiverem fora do lugar padrão, defina `BROWSER_PATH` ou ajuste `pdf.browsers` no `config/settings.yaml`.
+Roda o mesmo **Main Graph: Enter Challenge** com o `rivet-cli`, lendo a chave do `.env`, e imprime `status`, `pdf_path` e `brief` em JSON. Se o Edge ou o Chrome estiverem fora do lugar padrão, defina `BROWSER_PATH` ou ajuste `pdf.browsers` no `config/settings.yaml`.
 
 Cada execução chama a API: cerca de US$ 0,10 com gpt-4.1.
 
@@ -55,15 +55,15 @@ Se a carta sair bloqueada, o motivo aparece na seção de checagens do brief. Co
 
 ## Rodar um grafo de LLM sozinho
 
-Cada um dos seis grafos de LLM (`macro_outlook`, `write_letter` e os outros) também roda sozinho no app: as entradas vêm preenchidas com dados reais do Albert (`data/rivet_inputs/`). Serve para mostrar um prompt e a resposta estruturada sem rodar o fluxo inteiro.
+Cada um dos seis grafos de LLM (**Subgraph: Macro Outlook**, **Subgraph: Write Letter** e os outros) também roda sozinho no app: as entradas vêm preenchidas com dados reais do Albert (`data/rivet_inputs/`). Serve para mostrar um prompt e a resposta estruturada sem rodar o fluxo inteiro.
 
 ## Mudar um prompt ou o código de um node
 
-Os prompts ficam em `rivet/prompts/`, os schemas em `rivet/schemas/` e o código dos nodes em `rivet/code/`. Depois de editar:
+Os prompts ficam em `src/prompts/`, os schemas em `src/schemas/` e o código dos nodes em `src/code/`. Depois de editar:
 
 ```powershell
 npm test          # 8 testes, sem chave de API, cerca de 1 segundo
-npm run build     # regenera rivet/xp_monthly_letter.rivet-project
+npm run build     # regenera enter_challenge.rivet-project
 ```
 
 Editar o código dentro do app não adianta: o próximo build sobrescreve. Nos nodes de código, não marque *Allow require*: no app desktop isso quebra o node (ver [Arquitetura e código](04_arquitetura_e_codigo.md)).
@@ -88,4 +88,4 @@ Se o PDF estiver aberto num visualizador, feche e abra de novo, porque a maioria
 1. Em `config/settings.yaml`, troque os caminhos dos arquivos de entrada e as datas `period.start` e `period.end`.
 2. Para outro mês, atualize o recorte das cotas da CVM em `data/market/cvm_inf_diario_subset.csv` (ver [Dados externos](05_dados_externos.md)); os benchmarks são buscados ao vivo.
 
-Hoje existem faixas apenas para o perfil **moderado**. Outro perfil precisa do seu `config/allocation_*.yaml` e de uma entrada no `bands` do `rivet/code/load_inputs.js`, que hoje carrega só o moderado. Fundos novos precisam entrar em `config/fund_registry.yaml`.
+Hoje existem faixas apenas para o perfil **moderado**. Outro perfil precisa do seu `config/allocation_*.yaml` e de uma entrada no `bands` do `src/code/load_inputs.js`, que hoje carrega só o moderado. Fundos novos precisam entrar em `config/fund_registry.yaml`.

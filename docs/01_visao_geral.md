@@ -21,13 +21,13 @@ As restrições do enunciado:
 
 | Entregável | Onde |
 |---|---|
-| Workflow revisado: um grafo principal no Rivet (`monthly_letter`) que roda tudo, com 6 grafos de LLM, 2 loops de correção e 10 nodes de código | `rivet/xp_monthly_letter.rivet-project` |
-| O código dos nodes, em arquivos revisáveis, e o gerador do projeto | `rivet/code/`, `rivet/build.mjs` |
+| Workflow revisado: um grafo principal no Rivet (**Main Graph: Enter Challenge**) que roda tudo, com 6 grafos de LLM, 2 loops de correção e 10 nodes de código | `enter_challenge.rivet-project` |
+| O código dos nodes, em arquivos revisáveis, e o gerador do projeto | `src/code/`, `src/build.mjs` |
 | Nova carta para o Albert (PDF de 2 páginas, gerado a partir de um HTML com a identidade da XP) | `Output/carta_albert_2025-05-07.pdf` |
 | Brief do assessor, o documento de revisão que acompanha a carta | `Output/brief_assessor_albert_2025-05-07.md` |
 | Relatório curto (2 páginas): problemas, racional, próximos passos | `docs/relatorio.pdf` |
 | Documentação completa e este site | `docs/*.md`, `docs/index.html` |
-| Testes automatizados (8), que rodam sem chave de API | `rivet/tests/` |
+| Testes automatizados (8), que rodam sem chave de API | `src/tests/` |
 
 A branch `main` do repositório guarda a mesma solução numa versão anterior, com os cálculos em Python e o Rivet só nas etapas de LLM. Esta versão leva tudo para dentro do Rivet: dá para abrir o grafo no app, apertar Run e ver cada etapa acontecendo até o PDF sair.
 
@@ -60,7 +60,7 @@ Os valores exatos de cada execução (quantas citações foram mantidas, quantos
 
 1. [Diagnóstico da v1](02_diagnostico_v1.md): o que estava errado e a prova de cada problema.
 2. [Melhorias implementadas](03_melhorias_implementadas.md): as três áreas sugeridas, o que foi feito e como.
-3. [Arquitetura e código](04_arquitetura_e_codigo.md): o grafo `monthly_letter`, por que tudo no Rivet e como o código dos nodes é organizado e testado. No site, a seção **Grafos do Rivet** mostra os 9 grafos da v2 e o grafo da v1 desenhados como no app.
+3. [Arquitetura e código](04_arquitetura_e_codigo.md): o **Main Graph: Enter Challenge**, por que tudo no Rivet e como o código dos nodes é organizado e testado. No site, a seção **Grafos do Rivet** mostra os 9 grafos da v2 e o grafo da v1 desenhados como no app.
 4. [Dados externos](05_dados_externos.md): por que buscar dados na CVM, no Banco Central e no Yahoo.
 5. [Qualidade e travas](06_qualidade_e_travas.md): como o sistema evita erros, com evidências reais.
 6. [Como usar](07_como_usar.md): instalar, rodar no app do Rivet ou no terminal e demonstrar.

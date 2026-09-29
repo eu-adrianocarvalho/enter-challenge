@@ -17,13 +17,13 @@ Sem dados externos, a carta só poderia falar do mês de 19% da carteira e não 
 
 ```mermaid
 flowchart LR
-  CSV["CSV do desafio<br/>preço atual e anterior"] --> MD["Code · Dados de mercado<br/>lib/market.js"]
+  CSV["CSV do desafio<br/>preço atual e anterior"] --> MD["Code: Market Data<br/>lib/market.js"]
   CVM[("data/market/cvm_inf_diario_subset.csv<br/>recorte das cotas diárias da CVM")] --> MD
   FIDC["CVM · informe mensal FIDC<br/>estimativa do Brave em fund_registry.yaml"] -.-> MD
   BCB["Banco Central · SGS<br/>séries 12 e 433"] --> MD
   YH["Yahoo Finance · ^BVSP"] --> MD
   SNAP[("data/market/benchmarks_*.json")] -. "só se a rede falhar" .-> MD
-  MD --> AN["Code · Analisar carteira<br/>ações +3,30% · fundos +2,29%<br/>carteira +2,51%"]
+  MD --> AN["Code: Analyze Portfolio<br/>ações +3,30% · fundos +2,29%<br/>carteira +2,51%"]
   MD --> BEN["CDI +1,00% · IPCA 12m 5,48%<br/>Ibovespa +6,22%"]
   AN --> FACTS["FACTS da carta"]
   BEN --> FACTS
@@ -45,7 +45,7 @@ flowchart LR
 
 | Dado | Na execução do grafo |
 |---|---|
-| CDI, IPCA, Ibovespa | Buscados ao vivo pelo node **Dados de mercado** (BCB e Yahoo). Se a rede falhar, ele usa `data/market/benchmarks_2025-04-07_2025-05-07.json` e registra a origem na própria saída |
+| CDI, IPCA, Ibovespa | Buscados ao vivo pelo node **Code: Market Data** (BCB e Yahoo). Se a rede falhar, ele usa `data/market/benchmarks_2025-04-07_2025-05-07.json` e registra a origem na própria saída |
 | Cotas dos fundos | Lidas de `data/market/cvm_inf_diario_subset.csv`: as linhas dos 7 fundos no informe diário da CVM de abril e maio de 2025, baixadas uma vez. O arquivo é também a prova de onde saiu cada retorno |
 | Retorno do Brave (FIDC) | Estimativa fixa em `config/fund_registry.yaml`, com o método descrito |
 

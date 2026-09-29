@@ -1,6 +1,6 @@
-/* Node "Fact-check dos números" (dentro do loop letter_attempt): confere se todo percentual, valor em R$ e
+/* Node "Code: Fact-check Figures" (dentro do loop Letter Attempt): confere se todo percentual, valor em R$ e
    p.p. da carta existe nos FACTS, se a saudação usa o nome do cliente e se não há listas nem palavras
-   duplicadas. Devolve o resultado e a carta em JSON para o grafo review_letter. */
+   duplicadas. Devolve o resultado e a carta em JSON para o Subgraph: Review Letter. */
 
 const letter = input(inputs, 'letter');
 const facts = JSON.parse(input(inputs, 'facts_json'));

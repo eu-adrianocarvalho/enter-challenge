@@ -1,7 +1,7 @@
-/* Node "Publicar": grava a carta em HTML em Output/ e gera o PDF com um navegador headless (BROWSER_PATH
-   ou o primeiro de pdf.browsers no settings.yaml que existir). Conta as páginas, define o status (pronta ou
-   bloqueada) e escreve o brief do assessor, os FACTS e o log de tokens e custo de cada chamada ao LLM.
-   Devolve o caminho do PDF, o status e o brief. Precisa do executor Node (process). */
+/* Node "Code: Publish (PDF, Brief, Log)": grava a carta em HTML em Output/ e gera o PDF com um navegador
+   headless (BROWSER_PATH ou o primeiro de pdf.browsers no settings.yaml que existir). Conta as páginas,
+   define o status (pronta ou bloqueada) e escreve o brief do assessor, os FACTS e o log de tokens e custo
+   de cada chamada ao LLM. Devolve o caminho do PDF, o status e o brief. Precisa do executor Node. */
 
 const setup = input(inputs, 'context');
 const load = await projectRequire(setup.repo);

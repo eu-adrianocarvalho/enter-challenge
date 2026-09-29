@@ -3,42 +3,42 @@
     "graph": "extract_portfolio",
     "model": "gpt-4.1",
     "prompt_tokens": 1894,
-    "completion_tokens": 1947,
-    "cost_usd": 0.019364
+    "completion_tokens": 1941,
+    "cost_usd": 0.019316
   },
   {
     "graph": "extract_profile",
     "model": "gpt-4.1",
     "prompt_tokens": 1006,
-    "completion_tokens": 284,
-    "cost_usd": 0.004284
+    "completion_tokens": 286,
+    "cost_usd": 0.0043
   },
   {
     "graph": "macro_outlook",
     "model": "gpt-4.1",
     "prompt_tokens": 12556,
-    "completion_tokens": 1774,
-    "cost_usd": 0.039304
+    "completion_tokens": 1704,
+    "cost_usd": 0.038744
   },
   {
     "graph": "advise",
     "model": "gpt-4.1",
-    "prompt_tokens": 3827,
-    "completion_tokens": 354,
-    "cost_usd": 0.010486
+    "prompt_tokens": 3755,
+    "completion_tokens": 323,
+    "cost_usd": 0.010094
   },
   {
     "graph": "write_letter",
     "model": "gpt-4.1",
-    "prompt_tokens": 3391,
-    "completion_tokens": 781,
-    "cost_usd": 0.01303
+    "prompt_tokens": 3368,
+    "completion_tokens": 793,
+    "cost_usd": 0.01308
   },
   {
     "graph": "review_letter",
     "model": "gpt-4.1",
-    "prompt_tokens": 3759,
-    "completion_tokens": 4,
-    "cost_usd": 0.00755
+    "prompt_tokens": 3748,
+    "completion_tokens": 133,
+    "cost_usd": 0.00856
   }
 ]
