@@ -6,7 +6,7 @@ Assessor: Antonio Bicudo (A7699) · Extrato de 07/05/2025 · Gerado pelo grafo m
 
 ## 1. Checagens automáticas
 - Reconciliação do extrato extraído pelo LLM: 28/28 (OK; 1 transcrição(ões))
-- Citações do relatório macro conferidas no texto original: 23 mantidas, 0 descartadas 
+- Citações do relatório macro conferidas no texto original: 24 mantidas, 0 descartadas 
 - Fact-check da carta: 24 números conferidos, 0 sem fonte (OK; 1 versão(ões) geradas)
 - Revisão de fidelidade (LLM revisor): 0 apontamento(s) grave(s) na versão final (OK)
 - Páginas do PDF: 2
@@ -53,41 +53,41 @@ Carteira coberta (87,0% do investido): +2,51%, +R$ 6.650,04.
 
 ## 5. Recomendações propostas (aprovar antes do envio)
 
-**1. Reinvestir caixa em renda fixa e inflação**. Aplicação em Tesouro Selic 2029 e Tesouro IPCA+ 2029 coloca o caixa excedente para trabalhar, reforçando proteção contra inflação e aproveitando juros elevados, em linha com o perfil moderado e foco em preservação do poder de compra.
+**1. Reinvestir caixa em renda fixa e inflação**. Aplicar em Tesouro Selic 2029 e Tesouro IPCA+ 2029 reduz excesso de caixa, aumenta proteção contra inflação e aproveita juros elevados, alinhando a carteira ao perfil moderado e ao cenário macroeconômico atual.
 - Aplicar Tesouro Selic 2029: R$ 40.000,00. Regra: Caixa e renda fixa vencida acima da banda; leva Renda fixa para o alvo do perfil.
 - Aplicar Tesouro IPCA+ 2029: R$ 40.000,00. Regra: Caixa e renda fixa vencida acima da banda; leva Renda fixa para o alvo do perfil.
 - Evidências do research:
-  - I1, leitura do modelo apoiada em P1, T2, T1: Com Selic elevada e inflação pressionada, pós-fixados continuam atrativos para proteção e liquidez.
-  - I3, leitura do modelo apoiada em P3, T1, R3: Títulos atrelados à inflação são recomendados, pois IPCA deve seguir acima da meta em 2025.
+  - I1, leitura do modelo apoiada em P1, T2, T1: Com Selic elevada e cenário de inflação pressionada, ativos pós-fixados continuam atrativos para proteção e rendimento.
+  - I3, leitura do modelo apoiada em P3, T1, R3: Inflação acima da meta e risco de persistência tornam títulos atrelados ao IPCA recomendados para diversificação.
 
-**2. Ajuste em ações para perfil moderado**. Troca de MRFG3 e HAPV3 por ITUB4 e B3SA3 aumenta a aderência do portfólio ao perfil moderado, priorizando empresas consolidadas e pagadoras de dividendos, sem alterar o peso em renda variável.
+**2. Ajuste em ações para perfil moderado**. Trocar MRFG3 e HAPV3 por ITUB4 e B3SA3 mantém o peso em renda variável, priorizando empresas consolidadas e pagadoras de dividendos, conforme o perfil e o momento econômico.
 - Vender MRFG3: R$ 15.431,04. Regra: Ação fora do perfil moderado (não é pagadora consistente de dividendos).
 - Vender HAPV3: R$ 6.141,59. Regra: Ação fora do perfil moderado (não é pagadora consistente de dividendos).
 - Comprar ITUB4: R$ 10.000,00. Regra: Reposição com os recursos das vendas, sem alterar o peso de renda variável.
 - Comprar B3SA3: R$ 10.000,00. Regra: Reposição com os recursos das vendas, sem alterar o peso de renda variável.
 - Evidências do research:
-  - I5, leitura do modelo apoiada em T3, T2, T4: Ações brasileiras podem oscilar com atividade mais fraca e juros altos, mas valuations já refletem parte do cenário.
+  - I5, leitura do modelo apoiada em T3, T6, P7: Crescimento menor e juros altos limitam o potencial das ações, mas setores exportadores podem se beneficiar do câmbio.
 
-**3. Diversificação com multimercado**. Aporte no Ibiuna Hedge ST Advisory FIC FIM amplia a diversificação, buscando equilíbrio entre segurança e retorno, conforme o perfil e recomendação de diversificação em diferentes classes de ativos.
+**3. Diversificação com multimercado**. Aumentar exposição ao Ibiuna Hedge ST Advisory FIC FIM amplia a diversificação da carteira, diluindo riscos e buscando fontes alternativas de retorno em cenário de juros altos e volatilidade.
 - Aplicar Ibiuna Hedge ST Advisory FIC FIM: R$ 27.000,00. Regra: Caixa e renda fixa vencida acima da banda; leva Multimercado para o alvo do perfil.
 - Evidências do research:
-  - T3, citação do relatório: "Projetamos avanço de 2,0% para o PIB de 2025, após aumento de 3,6% em 2024. A atividade deve continuar a arrefecer em 2026 – prevemos alta de 1,0%."
+  - T2, citação do relatório: "Vemos a taxa Selic terminal em 15,50%, com altas de 1,00-0,75-0,50 p.p. nas próximas três reuniões de política monetária."
 - IR: Vendas de R$ 21.572,63 superam a isenção mensal de R$ 20.000,00. Resultado realizado: MRFG3 +R$ 4.677,44, HAPV3 -R$ 18.022,55. Saldo -R$ 13.345,11, sem IR a pagar; prejuízo de R$ 13.345,11 a compensar no futuro. Estimativa; confirmar com a área tributária.
-- Nota do modelo: Deixei de fora crédito privado por cenário neutro e foco em títulos públicos.
-- Nota do modelo: Ajuste em renda variável não altera exposição total, apenas melhora qualidade.
-- Nota do modelo: Aporte multimercado é complementar, mas prioridade é alocar caixa e ajustar perfil.
-- Nota do modelo: Confirmar se cliente deseja manter exposição mínima em multimercado.
+- Nota do modelo: Deixei de fora crédito privado por orientação neutra e foco em emissores sólidos.
+- Nota do modelo: Ajuste de multimercado é complementar, mas não prioritário frente ao excesso de caixa.
+- Nota do modelo: Confirmar se o cliente deseja manter exposição mínima em caixa para liquidez.
+- Nota do modelo: A troca em ações não altera o percentual de renda variável, apenas adequa ao perfil.
 
 ## 6. Custo das chamadas ao LLM
 | Grafo | Modelo | Tokens (in/out) | Custo (US$) |
 |---|---|---|---|
 | extract_portfolio | gpt-4.1 | 1894/1941 | 0.0193 |
-| extract_profile | gpt-4.1 | 1006/297 | 0.0044 |
-| macro_outlook | gpt-4.1 | 12556/1711 | 0.0388 |
-| advise | gpt-4.1 | 3773/367 | 0.0105 |
-| write_letter | gpt-4.1 | 3389/775 | 0.0130 |
-| review_letter | gpt-4.1 | 3751/4 | 0.0075 |
-| **Total** | | | **0.0935** |
+| extract_profile | gpt-4.1 | 1006/283 | 0.0043 |
+| macro_outlook | gpt-4.1 | 12556/1849 | 0.0399 |
+| advise | gpt-4.1 | 3908/365 | 0.0107 |
+| write_letter | gpt-4.1 | 3454/804 | 0.0133 |
+| review_letter | gpt-4.1 | 3845/4 | 0.0077 |
+| **Total** | | | **0.0953** |
 
 ## 7. Arquivos gerados
 - carta_albert_2025-05-07.html

@@ -4,7 +4,6 @@ Dados que o fluxo lê, baixa ou guarda para reutilizar.
 
 | Pasta | O que tem | Por que guardar |
 |---|---|---|
-| `llm/` | Cache de respostas do LLM da versão Python (branch `main`). O grafo `monthly_letter` não usa. | Só a versão Python lê essa pasta. |
 | `market/` | Recorte das cotas diárias da CVM usado no retorno dos fundos, e os benchmarks (CDI, IPCA, Ibovespa) do período. | O node "Dados de mercado" calcula os fundos a partir desse CSV e usa o arquivo de benchmarks quando não consegue buscar ao vivo no BCB e no Yahoo. |
 | `rivet_inputs/` | Os inputs de uma chamada real de cada grafo de LLM. | `rivet/build.mjs` usa esses valores como padrão dos grafos, para que cada um rode sozinho no app do Rivet durante a demo. |
 | `evidence/` | Respostas reais do LLM que mostraram por que cada trava existe (ver abaixo). | Material para a reunião: não entram no pipeline. |

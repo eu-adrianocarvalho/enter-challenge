@@ -21,8 +21,6 @@ paths:
 
 rivet:
   project: rivet/xp_monthly_letter.rivet-project
-  cli: node_modules/@ironclad/rivet-cli/bin/cli.js
-  timeout_seconds: 300
 
 models:
   extraction: gpt-4.1
@@ -34,7 +32,6 @@ pricing_usd_per_million_tokens:
 
 letter:
   word_budget: 560
-  retry_word_budget: 460
   max_pages: 2
 
 thresholds:

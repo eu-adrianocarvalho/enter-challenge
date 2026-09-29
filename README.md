@@ -76,9 +76,6 @@ environment. Set `BROWSER_PATH` if Edge or Chrome is not in its default location
 | `docs/` | Documentation in Portuguese and the 2-page report; they describe the Python version on `main` |
 | `enter_challenge.rivet-project`, `Output/output_letter.docx` | The v1 graph and letter, untouched for comparison |
 
-`src/` still holds the Python version from `main`. Do not run `src/run.py` on this branch: it rewrites
-`rivet/xp_monthly_letter.rivet-project` with its six-graph project, which has no `monthly_letter`.
-
 ## Guards
 
 1. **Reconciliation.** The extracted statement must add up: invested + cash = net worth, positions = class
