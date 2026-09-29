@@ -1,6 +1,6 @@
-/* Converte os .md da documentação em HTML, para o site e para o relatório: tabelas e blocos de código pelo
-   marked, blocos ```mermaid em <pre class="mermaid"> para o Mermaid desenhar no navegador e links entre os
-   .md em âncoras das seções do site. */
+/* Converte os .md da documentação em HTML para as páginas do site: tabelas e blocos de código pelo marked,
+   blocos ```mermaid em <pre class="mermaid"> para o Mermaid desenhar no navegador e links entre os .md em
+   âncoras das seções do site. */
 
 import { marked } from 'marked';
 

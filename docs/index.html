@@ -184,10 +184,6 @@ details.file[open] > summary::before { content:"–"; }
 <td><code>Output/brief_assessor_albert_2025-05-07.md</code></td>
 </tr>
 <tr>
-<td>Relatório curto (2 páginas): problemas, racional, próximos passos</td>
-<td><code>docs/relatorio.pdf</code></td>
-</tr>
-<tr>
 <td>Documentação completa e este site</td>
 <td><code>docs/*.md</code>, <code>docs/index.html</code></td>
 </tr>
@@ -1084,7 +1080,7 @@ src/            build.mjs (gera o projeto), code/ (Code nodes e lib/), prompts/,
 config/         cliente, período, modelos, preços por token, limites, logo, navegadores do PDF,
                 faixas do perfil, produtos e fundos (CNPJ)
 data/           market/ (cotas da CVM e benchmarks salvos), rivet_inputs/ (entradas padrão), evidence/
-docs/           esta documentação, o relatório de 2 páginas, o site index.html e o gerador em site/
+docs/           esta documentação, o site index.html e o gerador em site/
 Input/          arquivos do desafio (intactos) e o logo da XP
 Output/         carta (HTML e PDF), brief, FACTS e log de custo; a carta da v1 continua aqui
 </code></pre>
@@ -1474,11 +1470,10 @@ Copy-Item .env.example .env               # e coloque a OPENAI_API_KEY no .env
 npm run build     # regenera enter_challenge.rivet-project
 </code></pre>
 <p>Editar o código dentro do app não adianta: o próximo build sobrescreve. Nos nodes de código, não marque <em>Allow require</em>: no app desktop isso quebra o node (ver <a href="#arquitetura">Arquitetura e código</a>).</p>
-<h2>Gerar a documentação e o relatório</h2>
-<pre><code class="language-powershell">npm run docs      # recria docs/index.html com os números da última carta em Output/
-npm run report    # recria docs/relatorio.pdf a partir de docs/relatorio.md
+<h2>Gerar a documentação</h2>
+<pre><code class="language-powershell">npm run docs      # recria docs/index.html a partir de docs/*.md e da última carta em Output/
 </code></pre>
-<p>O <code>docs/relatorio.pdf</code> é o relatório curto que o desafio pede (até 2 páginas): problemas da v1, racional da solução e próximos passos. O segundo comando avisa se passar de 2 páginas. O site usa o Mermaid e as fontes da internet; sem conexão, o texto aparece, mas os diagramas não.</p>
+<p>O site usa o Mermaid e as fontes da internet; sem conexão, o texto aparece, mas os diagramas não.</p>
 <h2>Trocar o logo da carta</h2>
 <p>O logo fica em <code>Input/xp_inc_logo.jpg</code>, e o caminho é definido em <code>config/settings.yaml</code> (<code>brand.logo</code>). Para trocar, coloque o arquivo novo (JPG ou PNG) em <code>Input/</code>, ajuste o caminho e gere a carta de novo, sem mexer no código.</p>
 <p>Se o PDF estiver aberto num visualizador, feche e abra de novo, porque a maioria dos visualizadores não recarrega o arquivo sozinha.</p>
@@ -4739,7 +4734,7 @@ o desempenho do investimento.
     &quot;completion_tokens&quot;: 133,
     &quot;cost_usd&quot;: 0.00856
   }
-]</code></pre></div></details><details class="file"><summary><span class="fname">docs/relatorio.pdf</span><span class="fdesc">Relatório curto do desafio (2 páginas)</span><span class="fsize">129 KB</span><a class="dl" href="../docs/relatorio.pdf" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><p><a href="../docs/relatorio.pdf" target="_blank">Abrir o PDF em outra aba</a></p><iframe class="frame" data-src="../docs/relatorio.pdf" title="docs/relatorio.pdf"></iframe></div></details></section><section class="doc files" id="arquivos-v1" data-spy><h2>Primeira versão (v1)</h2><details class="file"><summary><span class="fname">Output/output_letter.docx</span><span class="fdesc">Carta gerada pela v1, intacta</span><span class="fsize">139 KB</span><a class="dl" href="../Output/output_letter.docx" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><p class="note">Formato sem prévia no navegador. Baixe o arquivo.</p></div></details></section><section class="doc files" id="arquivos-rivet" data-spy><h2>Workflow Rivet (v2)</h2><details class="file"><summary><span class="fname">enter_challenge.rivet-project</span><span class="fdesc">O projeto do Rivet: Main Graph, 2 loops, 6 grafos de LLM e o grafo original da v1 (gerado por src/build.mjs)</span><span class="fsize">375 KB</span><a class="dl" href="../enter_challenge.rivet-project" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><pre><code>version: 4
+]</code></pre></div></details></section><section class="doc files" id="arquivos-v1" data-spy><h2>Primeira versão (v1)</h2><details class="file"><summary><span class="fname">Output/output_letter.docx</span><span class="fdesc">Carta gerada pela v1, intacta</span><span class="fsize">139 KB</span><a class="dl" href="../Output/output_letter.docx" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><p class="note">Formato sem prévia no navegador. Baixe o arquivo.</p></div></details></section><section class="doc files" id="arquivos-rivet" data-spy><h2>Workflow Rivet (v2)</h2><details class="file"><summary><span class="fname">enter_challenge.rivet-project</span><span class="fdesc">O projeto do Rivet: Main Graph, 2 loops, 6 grafos de LLM e o grafo original da v1 (gerado por src/build.mjs)</span><span class="fsize">375 KB</span><a class="dl" href="../enter_challenge.rivet-project" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><pre><code>version: 4
 data:
   attachedData:
     trivet:
@@ -10048,7 +10043,6 @@ npm run letter           # runs the main graph with rivet-cli and prints status,
 npm test                 # 8 tests, no API key: runs each Code node the way Rivet&#39;s Node executor does
 npm run build            # regenerates enter_challenge.rivet-project from src/prompts, src/schemas and src/code
 npm run docs             # rebuilds docs/index.html from docs/*.md and the latest letter in Output/
-npm run report           # rebuilds docs/relatorio.pdf, the 2-page challenge report, and checks the page count
 </code></pre>
 <p><code>npm run letter</code> loads <code>.env</code> with <code>node --env-file</code>, because <code>rivet-cli</code> reads <code>OPENAI_API_KEY</code> only from the
 environment, and runs the project&#39;s main graph. Set <code>BROWSER_PATH</code> if Edge or Chrome is not in its default
@@ -10123,11 +10117,11 @@ location, or edit <code>pdf.browsers</code> in <code>config/settings.yaml</code>
 </tr>
 <tr>
 <td><code>docs/</code></td>
-<td>Documentation in Portuguese (<code>0*.md</code>, the sources of the site), the 2-page report (<code>relatorio.md</code> → <code>relatorio.pdf</code>) and the delivery site <code>index.html</code></td>
+<td>Documentation in Portuguese (<code>0*.md</code>, the sources of the site) and the delivery site <code>index.html</code></td>
 </tr>
 <tr>
 <td><code>docs/site/</code></td>
-<td>Site and report generators (<code>npm run docs</code>, <code>npm run report</code>), the shared page layout, CSS and browser scripts</td>
+<td>Site generator (<code>npm run docs</code>), the shared page layout, CSS and browser scripts</td>
 </tr>
 </tbody></table>
 <h2>Guards</h2>
@@ -10172,7 +10166,7 @@ the mistake when shown the failed check (see <code>data/evidence/</code>), so ex
 became a FIDC, which has no daily quota, so its return is an estimate prorated from the monthly FIDC report and
 flagged as such. The statement&#39;s dates also disagree (fund quotes from 04/04/2024, CDB matured 05/09/2024,
 statement 07/05/2025, macro report 06/02/2025); the brief lists each inconsistency.</p>
-</div></details><details class="file"><summary><span class="fname">package.json</span><span class="fdesc">Scripts npm e dependências (rivet-cli, pdf-parse, yaml; marked e mammoth para o site)</span><span class="fsize">660 B</span><a class="dl" href="../package.json" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><pre><code>{
+</div></details><details class="file"><summary><span class="fname">package.json</span><span class="fdesc">Scripts npm e dependências (rivet-cli, pdf-parse, yaml; marked e mammoth para o site)</span><span class="fsize">617 B</span><a class="dl" href="../package.json" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><pre><code>{
   &quot;name&quot;: &quot;xp-monthly-letter&quot;,
   &quot;private&quot;: true,
   &quot;description&quot;: &quot;XP monthly client letter, run end to end by the Rivet project enter_challenge.rivet-project.&quot;,
@@ -10180,8 +10174,7 @@ statement 07/05/2025, macro report 06/02/2025); the brief lists each inconsisten
     &quot;build&quot;: &quot;node src/build.mjs&quot;,
     &quot;letter&quot;: &quot;node --env-file=.env node_modules/@ironclad/rivet-cli/bin/cli.js run enter_challenge.rivet-project&quot;,
     &quot;test&quot;: &quot;node --test \&quot;src/tests/*.test.mjs\&quot;&quot;,
-    &quot;docs&quot;: &quot;node docs/site/build.mjs&quot;,
-    &quot;report&quot;: &quot;node docs/site/report.mjs&quot;
+    &quot;docs&quot;: &quot;node docs/site/build.mjs&quot;
   },
   &quot;devDependencies&quot;: {
     &quot;@ironclad/rivet-cli&quot;: &quot;1.25.0&quot;,
@@ -10388,7 +10381,6 @@ const FILE_GROUPS = [
     [output('brief_assessor', 'md'), 'Brief do assessor: status, travas, alertas, recomendações e custo'],
     [output('facts', 'json'), 'FACTS usados pela carta e o texto final'],
     [output('run_log', 'json'), 'Tokens e custo de cada chamada ao LLM'],
-    ['docs/relatorio.pdf', 'Relatório curto do desafio (2 páginas)'],
   ]],
   ['arquivos-v1', 'Primeira versão (v1)', [
     [`${OUTPUT_DIR}/output_letter.docx`, 'Carta gerada pela v1, intacta'],
@@ -10637,9 +10629,9 @@ export function renderSite({ title, tagline, topbar, topics, sections }) {
     + `&lt;body&gt;${topbar}&lt;div class=&quot;layout&quot;&gt;${sidebar(topics, sections, tagline)}&lt;main&gt;${pages}&lt;/main&gt;&lt;/div&gt;`
     + `&lt;script&gt;${asset('app.js')}&lt;/script&gt;&lt;script type=&quot;module&quot;&gt;${asset('mermaid.js')}&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;`;
 }
-</code></pre></div></details><details class="file"><summary><span class="fname">docs/site/markdown.mjs</span><span class="fdesc">Converte os .md da documentação em HTML, para o site e para o relatório: tabelas e blocos de código pelo marked, blocos ```mermaid em &lt;pre class=&quot;mermaid&quot;&gt; para o Merm…</span><span class="fsize">829 B</span><a class="dl" href="../docs/site/markdown.mjs" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><pre><code>/* Converte os .md da documentação em HTML, para o site e para o relatório: tabelas e blocos de código pelo
-   marked, blocos ```mermaid em &lt;pre class=&quot;mermaid&quot;&gt; para o Mermaid desenhar no navegador e links entre os
-   .md em âncoras das seções do site. */
+</code></pre></div></details><details class="file"><summary><span class="fname">docs/site/markdown.mjs</span><span class="fdesc">Converte os .md da documentação em HTML para as páginas do site: tabelas e blocos de código pelo marked, blocos ```mermaid em &lt;pre class=&quot;mermaid&quot;&gt; para o Mermaid dese…</span><span class="fsize">821 B</span><a class="dl" href="../docs/site/markdown.mjs" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><pre><code>/* Converte os .md da documentação em HTML para as páginas do site: tabelas e blocos de código pelo marked,
+   blocos ```mermaid em &lt;pre class=&quot;mermaid&quot;&gt; para o Mermaid desenhar no navegador e links entre os .md em
+   âncoras das seções do site. */
 
 import { marked } from 'marked';
 
@@ -10695,68 +10687,6 @@ window.renderMermaidIn = (page) =&gt; {
   });
 };
 window.renderMermaidIn(document.querySelector('.page:not([hidden])'));
-</code></pre></div></details><details class="file"><summary><span class="fname">docs/site/report.css</span><span class="fdesc">Estilo do relatório de 2 páginas (docs/relatorio.pdf): A4, texto compacto em Calibri, títulos em Georgia com filete laranja e tabelas com cabeçalho preto, para caber p…</span><span class="fsize">1002 B</span><a class="dl" href="../docs/site/report.css" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><pre><code>/* Estilo do relatório de 2 páginas (docs/relatorio.pdf): A4, texto compacto em Calibri, títulos em Georgia
-   com filete laranja e tabelas com cabeçalho preto, para caber problemas, racional e próximos passos. */
-
-@page { size: A4; margin: 1.4cm 1.7cm; }
-body { font-family: Calibri, &quot;Segoe UI&quot;, sans-serif; font-size: 9pt; line-height: 1.2; color: #000; margin: 0; }
-h1 { font-family: Georgia, serif; font-weight: normal; font-size: 16pt; margin: 0 0 4pt; }
-h2 { break-after: avoid; font-family: Georgia, serif; font-weight: normal; font-size: 12pt; margin: 8pt 0 3pt;
-  border-bottom: 2px solid #ffae35; }
-p { margin: 2pt 0 3pt; text-align: justify; }
-a { color: #000; }
-ul { margin: 0 0 2pt 12pt; padding-left: 0; }
-li { margin: 0 0 1pt; }
-table { border-collapse: collapse; width: 100%; font-size: 8pt; margin: 3pt 0 4pt; }
-th { background: #171717; color: #fff; text-align: left; padding: 1pt 3pt; }
-td { border: 1px solid #cecece; padding: 1pt 3pt; vertical-align: top; line-height: 1.1; }
-</code></pre></div></details><details class="file"><summary><span class="fname">docs/site/report.mjs</span><span class="fdesc">Gera docs/relatorio.pdf, o relatório curto do desafio (até 2 páginas), a partir de docs/relatorio.md: converte o Markdown em HTML com o estilo de docs/site/report.css …</span><span class="fsize">2 KB</span><a class="dl" href="../docs/site/report.mjs" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><pre><code>/* Gera docs/relatorio.pdf, o relatório curto do desafio (até 2 páginas), a partir de docs/relatorio.md:
-   converte o Markdown em HTML com o estilo de docs/site/report.css e imprime em PDF com o mesmo navegador
-   headless que gera a carta (BROWSER_PATH ou a lista pdf.browsers do settings.yaml). Sai com erro se
-   passar de 2 páginas. Rode depois de editar o relatório: npm run report. */
-
-import { execFileSync } from 'node:child_process';
-import { existsSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
-import { dirname, join } from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
-import YAML from 'yaml';
-
-import { renderMarkdown } from './markdown.mjs';
-
-const SITE = dirname(fileURLToPath(import.meta.url));
-const REPO = join(SITE, '..', '..');
-const SOURCE = join(REPO, 'docs', 'relatorio.md');
-const TARGET = join(REPO, 'docs', 'relatorio.pdf');
-const MAX_PAGES = 2;
-
-function browser() {
-  const settings = YAML.parse(readFileSync(join(REPO, 'config', 'settings.yaml'), 'utf8'));
-  const found = [process.env.BROWSER_PATH, ...settings.pdf.browsers].filter(Boolean).find((candidate) =&gt; existsSync(candidate));
-  if (!found) throw new Error('Nenhum navegador encontrado para gerar o PDF: defina BROWSER_PATH.');
-  return found;
-}
-
-function printToPdf(html, target) {
-  const staging = join(tmpdir(), `relatorio_${process.pid}.html`);
-  writeFileSync(staging, html, 'utf8');
-  try {
-    execFileSync(browser(), ['--headless=new', '--disable-gpu', '--no-first-run', '--no-pdf-header-footer',
-      `--print-to-pdf=${target}`, pathToFileURL(staging).href], { stdio: 'ignore', timeout: 120000 });
-  } finally {
-    rmSync(staging, { force: true });
-  }
-}
-
-const css = readFileSync(join(SITE, 'report.css'), 'utf8');
-const body = renderMarkdown(readFileSync(SOURCE, 'utf8'));
-printToPdf(`&lt;!doctype html&gt;&lt;html lang=&quot;pt-BR&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;style&gt;${css}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;${body}&lt;/body&gt;&lt;/html&gt;`, TARGET);
-const pages = (readFileSync(TARGET).toString('latin1').match(/\/Type\s*\/Page(?!s)/g) || []).length;
-console.log(`${TARGET} · ${pages} página(s)`);
-if (pages &gt; MAX_PAGES) {
-  console.error(`O relatório passou de ${MAX_PAGES} páginas: encurte docs/relatorio.md.`);
-  process.exit(1);
-}
 </code></pre></div></details><details class="file"><summary><span class="fname">docs/site/style.css</span><span class="fdesc">Visual do site de documentação, no padrão da Enter (getenter.ai): fundo branco ou preto, destaque laranja, títulos em serifa fina, texto em Geist.</span><span class="fsize">11 KB</span><a class="dl" href="../docs/site/style.css" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><pre><code>/* Visual do site de documentação, no padrão da Enter (getenter.ai): fundo branco ou preto, destaque laranja,
    títulos em serifa fina, texto em Geist. Inclui o tema escuro, a barra lateral por tópicos, o catálogo de
    arquivos e a carta em HTML em escala. */

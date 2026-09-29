@@ -68,14 +68,13 @@ npm run build     # regenera enter_challenge.rivet-project
 
 Editar o código dentro do app não adianta: o próximo build sobrescreve. Nos nodes de código, não marque *Allow require*: no app desktop isso quebra o node (ver [Arquitetura e código](04_arquitetura_e_codigo.md)).
 
-## Gerar a documentação e o relatório
+## Gerar a documentação
 
 ```powershell
-npm run docs      # recria docs/index.html com os números da última carta em Output/
-npm run report    # recria docs/relatorio.pdf a partir de docs/relatorio.md
+npm run docs      # recria docs/index.html a partir de docs/*.md e da última carta em Output/
 ```
 
-O `docs/relatorio.pdf` é o relatório curto que o desafio pede (até 2 páginas): problemas da v1, racional da solução e próximos passos. O segundo comando avisa se passar de 2 páginas. O site usa o Mermaid e as fontes da internet; sem conexão, o texto aparece, mas os diagramas não.
+O site usa o Mermaid e as fontes da internet; sem conexão, o texto aparece, mas os diagramas não.
 
 ## Trocar o logo da carta
 

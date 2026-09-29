@@ -95,7 +95,6 @@ const FILE_GROUPS = [
     [output('brief_assessor', 'md'), 'Brief do assessor: status, travas, alertas, recomendações e custo'],
     [output('facts', 'json'), 'FACTS usados pela carta e o texto final'],
     [output('run_log', 'json'), 'Tokens e custo de cada chamada ao LLM'],
-    ['docs/relatorio.pdf', 'Relatório curto do desafio (2 páginas)'],
   ]],
   ['arquivos-v1', 'Primeira versão (v1)', [
     [`${OUTPUT_DIR}/output_letter.docx`, 'Carta gerada pela v1, intacta'],

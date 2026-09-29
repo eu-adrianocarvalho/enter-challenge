@@ -184,7 +184,7 @@ src/            build.mjs (gera o projeto), code/ (Code nodes e lib/), prompts/,
 config/         cliente, período, modelos, preços por token, limites, logo, navegadores do PDF,
                 faixas do perfil, produtos e fundos (CNPJ)
 data/           market/ (cotas da CVM e benchmarks salvos), rivet_inputs/ (entradas padrão), evidence/
-docs/           esta documentação, o relatório de 2 páginas, o site index.html e o gerador em site/
+docs/           esta documentação, o site index.html e o gerador em site/
 Input/          arquivos do desafio (intactos) e o logo da XP
 Output/         carta (HTML e PDF), brief, FACTS e log de custo; a carta da v1 continua aqui
 ```

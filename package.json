@@ -6,8 +6,7 @@
     "build": "node src/build.mjs",
     "letter": "node --env-file=.env node_modules/@ironclad/rivet-cli/bin/cli.js run enter_challenge.rivet-project",
     "test": "node --test \"src/tests/*.test.mjs\"",
-    "docs": "node docs/site/build.mjs",
-    "report": "node docs/site/report.mjs"
+    "docs": "node docs/site/build.mjs"
   },
   "devDependencies": {
     "@ironclad/rivet-cli": "1.25.0",

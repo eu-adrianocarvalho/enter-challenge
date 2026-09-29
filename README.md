@@ -58,7 +58,6 @@ npm run letter           # runs the main graph with rivet-cli and prints status,
 npm test                 # 8 tests, no API key: runs each Code node the way Rivet's Node executor does
 npm run build            # regenerates enter_challenge.rivet-project from src/prompts, src/schemas and src/code
 npm run docs             # rebuilds docs/index.html from docs/*.md and the latest letter in Output/
-npm run report           # rebuilds docs/relatorio.pdf, the 2-page challenge report, and checks the page count
 ```
 
 `npm run letter` loads `.env` with `node --env-file`, because `rivet-cli` reads `OPENAI_API_KEY` only from the
@@ -84,8 +83,8 @@ location, or edit `pdf.browsers` in `config/settings.yaml`.
 | `data/evidence/` | Real LLM failures that motivated each guard |
 | `Input/` | The challenge files, untouched, and the XP logo used in the letter header (`brand.logo`) |
 | `Output/` | `carta_*.html` and `.pdf`, `brief_assessor_*.md`, `facts_*.json`, `run_log_*.json`; `output_letter.docx` is the v1 letter |
-| `docs/` | Documentation in Portuguese (`0*.md`, the sources of the site), the 2-page report (`relatorio.md` → `relatorio.pdf`) and the delivery site `index.html` |
-| `docs/site/` | Site and report generators (`npm run docs`, `npm run report`), the shared page layout, CSS and browser scripts |
+| `docs/` | Documentation in Portuguese (`0*.md`, the sources of the site) and the delivery site `index.html` |
+| `docs/site/` | Site generator (`npm run docs`), the shared page layout, CSS and browser scripts |
 
 ## Guards
 

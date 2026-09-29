@@ -25,7 +25,6 @@ As restrições do enunciado:
 | O código dos nodes, em arquivos revisáveis, e o gerador do projeto | `src/code/`, `src/build.mjs` |
 | Nova carta para o Albert (PDF de 2 páginas, gerado a partir de um HTML com a identidade da XP) | `Output/carta_albert_2025-05-07.pdf` |
 | Brief do assessor, o documento de revisão que acompanha a carta | `Output/brief_assessor_albert_2025-05-07.md` |
-| Relatório curto (2 páginas): problemas, racional, próximos passos | `docs/relatorio.pdf` |
 | Documentação completa e este site | `docs/*.md`, `docs/index.html` |
 | Testes automatizados (8), que rodam sem chave de API | `src/tests/` |
 
