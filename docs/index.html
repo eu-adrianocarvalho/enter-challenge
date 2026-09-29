@@ -1,18 +1,15 @@
 <!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Carta mensal XP · Documentação</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Noto+Serif:wght@300;400&display=swap" rel="stylesheet"><style>/* Visual do site de documentação, no padrão da Enter (getenter.ai): fundo branco ou preto, destaque laranja,
-   títulos em serifa fina, texto em Geist. Inclui o tema escuro, a barra lateral por tópicos, o catálogo de
-   arquivos e a carta em HTML em escala. */
+   títulos em serifa fina, texto em Geist. O tema escuro segue a configuração do sistema. Inclui a barra
+   lateral por tópicos, o catálogo de arquivos e a carta em HTML em escala. */
 
 :root { --bg:#ffffff; --surface:#f3f3f3; --text:#000000; --text-2:rgba(0,0,0,.64); --stroke:rgba(0,0,0,.1);
   --stroke-strong:rgba(0,0,0,.2); --hover:rgba(0,0,0,.05); --inv-bg:#171717; --inv-text:#ffffff;
   --inv-text-2:rgba(255,255,255,.64); --inv-stroke:rgba(255,255,255,.16); --accent:#ffae35; --on-accent:#000000;
   --page-bg:#e8e8e8; --serif:"Noto Serif", Georgia, serif; --sans:"Geist", "Segoe UI", system-ui, sans-serif;
   --mono:"Geist Mono", Consolas, monospace; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#0e0e0e; --surface:#171717; --text:#ffffff;
+@media (prefers-color-scheme: dark) { :root { --bg:#0e0e0e; --surface:#171717; --text:#ffffff;
   --text-2:rgba(255,255,255,.64); --stroke:rgba(255,255,255,.1); --stroke-strong:rgba(255,255,255,.2);
   --hover:rgba(255,255,255,.06); --inv-bg:#1c1c1c; --inv-stroke:rgba(255,255,255,.12); --page-bg:#262626; } }
-:root[data-theme="dark"] { --bg:#0e0e0e; --surface:#171717; --text:#ffffff; --text-2:rgba(255,255,255,.64);
-  --stroke:rgba(255,255,255,.1); --stroke-strong:rgba(255,255,255,.2); --hover:rgba(255,255,255,.06); --inv-bg:#1c1c1c;
-  --inv-stroke:rgba(255,255,255,.12); --page-bg:#262626; }
 * { box-sizing:border-box; }
 body { margin:0; background:var(--bg); color:var(--text); font:16px/1.6 var(--sans); letter-spacing:-.1px; }
 .topbar { background:#000; color:#fff; font-size:13px; text-align:center; padding:11px 16px; }
@@ -44,8 +41,6 @@ pre.mermaid { background:transparent; border:1px solid var(--stroke); border-rad
   font-size:14px; border-left:2px solid transparent; }
 .subnav a:hover { background:var(--hover); color:var(--text); }
 .subnav a.active { color:var(--text); border-left-color:var(--accent); background:var(--hover); }
-.theme-toggle { margin-top:24px; padding:12px 14px; border:1px solid var(--stroke-strong); border-radius:8px; background:transparent;
-  color:var(--text); cursor:pointer; text-transform:uppercase; letter-spacing:.2px; font:12px var(--sans); }
 main { padding:48px clamp(24px, 4vw, 72px) 96px; max-width:1560px; width:100%; }
 .page[hidden] { display:none; }
 .page-head { display:flex; align-items:baseline; gap:16px; border-bottom:1px solid var(--stroke); padding-bottom:18px; margin-bottom:8px; }
@@ -134,7 +129,6 @@ details.file[open] > summary::before { content:"–"; }
 @media (max-width: 860px) {
   .layout { grid-template-columns:1fr; }
   nav.sidebar { position:static; height:auto; border-right:none; border-bottom:1px solid var(--stroke); }
-  .theme-toggle { margin-top:16px; }
   main { padding:28px 16px 64px; }
   .page-head { flex-direction:column; gap:6px; }
   .page-head p { margin:0; text-align:left; }
@@ -143,7 +137,7 @@ details.file[open] > summary::before { content:"–"; }
   .fdesc, .fsize { display:none; }
   .preview { padding-left:6px; }
 }
-</style></head><body><div class="topbar">Adriano da Silva de Carvalho · Carta mensal XP com IA: da v1 à v2, tudo num grafo do Rivet<a href="https://github.com/eu-adrianocarvalho/enter-challenge" target="_blank" rel="noopener">GitHub</a><a href="#carta">Ver a carta</a></div><div class="layout"><nav class="sidebar"><div class="brand"><div class="mark">ENTER<b></b></div><small>Challenge · Carta mensal XP com IA</small><div class="author"><strong>Adriano da Silva de Carvalho</strong><a href="https://github.com/eu-adrianocarvalho/enter-challenge" target="_blank" rel="noopener">GitHub · enter-challenge ↗</a></div></div><div class="nav-topic" data-page="apresentacao"><a class="topic-link" href="#apresentacao"><span class="num">01</span>Apresentação</a><div class="subnav"><a href="#visao-geral" data-target="visao-geral">Visão geral</a><a href="#carta" data-target="carta">A carta e o brief</a></div></div><div class="nav-topic" data-page="trabalho"><a class="topic-link" href="#trabalho"><span class="num">02</span>O trabalho</a><div class="subnav"><a href="#diagnostico" data-target="diagnostico">Diagnóstico da v1</a><a href="#melhorias" data-target="melhorias">Melhorias implementadas</a><a href="#arquitetura" data-target="arquitetura">Arquitetura e código</a><a href="#dados-externos" data-target="dados-externos">Dados externos</a><a href="#qualidade" data-target="qualidade">Qualidade e travas</a></div></div><div class="nav-topic" data-page="uso"><a class="topic-link" href="#uso"><span class="num">03</span>Uso</a><div class="subnav"><a href="#como-usar" data-target="como-usar">Como usar</a></div></div><div class="nav-topic" data-page="arquivos"><a class="topic-link" href="#arquivos"><span class="num">04</span>Arquivos</a><div class="subnav"><a href="#arquivos-entradas" data-target="arquivos-entradas">Entradas do desafio</a><a href="#arquivos-saidas" data-target="arquivos-saidas">Saídas geradas (v2)</a><a href="#arquivos-v1" data-target="arquivos-v1">Primeira versão (v1)</a><a href="#arquivos-rivet" data-target="arquivos-rivet">Workflow Rivet (v2)</a><a href="#arquivos-config" data-target="arquivos-config">Configuração</a><a href="#arquivos-dados" data-target="arquivos-dados">Dados de mercado e inputs dos grafos</a><a href="#arquivos-evidencias" data-target="arquivos-evidencias">Evidências</a><a href="#arquivos-testes" data-target="arquivos-testes">Testes</a><a href="#arquivos-repo" data-target="arquivos-repo">Repositório e documentação</a></div></div><button class="theme-toggle" id="theme" type="button">Tema claro / escuro</button></nav><main><div class="page" id="apresentacao"><div class="page-head"><span class="num">01</span><h1>Apresentação</h1><p>O que foi entregue, os números e a carta da v1 ao lado da v2.</p></div><div class="hero"><div class="eyebrow">Adriano da Silva de Carvalho · Challenge Enter · AI Deployment</div><h2>O LLM lê e escreve, o código calcula e <em>nada chega ao cliente sem checagem.</em></h2><p>Tudo roda num único grafo do Rivet, o <strong>Main Graph: Enter Challenge</strong>. Números da última execução para o Albert, no período de 07/04/2025 a 07/05/2025.</p><div class="kpis"><div class="kpi"><span>Retorno no período</span><strong>+2,51%</strong></div><div class="kpi"><span>Resultado no período</span><strong>+R$ 6.650,04</strong></div><div class="kpi"><span>CDI | Ibovespa</span><strong>+1,00% | +6,22%</strong></div><div class="kpi"><span>Saldo + CDB vencido (% do patrimônio)</span><strong>29,8%</strong></div><div class="kpi"><span>Alertas para o assessor</span><strong>11</strong></div><div class="kpi"><span>Custo da execução</span><strong>US$ 0,09</strong></div><div class="kpi"><span>Grafos | Code nodes no Rivet</span><strong>9 | 10</strong></div><div class="kpi"><span>Testes automatizados</span><strong>8</strong></div></div><div class="actions"><a class="btn" href="#carta">Ver a carta</a><a class="btn secondary" href="#diagnostico">Diagnóstico da v1</a><a class="btn secondary" href="#arquitetura">Arquitetura</a><a class="btn secondary" href="#como-usar">Como usar</a><a class="btn secondary" href="https://github.com/eu-adrianocarvalho/enter-challenge" target="_blank" rel="noopener">GitHub ↗</a></div></div><section class="doc" id="visao-geral" data-spy><h1>Visão geral</h1>
+</style></head><body><div class="topbar">Adriano da Silva de Carvalho · Carta mensal XP com IA: da v1 à v2, tudo num grafo do Rivet<a href="https://github.com/eu-adrianocarvalho/enter-challenge" target="_blank" rel="noopener">GitHub</a><a href="#carta">Ver a carta</a></div><div class="layout"><nav class="sidebar"><div class="brand"><div class="mark">ENTER<b></b></div><small>Challenge · Carta mensal XP com IA</small><div class="author"><strong>Adriano da Silva de Carvalho</strong><a href="https://github.com/eu-adrianocarvalho/enter-challenge" target="_blank" rel="noopener">GitHub · enter-challenge ↗</a></div></div><div class="nav-topic" data-page="apresentacao"><a class="topic-link" href="#apresentacao"><span class="num">01</span>Apresentação</a><div class="subnav"><a href="#visao-geral" data-target="visao-geral">Visão geral</a><a href="#carta" data-target="carta">A carta e o brief</a></div></div><div class="nav-topic" data-page="trabalho"><a class="topic-link" href="#trabalho"><span class="num">02</span>O trabalho</a><div class="subnav"><a href="#diagnostico" data-target="diagnostico">Diagnóstico da v1</a><a href="#melhorias" data-target="melhorias">Melhorias implementadas</a><a href="#arquitetura" data-target="arquitetura">Arquitetura e código</a><a href="#dados-externos" data-target="dados-externos">Dados externos</a><a href="#qualidade" data-target="qualidade">Qualidade e travas</a></div></div><div class="nav-topic" data-page="uso"><a class="topic-link" href="#uso"><span class="num">03</span>Uso</a><div class="subnav"><a href="#como-usar" data-target="como-usar">Como usar</a></div></div><div class="nav-topic" data-page="arquivos"><a class="topic-link" href="#arquivos"><span class="num">04</span>Arquivos</a><div class="subnav"><a href="#arquivos-entradas" data-target="arquivos-entradas">Entradas do desafio</a><a href="#arquivos-saidas" data-target="arquivos-saidas">Saídas geradas (v2)</a><a href="#arquivos-v1" data-target="arquivos-v1">Primeira versão (v1)</a><a href="#arquivos-rivet" data-target="arquivos-rivet">Workflow Rivet (v2)</a><a href="#arquivos-config" data-target="arquivos-config">Configuração</a><a href="#arquivos-dados" data-target="arquivos-dados">Dados de mercado e inputs dos grafos</a><a href="#arquivos-evidencias" data-target="arquivos-evidencias">Evidências</a><a href="#arquivos-testes" data-target="arquivos-testes">Testes</a><a href="#arquivos-repo" data-target="arquivos-repo">Repositório e documentação</a></div></div></nav><main><div class="page" id="apresentacao"><div class="page-head"><span class="num">01</span><h1>Apresentação</h1><p>O que foi entregue, os números e a carta da v1 ao lado da v2.</p></div><div class="hero"><div class="eyebrow">Adriano da Silva de Carvalho · Challenge Enter · AI Deployment</div><h2>O LLM lê e escreve, o código calcula e <em>nada chega ao cliente sem checagem.</em></h2><p>Tudo roda num único grafo do Rivet, o <strong>Main Graph: Enter Challenge</strong>. Números da última execução para o Albert, no período de 07/04/2025 a 07/05/2025.</p><div class="kpis"><div class="kpi"><span>Retorno no período</span><strong>+2,51%</strong></div><div class="kpi"><span>Resultado no período</span><strong>+R$ 6.650,04</strong></div><div class="kpi"><span>CDI | Ibovespa</span><strong>+1,00% | +6,22%</strong></div><div class="kpi"><span>Saldo + CDB vencido (% do patrimônio)</span><strong>29,8%</strong></div><div class="kpi"><span>Alertas para o assessor</span><strong>11</strong></div><div class="kpi"><span>Custo da execução</span><strong>US$ 0,09</strong></div><div class="kpi"><span>Grafos | Code nodes no Rivet</span><strong>9 | 10</strong></div><div class="kpi"><span>Testes automatizados</span><strong>8</strong></div></div><div class="actions"><a class="btn" href="#carta">Ver a carta</a><a class="btn secondary" href="#diagnostico">Diagnóstico da v1</a><a class="btn secondary" href="#arquitetura">Arquitetura</a><a class="btn secondary" href="#como-usar">Como usar</a><a class="btn secondary" href="https://github.com/eu-adrianocarvalho/enter-challenge" target="_blank" rel="noopener">GitHub ↗</a></div></div><section class="doc" id="visao-geral" data-spy><h1>Visão geral</h1>
 <p><strong>Autor:</strong> Adriano da Silva de Carvalho · <strong>Repositório:</strong> <a href="https://github.com/eu-adrianocarvalho/enter-challenge">github.com/eu-adrianocarvalho/enter-challenge</a></p>
 <h2>O desafio</h2>
 <p>A XP quer que seus assessores atendam três vezes mais clientes <em>middle market</em> (menos de R$ 1 milhão na XP) sem perder qualidade. A ideia é uma carta mensal gerada por IA que explique a cada cliente:</p>
@@ -10186,9 +10180,9 @@ statement 07/05/2025, macro report 06/02/2025); the brief lists each inconsisten
     &quot;yaml&quot;: &quot;^2.9.1&quot;
   }
 }
-</code></pre></div></details><details class="file"><summary><span class="fname">docs/site/app.js</span><span class="fdesc">Navegação do site: mostra um tópico por vez (Apresentação, O trabalho, Uso, Arquivos), expande na barra lateral só o tópico aberto e destaca a seção visível (scrollspy).</span><span class="fsize">4 KB</span><a class="dl" href="../docs/site/app.js" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><pre><code>/* Navegação do site: mostra um tópico por vez (Apresentação, O trabalho, Uso, Arquivos), expande na barra
-   lateral só o tópico aberto e destaca a seção visível (scrollspy). Também alterna tema claro e escuro,
-   filtra o catálogo de arquivos, carrega as prévias só quando abertas e ajusta a carta em HTML à largura. */
+</code></pre></div></details><details class="file"><summary><span class="fname">docs/site/app.js</span><span class="fdesc">Navegação do site: mostra um tópico por vez (Apresentação, O trabalho, Uso, Arquivos), expande na barra lateral só o tópico aberto e destaca a seção visível (scrollspy).</span><span class="fsize">3 KB</span><a class="dl" href="../docs/site/app.js" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><pre><code>/* Navegação do site: mostra um tópico por vez (Apresentação, O trabalho, Uso, Arquivos), expande na barra
+   lateral só o tópico aberto e destaca a seção visível (scrollspy). Também filtra o catálogo de arquivos,
+   carrega as prévias só quando abertas e ajusta a carta em HTML à largura. */
 
 const pages = [...document.querySelectorAll('.page')];
 const topics = [...document.querySelectorAll('.nav-topic')];
@@ -10259,31 +10253,6 @@ if (filter) {
     document.querySelectorAll('details.file').forEach((d) =&gt; { d.style.display = d.textContent.toLowerCase().includes(query) ? '' : 'none'; });
   });
 }
-
-function savedTheme() {
-  try {
-    return localStorage.getItem('theme');
-  } catch {
-    return null;
-  }
-}
-
-function saveTheme(theme) {
-  try {
-    localStorage.setItem('theme', theme);
-    return true;
-  } catch {
-    return false;
-  }
-}
-
-const root = document.documentElement;
-if (savedTheme()) root.dataset.theme = savedTheme();
-document.getElementById('theme').addEventListener('click', () =&gt; {
-  const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
-  root.dataset.theme = dark ? 'light' : 'dark';
-  if (saveTheme(root.dataset.theme)) location.reload();
-});
 </code></pre></div></details><details class="file"><summary><span class="fname">docs/site/build.mjs</span><span class="fdesc">Gera docs/index.html, o site de entrega do desafio, no visual da Enter (getenter.ai): quatro tópicos (Apresentação, O trabalho, Uso, Arquivos), seções vindas de docs/0…</span><span class="fsize">15 KB</span><a class="dl" href="../docs/site/build.mjs" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><pre><code>/* Gera docs/index.html, o site de entrega do desafio, no visual da Enter (getenter.ai): quatro tópicos
    (Apresentação, O trabalho, Uso, Arquivos), seções vindas de docs/0*.md, a carta da v1 ao lado da v2, os
    números da última execução lidos de Output/ e a prévia de cada arquivo. O layout vem de layout.mjs e a
@@ -10566,7 +10535,7 @@ async function build() {
 }
 
 console.log(await build());
-</code></pre></div></details><details class="file"><summary><span class="fname">docs/site/layout.mjs</span><span class="fdesc">Monta uma página no formato do site de documentação, no visual da Enter: barra superior, barra lateral com os tópicos (só o aberto se expande), um tópico visível por v…</span><span class="fsize">4 KB</span><a class="dl" href="../docs/site/layout.mjs" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><pre><code>/* Monta uma página no formato do site de documentação, no visual da Enter: barra superior, barra lateral com
+</code></pre></div></details><details class="file"><summary><span class="fname">docs/site/layout.mjs</span><span class="fdesc">Monta uma página no formato do site de documentação, no visual da Enter: barra superior, barra lateral com os tópicos (só o aberto se expande), um tópico visível por v…</span><span class="fsize">3 KB</span><a class="dl" href="../docs/site/layout.mjs" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><pre><code>/* Monta uma página no formato do site de documentação, no visual da Enter: barra superior, barra lateral com
    os tópicos (só o aberto se expande), um tópico visível por vez e paginação entre eles. Recebe o HTML de
    cada seção pronto e embute o CSS e o JS de docs/site/, então a página abre sozinha. */
 
@@ -10616,7 +10585,7 @@ function sidebar(topics, sections, tagline) {
     + `&lt;small&gt;${escapeHtml(tagline)}&lt;/small&gt;`
     + `&lt;div class=&quot;author&quot;&gt;&lt;strong&gt;${AUTHOR}&lt;/strong&gt;`
     + `&lt;a href=&quot;${REPO_URL}&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;GitHub · enter-challenge ↗&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;`
-    + `${items}&lt;button class=&quot;theme-toggle&quot; id=&quot;theme&quot; type=&quot;button&quot;&gt;Tema claro / escuro&lt;/button&gt;&lt;/nav&gt;`;
+    + `${items}&lt;/nav&gt;`;
 }
 
 export function renderSite({ title, tagline, topbar, topics, sections }) {
@@ -10645,15 +10614,14 @@ export function renderMarkdown(text, anchors = {}) {
   const html = marked.parse(text, { gfm: true }).replace(MERMAID_BLOCK, '&lt;pre class=&quot;mermaid&quot;&gt;$1&lt;/pre&gt;');
   return Object.entries(anchors).reduce((page, [file, anchor]) =&gt; page.replaceAll(`href=&quot;${file}&quot;`, `href=&quot;#${anchor}&quot;`), html);
 }
-</code></pre></div></details><details class="file"><summary><span class="fname">docs/site/mermaid.js</span><span class="fdesc">Desenha os diagramas Mermaid da documentação com as cores da Enter, no tema claro ou escuro.</span><span class="fsize">2 KB</span><a class="dl" href="../docs/site/mermaid.js" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><pre><code>/* Desenha os diagramas Mermaid da documentação com as cores da Enter, no tema claro ou escuro. Carrega o
+</code></pre></div></details><details class="file"><summary><span class="fname">docs/site/mermaid.js</span><span class="fdesc">Desenha os diagramas Mermaid da documentação com as cores da Enter, no tema do sistema.</span><span class="fsize">2 KB</span><a class="dl" href="../docs/site/mermaid.js" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><pre><code>/* Desenha os diagramas Mermaid da documentação com as cores da Enter, no tema do sistema. Carrega o
    Mermaid da CDN (precisa de internet) e só desenha os diagramas do tópico aberto, porque diagramas em
    elementos escondidos saem com tamanho zero. Cada diagrama é desenhado em fila com um id próprio: o
    mermaid.run gera ids pelo relógio, e dois diagramas no mesmo milissegundo misturam os nodes. */
 
 import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
 
-const root = document.documentElement;
-const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+const dark = matchMedia('(prefers-color-scheme: dark)').matches;
 const LIGHT = {
   primaryColor: '#f3f3f3', primaryTextColor: '#000', primaryBorderColor: '#000', lineColor: '#3c3c3c', secondaryColor: '#ffae35',
   tertiaryColor: '#ffffff', clusterBkg: '#fafafa', clusterBorder: '#cecece', edgeLabelBackground: '#ffffff', actorBkg: '#f3f3f3',
@@ -10688,20 +10656,17 @@ window.renderMermaidIn = (page) =&gt; {
 };
 window.renderMermaidIn(document.querySelector('.page:not([hidden])'));
 </code></pre></div></details><details class="file"><summary><span class="fname">docs/site/style.css</span><span class="fdesc">Visual do site de documentação, no padrão da Enter (getenter.ai): fundo branco ou preto, destaque laranja, títulos em serifa fina, texto em Geist.</span><span class="fsize">11 KB</span><a class="dl" href="../docs/site/style.css" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><pre><code>/* Visual do site de documentação, no padrão da Enter (getenter.ai): fundo branco ou preto, destaque laranja,
-   títulos em serifa fina, texto em Geist. Inclui o tema escuro, a barra lateral por tópicos, o catálogo de
-   arquivos e a carta em HTML em escala. */
+   títulos em serifa fina, texto em Geist. O tema escuro segue a configuração do sistema. Inclui a barra
+   lateral por tópicos, o catálogo de arquivos e a carta em HTML em escala. */
 
 :root { --bg:#ffffff; --surface:#f3f3f3; --text:#000000; --text-2:rgba(0,0,0,.64); --stroke:rgba(0,0,0,.1);
   --stroke-strong:rgba(0,0,0,.2); --hover:rgba(0,0,0,.05); --inv-bg:#171717; --inv-text:#ffffff;
   --inv-text-2:rgba(255,255,255,.64); --inv-stroke:rgba(255,255,255,.16); --accent:#ffae35; --on-accent:#000000;
   --page-bg:#e8e8e8; --serif:&quot;Noto Serif&quot;, Georgia, serif; --sans:&quot;Geist&quot;, &quot;Segoe UI&quot;, system-ui, sans-serif;
   --mono:&quot;Geist Mono&quot;, Consolas, monospace; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme=&quot;light&quot;]) { --bg:#0e0e0e; --surface:#171717; --text:#ffffff;
+@media (prefers-color-scheme: dark) { :root { --bg:#0e0e0e; --surface:#171717; --text:#ffffff;
   --text-2:rgba(255,255,255,.64); --stroke:rgba(255,255,255,.1); --stroke-strong:rgba(255,255,255,.2);
   --hover:rgba(255,255,255,.06); --inv-bg:#1c1c1c; --inv-stroke:rgba(255,255,255,.12); --page-bg:#262626; } }
-:root[data-theme=&quot;dark&quot;] { --bg:#0e0e0e; --surface:#171717; --text:#ffffff; --text-2:rgba(255,255,255,.64);
-  --stroke:rgba(255,255,255,.1); --stroke-strong:rgba(255,255,255,.2); --hover:rgba(255,255,255,.06); --inv-bg:#1c1c1c;
-  --inv-stroke:rgba(255,255,255,.12); --page-bg:#262626; }
 * { box-sizing:border-box; }
 body { margin:0; background:var(--bg); color:var(--text); font:16px/1.6 var(--sans); letter-spacing:-.1px; }
 .topbar { background:#000; color:#fff; font-size:13px; text-align:center; padding:11px 16px; }
@@ -10733,8 +10698,6 @@ pre.mermaid { background:transparent; border:1px solid var(--stroke); border-rad
   font-size:14px; border-left:2px solid transparent; }
 .subnav a:hover { background:var(--hover); color:var(--text); }
 .subnav a.active { color:var(--text); border-left-color:var(--accent); background:var(--hover); }
-.theme-toggle { margin-top:24px; padding:12px 14px; border:1px solid var(--stroke-strong); border-radius:8px; background:transparent;
-  color:var(--text); cursor:pointer; text-transform:uppercase; letter-spacing:.2px; font:12px var(--sans); }
 main { padding:48px clamp(24px, 4vw, 72px) 96px; max-width:1560px; width:100%; }
 .page[hidden] { display:none; }
 .page-head { display:flex; align-items:baseline; gap:16px; border-bottom:1px solid var(--stroke); padding-bottom:18px; margin-bottom:8px; }
@@ -10823,7 +10786,6 @@ details.file[open] &gt; summary::before { content:&quot;–&quot;; }
 @media (max-width: 860px) {
   .layout { grid-template-columns:1fr; }
   nav.sidebar { position:static; height:auto; border-right:none; border-bottom:1px solid var(--stroke); }
-  .theme-toggle { margin-top:16px; }
   main { padding:28px 16px 64px; }
   .page-head { flex-direction:column; gap:6px; }
   .page-head p { margin:0; text-align:left; }
@@ -10833,8 +10795,8 @@ details.file[open] &gt; summary::before { content:&quot;–&quot;; }
   .preview { padding-left:6px; }
 }
 </code></pre></div></details></section><div class="pager"><a class="prev" href="#uso"><small>← Anterior</small><strong>Uso</strong></a></div></div></main></div><script>/* Navegação do site: mostra um tópico por vez (Apresentação, O trabalho, Uso, Arquivos), expande na barra
-   lateral só o tópico aberto e destaca a seção visível (scrollspy). Também alterna tema claro e escuro,
-   filtra o catálogo de arquivos, carrega as prévias só quando abertas e ajusta a carta em HTML à largura. */
+   lateral só o tópico aberto e destaca a seção visível (scrollspy). Também filtra o catálogo de arquivos,
+   carrega as prévias só quando abertas e ajusta a carta em HTML à largura. */
 
 const pages = [...document.querySelectorAll('.page')];
 const topics = [...document.querySelectorAll('.nav-topic')];
@@ -10905,40 +10867,14 @@ if (filter) {
     document.querySelectorAll('details.file').forEach((d) => { d.style.display = d.textContent.toLowerCase().includes(query) ? '' : 'none'; });
   });
 }
-
-function savedTheme() {
-  try {
-    return localStorage.getItem('theme');
-  } catch {
-    return null;
-  }
-}
-
-function saveTheme(theme) {
-  try {
-    localStorage.setItem('theme', theme);
-    return true;
-  } catch {
-    return false;
-  }
-}
-
-const root = document.documentElement;
-if (savedTheme()) root.dataset.theme = savedTheme();
-document.getElementById('theme').addEventListener('click', () => {
-  const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
-  root.dataset.theme = dark ? 'light' : 'dark';
-  if (saveTheme(root.dataset.theme)) location.reload();
-});
-</script><script type="module">/* Desenha os diagramas Mermaid da documentação com as cores da Enter, no tema claro ou escuro. Carrega o
+</script><script type="module">/* Desenha os diagramas Mermaid da documentação com as cores da Enter, no tema do sistema. Carrega o
    Mermaid da CDN (precisa de internet) e só desenha os diagramas do tópico aberto, porque diagramas em
    elementos escondidos saem com tamanho zero. Cada diagrama é desenhado em fila com um id próprio: o
    mermaid.run gera ids pelo relógio, e dois diagramas no mesmo milissegundo misturam os nodes. */
 
 import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
 
-const root = document.documentElement;
-const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+const dark = matchMedia('(prefers-color-scheme: dark)').matches;
 const LIGHT = {
   primaryColor: '#f3f3f3', primaryTextColor: '#000', primaryBorderColor: '#000', lineColor: '#3c3c3c', secondaryColor: '#ffae35',
   tertiaryColor: '#ffffff', clusterBkg: '#fafafa', clusterBorder: '#cecece', edgeLabelBackground: '#ffffff', actorBkg: '#f3f3f3',

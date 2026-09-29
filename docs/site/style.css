@@ -1,18 +1,15 @@
 /* Visual do site de documentação, no padrão da Enter (getenter.ai): fundo branco ou preto, destaque laranja,
-   títulos em serifa fina, texto em Geist. Inclui o tema escuro, a barra lateral por tópicos, o catálogo de
-   arquivos e a carta em HTML em escala. */
+   títulos em serifa fina, texto em Geist. O tema escuro segue a configuração do sistema. Inclui a barra
+   lateral por tópicos, o catálogo de arquivos e a carta em HTML em escala. */
 
 :root { --bg:#ffffff; --surface:#f3f3f3; --text:#000000; --text-2:rgba(0,0,0,.64); --stroke:rgba(0,0,0,.1);
   --stroke-strong:rgba(0,0,0,.2); --hover:rgba(0,0,0,.05); --inv-bg:#171717; --inv-text:#ffffff;
   --inv-text-2:rgba(255,255,255,.64); --inv-stroke:rgba(255,255,255,.16); --accent:#ffae35; --on-accent:#000000;
   --page-bg:#e8e8e8; --serif:"Noto Serif", Georgia, serif; --sans:"Geist", "Segoe UI", system-ui, sans-serif;
   --mono:"Geist Mono", Consolas, monospace; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#0e0e0e; --surface:#171717; --text:#ffffff;
+@media (prefers-color-scheme: dark) { :root { --bg:#0e0e0e; --surface:#171717; --text:#ffffff;
   --text-2:rgba(255,255,255,.64); --stroke:rgba(255,255,255,.1); --stroke-strong:rgba(255,255,255,.2);
   --hover:rgba(255,255,255,.06); --inv-bg:#1c1c1c; --inv-stroke:rgba(255,255,255,.12); --page-bg:#262626; } }
-:root[data-theme="dark"] { --bg:#0e0e0e; --surface:#171717; --text:#ffffff; --text-2:rgba(255,255,255,.64);
-  --stroke:rgba(255,255,255,.1); --stroke-strong:rgba(255,255,255,.2); --hover:rgba(255,255,255,.06); --inv-bg:#1c1c1c;
-  --inv-stroke:rgba(255,255,255,.12); --page-bg:#262626; }
 * { box-sizing:border-box; }
 body { margin:0; background:var(--bg); color:var(--text); font:16px/1.6 var(--sans); letter-spacing:-.1px; }
 .topbar { background:#000; color:#fff; font-size:13px; text-align:center; padding:11px 16px; }
@@ -44,8 +41,6 @@ pre.mermaid { background:transparent; border:1px solid var(--stroke); border-rad
   font-size:14px; border-left:2px solid transparent; }
 .subnav a:hover { background:var(--hover); color:var(--text); }
 .subnav a.active { color:var(--text); border-left-color:var(--accent); background:var(--hover); }
-.theme-toggle { margin-top:24px; padding:12px 14px; border:1px solid var(--stroke-strong); border-radius:8px; background:transparent;
-  color:var(--text); cursor:pointer; text-transform:uppercase; letter-spacing:.2px; font:12px var(--sans); }
 main { padding:48px clamp(24px, 4vw, 72px) 96px; max-width:1560px; width:100%; }
 .page[hidden] { display:none; }
 .page-head { display:flex; align-items:baseline; gap:16px; border-bottom:1px solid var(--stroke); padding-bottom:18px; margin-bottom:8px; }
@@ -134,7 +129,6 @@ details.file[open] > summary::before { content:"–"; }
 @media (max-width: 860px) {
   .layout { grid-template-columns:1fr; }
   nav.sidebar { position:static; height:auto; border-right:none; border-bottom:1px solid var(--stroke); }
-  .theme-toggle { margin-top:16px; }
   main { padding:28px 16px 64px; }
   .page-head { flex-direction:column; gap:6px; }
   .page-head p { margin:0; text-align:left; }

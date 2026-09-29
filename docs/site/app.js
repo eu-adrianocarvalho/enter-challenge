@@ -1,6 +1,6 @@
 /* Navegação do site: mostra um tópico por vez (Apresentação, O trabalho, Uso, Arquivos), expande na barra
-   lateral só o tópico aberto e destaca a seção visível (scrollspy). Também alterna tema claro e escuro,
-   filtra o catálogo de arquivos, carrega as prévias só quando abertas e ajusta a carta em HTML à largura. */
+   lateral só o tópico aberto e destaca a seção visível (scrollspy). Também filtra o catálogo de arquivos,
+   carrega as prévias só quando abertas e ajusta a carta em HTML à largura. */
 
 const pages = [...document.querySelectorAll('.page')];
 const topics = [...document.querySelectorAll('.nav-topic')];
@@ -71,28 +71,3 @@ if (filter) {
     document.querySelectorAll('details.file').forEach((d) => { d.style.display = d.textContent.toLowerCase().includes(query) ? '' : 'none'; });
   });
 }
-
-function savedTheme() {
-  try {
-    return localStorage.getItem('theme');
-  } catch {
-    return null;
-  }
-}
-
-function saveTheme(theme) {
-  try {
-    localStorage.setItem('theme', theme);
-    return true;
-  } catch {
-    return false;
-  }
-}
-
-const root = document.documentElement;
-if (savedTheme()) root.dataset.theme = savedTheme();
-document.getElementById('theme').addEventListener('click', () => {
-  const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
-  root.dataset.theme = dark ? 'light' : 'dark';
-  if (saveTheme(root.dataset.theme)) location.reload();
-});
