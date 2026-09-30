@@ -83,7 +83,7 @@ O mesmo projeto roda no app do Rivet (com o executor Node) ou no terminal pelo `
 **Visibilidade.** O fluxo inteiro fica num lugar só: abrir o **Main Graph: Enter Challenge** no app mostra cada etapa, e ao rodar cada node acende com a entrada e a saída que recebeu. Quem mantém o workflow, e usa Rivet no dia a dia, lê o processo sem abrir outra ferramenta.
 
 **O que isso custou:**
-- **Code nodes só rodam JavaScript.** As contas e regras foram escritas em JavaScript e conferidas contra a versão Python da branch `main`: os FACTS saem idênticos, e um teste garante isso.
+- **Code nodes só rodam JavaScript.** As contas e regras foram escritas em JavaScript e conferidas contra a versão Python do primeiro commit do repositório: os FACTS saem idênticos, e um teste garante isso.
 - **Code nodes não importam módulos.** O código fica em arquivos: um por node em `src/code/` e as funções compartilhadas em `src/code/lib/`. O `src/build.mjs` cola as bibliotecas de cada node antes do corpo e grava o projeto. Editar o código dentro do app não adianta, porque o próximo build sobrescreve.
 - **Ler e escrever arquivos exige o executor Node.** No app, esse executor roda Node 18 e quebra quando um Code node marca *Allow require*, com o erro "The argument 'filename' … Received undefined". Os nodes carregam os módulos por `projectRequire()` (`lib/modules.js`), que funciona no app e no CLI.
 - **O Rivet não escreve arquivos nem gera DOCX, e o node Chat da OpenAI não recebe PDF.** Por isso a leitura dos PDFs (pdf.js) e a gravação das saídas são Code nodes, e a carta é HTML impresso em PDF pelo navegador.

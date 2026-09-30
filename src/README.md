@@ -68,4 +68,4 @@ esses ids. Os nomes que aparecem na lateral podem mudar à vontade em `build.mjs
 | `tests/harness.mjs` | Executa o código de um node do mesmo jeito que o executor Node do Rivet, com os mesmos parâmetros e sem `require` |
 | `tests/fixtures/albert_statement.json` | O extrato do Albert transcrito à mão: o gabarito da extração |
 | `tests/fixtures/llm_*.json` | Respostas reais do LLM (perfil, macro e advise), para testar sem chamar a API |
-| `tests/fixtures/python_facts_and_letter.json` | Os FACTS e a carta da versão Python (branch `main`), para garantir que os números são os mesmos |
+| `tests/fixtures/python_facts_and_letter.json` | Os FACTS e a carta da versão Python (primeiro commit do repositório), para garantir que os números são os mesmos |

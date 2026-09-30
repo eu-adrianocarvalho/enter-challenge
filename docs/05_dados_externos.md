@@ -49,7 +49,7 @@ flowchart LR
 | Cotas dos fundos | Lidas de `data/market/cvm_inf_diario_subset.csv`: as linhas dos 7 fundos no informe diário da CVM de abril e maio de 2025, baixadas uma vez. O arquivo é também a prova de onde saiu cada retorno |
 | Retorno do Brave (FIDC) | Estimativa fixa em `config/fund_registry.yaml`, com o método descrito |
 
-**Limite desta versão:** o grafo não baixa o informe da CVM. Para outro mês, o recorte `cvm_inf_diario_subset.csv` precisa ser atualizado (é um arquivo mensal público da CVM, filtrado pelos CNPJs do `fund_registry.yaml`). A versão Python da branch `main` fazia esse download; trazê-lo para um node de código é o próximo passo natural.
+**Limite desta versão:** o grafo não baixa o informe da CVM. Para outro mês, o recorte `cvm_inf_diario_subset.csv` precisa ser atualizado (é um arquivo mensal público da CVM, filtrado pelos CNPJs do `fund_registry.yaml`). A versão Python, no primeiro commit do repositório, fazia esse download; trazê-lo para um node de código é o próximo passo natural.
 
 ## Como os fundos foram identificados
 

@@ -194,7 +194,7 @@ details.file[open] > summary::before { content:"–"; }
 <td><code>src/tests/</code></td>
 </tr>
 </tbody></table>
-<p>A branch <code>main</code> do repositório guarda a mesma solução numa versão anterior, com os cálculos em Python e o Rivet só nas etapas de LLM. Esta versão leva tudo para dentro do Rivet: dá para abrir o grafo no app, apertar Run e ver cada etapa acontecendo até o PDF sair.</p>
+<p>O primeiro commit do repositório guarda uma versão anterior da mesma solução, com os cálculos em Python e o Rivet só nas etapas de LLM. Esta versão leva tudo para dentro do Rivet: dá para abrir o grafo no app, apertar Run e ver cada etapa acontecendo até o PDF sair.</p>
 <h2>A ideia central</h2>
 <p><strong>O LLM lê e escreve; o código calcula; nada chega ao cliente sem checagem.</strong></p>
 <p>A v1 deixava o modelo inventar os números: o retorno, a diferença para o benchmark e as projeções macro. Na v2 nenhum número que o cliente vê é produzido por um LLM:</p>
@@ -867,7 +867,7 @@ details.file[open] > summary::before { content:"–"; }
 <p><strong>Visibilidade.</strong> O fluxo inteiro fica num lugar só: abrir o <strong>Main Graph: Enter Challenge</strong> no app mostra cada etapa, e ao rodar cada node acende com a entrada e a saída que recebeu. Quem mantém o workflow, e usa Rivet no dia a dia, lê o processo sem abrir outra ferramenta.</p>
 <p><strong>O que isso custou:</strong></p>
 <ul>
-<li><strong>Code nodes só rodam JavaScript.</strong> As contas e regras foram escritas em JavaScript e conferidas contra a versão Python da branch <code>main</code>: os FACTS saem idênticos, e um teste garante isso.</li>
+<li><strong>Code nodes só rodam JavaScript.</strong> As contas e regras foram escritas em JavaScript e conferidas contra a versão Python do primeiro commit do repositório: os FACTS saem idênticos, e um teste garante isso.</li>
 <li><strong>Code nodes não importam módulos.</strong> O código fica em arquivos: um por node em <code>src/code/</code> e as funções compartilhadas em <code>src/code/lib/</code>. O <code>src/build.mjs</code> cola as bibliotecas de cada node antes do corpo e grava o projeto. Editar o código dentro do app não adianta, porque o próximo build sobrescreve.</li>
 <li><strong>Ler e escrever arquivos exige o executor Node.</strong> No app, esse executor roda Node 18 e quebra quando um Code node marca <em>Allow require</em>, com o erro &quot;The argument &#39;filename&#39; … Received undefined&quot;. Os nodes carregam os módulos por <code>projectRequire()</code> (<code>lib/modules.js</code>), que funciona no app e no CLI.</li>
 <li><strong>O Rivet não escreve arquivos nem gera DOCX, e o node Chat da OpenAI não recebe PDF.</strong> Por isso a leitura dos PDFs (pdf.js) e a gravação das saídas são Code nodes, e a carta é HTML impresso em PDF pelo navegador.</li>
@@ -1198,7 +1198,7 @@ Output/         carta (HTML e PDF), brief, FACTS e log de custo; a carta da v1 c
 <td>Estimativa fixa em <code>config/fund_registry.yaml</code>, com o método descrito</td>
 </tr>
 </tbody></table>
-<p><strong>Limite desta versão:</strong> o grafo não baixa o informe da CVM. Para outro mês, o recorte <code>cvm_inf_diario_subset.csv</code> precisa ser atualizado (é um arquivo mensal público da CVM, filtrado pelos CNPJs do <code>fund_registry.yaml</code>). A versão Python da branch <code>main</code> fazia esse download; trazê-lo para um node de código é o próximo passo natural.</p>
+<p><strong>Limite desta versão:</strong> o grafo não baixa o informe da CVM. Para outro mês, o recorte <code>cvm_inf_diario_subset.csv</code> precisa ser atualizado (é um arquivo mensal público da CVM, filtrado pelos CNPJs do <code>fund_registry.yaml</code>). A versão Python, no primeiro commit do repositório, fazia esse download; trazê-lo para um node de código é o próximo passo natural.</p>
 <h2>Como os fundos foram identificados</h2>
 <p>Os nomes do extrato não batem com o cadastro da CVM. A resolução CVM 175 renomeou quase todos os fundos, e um deles mudou de tipo. Uma busca automática por nome achou 4 dos 7, e para o Riza achou o fundo errado (o <em>master</em>, não o fundo que o cliente tem). Por isso o mapa nome → CNPJ foi conferido à mão e está em <code>config/fund_registry.yaml</code>.</p>
 <table>
@@ -5986,7 +5986,7 @@ esses ids. Os nomes que aparecem na lateral podem mudar à vontade em <code>buil
 </tr>
 <tr>
 <td><code>tests/fixtures/python_facts_and_letter.json</code></td>
-<td>Os FACTS e a carta da versão Python (branch <code>main</code>), para garantir que os números são os mesmos</td>
+<td>Os FACTS e a carta da versão Python (primeiro commit do repositório), para garantir que os números são os mesmos</td>
 </tr>
 </tbody></table>
 </div></details><details class="file"><summary><span class="fname">src/build.mjs</span><span class="fdesc">Gera enter_challenge.rivet-project, o projeto do Rivet na raiz: os 6 grafos de LLM (prompts e schemas em src/prompts e src/schemas), os corpos dos dois loops e o Main …</span><span class="fsize">15 KB</span><a class="dl" href="../src/build.mjs" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><pre><code>/* Gera enter_challenge.rivet-project, o projeto do Rivet na raiz: os 6 grafos de LLM (prompts e schemas em
@@ -8725,7 +8725,7 @@ funds:
 <tbody><tr>
 <td><code>market/cvm_inf_diario_subset.csv</code></td>
 <td>Cotas diárias dos 7 fundos do Albert em abril e maio de 2025</td>
-<td>Informe diário da CVM (<code>dados.cvm.gov.br</code>, <code>inf_diario_fi_202504</code> e <code>_202505</code>), filtrado pelos CNPJs de <code>config/fund_registry.yaml</code>. Baixado pela versão Python da branch <code>main</code></td>
+<td>Informe diário da CVM (<code>dados.cvm.gov.br</code>, <code>inf_diario_fi_202504</code> e <code>_202505</code>), filtrado pelos CNPJs de <code>config/fund_registry.yaml</code>. Baixado pela versão Python (primeiro commit do repositório)</td>
 <td>O node &quot;Code: Market Data&quot; calcula o retorno de cada fundo no período</td>
 </tr>
 <tr>
@@ -9554,8 +9554,8 @@ export async function runNode(name, plainInputs, { fetchImpl = fetch } = {}) {
 export async function offlineFetch() {
   throw new Error('sem rede nos testes');
 }
-</code></pre></div></details><details class="file"><summary><span class="fname">src/tests/pipeline.test.mjs</span><span class="fdesc">Testes dos Code nodes do Main Graph: Enter Challenge, sem chamar o LLM: usam respostas reais já guardadas (perfil, macro e advise) e comparam com a versão Python da br…</span><span class="fsize">4 KB</span><a class="dl" href="../src/tests/pipeline.test.mjs" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><pre><code>/* Testes dos Code nodes do Main Graph: Enter Challenge, sem chamar o LLM: usam respostas reais já guardadas
-   (perfil, macro e advise) e comparam com a versão Python da branch main. Conferem a leitura do PDF, a
+</code></pre></div></details><details class="file"><summary><span class="fname">src/tests/pipeline.test.mjs</span><span class="fdesc">Testes dos Code nodes do Main Graph: Enter Challenge, sem chamar o LLM: usam respostas reais já guardadas (perfil, macro e advise) e comparam com a versão Python do pr…</span><span class="fsize">4 KB</span><a class="dl" href="../src/tests/pipeline.test.mjs" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><pre><code>/* Testes dos Code nodes do Main Graph: Enter Challenge, sem chamar o LLM: usam respostas reais já guardadas
+   (perfil, macro e advise) e comparam com a versão Python do primeiro commit. Conferem a leitura do PDF, a
    reconciliação (e a detecção de um subtotal trocado), a rentabilidade (+2,51% / +R$ 6.650,04), os
    candidatos (R$ 40 mil + 40 mil + 27 mil), o IR, os 11 alertas, o FACTS idêntico ao Python e o fact-check. */
 
@@ -10137,7 +10137,7 @@ test('carta em HTML traz a identidade da XP e os números', async () =&gt; {
     &quot;Evitar movimentos bruscos diante de oscilações de curto prazo.&quot;
   ],
   &quot;summary_pt&quot;: &quot;Albert possui perfil moderado, buscando equilíbrio entre segurança e retorno. Recomenda-se diversificação entre ações de empresas consolidadas com dividendos e renda fixa com rating BB+ ou superior, sempre com acompanhamento periódico e foco no médio a longo prazo, evitando decisões precipitadas diante de oscilações de mercado.&quot;
-}</code></pre></div></details><details class="file"><summary><span class="fname">src/tests/fixtures/python_facts_and_letter.json</span><span class="fdesc">FACTS e carta da versão Python (branch main), para conferir que os números não mudaram</span><span class="fsize">12 KB</span><a class="dl" href="../src/tests/fixtures/python_facts_and_letter.json" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><pre><code>{
+}</code></pre></div></details><details class="file"><summary><span class="fname">src/tests/fixtures/python_facts_and_letter.json</span><span class="fdesc">FACTS e carta da versão Python (primeiro commit do repositório), para conferir que os números não mudaram</span><span class="fsize">12 KB</span><a class="dl" href="../src/tests/fixtures/python_facts_and_letter.json" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><pre><code>{
   &quot;facts&quot;: {
     &quot;client&quot;: {
       &quot;first_name&quot;: &quot;Albert&quot;,
@@ -10436,18 +10436,58 @@ test('carta em HTML traz a identidade da XP e os números', async () =&gt; {
     &quot;recommendations&quot;: &quot;Diante desse cenário, sugerimos discutir três movimentos para adequar sua carteira ao perfil moderado e ao ambiente atual. Primeiro, a aplicação em Tesouro Selic 2029 e Tesouro IPCA+ 2029 visa reduzir o excesso de caixa, aumentar a proteção contra a inflação e aproveitar o patamar elevado dos juros, alinhando-se ao seu perfil e ao cenário macroeconômico. Em seguida, a diversificação com o fundo Ibiuna Hedge ST Advisory FIC FIM busca ampliar fontes alternativas de retorno e reduzir a concentração em caixa, o que é especialmente relevante em um ambiente de incerteza econômica. Por fim, propomos a troca de MRFG3 e HAPV3 por ITUB4 e B3SA3, ajustando a exposição em ações para empresas consolidadas e pagadoras de dividendos, conforme a diretriz de qualidade e seu perfil. Os valores sugeridos para cada operação estão detalhados na tabela abaixo, sendo todas as movimentações sujeitas à sua confirmação.&quot;,
     &quot;closing&quot;: &quot;Estou à disposição para conversarmos sobre essas sugestões e avaliar juntos os próximos passos. Conte comigo para quaisquer esclarecimentos ou para agendarmos uma reunião.&quot;
   }
-}</code></pre></div></details></section><section class="doc files" id="arquivos-repo" data-spy><h2>Repositório e documentação</h2><details class="file"><summary><span class="fname">README.md</span><span class="fdesc">README do repositório (em inglês)</span><span class="fsize">10 KB</span><a class="dl" href="../README.md" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><h1>XP monthly client letter — v2, Rivet-native</h1>
-<p><strong>Author:</strong> Adriano da Silva de Carvalho · <strong>Repository:</strong> <a href="https://github.com/eu-adrianocarvalho/enter-challenge">github.com/eu-adrianocarvalho/enter-challenge</a> · <strong>Documentation site:</strong> <a href="https://eu-adrianocarvalho.github.io/enter-challenge/">eu-adrianocarvalho.github.io/enter-challenge</a></p>
-<p>Proof of concept that writes the monthly investment letter for an XP middle-market client (Albert) and an
-<strong>advisor brief</strong> listing everything the advisor should approve before the letter goes out.</p>
+}</code></pre></div></details></section><section class="doc files" id="arquivos-repo" data-spy><h2>Repositório e documentação</h2><details class="file"><summary><span class="fname">README.md</span><span class="fdesc">README do repositório (em inglês)</span><span class="fsize">12 KB</span><a class="dl" href="../README.md" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/enter-logo-white.svg">
+    <img src="docs/assets/enter-logo.svg" alt="Enter" width="280">
+  </picture>
+</p><h1>XP monthly client letter — Enter AI Deployment challenge</h1>
+<p><strong>Author:</strong> Adriano da Silva de Carvalho · <strong>Documentation site:</strong> <a href="https://eu-adrianocarvalho.github.io/enter-challenge/">eu-adrianocarvalho.github.io/enter-challenge</a></p>
+<p>This repository is my solution to the take-home challenge for the <strong>AI Deployment</strong> role at
+<a href="https://getenter.ai">Enter</a>. XP wants its advisors to serve three times more middle-market clients, and the idea
+is a monthly letter written by an AI workflow in <a href="https://rivet.ironcladapp.com">Rivet</a>: how the portfolio did,
+how the market may affect it, and what to adjust given the client&#39;s risk profile and XP&#39;s research. The challenge
+shipped a first version (a Rivet graph and a sample letter) and asked to review it, find what is wrong, improve at
+least one of three areas (profitability, buy/sell logic, automated formatting) and document the reasoning. This
+solution covers the three areas.</p>
+<h2>Quick start</h2>
+<p>You need <a href="https://nodejs.org">Node.js</a> 22 or later, the <a href="https://rivet.ironcladapp.com">Rivet</a> desktop app 1.25 or
+later, Microsoft Edge or Google Chrome (to print the letter as PDF) and an OpenAI API key.</p>
+<p><strong>1. Clone and install</strong></p>
+<pre><code class="language-bash">git clone https://github.com/eu-adrianocarvalho/enter-challenge.git
+cd enter-challenge
+npm install
+npm run build
+</code></pre>
+<p><code>npm install</code> brings the packages the Rivet Code nodes load (<code>pdf-parse</code>, <code>yaml</code>). <code>npm run build</code> regenerates
+<code>enter_challenge.rivet-project</code> so that its <code>Graph Input: repo_dir</code> points to the folder you just cloned.</p>
+<p><strong>2. Open it in Rivet</strong></p>
+<p>Open <code>enter_challenge.rivet-project</code> in the Rivet app and switch the executor from <strong>Browser</strong> to <strong>Node</strong>: the
+Code nodes read files, call the Banco Central and Yahoo APIs and print the PDF, which only the Node executor allows.
+In the graph list, open <strong>Main Graph: Enter Challenge</strong>.</p>
+<p><strong>3. Set the OpenAI key</strong></p>
+<p>In Rivet, open <strong>Settings → OpenAI</strong> and paste your API key. Every model call uses it.</p>
+<p><strong>4. Delete the previous outputs and press Run</strong></p>
+<p><code>Output/</code> holds the letter of the last run. Delete the generated files to watch them come back (keep
+<code>Output/output_letter.docx</code>, the v1 letter the documentation compares against):</p>
+<pre><code class="language-bash">rm Output/carta_* Output/brief_assessor_* Output/facts_* Output/run_log_*
+</code></pre>
+<pre><code class="language-powershell">Remove-Item Output\carta_*, Output\brief_assessor_*, Output\facts_*, Output\run_log_*
+</code></pre>
+<p>Then press <strong>Run</strong>. Each node lights up as it runs and the loops show every attempt. In 30 to 50 seconds (about
+US$ 0.10 with gpt-4.1) <code>Output/</code> has the letter as PDF and HTML, the advisor brief, the FACTS and the cost log, and
+the graph outputs show <code>status</code>, <code>pdf_path</code> and <code>brief</code>.</p>
+<p><strong>Without the app.</strong> After step 1, put the key in <code>.env</code> (<code>cp .env.example .env</code>) and run <code>npm run letter</code>: the
+same graph runs through <code>rivet-cli</code> and prints <code>status</code>, <code>pdf_path</code> and <code>brief</code> as JSON.</p>
+<h2>How it works</h2>
 <p>The rule behind the design: <strong>the LLM reads documents and writes prose; code computes every number; nothing
 reaches the client unchecked.</strong> The v1 workflow let two chained LLM calls invent the return, the benchmark gap
-and the macro forecasts. In v2 an LLM never produces a figure that the client sees.</p>
-<p>On this branch the whole workflow is <strong>one Rivet project, <code>enter_challenge.rivet-project</code></strong>, whose main graph is
-<strong>Main Graph: Enter Challenge</strong>. Press Run and it reads the PDFs, calls the LLM subgraphs, checks each answer,
-computes returns and trade sizes, writes and reviews the letter, and saves the XP-branded PDF. The branch <code>main</code>
-has the same solution with the deterministic steps in Python.</p>
-<h2>The graph</h2>
+and the macro forecasts. In v2 an LLM never produces a figure that the client sees. The letter comes with an
+<strong>advisor brief</strong> listing everything the advisor should approve before it goes out.</p>
+<p>The whole workflow is <strong>one Rivet project, <code>enter_challenge.rivet-project</code></strong>, whose main graph is
+<strong>Main Graph: Enter Challenge</strong>. It reads the PDFs, calls the LLM subgraphs, checks each answer, computes returns
+and trade sizes, writes and reviews the letter, and saves the XP-branded PDF. An earlier version, with the
+deterministic steps in Python, is the first commit of this repository.</p>
 <p>Node titles follow <em>node type: name</em>, exactly as they appear in the Rivet app.</p>
 <pre><code>Main Graph: Enter Challenge
   Graph Input: repo_dir ─► Code: Load Inputs      statement and macro PDFs → text rows (pdf.js), config YAML, XP logo
@@ -10463,30 +10503,17 @@ has the same solution with the deterministic steps in Python.</p>
      └─► Code: Publish (PDF, Brief, Log)           PDF via headless Edge/Chrome, page count, status, brief, cost log
 </code></pre>
 <p>Graph outputs: <code>status</code> (ready for the advisor, or blocked with the reason), <code>pdf_path</code> and <code>brief</code> (Markdown).
-A run takes 30–50 s and costs about US$ 0.10 with gpt-4.1.</p>
-<p>The project also holds <strong>V1 Graph: Original Challenge (unchanged)</strong>, the graph that came with the challenge, with
+The project also holds <strong>V1 Graph: Original Challenge (unchanged)</strong>, the graph that came with the challenge, with
 its nodes untouched, for comparison. It is not part of the run.</p>
-<h2>Running it in the Rivet app</h2>
-<ol>
-<li><code>npm install</code> with Node.js 22 or later (brings <code>pdf-parse</code> and <code>yaml</code>, which the Code nodes load from <code>node_modules/</code>).</li>
-<li>Open <code>enter_challenge.rivet-project</code> in Rivet 1.25 and set the OpenAI key under Settings.</li>
-<li>Switch the executor from <strong>Browser</strong> to <strong>Node</strong>: the Code nodes read files, run the browser that prints
-the PDF and call the BCB and Yahoo APIs, which only the Node executor allows.</li>
-<li>The <code>Graph Input: repo_dir</code> defaults to the folder where <code>npm run build</code> last ran. After cloning somewhere
-else, run <code>npm run build</code> once or type the path into the input.</li>
-<li>Open <strong>Main Graph: Enter Challenge</strong> and press Run. Loops show each attempt; the PDF lands in <code>Output/</code>.</li>
-</ol>
-<h2>Running it from the command line</h2>
-<pre><code class="language-bash">npm install
-cp .env.example .env     # then put your OPENAI_API_KEY in .env
-npm run letter           # runs the main graph with rivet-cli and prints status, pdf_path and brief as JSON
+<h2>Commands</h2>
+<pre><code class="language-bash">npm run letter           # runs the main graph with rivet-cli and prints status, pdf_path and brief as JSON
 npm test                 # 8 tests, no API key: runs each Code node the way Rivet&#39;s Node executor does
 npm run build            # regenerates enter_challenge.rivet-project from src/prompts, src/schemas and src/code
 npm run docs             # rebuilds docs/index.html from docs/*.md and the latest letter in Output/
 </code></pre>
 <p><code>npm run letter</code> loads <code>.env</code> with <code>node --env-file</code>, because <code>rivet-cli</code> reads <code>OPENAI_API_KEY</code> only from the
-environment, and runs the project&#39;s main graph. Set <code>BROWSER_PATH</code> if Edge or Chrome is not in its default
-location, or edit <code>pdf.browsers</code> in <code>config/settings.yaml</code>.</p>
+environment. Set <code>BROWSER_PATH</code> if Edge or Chrome is not in its default location, or edit <code>pdf.browsers</code> in
+<code>config/settings.yaml</code>.</p>
 <h2>Where things are</h2>
 <p><code>config/</code>, <code>data/</code>, <code>docs/</code> and <code>src/</code> each have a README (in Portuguese) explaining what the folder holds and
 what it is for.</p>
@@ -10503,7 +10530,7 @@ what it is for.</p>
 </tr>
 <tr>
 <td><code>src/build.mjs</code></td>
-<td>Writes the project from the files below; graphs it does not generate (the v1 graph) are kept</td>
+<td>Writes the project from the files below; keeps the graphs it does not generate (the v1 graph) and the node positions arranged in the app</td>
 </tr>
 <tr>
 <td><code>src/code/*.js</code></td>
@@ -10559,7 +10586,7 @@ what it is for.</p>
 </tr>
 <tr>
 <td><code>docs/</code></td>
-<td>Documentation in Portuguese (<code>0*.md</code>, the sources of the site) and the delivery site <code>index.html</code></td>
+<td>Documentation in Portuguese (<code>0*.md</code>, the sources of the site), the delivery site <code>index.html</code> and the Enter logo of this README (<code>assets/</code>)</td>
 </tr>
 <tr>
 <td><code>docs/site/</code></td>
@@ -10686,6 +10713,10 @@ navegador. É uma página única, com a barra lateral por tópicos:</p>
 <tr>
 <td><code>index.html</code></td>
 <td>O site, gerado; não editar</td>
+</tr>
+<tr>
+<td><code>assets/enter-logo.svg</code>, <code>assets/enter-logo-white.svg</code></td>
+<td>Logo da Enter no topo do README do repositório; a versão branca aparece no tema escuro do GitHub</td>
 </tr>
 <tr>
 <td><code>site/build.mjs</code></td>
@@ -10872,7 +10903,7 @@ const ANCHORS = Object.fromEntries(SECTIONS.filter((s) =&gt; s.source).map((s) =
 
 const FIXTURES = {
   'albert_statement.json': 'Extrato transcrito à mão: gabarito da extração e da reconciliação',
-  'python_facts_and_letter.json': 'FACTS e carta da versão Python (branch main), para conferir que os números não mudaram',
+  'python_facts_and_letter.json': 'FACTS e carta da versão Python (primeiro commit do repositório), para conferir que os números não mudaram',
 };
 
 function read(relative) {

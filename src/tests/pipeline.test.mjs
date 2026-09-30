@@ -1,5 +1,5 @@
 /* Testes dos Code nodes do Main Graph: Enter Challenge, sem chamar o LLM: usam respostas reais já guardadas
-   (perfil, macro e advise) e comparam com a versão Python da branch main. Conferem a leitura do PDF, a
+   (perfil, macro e advise) e comparam com a versão Python do primeiro commit. Conferem a leitura do PDF, a
    reconciliação (e a detecção de um subtotal trocado), a rentabilidade (+2,51% / +R$ 6.650,04), os
    candidatos (R$ 40 mil + 40 mil + 27 mil), o IR, os 11 alertas, o FACTS idêntico ao Python e o fact-check. */
 

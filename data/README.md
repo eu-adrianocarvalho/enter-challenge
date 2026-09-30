@@ -4,7 +4,7 @@ Dados que o fluxo lê e que foram guardados de execuções anteriores. Nada aqui
 
 | Arquivo ou pasta | O que tem | De onde veio | Quem usa |
 |---|---|---|---|
-| `market/cvm_inf_diario_subset.csv` | Cotas diárias dos 7 fundos do Albert em abril e maio de 2025 | Informe diário da CVM (`dados.cvm.gov.br`, `inf_diario_fi_202504` e `_202505`), filtrado pelos CNPJs de `config/fund_registry.yaml`. Baixado pela versão Python da branch `main` | O node "Code: Market Data" calcula o retorno de cada fundo no período |
+| `market/cvm_inf_diario_subset.csv` | Cotas diárias dos 7 fundos do Albert em abril e maio de 2025 | Informe diário da CVM (`dados.cvm.gov.br`, `inf_diario_fi_202504` e `_202505`), filtrado pelos CNPJs de `config/fund_registry.yaml`. Baixado pela versão Python (primeiro commit do repositório) | O node "Code: Market Data" calcula o retorno de cada fundo no período |
 | `market/benchmarks_2025-04-07_2025-05-07.json` | CDI, IPCA 12 meses e Ibovespa do período | Banco Central (SGS, séries 12 e 433) e Yahoo Finance (`^BVSP`), buscados na mesma janela | O node "Code: Market Data" busca esses valores ao vivo e só usa o arquivo se a rede falhar |
 | `rivet_inputs/` | As entradas de uma chamada real de cada grafo de LLM | Gravadas numa execução real para o Albert | `src/build.mjs` usa como valores padrão, para que cada grafo de LLM rode sozinho no app durante a demo |
 | `evidence/` | Respostas reais do LLM que mostraram por que cada trava existe (ver abaixo) | Execuções reais durante o desenvolvimento | Material para a reunião: não entram no fluxo |

@@ -1,20 +1,80 @@
-# XP monthly client letter — v2, Rivet-native
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/enter-logo-white.svg">
+    <img src="docs/assets/enter-logo.svg" alt="Enter" width="280">
+  </picture>
+</p>
 
-**Author:** Adriano da Silva de Carvalho · **Repository:** [github.com/eu-adrianocarvalho/enter-challenge](https://github.com/eu-adrianocarvalho/enter-challenge) · **Documentation site:** [eu-adrianocarvalho.github.io/enter-challenge](https://eu-adrianocarvalho.github.io/enter-challenge/)
+# XP monthly client letter — Enter AI Deployment challenge
 
-Proof of concept that writes the monthly investment letter for an XP middle-market client (Albert) and an
-**advisor brief** listing everything the advisor should approve before the letter goes out.
+**Author:** Adriano da Silva de Carvalho · **Documentation site:** [eu-adrianocarvalho.github.io/enter-challenge](https://eu-adrianocarvalho.github.io/enter-challenge/)
+
+This repository is my solution to the take-home challenge for the **AI Deployment** role at
+[Enter](https://getenter.ai). XP wants its advisors to serve three times more middle-market clients, and the idea
+is a monthly letter written by an AI workflow in [Rivet](https://rivet.ironcladapp.com): how the portfolio did,
+how the market may affect it, and what to adjust given the client's risk profile and XP's research. The challenge
+shipped a first version (a Rivet graph and a sample letter) and asked to review it, find what is wrong, improve at
+least one of three areas (profitability, buy/sell logic, automated formatting) and document the reasoning. This
+solution covers the three areas.
+
+## Quick start
+
+You need [Node.js](https://nodejs.org) 22 or later, the [Rivet](https://rivet.ironcladapp.com) desktop app 1.25 or
+later, Microsoft Edge or Google Chrome (to print the letter as PDF) and an OpenAI API key.
+
+**1. Clone and install**
+
+```bash
+git clone https://github.com/eu-adrianocarvalho/enter-challenge.git
+cd enter-challenge
+npm install
+npm run build
+```
+
+`npm install` brings the packages the Rivet Code nodes load (`pdf-parse`, `yaml`). `npm run build` regenerates
+`enter_challenge.rivet-project` so that its `Graph Input: repo_dir` points to the folder you just cloned.
+
+**2. Open it in Rivet**
+
+Open `enter_challenge.rivet-project` in the Rivet app and switch the executor from **Browser** to **Node**: the
+Code nodes read files, call the Banco Central and Yahoo APIs and print the PDF, which only the Node executor allows.
+In the graph list, open **Main Graph: Enter Challenge**.
+
+**3. Set the OpenAI key**
+
+In Rivet, open **Settings → OpenAI** and paste your API key. Every model call uses it.
+
+**4. Delete the previous outputs and press Run**
+
+`Output/` holds the letter of the last run. Delete the generated files to watch them come back (keep
+`Output/output_letter.docx`, the v1 letter the documentation compares against):
+
+```bash
+rm Output/carta_* Output/brief_assessor_* Output/facts_* Output/run_log_*
+```
+
+```powershell
+Remove-Item Output\carta_*, Output\brief_assessor_*, Output\facts_*, Output\run_log_*
+```
+
+Then press **Run**. Each node lights up as it runs and the loops show every attempt. In 30 to 50 seconds (about
+US$ 0.10 with gpt-4.1) `Output/` has the letter as PDF and HTML, the advisor brief, the FACTS and the cost log, and
+the graph outputs show `status`, `pdf_path` and `brief`.
+
+**Without the app.** After step 1, put the key in `.env` (`cp .env.example .env`) and run `npm run letter`: the
+same graph runs through `rivet-cli` and prints `status`, `pdf_path` and `brief` as JSON.
+
+## How it works
 
 The rule behind the design: **the LLM reads documents and writes prose; code computes every number; nothing
 reaches the client unchecked.** The v1 workflow let two chained LLM calls invent the return, the benchmark gap
-and the macro forecasts. In v2 an LLM never produces a figure that the client sees.
+and the macro forecasts. In v2 an LLM never produces a figure that the client sees. The letter comes with an
+**advisor brief** listing everything the advisor should approve before it goes out.
 
-On this branch the whole workflow is **one Rivet project, `enter_challenge.rivet-project`**, whose main graph is
-**Main Graph: Enter Challenge**. Press Run and it reads the PDFs, calls the LLM subgraphs, checks each answer,
-computes returns and trade sizes, writes and reviews the letter, and saves the XP-branded PDF. The branch `main`
-has the same solution with the deterministic steps in Python.
-
-## The graph
+The whole workflow is **one Rivet project, `enter_challenge.rivet-project`**, whose main graph is
+**Main Graph: Enter Challenge**. It reads the PDFs, calls the LLM subgraphs, checks each answer, computes returns
+and trade sizes, writes and reviews the letter, and saves the XP-branded PDF. An earlier version, with the
+deterministic steps in Python, is the first commit of this repository.
 
 Node titles follow *node type: name*, exactly as they appear in the Rivet app.
 
@@ -34,26 +94,12 @@ Main Graph: Enter Challenge
 ```
 
 Graph outputs: `status` (ready for the advisor, or blocked with the reason), `pdf_path` and `brief` (Markdown).
-A run takes 30–50 s and costs about US$ 0.10 with gpt-4.1.
-
 The project also holds **V1 Graph: Original Challenge (unchanged)**, the graph that came with the challenge, with
 its nodes untouched, for comparison. It is not part of the run.
 
-## Running it in the Rivet app
-
-1. `npm install` with Node.js 22 or later (brings `pdf-parse` and `yaml`, which the Code nodes load from `node_modules/`).
-2. Open `enter_challenge.rivet-project` in Rivet 1.25 and set the OpenAI key under Settings.
-3. Switch the executor from **Browser** to **Node**: the Code nodes read files, run the browser that prints
-   the PDF and call the BCB and Yahoo APIs, which only the Node executor allows.
-4. The `Graph Input: repo_dir` defaults to the folder where `npm run build` last ran. After cloning somewhere
-   else, run `npm run build` once or type the path into the input.
-5. Open **Main Graph: Enter Challenge** and press Run. Loops show each attempt; the PDF lands in `Output/`.
-
-## Running it from the command line
+## Commands
 
 ```bash
-npm install
-cp .env.example .env     # then put your OPENAI_API_KEY in .env
 npm run letter           # runs the main graph with rivet-cli and prints status, pdf_path and brief as JSON
 npm test                 # 8 tests, no API key: runs each Code node the way Rivet's Node executor does
 npm run build            # regenerates enter_challenge.rivet-project from src/prompts, src/schemas and src/code
@@ -61,8 +107,8 @@ npm run docs             # rebuilds docs/index.html from docs/*.md and the lates
 ```
 
 `npm run letter` loads `.env` with `node --env-file`, because `rivet-cli` reads `OPENAI_API_KEY` only from the
-environment, and runs the project's main graph. Set `BROWSER_PATH` if Edge or Chrome is not in its default
-location, or edit `pdf.browsers` in `config/settings.yaml`.
+environment. Set `BROWSER_PATH` if Edge or Chrome is not in its default location, or edit `pdf.browsers` in
+`config/settings.yaml`.
 
 ## Where things are
 
@@ -72,7 +118,7 @@ what it is for.
 | Path | What |
 |---|---|
 | `enter_challenge.rivet-project` | The Rivet project: the main graph, two loop bodies, six LLM subgraphs and the original v1 graph |
-| `src/build.mjs` | Writes the project from the files below; graphs it does not generate (the v1 graph) are kept |
+| `src/build.mjs` | Writes the project from the files below; keeps the graphs it does not generate (the v1 graph) and the node positions arranged in the app |
 | `src/code/*.js` | Body of each Code node |
 | `src/code/lib/*.js` | Shared functions, pasted in front of each node body at build time |
 | `src/code/nodes.mjs` | Title, libraries, inputs, outputs and permissions of each Code node |
@@ -86,7 +132,7 @@ what it is for.
 | `data/evidence/` | Real LLM failures that motivated each guard |
 | `Input/` | The challenge files, untouched, and the XP logo used in the letter header (`brand.logo`) |
 | `Output/` | `carta_*.html` and `.pdf`, `brief_assessor_*.md`, `facts_*.json`, `run_log_*.json`; `output_letter.docx` is the v1 letter |
-| `docs/` | Documentation in Portuguese (`0*.md`, the sources of the site) and the delivery site `index.html` |
+| `docs/` | Documentation in Portuguese (`0*.md`, the sources of the site), the delivery site `index.html` and the Enter logo of this README (`assets/`) |
 | `docs/site/` | Site generator (`npm run docs`), the shared page layout, CSS and browser scripts |
 | `index.html`, `.nojekyll` | GitHub Pages entry point: the root page redirects to `docs/`, and `.nojekyll` serves files as they are |
 

@@ -34,6 +34,7 @@ O site usa o Mermaid e as fontes da internet. Sem conexão, o texto aparece, mas
 | `06_qualidade_e_travas.md` | As travas contra erro do LLM, com as evidências reais, e os testes |
 | `07_como_usar.md` | Instalar, rodar pelo app ou pelo terminal, trocar o logo, outro cliente ou mês |
 | `index.html` | O site, gerado; não editar |
+| `assets/enter-logo.svg`, `assets/enter-logo-white.svg` | Logo da Enter no topo do README do repositório; a versão branca aparece no tema escuro do GitHub |
 | `site/build.mjs` | Gera o `index.html`: escolhe as seções de cada tópico, a carta e o catálogo de arquivos |
 | `site/layout.mjs` | O layout da página: barra lateral, tópicos, paginação, CSS e JS embutidos |
 | `site/markdown.mjs` | Converte os `.md` em HTML e prepara os diagramas Mermaid |

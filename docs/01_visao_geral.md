@@ -28,7 +28,7 @@ As restrições do enunciado:
 | Documentação completa e este site | `docs/*.md`, `docs/index.html` |
 | Testes automatizados (8), que rodam sem chave de API | `src/tests/` |
 
-A branch `main` do repositório guarda a mesma solução numa versão anterior, com os cálculos em Python e o Rivet só nas etapas de LLM. Esta versão leva tudo para dentro do Rivet: dá para abrir o grafo no app, apertar Run e ver cada etapa acontecendo até o PDF sair.
+O primeiro commit do repositório guarda uma versão anterior da mesma solução, com os cálculos em Python e o Rivet só nas etapas de LLM. Esta versão leva tudo para dentro do Rivet: dá para abrir o grafo no app, apertar Run e ver cada etapa acontecendo até o PDF sair.
 
 ## A ideia central
 

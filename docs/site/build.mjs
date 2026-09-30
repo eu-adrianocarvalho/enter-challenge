@@ -41,7 +41,7 @@ const ANCHORS = Object.fromEntries(SECTIONS.filter((s) => s.source).map((s) => [
 
 const FIXTURES = {
   'albert_statement.json': 'Extrato transcrito à mão: gabarito da extração e da reconciliação',
-  'python_facts_and_letter.json': 'FACTS e carta da versão Python (branch main), para conferir que os números não mudaram',
+  'python_facts_and_letter.json': 'FACTS e carta da versão Python (primeiro commit do repositório), para conferir que os números não mudaram',
 };
 
 function read(relative) {
