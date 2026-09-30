@@ -1,7 +1,7 @@
 /* Gera enter_challenge.rivet-project, o projeto do Rivet na raiz: os 6 grafos de LLM (prompts e schemas em
    src/prompts e src/schemas), os corpos dos dois loops e o Main Graph, que roda tudo e termina com a carta
-   em HTML e PDF. O código dos nodes vem de src/code. Grafos que não são gerados aqui, como o original da
-   v1, são mantidos. Rode depois de editar qualquer prompt, schema ou código: npm run build. */
+   em HTML e PDF. O código dos nodes vem de src/code. Mantém do arquivo atual os grafos que não gera (o da
+   v1) e a posição de cada node arrumada no app. Rode depois de editar prompt, schema ou código. */
 
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
@@ -81,9 +81,9 @@ class Graph {
     }, 300);
   }
 
-  serialize() {
+  serialize(layout) {
     const nodes = Object.fromEntries(this.nodes.map((n) => [`[${n.id}]:${n.type} "${n.title}"`, {
-      visualData: `${n.x}/${n.y}/${n.width}/1//`, data: n.data,
+      visualData: layout[n.id] ?? `${n.x}/${n.y}/${n.width}/1//`, data: n.data,
       ...(n.connections.length ? { outgoingConnections: [...n.connections].sort() } : {}),
     }]));
     return { metadata: { id: graphId(this.name), name: GRAPH_NAMES[this.name], description: this.description }, nodes };
@@ -264,10 +264,16 @@ function preservedGraphs(current, generatedIds) {
     LEGACY_NAMES[id] ? { ...graph, metadata: { ...graph.metadata, name: LEGACY_NAMES[id] } } : graph]);
 }
 
+function savedLayout(current) {
+  const nodes = Object.values(current?.data?.graphs ?? {}).flatMap((graph) => Object.entries(graph.nodes ?? {}));
+  return Object.fromEntries(nodes.map(([key, node]) => [key.match(/^\[([^\]]+)\]/)?.[1], node.visualData]).filter(([id, data]) => id && data));
+}
+
 function build() {
   const current = existsSync(TARGET) ? YAML.parse(readFileSync(TARGET, 'utf8')) : null;
   const graphs = [monthlyLetter(), extractionAttempt(), letterAttempt(), ...LLM_GRAPHS.map(llmGraph)];
-  const generated = graphs.map((g) => [graphId(g.name), g.serialize()]);
+  const layout = savedLayout(current);
+  const generated = graphs.map((g) => [graphId(g.name), g.serialize(layout)]);
   const project = {
     version: 4,
     data: {

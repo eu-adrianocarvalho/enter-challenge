@@ -106,7 +106,7 @@ flowchart LR
 
 `src/code/nodes.mjs` é o catálogo: para cada node, o título, as bibliotecas, as portas de entrada e saída e as permissões do executor. A mesma função `assembleCode()` monta o código que vai para o projeto e o código que os testes executam, então o que é testado é exatamente o que roda no Rivet.
 
-O `src/build.mjs` regrava o `enter_challenge.rivet-project` a cada build, mas mantém os grafos que ele não gera: é assim que o grafo original da v1 continua no arquivo. Todo título segue o padrão *tipo do node: nome* (`Graph Input: repo_dir`, `Code: Load Inputs`, `Subgraph: Advise`, `Loop Until: Letter Attempt (max 3)`), e cada grafo na lateral começa por *Main Graph*, *Subgraph* ou *V1 Graph*.
+O `src/build.mjs` regrava o `enter_challenge.rivet-project` a cada build, mas mantém do arquivo os grafos que ele não gera, e é assim que o grafo original da v1 continua lá, e a posição de cada node: o layout arrumado no app sobrevive ao build. Todo título segue o padrão *tipo do node: nome* (`Graph Input: repo_dir`, `Code: Load Inputs`, `Subgraph: Advise`, `Loop Until: Letter Attempt (max 3)`), e cada grafo na lateral começa por *Main Graph*, *Subgraph* ou *V1 Graph*.
 
 Os 10 Code nodes:
 

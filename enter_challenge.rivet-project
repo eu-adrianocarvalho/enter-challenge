@@ -249,7 +249,7 @@ data:
             - 'statement_text->"Loop Until: Extraction Attempt (max 2)" monthly_letter__loop_extraction_attempt/statement_text'
             - 'word_budget->"Loop Until: Letter Attempt (max 3)" monthly_letter__loop_letter_attempt/word_budget'
         '[monthly_letter__market_data]:code "Code: Market Data (CVM, BCB, Yahoo)"':
-          visualData: 813/557/300/1//
+          visualData: 813.186250788187/556.8373730256462/300/19//
           data:
             code: |-
               /* Ponte entre o código e o Rivet: lê o valor de uma porta de entrada e empacota as saídas no formato
@@ -491,7 +491,7 @@ data:
           outgoingConnections:
             - 'market->"Code: Analyze Portfolio" monthly_letter__analyze/market'
         '[monthly_letter__loop_extraction_attempt]:loopUntil "Loop Until: Extraction Attempt (max 2)"':
-          visualData: 865/-119/300/1//
+          visualData: 1174.1231815792107/-11.02568571645972/300/30//
           data:
             targetGraph: graph_extraction_attempt
             conditionType: inputEqual
@@ -505,7 +505,7 @@ data:
             - 'statement->"Code: Analyze Portfolio" monthly_letter__analyze/statement'
             - 'usage_log->"Code: Publish (PDF, Brief, Log)" monthly_letter__publish/extraction_log'
         '[monthly_letter__sub_extract_profile]:subGraph "Subgraph: Extract Profile"':
-          visualData: 823/301/280/1//
+          visualData: 804.0029834467168/311.7270812839319/280/24//
           data:
             graphId: graph_extract_profile
             useErrorOutput: false
@@ -514,7 +514,7 @@ data:
             - 'result->"Code: Analyze Portfolio" monthly_letter__analyze/profile'
             - 'usage->"Code: Publish (PDF, Brief, Log)" monthly_letter__publish/profile_usage'
         '[monthly_letter__sub_macro_outlook]:subGraph "Subgraph: Macro Outlook"':
-          visualData: 843/985/280/1//
+          visualData: 848.4362222917063/1021.2299162468653/280/21//
           data:
             graphId: graph_macro_outlook
             useErrorOutput: false
@@ -523,7 +523,7 @@ data:
             - 'result->"Code: Check Macro Quotes" monthly_letter__ground_macro/outlook'
             - 'usage->"Code: Publish (PDF, Brief, Log)" monthly_letter__publish/macro_usage'
         '[monthly_letter__ground_macro]:code "Code: Check Macro Quotes"':
-          visualData: 1270/632/300/1//
+          visualData: 1269.681077011645/631.6064079363132/300/4//
           data:
             code: |-
               /* Ponte entre o código e o Rivet: lê o valor de uma porta de entrada e empacota as saídas no formato
@@ -1199,7 +1199,7 @@ data:
             - 'candidates_json->"Subgraph: Advise" monthly_letter__sub_advise/candidates_json'
             - 'profile_json->"Subgraph: Advise" monthly_letter__sub_advise/profile_json'
         '[monthly_letter__sub_advise]:subGraph "Subgraph: Advise"':
-          visualData: 2058/336/280/1//
+          visualData: 2057.837272828703/335.790620814533/280/12//
           data:
             graphId: graph_advise
             useErrorOutput: false
@@ -1208,7 +1208,7 @@ data:
             - 'result->"Code: Build FACTS" monthly_letter__build_facts/advice'
             - 'usage->"Code: Publish (PDF, Brief, Log)" monthly_letter__publish/advise_usage'
         '[monthly_letter__build_facts]:code "Code: Build FACTS"':
-          visualData: 2407/346/300/1//
+          visualData: 2407.0938624650835/346.2755533282418/300/13//
           data:
             code: |-
               /* Ponte entre o código e o Rivet: lê o valor de uma porta de entrada e empacota as saídas no formato
@@ -1684,7 +1684,7 @@ data:
             - 'facts_json->"Loop Until: Letter Attempt (max 3)" monthly_letter__loop_letter_attempt/facts_json'
             - 'recommendations->"Code: Publish (PDF, Brief, Log)" monthly_letter__publish/recommendations'
         '[monthly_letter__loop_letter_attempt]:loopUntil "Loop Until: Letter Attempt (max 3)"':
-          visualData: 2804/228/300/1//
+          visualData: 2804.4546606968006/228.41641212557874/300/6//
           data:
             targetGraph: graph_letter_attempt
             conditionType: inputEqual
@@ -1700,7 +1700,7 @@ data:
             - 'review->"Code: Publish (PDF, Brief, Log)" monthly_letter__publish/review'
             - 'usage_log->"Code: Publish (PDF, Brief, Log)" monthly_letter__publish/letter_log'
         '[monthly_letter__render_letter]:code "Code: Render Letter (HTML)"':
-          visualData: 3224/399/300/1//
+          visualData: 3223.5034219160034/398.5559185535441/300/7//
           data:
             code: |-
               /* Ponte entre o código e o Rivet: lê o valor de uma porta de entrada e empacota as saídas no formato
@@ -2201,7 +2201,7 @@ data:
           outgoingConnections:
             - 'html->"Code: Publish (PDF, Brief, Log)" monthly_letter__publish/html'
         '[monthly_letter__publish]:code "Code: Publish (PDF, Brief, Log)"':
-          visualData: 3796/253/300/1//
+          visualData: 3796.1949116720834/252.85957953847867/300/8//
           data:
             code: |-
               /* Ponte entre o código e o Rivet: lê o valor de uma porta de entrada e empacota as saídas no formato
@@ -2777,7 +2777,7 @@ data:
             - 'pdf_path->"Graph Output: pdf_path" monthly_letter__out_pdf_path/value'
             - 'status->"Graph Output: status" monthly_letter__out_status/value'
         '[monthly_letter__out_pdf_path]:graphOutput "Graph Output: pdf_path"':
-          visualData: 4320/200/240/1//
+          visualData: 4275.927758305715/146.64939163323353/240/29//
           data:
             id: pdf_path
             dataType: string
@@ -2787,7 +2787,7 @@ data:
             id: status
             dataType: string
         '[monthly_letter__out_brief]:graphOutput "Graph Output: brief"':
-          visualData: 4322/590/240/1//
+          visualData: 4268.39543920224/638.2357390377636/240/28//
           data:
             id: brief
             dataType: string
@@ -2798,7 +2798,7 @@ data:
         description: One transcription of the statement plus reconciliation; looped until it adds up.
       nodes:
         '[extraction_attempt__in_statement_text]:graphInput "Graph Input: statement_text"':
-          visualData: 0/0/240/1//
+          visualData: 104.75227502527805/-23.943377148634983/240/5//
           data:
             id: statement_text
             dataType: string
@@ -2808,7 +2808,7 @@ data:
             - 'data->"Graph Output: statement_text" extraction_attempt__out_statement_text/value'
             - 'data->"Subgraph: Extract Portfolio" extraction_attempt__sub_extract_portfolio/statement_text'
         '[extraction_attempt__in_corrections]:graphInput "Graph Input: corrections"':
-          visualData: 0/200/240/1//
+          visualData: -212.4974721941355/152.11324570273004/240/4//
           data:
             id: corrections
             dataType: string
@@ -2817,7 +2817,7 @@ data:
           outgoingConnections:
             - 'data->"Subgraph: Extract Portfolio" extraction_attempt__sub_extract_portfolio/corrections'
         '[extraction_attempt__in_model]:graphInput "Graph Input: model"':
-          visualData: 0/400/240/1//
+          visualData: -145.1567239635996/405.9858442871587/240/3//
           data:
             id: model
             dataType: string
@@ -2828,7 +2828,7 @@ data:
             - 'data->"Graph Output: model" extraction_attempt__out_model/value'
             - 'data->"Subgraph: Extract Portfolio" extraction_attempt__sub_extract_portfolio/model'
         '[extraction_attempt__in_usage_log]:graphInput "Graph Input: usage_log"':
-          visualData: 0/600/240/1//
+          visualData: 31.425682507583417/644.8938321536906/240/2//
           data:
             id: usage_log
             dataType: string
@@ -3069,37 +3069,37 @@ data:
             - 'statement->"Graph Output: statement" extraction_attempt__out_statement/value'
             - 'usage_log->"Graph Output: usage_log" extraction_attempt__out_usage_log/value'
         '[extraction_attempt__out_statement]:graphOutput "Graph Output: statement"':
-          visualData: 1400/0/240/1//
+          visualData: 1304.2264914054601/-77.8159757330637/240/6//
           data:
             id: statement
             dataType: object
         '[extraction_attempt__out_checks]:graphOutput "Graph Output: checks"':
-          visualData: 1400/160/240/1//
+          visualData: 1628.958543983822/28.311425682507576/240/7//
           data:
             id: checks
             dataType: object
         '[extraction_attempt__out_done]:graphOutput "Graph Output: done"':
-          visualData: 1400/320/240/1//
+          visualData: 1715.7532861476238/334.96461071789685/240/8//
           data:
             id: done
             dataType: string
         '[extraction_attempt__out_corrections]:graphOutput "Graph Output: corrections"':
-          visualData: 1400/480/240/1//
+          visualData: 1700.788675429727/625.1567239635996/240/9//
           data:
             id: corrections
             dataType: string
         '[extraction_attempt__out_usage_log]:graphOutput "Graph Output: usage_log"':
-          visualData: 1400/640/240/1//
+          visualData: 1477.8159757330636/876.4408493427704/240/12//
           data:
             id: usage_log
             dataType: string
         '[extraction_attempt__out_statement_text]:graphOutput "Graph Output: statement_text"':
-          visualData: 1400/820/240/1//
+          visualData: 663.7411526794742/-152.6996966632962/240/11//
           data:
             id: statement_text
             dataType: string
         '[extraction_attempt__out_model]:graphOutput "Graph Output: model"':
-          visualData: 1400/980/240/1//
+          visualData: 472.1941354903944/444.2669362992922/240/10//
           data:
             id: model
             dataType: string
@@ -3110,7 +3110,7 @@ data:
         description: "One version of the letter: write, fact-check, review and decide; looped up to 3 times."
       nodes:
         '[letter_attempt__in_facts_json]:graphInput "Graph Input: facts_json"':
-          visualData: 0/0/240/1//
+          visualData: -38.22042467138524/-140.14155712841256/240/3//
           data:
             id: facts_json
             dataType: string
@@ -3122,7 +3122,7 @@ data:
             - 'data->"Subgraph: Review Letter" letter_attempt__sub_review_letter/facts_json'
             - 'data->"Subgraph: Write Letter" letter_attempt__sub_write_letter/facts_json'
         '[letter_attempt__in_word_budget]:graphInput "Graph Input: word_budget"':
-          visualData: 0/200/240/1//
+          visualData: 81.90091001011123/203.64004044489383/240/5//
           data:
             id: word_budget
             dataType: string
@@ -3133,7 +3133,7 @@ data:
             - 'data->"Graph Output: word_budget" letter_attempt__out_word_budget/value'
             - 'data->"Subgraph: Write Letter" letter_attempt__sub_write_letter/word_budget'
         '[letter_attempt__in_corrections]:graphInput "Graph Input: corrections"':
-          visualData: 0/400/240/1//
+          visualData: -316.68351870576345/1.415571284125349/240/4//
           data:
             id: corrections
             dataType: string
@@ -3142,7 +3142,7 @@ data:
           outgoingConnections:
             - 'data->"Subgraph: Write Letter" letter_attempt__sub_write_letter/corrections'
         '[letter_attempt__in_model]:graphInput "Graph Input: model"':
-          visualData: 0/600/240/1//
+          visualData: -94.64105156723963/507.17896865520726/240/15//
           data:
             id: model
             dataType: string
@@ -3154,7 +3154,7 @@ data:
             - 'data->"Subgraph: Review Letter" letter_attempt__sub_review_letter/model'
             - 'data->"Subgraph: Write Letter" letter_attempt__sub_write_letter/model'
         '[letter_attempt__in_usage_log]:graphInput "Graph Input: usage_log"':
-          visualData: 0/800/240/1//
+          visualData: 1286.7542972699698/705.3589484327605/240/26//
           data:
             id: usage_log
             dataType: string
@@ -3163,7 +3163,7 @@ data:
           outgoingConnections:
             - 'data->"Code: Decide Letter Version" letter_attempt__decide_letter/usage_log'
         '[letter_attempt__sub_write_letter]:subGraph "Subgraph: Write Letter"':
-          visualData: 420/100/280/1//
+          visualData: 389.05965621840244/83.61981799797775/280/21//
           data:
             graphId: graph_write_letter
             useErrorOutput: false
@@ -3173,7 +3173,7 @@ data:
             - 'result->"Code: Fact-check Figures" letter_attempt__check_numbers/letter'
             - 'usage->"Code: Decide Letter Version" letter_attempt__decide_letter/write_usage'
         '[letter_attempt__check_numbers]:code "Code: Fact-check Figures"':
-          visualData: 860/60/300/1//
+          visualData: 894.5803842264914/52.71991911021234/300/20//
           data:
             code: |-
               /* Ponte entre o código e o Rivet: lê o valor de uma porta de entrada e empacota as saídas no formato
@@ -3405,47 +3405,47 @@ data:
             - 'review->"Graph Output: review" letter_attempt__out_review/value'
             - 'usage_log->"Graph Output: usage_log" letter_attempt__out_usage_log/value'
         '[letter_attempt__out_letter]:graphOutput "Graph Output: letter"':
-          visualData: 2200/0/240/1//
+          visualData: 2118.099089989889/-118.30131445904956/240/9//
           data:
             id: letter
             dataType: object
         '[letter_attempt__out_review]:graphOutput "Graph Output: review"':
-          visualData: 2200/160/240/1//
+          visualData: 2402.0222446916077/103.57937310414559/240/10//
           data:
             id: review
             dataType: object
         '[letter_attempt__out_done]:graphOutput "Graph Output: done"':
-          visualData: 2200/320/240/1//
+          visualData: 2285.5409504550053/376.4206268958544/240/11//
           data:
             id: done
             dataType: string
         '[letter_attempt__out_corrections]:graphOutput "Graph Output: corrections"':
-          visualData: 2200/480/240/1//
+          visualData: 2505.7633973710817/654.721941354904/240/28//
           data:
             id: corrections
             dataType: string
         '[letter_attempt__out_usage_log]:graphOutput "Graph Output: usage_log"':
-          visualData: 2200/640/240/1//
+          visualData: 2130.8392315470173/847.4823053589485/240/27//
           data:
             id: usage_log
             dataType: string
         '[letter_attempt__out_factcheck]:graphOutput "Graph Output: factcheck"':
-          visualData: 2200/820/240/1//
+          visualData: 1286.349848331648/392.29524772497473/240/25//
           data:
             id: factcheck
             dataType: object
         '[letter_attempt__out_facts_json]:graphOutput "Graph Output: facts_json"':
-          visualData: 2200/980/240/1//
+          visualData: 673.0030333670373/-186.63296258847336/240/22//
           data:
             id: facts_json
             dataType: string
         '[letter_attempt__out_word_budget]:graphOutput "Graph Output: word_budget"':
-          visualData: 2200/1140/240/1//
+          visualData: 460.06066734074807/433.83215369059656/240/17//
           data:
             id: word_budget
             dataType: string
         '[letter_attempt__out_model]:graphOutput "Graph Output: model"':
-          visualData: 2200/1300/240/1//
+          visualData: 276.2386248736095/724.8736097067745/240/18//
           data:
             id: model
             dataType: string
@@ -3456,7 +3456,7 @@ data:
         description: Transcribes the portfolio statement into validated JSON.
       nodes:
         '[extract_portfolio__prompt]:prompt "Prompt: User Message"':
-          visualData: 420/40/420/1//
+          visualData: 397.502451025973/126.52903451548846/420/8//
           data:
             type: user
             useTypeInput: false
@@ -3491,14 +3491,14 @@ data:
           outgoingConnections:
             - 'output->"Chat: OpenAI (JSON Schema)" extract_portfolio__chat/prompt'
         '[extract_portfolio__system]:text "Text: System Prompt"':
-          visualData: 420/-260/420/1//
+          visualData: 359.4296758391581/-370.7571641798252/420/10//
           data:
             text: "You are a meticulous data-entry specialist at a Brazilian brokerage. You transcribe client portfolio statements into structured JSON. You never estimate, infer or calculate a value: every number you output is printed in the statement. When a field is not printed for a position, you output null."
             normalizeLineEndings: true
           outgoingConnections:
             - 'output->"Chat: OpenAI (JSON Schema)" extract_portfolio__chat/systemPrompt'
         '[extract_portfolio__schema]:object "Object: Response Schema"':
-          visualData: 420/420/420/1//
+          visualData: 336.93212686513107/717.6598787332803/420/5//
           data:
             jsonTemplate: |-
               {
@@ -3722,7 +3722,7 @@ data:
           outgoingConnections:
             - 'output->"Graph Output: result" extract_portfolio__out_result/value'
         '[extract_portfolio__in_statement_text]:graphInput "Graph Input: statement_text"':
-          visualData: 0/0/240/1//
+          visualData: -230.16723181119931/-141.90761660540107/240/11//
           data:
             id: statement_text
             dataType: string
@@ -3790,7 +3790,7 @@ data:
           outgoingConnections:
             - 'data->"Prompt: User Message" extract_portfolio__prompt/statement_text'
         '[extract_portfolio__in_corrections]:graphInput "Graph Input: corrections"':
-          visualData: 0/220/240/1//
+          visualData: 83.06787313486892/-77.6598787332803/240/6//
           data:
             id: corrections
             dataType: string
@@ -3799,7 +3799,7 @@ data:
           outgoingConnections:
             - 'data->"Prompt: User Message" extract_portfolio__prompt/corrections'
         '[extract_portfolio__in_model]:graphInput "Graph Input: model"':
-          visualData: 0/440/240/1//
+          visualData: 453.41214086115957/-169.16440298903876/240/9//
           data:
             id: model
             dataType: string
@@ -3824,7 +3824,7 @@ data:
         description: Extracts the suitability constraints from the risk profile.
       nodes:
         '[extract_profile__prompt]:prompt "Prompt: User Message"':
-          visualData: 420/40/420/1//
+          visualData: 329.2156097696036/172.19481384426146/420/6//
           data:
             type: user
             useTypeInput: false
@@ -3846,14 +3846,14 @@ data:
           outgoingConnections:
             - 'output->"Chat: OpenAI (JSON Schema)" extract_profile__chat/prompt'
         '[extract_profile__system]:text "Text: System Prompt"':
-          visualData: 420/-260/420/1//
+          visualData: 384.96041078826806/-310.9666752170647/420/10//
           data:
             text: You are a suitability analyst at a Brazilian brokerage. You read a client's risk-profile statement and record, faithfully and without embellishment, the constraints an advisor must respect when recommending investments.
             normalizeLineEndings: true
           outgoingConnections:
             - 'output->"Chat: OpenAI (JSON Schema)" extract_profile__chat/systemPrompt'
         '[extract_profile__schema]:object "Object: Response Schema"':
-          visualData: 420/420/420/1//
+          visualData: 327.6229011690703/627.0521180693252/420/5//
           data:
             jsonTemplate: |-
               {
@@ -3985,7 +3985,7 @@ data:
           outgoingConnections:
             - 'output->"Graph Output: result" extract_profile__out_result/value'
         '[extract_profile__in_profile_text]:graphInput "Graph Input: profile_text"':
-          visualData: 0/0/240/1//
+          visualData: -183.16148906132614/-146.5291912490609/240/8//
           data:
             id: profile_text
             dataType: string
@@ -4073,7 +4073,7 @@ data:
           outgoingConnections:
             - 'data->"Prompt: User Message" extract_profile__prompt/profile_text'
         '[extract_profile__in_model]:graphInput "Graph Input: model"':
-          visualData: 0/220/240/1//
+          visualData: 434.80944794558286/-87.39275990292126/240/9//
           data:
             id: model
             dataType: string
@@ -4098,7 +4098,7 @@ data:
         description: Monthly evidence-backed macro brief, shared by every client letter.
       nodes:
         '[macro_outlook__prompt]:prompt "Prompt: User Message"':
-          visualData: 420/40/420/1//
+          visualData: 309.45618397090203/102.92494143194807/420/11//
           data:
             type: user
             useTypeInput: false
@@ -4126,14 +4126,14 @@ data:
           outgoingConnections:
             - 'output->"Chat: OpenAI (JSON Schema)" macro_outlook__chat/prompt'
         '[macro_outlook__system]:text "Text: System Prompt"':
-          visualData: 420/-260/420/1//
+          visualData: 413.19730362897855/-430.06740927553534/420/10//
           data:
             text: You are a senior investment strategist at XP. Each month you turn the Macro Research report into a compact, evidence-backed brief that advisors reuse in every client letter. Your brief is read by a program that checks each quote against the report, so you only state what the report supports, and you copy quotes and figures character by character.
             normalizeLineEndings: true
           outgoingConnections:
             - 'output->"Chat: OpenAI (JSON Schema)" macro_outlook__chat/systemPrompt'
         '[macro_outlook__schema]:object "Object: Response Schema"':
-          visualData: 420/420/420/1//
+          visualData: 391.088540423159/673.4004398205476/420/12//
           data:
             jsonTemplate: |-
               {
@@ -4342,7 +4342,7 @@ data:
           outgoingConnections:
             - 'output->"Graph Output: result" macro_outlook__out_result/value'
         '[macro_outlook__in_report_text]:graphInput "Graph Input: report_text"':
-          visualData: 0/0/240/1//
+          visualData: -166.66606109002458/-309.52268488147433/240/8//
           data:
             id: report_text
             dataType: string
@@ -5291,7 +5291,7 @@ data:
           outgoingConnections:
             - 'data->"Prompt: User Message" macro_outlook__prompt/report_text'
         '[macro_outlook__in_model]:graphInput "Graph Input: model"':
-          visualData: 0/220/240/1//
+          visualData: 411.5631304467955/-220.4745900236365/240/9//
           data:
             id: model
             dataType: string
@@ -5350,14 +5350,14 @@ data:
           outgoingConnections:
             - 'output->"Chat: OpenAI (JSON Schema)" advise__chat/prompt'
         '[advise__system]:text "Text: System Prompt"':
-          visualData: 420/-260/420/1//
+          visualData: 507.2208324189936/-383.69499870330003/420/10//
           data:
             text: You are an experienced XP investment advisor preparing the recommendation section of a client's monthly letter. A rules engine has already sized every possible move against the client's profile. Your job is to choose which moves to present and to explain them clearly, grounded in the client's profile and in XP's macro brief. You never add an asset, change an amount or promise a return.
             normalizeLineEndings: true
           outgoingConnections:
             - 'output->"Chat: OpenAI (JSON Schema)" advise__chat/systemPrompt'
         '[advise__schema]:object "Object: Response Schema"':
-          visualData: 420/420/420/1//
+          visualData: 396.21250024936535/611.8858313217859/420/13//
           data:
             jsonTemplate: |-
               {
@@ -5450,7 +5450,7 @@ data:
           outgoingConnections:
             - 'output->"Graph Output: result" advise__out_result/value'
         '[advise__in_profile_json]:graphInput "Graph Input: profile_json"':
-          visualData: 0/0/240/1//
+          visualData: 88.80666573570255/-196.6433312719128/240/4//
           data:
             id: profile_json
             dataType: string
@@ -5489,7 +5489,7 @@ data:
           outgoingConnections:
             - 'data->"Prompt: User Message" advise__prompt/profile_json'
         '[advise__in_allocation_json]:graphInput "Graph Input: allocation_json"':
-          visualData: 0/220/240/1//
+          visualData: -168.09833157115125/-113.02499650888461/240/5//
           data:
             id: allocation_json
             dataType: string
@@ -5524,7 +5524,7 @@ data:
           outgoingConnections:
             - 'data->"Prompt: User Message" advise__prompt/allocation_json'
         '[advise__in_candidates_json]:graphInput "Graph Input: candidates_json"':
-          visualData: 0/440/240/1//
+          visualData: -429.76082882813205/-13.548328578766643/240/6//
           data:
             id: candidates_json
             dataType: string
@@ -5591,7 +5591,7 @@ data:
           outgoingConnections:
             - 'data->"Prompt: User Message" advise__prompt/candidates_json'
         '[advise__in_macro_json]:graphInput "Graph Input: macro_json"':
-          visualData: 0/660/240/1//
+          visualData: -701.5660876727886/89.10000598476927/240/20//
           data:
             id: macro_json
             dataType: string
@@ -5788,7 +5788,7 @@ data:
           outgoingConnections:
             - 'data->"Prompt: User Message" advise__prompt/macro_json'
         '[advise__in_model]:graphInput "Graph Input: model"':
-          visualData: 0/880/240/1//
+          visualData: 453.54832857876664/-211.05332189577433/240/11//
           data:
             id: model
             dataType: string
@@ -5797,7 +5797,7 @@ data:
           outgoingConnections:
             - 'data->"Chat: OpenAI (JSON Schema)" advise__chat/model'
         '[advise__out_result]:graphOutput "Graph Output: result"':
-          visualData: 1620/0/240/1//
+          visualData: 1640.8903808013679/-44.765101717216716/240/21//
           data:
             id: result
             dataType: object
@@ -5813,7 +5813,7 @@ data:
         description: Writes the client letter (pt-BR) using only figures from FACTS.
       nodes:
         '[write_letter__prompt]:prompt "Prompt: User Message"':
-          visualData: 420/40/420/1//
+          visualData: 335.587645958905/38.08153740815693/420/9//
           data:
             type: user
             useTypeInput: false
@@ -5848,14 +5848,14 @@ data:
           outgoingConnections:
             - 'output->"Chat: OpenAI (JSON Schema)" write_letter__chat/prompt'
         '[write_letter__system]:text "Text: System Prompt"':
-          visualData: 420/-260/420/1//
+          visualData: 381.63074816313866/-536.2586132254019/420/6//
           data:
             text: "You are a senior XP investment advisor writing the monthly letter to a middle-market client, in Brazilian Portuguese. Your voice is that of a private banker: warm, precise and confident, never salesy. The letter is checked by a program that rejects any figure not present in FACTS, so every number you write is copied from FACTS exactly as it appears there."
             normalizeLineEndings: true
           outgoingConnections:
             - 'output->"Chat: OpenAI (JSON Schema)" write_letter__chat/systemPrompt'
         '[write_letter__schema]:object "Object: Response Schema"':
-          visualData: 420/420/420/1//
+          visualData: 316.40302004047436/700.095538409088/420/10//
           data:
             jsonTemplate: |-
               {
@@ -5927,7 +5927,7 @@ data:
           outgoingConnections:
             - 'output->"Graph Output: result" write_letter__out_result/value'
         '[write_letter__in_facts_json]:graphInput "Graph Input: facts_json"':
-          visualData: 0/0/240/1//
+          visualData: -399.04021910335814/-109.35236773505487/240/2//
           data:
             id: facts_json
             dataType: string
@@ -6226,7 +6226,7 @@ data:
           outgoingConnections:
             - 'data->"Prompt: User Message" write_letter__prompt/facts_json'
         '[write_letter__in_word_budget]:graphInput "Graph Input: word_budget"':
-          visualData: 0/220/240/1//
+          visualData: 5.755387775529203/5.132189713576395/240/3//
           data:
             id: word_budget
             dataType: string
@@ -6235,7 +6235,7 @@ data:
           outgoingConnections:
             - 'data->"Prompt: User Message" write_letter__prompt/word_budget'
         '[write_letter__in_corrections]:graphInput "Graph Input: corrections"':
-          visualData: 0/440/240/1//
+          visualData: -17.266163326587613/280.7676048770254/240/4//
           data:
             id: corrections
             dataType: string
@@ -6244,7 +6244,7 @@ data:
           outgoingConnections:
             - 'data->"Prompt: User Message" write_letter__prompt/corrections'
         '[write_letter__in_model]:graphInput "Graph Input: model"':
-          visualData: 0/660/240/1//
+          visualData: 385.61098096045663/-285.8020577786325/240/7//
           data:
             id: model
             dataType: string
@@ -6258,7 +6258,7 @@ data:
             id: result
             dataType: object
         '[write_letter__out_usage]:graphOutput "Graph Output: usage"':
-          visualData: 1620/240/240/1//
+          visualData: 1554.7722718773357/380.04776920454395/240/11//
           data:
             id: usage
             dataType: object
@@ -6301,14 +6301,14 @@ data:
           outgoingConnections:
             - 'output->"Chat: OpenAI (JSON Schema)" review_letter__chat/prompt'
         '[review_letter__system]:text "Text: System Prompt"':
-          visualData: 420/-260/420/1//
+          visualData: 361.7593528816987/-502.6693629929221/420/6//
           data:
             text: You are a compliance reviewer at XP. You compare a client letter with the FACTS it was written from and flag every statement that FACTS does not support. You are strict about substance and indifferent to style.
             normalizeLineEndings: true
           outgoingConnections:
             - 'output->"Chat: OpenAI (JSON Schema)" review_letter__chat/systemPrompt'
         '[review_letter__schema]:object "Object: Response Schema"':
-          visualData: 420/420/420/1//
+          visualData: 436.9868554095045/796.1375126390293/420/8//
           data:
             jsonTemplate: |-
               {
@@ -6396,7 +6396,7 @@ data:
           outgoingConnections:
             - 'output->"Graph Output: result" review_letter__out_result/value'
         '[review_letter__in_facts_json]:graphInput "Graph Input: facts_json"':
-          visualData: 0/0/240/1//
+          visualData: 123.76137512639029/-95.85439838220424/240/4//
           data:
             id: facts_json
             dataType: string
@@ -6695,7 +6695,7 @@ data:
           outgoingConnections:
             - 'data->"Prompt: User Message" review_letter__prompt/facts_json'
         '[review_letter__in_letter_json]:graphInput "Graph Input: letter_json"':
-          visualData: 0/220/240/1//
+          visualData: -167.44186046511626/-69.98988877654193/240/3//
           data:
             id: letter_json
             dataType: string
@@ -6712,7 +6712,7 @@ data:
           outgoingConnections:
             - 'data->"Prompt: User Message" review_letter__prompt/letter_json'
         '[review_letter__in_model]:graphInput "Graph Input: model"':
-          visualData: 0/440/240/1//
+          visualData: 513.2457027300303/-247.9676440849342/240/7//
           data:
             id: model
             dataType: string
@@ -6726,7 +6726,7 @@ data:
             id: result
             dataType: object
         '[review_letter__out_usage]:graphOutput "Graph Output: usage"':
-          visualData: 1620/240/240/1//
+          visualData: 1581.1729019211325/377.108190091001/240/9//
           data:
             id: usage
             dataType: object

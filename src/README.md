@@ -52,9 +52,8 @@ O Rivet executa o texto de um Code node como o corpo de uma função assíncrona
 - **Nunca marque *Allow require*:** no executor Node do app desktop isso quebra o node. Para ler arquivos ou usar
   pacotes, use `projectRequire()` de `lib/modules.js`.
 - **O código editado dentro do app se perde** no próximo build. Edite sempre aqui.
-- **As posições dos nodes também vêm do `build.mjs`.** Se reorganizar um grafo no app e salvar, copie as novas
-  posições (o `visualData` de cada node no `.rivet-project`) para as chamadas do `build.mjs`, ou o próximo build
-  desfaz o layout.
+- **O layout é do app.** Reorganizar os nodes no app e salvar é preservado: o `build.mjs` mantém a posição e a
+  largura que cada node já tem no `.rivet-project`. Só um node novo recebe a posição padrão definida no `build.mjs`.
 
 Os ids dos grafos (`graph_monthly_letter`, `graph_advise`…) são fixos, porque as ligações entre os grafos usam
 esses ids. Os nomes que aparecem na lateral podem mudar à vontade em `build.mjs`.

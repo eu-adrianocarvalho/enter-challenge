@@ -886,7 +886,7 @@ details.file[open] > summary::before { content:"–"; }
   class LIB,BODY,AS,PR,B,T,V1 code
 </pre>
 <p><code>src/code/nodes.mjs</code> é o catálogo: para cada node, o título, as bibliotecas, as portas de entrada e saída e as permissões do executor. A mesma função <code>assembleCode()</code> monta o código que vai para o projeto e o código que os testes executam, então o que é testado é exatamente o que roda no Rivet.</p>
-<p>O <code>src/build.mjs</code> regrava o <code>enter_challenge.rivet-project</code> a cada build, mas mantém os grafos que ele não gera: é assim que o grafo original da v1 continua no arquivo. Todo título segue o padrão <em>tipo do node: nome</em> (<code>Graph Input: repo_dir</code>, <code>Code: Load Inputs</code>, <code>Subgraph: Advise</code>, <code>Loop Until: Letter Attempt (max 3)</code>), e cada grafo na lateral começa por <em>Main Graph</em>, <em>Subgraph</em> ou <em>V1 Graph</em>.</p>
+<p>O <code>src/build.mjs</code> regrava o <code>enter_challenge.rivet-project</code> a cada build, mas mantém do arquivo os grafos que ele não gera, e é assim que o grafo original da v1 continua lá, e a posição de cada node: o layout arrumado no app sobrevive ao build. Todo título segue o padrão <em>tipo do node: nome</em> (<code>Graph Input: repo_dir</code>, <code>Code: Load Inputs</code>, <code>Subgraph: Advise</code>, <code>Loop Until: Letter Attempt (max 3)</code>), e cada grafo na lateral começa por <em>Main Graph</em>, <em>Subgraph</em> ou <em>V1 Graph</em>.</p>
 <p>Os 10 Code nodes:</p>
 <table>
 <thead>
@@ -4793,7 +4793,7 @@ o desempenho do investimento.
     &quot;completion_tokens&quot;: 4,
     &quot;cost_usd&quot;: 0.007812
   }
-]</code></pre></div></details></section><section class="doc files" id="arquivos-v1" data-spy><h2>Primeira versão (v1)</h2><details class="file"><summary><span class="fname">Output/output_letter.docx</span><span class="fdesc">Carta gerada pela v1, intacta</span><span class="fsize">139 KB</span><a class="dl" href="../Output/output_letter.docx" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><p class="note">Formato sem prévia no navegador. Baixe o arquivo.</p></div></details></section><section class="doc files" id="arquivos-rivet" data-spy><h2>Workflow Rivet (v2)</h2><details class="file"><summary><span class="fname">enter_challenge.rivet-project</span><span class="fdesc">O projeto do Rivet: Main Graph, 2 loops, 6 grafos de LLM e o grafo original da v1 (gerado por src/build.mjs)</span><span class="fsize">375 KB</span><a class="dl" href="../enter_challenge.rivet-project" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><pre><code>version: 4
+]</code></pre></div></details></section><section class="doc files" id="arquivos-v1" data-spy><h2>Primeira versão (v1)</h2><details class="file"><summary><span class="fname">Output/output_letter.docx</span><span class="fdesc">Carta gerada pela v1, intacta</span><span class="fsize">139 KB</span><a class="dl" href="../Output/output_letter.docx" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><p class="note">Formato sem prévia no navegador. Baixe o arquivo.</p></div></details></section><section class="doc files" id="arquivos-rivet" data-spy><h2>Workflow Rivet (v2)</h2><details class="file"><summary><span class="fname">enter_challenge.rivet-project</span><span class="fdesc">O projeto do Rivet: Main Graph, 2 loops, 6 grafos de LLM e o grafo original da v1 (gerado por src/build.mjs)</span><span class="fsize">377 KB</span><a class="dl" href="../enter_challenge.rivet-project" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><pre><code>version: 4
 data:
   attachedData:
     trivet:
@@ -5044,7 +5044,7 @@ data:
             - 'statement_text-&gt;&quot;Loop Until: Extraction Attempt (max 2)&quot; monthly_letter__loop_extraction_attempt/statement_text'
             - 'word_budget-&gt;&quot;Loop Until: Letter Attempt (max 3)&quot; monthly_letter__loop_letter_attempt/word_budget'
         '[monthly_letter__market_data]:code &quot;Code: Market Data (CVM, BCB, Yahoo)&quot;':
-          visualData: 813/557/300/1//
+          visualData: 813.186250788187/556.8373730256462/300/19//
           data:
             code: |-
               /* Ponte entre o código e o Rivet: lê o valor de uma porta de entrada e empacota as saídas no formato
@@ -5286,7 +5286,7 @@ data:
           outgoingConnections:
             - 'market-&gt;&quot;Code: Analyze Portfolio&quot; monthly_letter__analyze/market'
         '[monthly_letter__loop_extraction_attempt]:loopUntil &quot;Loop Until: Extraction Attempt (max 2)&quot;':
-          visualData: 865/-119/300/1//
+          visualData: 1174.1231815792107/-11.02568571645972/300/30//
           data:
             targetGraph: graph_extraction_attempt
             conditionType: inputEqual
@@ -5300,7 +5300,7 @@ data:
             - 'statement-&gt;&quot;Code: Analyze Portfolio&quot; monthly_letter__analyze/statement'
             - 'usage_log-&gt;&quot;Code: Publish (PDF, Brief, Log)&quot; monthly_letter__publish/extraction_log'
         '[monthly_letter__sub_extract_profile]:subGraph &quot;Subgraph: Extract Profile&quot;':
-          visualData: 823/301/280/1//
+          visualData: 804.0029834467168/311.7270812839319/280/24//
           data:
             graphId: graph_extract_profile
             useErrorOutput: false
@@ -5309,7 +5309,7 @@ data:
             - 'result-&gt;&quot;Code: Analyze Portfolio&quot; monthly_letter__analyze/profile'
             - 'usage-&gt;&quot;Code: Publish (PDF, Brief, Log)&quot; monthly_letter__publish/profile_usage'
         '[monthly_letter__sub_macro_outlook]:subGraph &quot;Subgraph: Macro Outlook&quot;':
-          visualData: 843/985/280/1//
+          visualData: 848.4362222917063/1021.2299162468653/280/21//
           data:
             graphId: graph_macro_outlook
             useErrorOutput: false
@@ -5318,7 +5318,7 @@ data:
             - 'result-&gt;&quot;Code: Check Macro Quotes&quot; monthly_letter__ground_macro/outlook'
             - 'usage-&gt;&quot;Code: Publish (PDF, Brief, Log)&quot; monthly_letter__publish/macro_usage'
         '[monthly_letter__ground_macro]:code &quot;Code: Check Macro Quotes&quot;':
-          visualData: 1270/632/300/1//
+          visualData: 1269.681077011645/631.6064079363132/300/4//
           data:
             code: |-
               /* Ponte entre o código e o Rivet: lê o valor de uma porta de entrada e empacota as saídas no formato
@@ -5842,11 +5842,7 @@ data:
                  Cada alerta tem severidade; o do CDB traz a nota que a carta imprime abaixo da tabela de sugestões. */
 
               function flag(code, severity, message, clientNote = null) {
-                return { code, severity, message, clientNote };
-              }
-
-              function maturedFixedIncome(statement) {
-                return positionsOf(statement, 'fixed_
+                return { code, severity, mess
 
 [prévia cortada; baixe o arquivo para ver tudo]</code></pre></div></details><details class="file"><summary><span class="fname">src/README.md</span><span class="fdesc">O que tem em src/, como mexer e as regras do código dos nodes</span><span class="fsize">5 KB</span><a class="dl" href="../src/README.md" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><h1>src/</h1>
 <p>Tudo o que forma o projeto do Rivet, <code>enter_challenge.rivet-project</code>, na raiz do repositório. O projeto não é
@@ -5958,9 +5954,8 @@ chama <code>setup</code>.</li>
 <li><strong>Nunca marque <em>Allow require</em>:</strong> no executor Node do app desktop isso quebra o node. Para ler arquivos ou usar
 pacotes, use <code>projectRequire()</code> de <code>lib/modules.js</code>.</li>
 <li><strong>O código editado dentro do app se perde</strong> no próximo build. Edite sempre aqui.</li>
-<li><strong>As posições dos nodes também vêm do <code>build.mjs</code>.</strong> Se reorganizar um grafo no app e salvar, copie as novas
-posições (o <code>visualData</code> de cada node no <code>.rivet-project</code>) para as chamadas do <code>build.mjs</code>, ou o próximo build
-desfaz o layout.</li>
+<li><strong>O layout é do app.</strong> Reorganizar os nodes no app e salvar é preservado: o <code>build.mjs</code> mantém a posição e a
+largura que cada node já tem no <code>.rivet-project</code>. Só um node novo recebe a posição padrão definida no <code>build.mjs</code>.</li>
 </ul>
 <p>Os ids dos grafos (<code>graph_monthly_letter</code>, <code>graph_advise</code>…) são fixos, porque as ligações entre os grafos usam
 esses ids. Os nomes que aparecem na lateral podem mudar à vontade em <code>build.mjs</code>.</p>
@@ -5996,8 +5991,8 @@ esses ids. Os nomes que aparecem na lateral podem mudar à vontade em <code>buil
 </tbody></table>
 </div></details><details class="file"><summary><span class="fname">src/build.mjs</span><span class="fdesc">Gera enter_challenge.rivet-project, o projeto do Rivet na raiz: os 6 grafos de LLM (prompts e schemas em src/prompts e src/schemas), os corpos dos dois loops e o Main …</span><span class="fsize">15 KB</span><a class="dl" href="../src/build.mjs" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><pre><code>/* Gera enter_challenge.rivet-project, o projeto do Rivet na raiz: os 6 grafos de LLM (prompts e schemas em
    src/prompts e src/schemas), os corpos dos dois loops e o Main Graph, que roda tudo e termina com a carta
-   em HTML e PDF. O código dos nodes vem de src/code. Grafos que não são gerados aqui, como o original da
-   v1, são mantidos. Rode depois de editar qualquer prompt, schema ou código: npm run build. */
+   em HTML e PDF. O código dos nodes vem de src/code. Mantém do arquivo atual os grafos que não gera (o da
+   v1) e a posição de cada node arrumada no app. Rode depois de editar prompt, schema ou código. */
 
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
@@ -6077,9 +6072,9 @@ class Graph {
     }, 300);
   }
 
-  serialize() {
+  serialize(layout) {
     const nodes = Object.fromEntries(this.nodes.map((n) =&gt; [`[${n.id}]:${n.type} &quot;${n.title}&quot;`, {
-      visualData: `${n.x}/${n.y}/${n.width}/1//`, data: n.data,
+      visualData: layout[n.id] ?? `${n.x}/${n.y}/${n.width}/1//`, data: n.data,
       ...(n.connections.length ? { outgoingConnections: [...n.connections].sort() } : {}),
     }]));
     return { metadata: { id: graphId(this.name), name: GRAPH_NAMES[this.name], description: this.description }, nodes };
@@ -6260,10 +6255,16 @@ function preservedGraphs(current, generatedIds) {
     LEGACY_NAMES[id] ? { ...graph, metadata: { ...graph.metadata, name: LEGACY_NAMES[id] } } : graph]);
 }
 
+function savedLayout(current) {
+  const nodes = Object.values(current?.data?.graphs ?? {}).flatMap((graph) =&gt; Object.entries(graph.nodes ?? {}));
+  return Object.fromEntries(nodes.map(([key, node]) =&gt; [key.match(/^\[([^\]]+)\]/)?.[1], node.visualData]).filter(([id, data]) =&gt; id &amp;&amp; data));
+}
+
 function build() {
   const current = existsSync(TARGET) ? YAML.parse(readFileSync(TARGET, 'utf8')) : null;
   const graphs = [monthlyLetter(), extractionAttempt(), letterAttempt(), ...LLM_GRAPHS.map(llmGraph)];
-  const generated = graphs.map((g) =&gt; [graphId(g.name), g.serialize()]);
+  const layout = savedLayout(current);
+  const generated = graphs.map((g) =&gt; [graphId(g.name), g.serialize(layout)]);
   const project = {
     version: 4,
     data: {
