@@ -74,7 +74,7 @@ Editar o código dentro do app não adianta: o próximo build sobrescreve. Nos n
 npm run docs      # recria docs/index.html a partir de docs/*.md e da última carta em Output/
 ```
 
-O site usa o Mermaid e as fontes da internet; sem conexão, o texto aparece, mas os diagramas não.
+O site usa o Mermaid e as fontes da internet; sem conexão, o texto aparece, mas os diagramas não. A versão publicada fica em [eu-adrianocarvalho.github.io/enter-challenge](https://eu-adrianocarvalho.github.io/enter-challenge/) e se atualiza a cada push na branch `main`: rode `npm run docs` e faça o commit do `docs/index.html` antes do push.
 
 ## Trocar o logo da carta
 

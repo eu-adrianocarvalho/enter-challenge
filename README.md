@@ -1,6 +1,6 @@
 # XP monthly client letter — v2, Rivet-native
 
-**Author:** Adriano da Silva de Carvalho · **Repository:** [github.com/eu-adrianocarvalho/enter-challenge](https://github.com/eu-adrianocarvalho/enter-challenge)
+**Author:** Adriano da Silva de Carvalho · **Repository:** [github.com/eu-adrianocarvalho/enter-challenge](https://github.com/eu-adrianocarvalho/enter-challenge) · **Documentation site:** [eu-adrianocarvalho.github.io/enter-challenge](https://eu-adrianocarvalho.github.io/enter-challenge/)
 
 Proof of concept that writes the monthly investment letter for an XP middle-market client (Albert) and an
 **advisor brief** listing everything the advisor should approve before the letter goes out.
@@ -88,6 +88,7 @@ what it is for.
 | `Output/` | `carta_*.html` and `.pdf`, `brief_assessor_*.md`, `facts_*.json`, `run_log_*.json`; `output_letter.docx` is the v1 letter |
 | `docs/` | Documentation in Portuguese (`0*.md`, the sources of the site) and the delivery site `index.html` |
 | `docs/site/` | Site generator (`npm run docs`), the shared page layout, CSS and browser scripts |
+| `index.html`, `.nojekyll` | GitHub Pages entry point: the root page redirects to `docs/`, and `.nojekyll` serves files as they are |
 
 ## Guards
 

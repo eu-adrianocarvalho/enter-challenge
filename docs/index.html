@@ -1491,7 +1491,7 @@ npm run build     # regenera enter_challenge.rivet-project
 <h2>Gerar a documentação</h2>
 <pre><code class="language-powershell">npm run docs      # recria docs/index.html a partir de docs/*.md e da última carta em Output/
 </code></pre>
-<p>O site usa o Mermaid e as fontes da internet; sem conexão, o texto aparece, mas os diagramas não.</p>
+<p>O site usa o Mermaid e as fontes da internet; sem conexão, o texto aparece, mas os diagramas não. A versão publicada fica em <a href="https://eu-adrianocarvalho.github.io/enter-challenge/">eu-adrianocarvalho.github.io/enter-challenge</a> e se atualiza a cada push na branch <code>main</code>: rode <code>npm run docs</code> e faça o commit do <code>docs/index.html</code> antes do push.</p>
 <h2>Trocar o logo da carta</h2>
 <p>O logo fica em <code>Input/xp_inc_logo.jpg</code>, e o caminho é definido em <code>config/settings.yaml</code> (<code>brand.logo</code>). Para trocar, coloque o arquivo novo (JPG ou PNG) em <code>Input/</code>, ajuste o caminho e gere a carta de novo, sem mexer no código.</p>
 <p>Se o PDF estiver aberto num visualizador, feche e abra de novo, porque a maioria dos visualizadores não recarrega o arquivo sozinha.</p>
@@ -10437,7 +10437,7 @@ test('carta em HTML traz a identidade da XP e os números', async () =&gt; {
     &quot;closing&quot;: &quot;Estou à disposição para conversarmos sobre essas sugestões e avaliar juntos os próximos passos. Conte comigo para quaisquer esclarecimentos ou para agendarmos uma reunião.&quot;
   }
 }</code></pre></div></details></section><section class="doc files" id="arquivos-repo" data-spy><h2>Repositório e documentação</h2><details class="file"><summary><span class="fname">README.md</span><span class="fdesc">README do repositório (em inglês)</span><span class="fsize">10 KB</span><a class="dl" href="../README.md" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><h1>XP monthly client letter — v2, Rivet-native</h1>
-<p><strong>Author:</strong> Adriano da Silva de Carvalho · <strong>Repository:</strong> <a href="https://github.com/eu-adrianocarvalho/enter-challenge">github.com/eu-adrianocarvalho/enter-challenge</a></p>
+<p><strong>Author:</strong> Adriano da Silva de Carvalho · <strong>Repository:</strong> <a href="https://github.com/eu-adrianocarvalho/enter-challenge">github.com/eu-adrianocarvalho/enter-challenge</a> · <strong>Documentation site:</strong> <a href="https://eu-adrianocarvalho.github.io/enter-challenge/">eu-adrianocarvalho.github.io/enter-challenge</a></p>
 <p>Proof of concept that writes the monthly investment letter for an XP middle-market client (Albert) and an
 <strong>advisor brief</strong> listing everything the advisor should approve before the letter goes out.</p>
 <p>The rule behind the design: <strong>the LLM reads documents and writes prose; code computes every number; nothing
@@ -10565,6 +10565,10 @@ what it is for.</p>
 <td><code>docs/site/</code></td>
 <td>Site generator (<code>npm run docs</code>), the shared page layout, CSS and browser scripts</td>
 </tr>
+<tr>
+<td><code>index.html</code>, <code>.nojekyll</code></td>
+<td>GitHub Pages entry point: the root page redirects to <code>docs/</code>, and <code>.nojekyll</code> serves files as they are</td>
+</tr>
 </tbody></table>
 <h2>Guards</h2>
 <ol>
@@ -10612,7 +10616,10 @@ statement 07/05/2025, macro report 06/02/2025); the brief lists each inconsisten
 <p>A documentação da entrega, em português, e o site que a reúne. Os <code>.md</code> são a <strong>fonte</strong>; o <code>index.html</code> é
 <strong>gerado</strong> a partir deles e não deve ser editado à mão.</p>
 <h2>O site</h2>
-<p>Abra <code>docs/index.html</code> no navegador. É uma página única, com a barra lateral por tópicos:</p>
+<p>Publicado em <a href="https://eu-adrianocarvalho.github.io/enter-challenge/">eu-adrianocarvalho.github.io/enter-challenge</a>
+pelo GitHub Pages, a partir da raiz da branch <code>main</code>: o <code>index.html</code> da raiz redireciona para <code>docs/</code>, e o site
+abre os arquivos de <code>Input/</code>, <code>Output/</code> e <code>src/</code> por caminhos relativos. Localmente, abra <code>docs/index.html</code> no
+navegador. É uma página única, com a barra lateral por tópicos:</p>
 <table>
 <thead>
 <tr>

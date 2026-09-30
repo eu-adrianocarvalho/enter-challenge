@@ -5,7 +5,10 @@ A documentação da entrega, em português, e o site que a reúne. Os `.md` são
 
 ## O site
 
-Abra `docs/index.html` no navegador. É uma página única, com a barra lateral por tópicos:
+Publicado em [eu-adrianocarvalho.github.io/enter-challenge](https://eu-adrianocarvalho.github.io/enter-challenge/)
+pelo GitHub Pages, a partir da raiz da branch `main`: o `index.html` da raiz redireciona para `docs/`, e o site
+abre os arquivos de `Input/`, `Output/` e `src/` por caminhos relativos. Localmente, abra `docs/index.html` no
+navegador. É uma página única, com a barra lateral por tópicos:
 
 | Tópico | Seções (arquivo de origem) |
 |---|---|
