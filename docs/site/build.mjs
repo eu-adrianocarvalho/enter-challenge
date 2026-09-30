@@ -248,8 +248,7 @@ function hero() {
   const cards = kpiCards().map(([label, value]) => `<div class="kpi"><span>${escapeHtml(label)}</span>`
     + `<strong>${escapeHtml(value)}</strong></div>`).join('');
   return `<div class="hero"><div class="eyebrow">${AUTHOR} · Challenge Enter · AI Deployment</div>`
-    + '<h2>O LLM lê e escreve, o código calcula e <em>nada chega ao cliente sem checagem.</em></h2>'
-    + `<p>Tudo roda num único grafo do Rivet, o <strong>Main Graph: Enter Challenge</strong>. Números da última execução para o Albert, `
+    + `<p>Tudo roda num único grafo do Rivet, o <strong>Main Graph: Enter Challenge</strong>.<br> Abaixo são os números da última execução para o Albert, `
     + `no período de ${SETTINGS.period.start.split('-').reverse().join('/')} a ${SETTINGS.period.end.split('-').reverse().join('/')}.</p>`
     + `<div class="kpis">${cards}</div>`
     + '<div class="actions"><a class="btn" href="#carta">Ver a carta</a>'

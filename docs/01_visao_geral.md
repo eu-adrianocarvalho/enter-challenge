@@ -32,8 +32,6 @@ O primeiro commit do repositório guarda uma versão anterior da mesma solução
 
 ## A ideia central
 
-**O LLM lê e escreve; o código calcula; nada chega ao cliente sem checagem.**
-
 A v1 deixava o modelo inventar os números: o retorno, a diferença para o benchmark e as projeções macro. Na v2 nenhum número que o cliente vê é produzido por um LLM:
 
 - **números:** vêm dos dados e são calculados em nodes de código do Rivet (JavaScript), já formatados em pt-BR;
