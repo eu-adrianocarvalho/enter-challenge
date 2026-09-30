@@ -66,6 +66,9 @@ location, or edit `pdf.browsers` in `config/settings.yaml`.
 
 ## Where things are
 
+`config/`, `data/`, `docs/` and `src/` each have a README (in Portuguese) explaining what the folder holds and
+what it is for.
+
 | Path | What |
 |---|---|
 | `enter_challenge.rivet-project` | The Rivet project: the main graph, two loop bodies, six LLM subgraphs and the original v1 graph |

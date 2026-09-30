@@ -101,6 +101,7 @@ const FILE_GROUPS = [
   ]],
   ['arquivos-rivet', 'Workflow Rivet (v2)', [
     ['enter_challenge.rivet-project', 'O projeto do Rivet: Main Graph, 2 loops, 6 grafos de LLM e o grafo original da v1 (gerado por src/build.mjs)'],
+    ['src/README.md', 'O que tem em src/, como mexer e as regras do código dos nodes'],
     ['src/build.mjs', headerSummary],
     ['src/code/nodes.mjs', headerSummary],
     ...listing('src/code', /\.js$/, headerSummary),
@@ -109,6 +110,7 @@ const FILE_GROUPS = [
     ...listing('src/schemas', /\.json$/, 'JSON schema da resposta'),
   ]],
   ['arquivos-config', 'Configuração', [
+    ['config/README.md', 'Para que serve cada arquivo e cada campo de config/'],
     ['config/settings.yaml', 'Entradas, período, modelos, preços por token, limites, logo e navegadores do PDF'],
     ['config/allocation_moderate.yaml', 'Faixas de alocação do perfil moderado (ilustrativas)'],
     ['config/research_shelf.yaml', 'Produtos e ações que o motor pode recomendar (ilustrativos)'],
@@ -126,6 +128,7 @@ const FILE_GROUPS = [
   ]],
   ['arquivos-repo', 'Repositório e documentação', [
     ['README.md', 'README do repositório (em inglês)'],
+    ['docs/README.md', 'O que tem em docs/: as fontes do site, o site gerado e o gerador'],
     ['package.json', 'Scripts npm e dependências (rivet-cli, pdf-parse, yaml; marked e mammoth para o site)'],
     ...listing('docs/site', /\.(mjs|js|css)$/, headerSummary),
   ]],

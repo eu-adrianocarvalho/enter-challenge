@@ -137,7 +137,7 @@ details.file[open] > summary::before { content:"–"; }
   .fdesc, .fsize { display:none; }
   .preview { padding-left:6px; }
 }
-</style></head><body><div class="topbar">Adriano da Silva de Carvalho · Carta mensal XP com IA: da v1 à v2, tudo num grafo do Rivet<a href="https://github.com/eu-adrianocarvalho/enter-challenge" target="_blank" rel="noopener">GitHub</a><a href="#carta">Ver a carta</a></div><div class="layout"><nav class="sidebar"><div class="brand"><div class="mark">ENTER<b></b></div><small>Challenge · Carta mensal XP com IA</small><div class="author"><strong>Adriano da Silva de Carvalho</strong><a href="https://github.com/eu-adrianocarvalho/enter-challenge" target="_blank" rel="noopener">GitHub · enter-challenge ↗</a></div></div><div class="nav-topic" data-page="apresentacao"><a class="topic-link" href="#apresentacao"><span class="num">01</span>Apresentação</a><div class="subnav"><a href="#visao-geral" data-target="visao-geral">Visão geral</a><a href="#carta" data-target="carta">A carta e o brief</a></div></div><div class="nav-topic" data-page="trabalho"><a class="topic-link" href="#trabalho"><span class="num">02</span>O trabalho</a><div class="subnav"><a href="#diagnostico" data-target="diagnostico">Diagnóstico da v1</a><a href="#melhorias" data-target="melhorias">Melhorias implementadas</a><a href="#arquitetura" data-target="arquitetura">Arquitetura e código</a><a href="#dados-externos" data-target="dados-externos">Dados externos</a><a href="#qualidade" data-target="qualidade">Qualidade e travas</a></div></div><div class="nav-topic" data-page="uso"><a class="topic-link" href="#uso"><span class="num">03</span>Uso</a><div class="subnav"><a href="#como-usar" data-target="como-usar">Como usar</a></div></div><div class="nav-topic" data-page="arquivos"><a class="topic-link" href="#arquivos"><span class="num">04</span>Arquivos</a><div class="subnav"><a href="#arquivos-entradas" data-target="arquivos-entradas">Entradas do desafio</a><a href="#arquivos-saidas" data-target="arquivos-saidas">Saídas geradas (v2)</a><a href="#arquivos-v1" data-target="arquivos-v1">Primeira versão (v1)</a><a href="#arquivos-rivet" data-target="arquivos-rivet">Workflow Rivet (v2)</a><a href="#arquivos-config" data-target="arquivos-config">Configuração</a><a href="#arquivos-dados" data-target="arquivos-dados">Dados de mercado e inputs dos grafos</a><a href="#arquivos-evidencias" data-target="arquivos-evidencias">Evidências</a><a href="#arquivos-testes" data-target="arquivos-testes">Testes</a><a href="#arquivos-repo" data-target="arquivos-repo">Repositório e documentação</a></div></div></nav><main><div class="page" id="apresentacao"><div class="page-head"><span class="num">01</span><h1>Apresentação</h1><p>O que foi entregue, os números e a carta da v1 ao lado da v2.</p></div><div class="hero"><div class="eyebrow">Adriano da Silva de Carvalho · Challenge Enter · AI Deployment</div><h2>O LLM lê e escreve, o código calcula e <em>nada chega ao cliente sem checagem.</em></h2><p>Tudo roda num único grafo do Rivet, o <strong>Main Graph: Enter Challenge</strong>. Números da última execução para o Albert, no período de 07/04/2025 a 07/05/2025.</p><div class="kpis"><div class="kpi"><span>Retorno no período</span><strong>+2,51%</strong></div><div class="kpi"><span>Resultado no período</span><strong>+R$ 6.650,04</strong></div><div class="kpi"><span>CDI | Ibovespa</span><strong>+1,00% | +6,22%</strong></div><div class="kpi"><span>Saldo + CDB vencido (% do patrimônio)</span><strong>29,8%</strong></div><div class="kpi"><span>Alertas para o assessor</span><strong>11</strong></div><div class="kpi"><span>Custo da execução</span><strong>US$ 0,09</strong></div><div class="kpi"><span>Grafos | Code nodes no Rivet</span><strong>9 | 10</strong></div><div class="kpi"><span>Testes automatizados</span><strong>8</strong></div></div><div class="actions"><a class="btn" href="#carta">Ver a carta</a><a class="btn secondary" href="#diagnostico">Diagnóstico da v1</a><a class="btn secondary" href="#arquitetura">Arquitetura</a><a class="btn secondary" href="#como-usar">Como usar</a><a class="btn secondary" href="https://github.com/eu-adrianocarvalho/enter-challenge" target="_blank" rel="noopener">GitHub ↗</a></div></div><section class="doc" id="visao-geral" data-spy><h1>Visão geral</h1>
+</style></head><body><div class="topbar">Adriano da Silva de Carvalho · Carta mensal XP com IA: da v1 à v2, tudo num grafo do Rivet<a href="https://github.com/eu-adrianocarvalho/enter-challenge" target="_blank" rel="noopener">GitHub</a><a href="#carta">Ver a carta</a></div><div class="layout"><nav class="sidebar"><div class="brand"><div class="mark">ENTER<b></b></div><small>Challenge · Carta mensal XP com IA</small><div class="author"><strong>Adriano da Silva de Carvalho</strong><a href="https://github.com/eu-adrianocarvalho/enter-challenge" target="_blank" rel="noopener">GitHub · enter-challenge ↗</a></div></div><div class="nav-topic" data-page="apresentacao"><a class="topic-link" href="#apresentacao"><span class="num">01</span>Apresentação</a><div class="subnav"><a href="#visao-geral" data-target="visao-geral">Visão geral</a><a href="#carta" data-target="carta">A carta e o brief</a></div></div><div class="nav-topic" data-page="trabalho"><a class="topic-link" href="#trabalho"><span class="num">02</span>O trabalho</a><div class="subnav"><a href="#diagnostico" data-target="diagnostico">Diagnóstico da v1</a><a href="#melhorias" data-target="melhorias">Melhorias implementadas</a><a href="#arquitetura" data-target="arquitetura">Arquitetura e código</a><a href="#dados-externos" data-target="dados-externos">Dados externos</a><a href="#qualidade" data-target="qualidade">Qualidade e travas</a></div></div><div class="nav-topic" data-page="uso"><a class="topic-link" href="#uso"><span class="num">03</span>Uso</a><div class="subnav"><a href="#como-usar" data-target="como-usar">Como usar</a></div></div><div class="nav-topic" data-page="arquivos"><a class="topic-link" href="#arquivos"><span class="num">04</span>Arquivos</a><div class="subnav"><a href="#arquivos-entradas" data-target="arquivos-entradas">Entradas do desafio</a><a href="#arquivos-saidas" data-target="arquivos-saidas">Saídas geradas (v2)</a><a href="#arquivos-v1" data-target="arquivos-v1">Primeira versão (v1)</a><a href="#arquivos-rivet" data-target="arquivos-rivet">Workflow Rivet (v2)</a><a href="#arquivos-config" data-target="arquivos-config">Configuração</a><a href="#arquivos-dados" data-target="arquivos-dados">Dados de mercado e inputs dos grafos</a><a href="#arquivos-evidencias" data-target="arquivos-evidencias">Evidências</a><a href="#arquivos-testes" data-target="arquivos-testes">Testes</a><a href="#arquivos-repo" data-target="arquivos-repo">Repositório e documentação</a></div></div></nav><main><div class="page" id="apresentacao"><div class="page-head"><span class="num">01</span><h1>Apresentação</h1><p>O que foi entregue, os números e a carta da v1 ao lado da v2.</p></div><div class="hero"><div class="eyebrow">Adriano da Silva de Carvalho · Challenge Enter · AI Deployment</div><h2>O LLM lê e escreve, o código calcula e <em>nada chega ao cliente sem checagem.</em></h2><p>Tudo roda num único grafo do Rivet, o <strong>Main Graph: Enter Challenge</strong>. Números da última execução para o Albert, no período de 07/04/2025 a 07/05/2025.</p><div class="kpis"><div class="kpi"><span>Retorno no período</span><strong>+2,51%</strong></div><div class="kpi"><span>Resultado no período</span><strong>+R$ 6.650,04</strong></div><div class="kpi"><span>CDI | Ibovespa</span><strong>+1,00% | +6,22%</strong></div><div class="kpi"><span>Saldo + CDB vencido (% do patrimônio)</span><strong>29,8%</strong></div><div class="kpi"><span>Alertas para o assessor</span><strong>11</strong></div><div class="kpi"><span>Custo da execução</span><strong>US$ 0,12</strong></div><div class="kpi"><span>Grafos | Code nodes no Rivet</span><strong>9 | 10</strong></div><div class="kpi"><span>Testes automatizados</span><strong>8</strong></div></div><div class="actions"><a class="btn" href="#carta">Ver a carta</a><a class="btn secondary" href="#diagnostico">Diagnóstico da v1</a><a class="btn secondary" href="#arquitetura">Arquitetura</a><a class="btn secondary" href="#como-usar">Como usar</a><a class="btn secondary" href="https://github.com/eu-adrianocarvalho/enter-challenge" target="_blank" rel="noopener">GitHub ↗</a></div></div><section class="doc" id="visao-geral" data-spy><h1>Visão geral</h1>
 <p><strong>Autor:</strong> Adriano da Silva de Carvalho · <strong>Repositório:</strong> <a href="https://github.com/eu-adrianocarvalho/enter-challenge">github.com/eu-adrianocarvalho/enter-challenge</a></p>
 <h2>O desafio</h2>
 <p>A XP quer que seus assessores atendam três vezes mais clientes <em>middle market</em> (menos de R$ 1 milhão na XP) sem perder qualidade. A ideia é uma carta mensal gerada por IA que explique a cada cliente:</p>
@@ -249,8 +249,8 @@ details.file[open] > summary::before { content:"–"; }
 <h2>1. Checagens automáticas</h2>
 <ul>
 <li>Reconciliação do extrato extraído pelo LLM: 28/28 (OK; 1 transcrição(ões))</li>
-<li>Citações do relatório macro conferidas no texto original: 23 mantidas, 0 descartadas </li>
-<li>Fact-check da carta: 25 números conferidos, 0 sem fonte (OK; 1 versão(ões) geradas)</li>
+<li>Citações do relatório macro conferidas no texto original: 24 mantidas, 0 descartadas </li>
+<li>Fact-check da carta: 24 números conferidos, 0 sem fonte (OK; 2 versão(ões) geradas)</li>
 <li>Revisão de fidelidade (LLM revisor): 0 apontamento(s) grave(s) na versão final (OK)</li>
 <li>Páginas do PDF: 2</li>
 </ul>
@@ -445,36 +445,40 @@ details.file[open] > summary::before { content:"–"; }
 </tr>
 </tbody></table>
 <h2>5. Recomendações propostas (aprovar antes do envio)</h2>
-<p><strong>1. Reaplicar caixa em renda fixa e multimercado</strong>. Reaplicação do caixa excedente em Tesouro Selic 2029, Tesouro IPCA+ 2029 e Ibiuna Hedge ST Advisory FIC FIM aumenta a diversificação, protege contra inflação e aproveita os juros elevados, alinhando a carteira ao perfil moderado e ao cenário macroeconômico atual.</p>
+<p><strong>1. Reinvestir caixa em renda fixa e inflação</strong>. Aplicação em Tesouro Selic 2029 e Tesouro IPCA+ 2029 coloca o caixa excedente para trabalhar, equilibra o portfólio e protege contra inflação e juros altos, alinhado ao perfil moderado e ao cenário macroeconômico atual.</p>
 <ul>
 <li>Aplicar Tesouro Selic 2029: R$ 40.000,00. Regra: Caixa e renda fixa vencida acima da banda; leva Renda fixa para o alvo do perfil.</li>
 <li>Aplicar Tesouro IPCA+ 2029: R$ 40.000,00. Regra: Caixa e renda fixa vencida acima da banda; leva Renda fixa para o alvo do perfil.</li>
-<li>Aplicar Ibiuna Hedge ST Advisory FIC FIM: R$ 27.000,00. Regra: Caixa e renda fixa vencida acima da banda; leva Multimercado para o alvo do perfil.</li>
 <li>Evidências do research:<ul>
-<li>I1, leitura do modelo apoiada em P1, T2, T1: Com Selic elevada e inflação pressionada, pós-fixados continuam atrativos para proteção e rendimento.</li>
-<li>I3, leitura do modelo apoiada em P3, T1, R3: Títulos atrelados à inflação são recomendados diante do IPCA acima da meta e cenário de preços pressionados.</li>
-<li>T2, citação do relatório: &quot;Com isso, vemos a taxa Selic terminal em 15,50%, com altas de 1,00-0,75-0,50 p.p. nas próximas três reuniões do Copom.&quot;</li>
-<li>T1, citação do relatório: &quot;Em suma, nosso cenário segue indicando inflação pressionada e disseminada neste ano. Mantivemos a projeção de alta de 6,1% para o IPCA de 2025.&quot;</li>
+<li>I1, leitura do modelo apoiada em P1, T2, T1: Com Selic elevada e inflação pressionada, ativos pós-fixados continuam atrativos para proteção e rendimento.</li>
+<li>I3, leitura do modelo apoiada em P3, T1, R3: Títulos atrelados à inflação ganham relevância diante do IPCA elevado e risco de inflação persistente.</li>
 </ul>
 </li>
 </ul>
-<p><strong>2. Ajuste qualitativo em ações</strong>. Troca de MRFG3 e HAPV3 por ITUB4 e B3SA3 mantém a exposição em renda variável, mas privilegia empresas consolidadas e pagadoras de dividendos, conforme o perfil moderado e o foco em resiliência no cenário de juros altos.</p>
+<p><strong>2. Ajuste em ações: foco em dividendos</strong>. Troca de MRFG3 e HAPV3 por ITUB4 e B3SA3 reforça a exposição a empresas consolidadas e pagadoras de dividendos, conforme o perfil e a recomendação de qualidade em renda variável.</p>
 <ul>
 <li>Vender MRFG3: R$ 15.431,04. Regra: Ação fora do perfil moderado (não é pagadora consistente de dividendos).</li>
 <li>Vender HAPV3: R$ 6.141,59. Regra: Ação fora do perfil moderado (não é pagadora consistente de dividendos).</li>
 <li>Comprar ITUB4: R$ 10.000,00. Regra: Reposição com os recursos das vendas, sem alterar o peso de renda variável.</li>
 <li>Comprar B3SA3: R$ 10.000,00. Regra: Reposição com os recursos das vendas, sem alterar o peso de renda variável.</li>
 <li>Evidências do research:<ul>
-<li>I5, leitura do modelo apoiada em P1, T3, T4, R2: Juros altos, crescimento menor e incerteza fiscal limitam o potencial das ações brasileiras no curto prazo.</li>
-<li>T3, citação do relatório: &quot;Projetamos avanço de 2,0% para o PIB de 2025, após aumento de 3,6% em 2024. A atividade deve continuar a arrefecer em 2026 – prevemos alta de 1,0%.&quot;</li>
-<li>T4, citação do relatório: &quot;A dívida pública continuará a subir em ritmo acelerado, ampliando preocupações sobre a sustentabilidade fiscal.&quot;</li>
+<li>I5, leitura do modelo apoiada em T3, T4, T2: Crescimento menor, juros altos e incerteza fiscal limitam o potencial das ações, mas valuations já refletem parte do cenário.</li>
+</ul>
+</li>
+</ul>
+<p><strong>3. Diversificação com multimercado</strong>. Aporte no Ibiuna Hedge ST Advisory FIC FIM amplia a diversificação e busca fontes alternativas de retorno, importante em cenário de juros altos e volatilidade.</p>
+<ul>
+<li>Aplicar Ibiuna Hedge ST Advisory FIC FIM: R$ 27.000,00. Regra: Caixa e renda fixa vencida acima da banda; leva Multimercado para o alvo do perfil.</li>
+<li>Evidências do research:<ul>
+<li>T2, citação do relatório: &quot;Com isso, vemos a taxa Selic terminal em 15,50%, com altas de 1,00-0,75-0,50 p.p. nas próximas três reuniões do Copom.&quot;</li>
+<li>T5, citação do relatório: &quot;Não vemos o Fed voltando a reduzir juros este ano.&quot;</li>
 </ul>
 </li>
 <li>IR: Vendas de R$ 21.572,63 superam a isenção mensal de R$ 20.000,00. Resultado realizado: MRFG3 +R$ 4.677,44, HAPV3 -R$ 18.022,55. Saldo -R$ 13.345,11, sem IR a pagar; prejuízo de R$ 13.345,11 a compensar no futuro. Estimativa; confirmar com a área tributária.</li>
-<li>Nota do modelo: Deixei de fora crédito privado por não haver candidatos elegíveis.</li>
-<li>Nota do modelo: Confirmar com o cliente se há preferência entre pós-fixado e inflação.</li>
-<li>Nota do modelo: A alocação multimercado é pequena, mas importante para diversificação.</li>
-<li>Nota do modelo: As trocas em ações não alteram o peso da renda variável.</li>
+<li>Nota do modelo: Deixei de fora prefixados, pois o cenário macro é desfavorável para essa classe.</li>
+<li>Nota do modelo: Ajustes em renda variável mantêm o peso total, apenas trocando ativos para melhor aderência ao perfil.</li>
+<li>Nota do modelo: Aporte em multimercado é complementar, mas não prioritário frente ao excesso de caixa.</li>
+<li>Nota do modelo: Confirmar com o cliente se há restrições a ITUB4 ou B3SA3.</li>
 </ul>
 <h2>6. Custo das chamadas ao LLM</h2>
 <table>
@@ -495,38 +499,50 @@ details.file[open] > summary::before { content:"–"; }
 <tr>
 <td>extract_profile</td>
 <td>gpt-4.1</td>
-<td>1006/286</td>
+<td>1006/285</td>
 <td>0.0043</td>
 </tr>
 <tr>
 <td>macro_outlook</td>
 <td>gpt-4.1</td>
-<td>12556/1704</td>
-<td>0.0387</td>
+<td>12556/2022</td>
+<td>0.0413</td>
 </tr>
 <tr>
 <td>advise</td>
 <td>gpt-4.1</td>
-<td>3755/323</td>
-<td>0.0101</td>
+<td>4085/380</td>
+<td>0.0112</td>
 </tr>
 <tr>
 <td>write_letter</td>
 <td>gpt-4.1</td>
-<td>3368/793</td>
-<td>0.0131</td>
+<td>3506/800</td>
+<td>0.0134</td>
 </tr>
 <tr>
 <td>review_letter</td>
 <td>gpt-4.1</td>
-<td>3748/133</td>
-<td>0.0086</td>
+<td>3893/122</td>
+<td>0.0088</td>
+</tr>
+<tr>
+<td>write_letter</td>
+<td>gpt-4.1</td>
+<td>3612/797</td>
+<td>0.0136</td>
+</tr>
+<tr>
+<td>review_letter</td>
+<td>gpt-4.1</td>
+<td>3890/4</td>
+<td>0.0078</td>
 </tr>
 <tr>
 <td><strong>Total</strong></td>
 <td></td>
 <td></td>
-<td><strong>0.0941</strong></td>
+<td><strong>0.1197</strong></td>
 </tr>
 </tbody></table>
 <h2>7. Arquivos gerados</h2>
@@ -4099,14 +4115,14 @@ o desempenho do investimento.
 
 11
 
-</code></pre></div></details><details class="file"><summary><span class="fname">Input/xp_inc_logo.jpg</span><span class="fdesc">Logo da XP no cabeçalho da carta (brand.logo no settings.yaml)</span><span class="fsize">33 KB</span><a class="dl" href="../Input/xp_inc_logo.jpg" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><img src="../Input/xp_inc_logo.jpg" alt="Input/xp_inc_logo.jpg" loading="lazy"></div></details></section><section class="doc files" id="arquivos-saidas" data-spy><h2>Saídas geradas (v2)</h2><details class="file"><summary><span class="fname">Output/carta_albert_2025-05-07.pdf</span><span class="fdesc">Carta para o cliente, 2 páginas</span><span class="fsize">115 KB</span><a class="dl" href="../Output/carta_albert_2025-05-07.pdf" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><p><a href="../Output/carta_albert_2025-05-07.pdf" target="_blank">Abrir o PDF em outra aba</a></p><iframe class="frame" data-src="../Output/carta_albert_2025-05-07.pdf" title="Output/carta_albert_2025-05-07.pdf"></iframe></div></details><details class="file"><summary><span class="fname">Output/carta_albert_2025-05-07.html</span><span class="fdesc">A mesma carta em HTML: é o que o node Code: Publish imprime em PDF</span><span class="fsize">98 KB</span><a class="dl" href="../Output/carta_albert_2025-05-07.html" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><p><a href="../Output/carta_albert_2025-05-07.html" target="_blank">Abrir a página em outra aba</a></p><iframe class="frame" data-src="../Output/carta_albert_2025-05-07.html" title="Output/carta_albert_2025-05-07.html"></iframe></div></details><details class="file"><summary><span class="fname">Output/brief_assessor_albert_2025-05-07.md</span><span class="fdesc">Brief do assessor: status, travas, alertas, recomendações e custo</span><span class="fsize">8 KB</span><a class="dl" href="../Output/brief_assessor_albert_2025-05-07.md" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><h1>Brief do assessor: Albert da Silva (conta 792854)</h1>
+</code></pre></div></details><details class="file"><summary><span class="fname">Input/xp_inc_logo.jpg</span><span class="fdesc">Logo da XP no cabeçalho da carta (brand.logo no settings.yaml)</span><span class="fsize">33 KB</span><a class="dl" href="../Input/xp_inc_logo.jpg" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><img src="../Input/xp_inc_logo.jpg" alt="Input/xp_inc_logo.jpg" loading="lazy"></div></details></section><section class="doc files" id="arquivos-saidas" data-spy><h2>Saídas geradas (v2)</h2><details class="file"><summary><span class="fname">Output/carta_albert_2025-05-07.pdf</span><span class="fdesc">Carta para o cliente, 2 páginas</span><span class="fsize">116 KB</span><a class="dl" href="../Output/carta_albert_2025-05-07.pdf" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><p><a href="../Output/carta_albert_2025-05-07.pdf" target="_blank">Abrir o PDF em outra aba</a></p><iframe class="frame" data-src="../Output/carta_albert_2025-05-07.pdf" title="Output/carta_albert_2025-05-07.pdf"></iframe></div></details><details class="file"><summary><span class="fname">Output/carta_albert_2025-05-07.html</span><span class="fdesc">A mesma carta em HTML: é o que o node Code: Publish imprime em PDF</span><span class="fsize">98 KB</span><a class="dl" href="../Output/carta_albert_2025-05-07.html" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><p><a href="../Output/carta_albert_2025-05-07.html" target="_blank">Abrir a página em outra aba</a></p><iframe class="frame" data-src="../Output/carta_albert_2025-05-07.html" title="Output/carta_albert_2025-05-07.html"></iframe></div></details><details class="file"><summary><span class="fname">Output/brief_assessor_albert_2025-05-07.md</span><span class="fdesc">Brief do assessor: status, travas, alertas, recomendações e custo</span><span class="fsize">8 KB</span><a class="dl" href="../Output/brief_assessor_albert_2025-05-07.md" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><h1>Brief do assessor: Albert da Silva (conta 792854)</h1>
 <p><strong>Status: PRONTA PARA REVISÃO DO ASSESSOR</strong></p>
 <p>Assessor: Antonio Bicudo (A7699) · Extrato de 07/05/2025 · Gerado pelo Rivet (Main Graph: Enter Challenge)</p>
 <h2>1. Checagens automáticas</h2>
 <ul>
 <li>Reconciliação do extrato extraído pelo LLM: 28/28 (OK; 1 transcrição(ões))</li>
-<li>Citações do relatório macro conferidas no texto original: 23 mantidas, 0 descartadas </li>
-<li>Fact-check da carta: 25 números conferidos, 0 sem fonte (OK; 1 versão(ões) geradas)</li>
+<li>Citações do relatório macro conferidas no texto original: 24 mantidas, 0 descartadas </li>
+<li>Fact-check da carta: 24 números conferidos, 0 sem fonte (OK; 2 versão(ões) geradas)</li>
 <li>Revisão de fidelidade (LLM revisor): 0 apontamento(s) grave(s) na versão final (OK)</li>
 <li>Páginas do PDF: 2</li>
 </ul>
@@ -4301,36 +4317,40 @@ o desempenho do investimento.
 </tr>
 </tbody></table>
 <h2>5. Recomendações propostas (aprovar antes do envio)</h2>
-<p><strong>1. Reaplicar caixa em renda fixa e multimercado</strong>. Reaplicação do caixa excedente em Tesouro Selic 2029, Tesouro IPCA+ 2029 e Ibiuna Hedge ST Advisory FIC FIM aumenta a diversificação, protege contra inflação e aproveita os juros elevados, alinhando a carteira ao perfil moderado e ao cenário macroeconômico atual.</p>
+<p><strong>1. Reinvestir caixa em renda fixa e inflação</strong>. Aplicação em Tesouro Selic 2029 e Tesouro IPCA+ 2029 coloca o caixa excedente para trabalhar, equilibra o portfólio e protege contra inflação e juros altos, alinhado ao perfil moderado e ao cenário macroeconômico atual.</p>
 <ul>
 <li>Aplicar Tesouro Selic 2029: R$ 40.000,00. Regra: Caixa e renda fixa vencida acima da banda; leva Renda fixa para o alvo do perfil.</li>
 <li>Aplicar Tesouro IPCA+ 2029: R$ 40.000,00. Regra: Caixa e renda fixa vencida acima da banda; leva Renda fixa para o alvo do perfil.</li>
-<li>Aplicar Ibiuna Hedge ST Advisory FIC FIM: R$ 27.000,00. Regra: Caixa e renda fixa vencida acima da banda; leva Multimercado para o alvo do perfil.</li>
 <li>Evidências do research:<ul>
-<li>I1, leitura do modelo apoiada em P1, T2, T1: Com Selic elevada e inflação pressionada, pós-fixados continuam atrativos para proteção e rendimento.</li>
-<li>I3, leitura do modelo apoiada em P3, T1, R3: Títulos atrelados à inflação são recomendados diante do IPCA acima da meta e cenário de preços pressionados.</li>
-<li>T2, citação do relatório: &quot;Com isso, vemos a taxa Selic terminal em 15,50%, com altas de 1,00-0,75-0,50 p.p. nas próximas três reuniões do Copom.&quot;</li>
-<li>T1, citação do relatório: &quot;Em suma, nosso cenário segue indicando inflação pressionada e disseminada neste ano. Mantivemos a projeção de alta de 6,1% para o IPCA de 2025.&quot;</li>
+<li>I1, leitura do modelo apoiada em P1, T2, T1: Com Selic elevada e inflação pressionada, ativos pós-fixados continuam atrativos para proteção e rendimento.</li>
+<li>I3, leitura do modelo apoiada em P3, T1, R3: Títulos atrelados à inflação ganham relevância diante do IPCA elevado e risco de inflação persistente.</li>
 </ul>
 </li>
 </ul>
-<p><strong>2. Ajuste qualitativo em ações</strong>. Troca de MRFG3 e HAPV3 por ITUB4 e B3SA3 mantém a exposição em renda variável, mas privilegia empresas consolidadas e pagadoras de dividendos, conforme o perfil moderado e o foco em resiliência no cenário de juros altos.</p>
+<p><strong>2. Ajuste em ações: foco em dividendos</strong>. Troca de MRFG3 e HAPV3 por ITUB4 e B3SA3 reforça a exposição a empresas consolidadas e pagadoras de dividendos, conforme o perfil e a recomendação de qualidade em renda variável.</p>
 <ul>
 <li>Vender MRFG3: R$ 15.431,04. Regra: Ação fora do perfil moderado (não é pagadora consistente de dividendos).</li>
 <li>Vender HAPV3: R$ 6.141,59. Regra: Ação fora do perfil moderado (não é pagadora consistente de dividendos).</li>
 <li>Comprar ITUB4: R$ 10.000,00. Regra: Reposição com os recursos das vendas, sem alterar o peso de renda variável.</li>
 <li>Comprar B3SA3: R$ 10.000,00. Regra: Reposição com os recursos das vendas, sem alterar o peso de renda variável.</li>
 <li>Evidências do research:<ul>
-<li>I5, leitura do modelo apoiada em P1, T3, T4, R2: Juros altos, crescimento menor e incerteza fiscal limitam o potencial das ações brasileiras no curto prazo.</li>
-<li>T3, citação do relatório: &quot;Projetamos avanço de 2,0% para o PIB de 2025, após aumento de 3,6% em 2024. A atividade deve continuar a arrefecer em 2026 – prevemos alta de 1,0%.&quot;</li>
-<li>T4, citação do relatório: &quot;A dívida pública continuará a subir em ritmo acelerado, ampliando preocupações sobre a sustentabilidade fiscal.&quot;</li>
+<li>I5, leitura do modelo apoiada em T3, T4, T2: Crescimento menor, juros altos e incerteza fiscal limitam o potencial das ações, mas valuations já refletem parte do cenário.</li>
+</ul>
+</li>
+</ul>
+<p><strong>3. Diversificação com multimercado</strong>. Aporte no Ibiuna Hedge ST Advisory FIC FIM amplia a diversificação e busca fontes alternativas de retorno, importante em cenário de juros altos e volatilidade.</p>
+<ul>
+<li>Aplicar Ibiuna Hedge ST Advisory FIC FIM: R$ 27.000,00. Regra: Caixa e renda fixa vencida acima da banda; leva Multimercado para o alvo do perfil.</li>
+<li>Evidências do research:<ul>
+<li>T2, citação do relatório: &quot;Com isso, vemos a taxa Selic terminal em 15,50%, com altas de 1,00-0,75-0,50 p.p. nas próximas três reuniões do Copom.&quot;</li>
+<li>T5, citação do relatório: &quot;Não vemos o Fed voltando a reduzir juros este ano.&quot;</li>
 </ul>
 </li>
 <li>IR: Vendas de R$ 21.572,63 superam a isenção mensal de R$ 20.000,00. Resultado realizado: MRFG3 +R$ 4.677,44, HAPV3 -R$ 18.022,55. Saldo -R$ 13.345,11, sem IR a pagar; prejuízo de R$ 13.345,11 a compensar no futuro. Estimativa; confirmar com a área tributária.</li>
-<li>Nota do modelo: Deixei de fora crédito privado por não haver candidatos elegíveis.</li>
-<li>Nota do modelo: Confirmar com o cliente se há preferência entre pós-fixado e inflação.</li>
-<li>Nota do modelo: A alocação multimercado é pequena, mas importante para diversificação.</li>
-<li>Nota do modelo: As trocas em ações não alteram o peso da renda variável.</li>
+<li>Nota do modelo: Deixei de fora prefixados, pois o cenário macro é desfavorável para essa classe.</li>
+<li>Nota do modelo: Ajustes em renda variável mantêm o peso total, apenas trocando ativos para melhor aderência ao perfil.</li>
+<li>Nota do modelo: Aporte em multimercado é complementar, mas não prioritário frente ao excesso de caixa.</li>
+<li>Nota do modelo: Confirmar com o cliente se há restrições a ITUB4 ou B3SA3.</li>
 </ul>
 <h2>6. Custo das chamadas ao LLM</h2>
 <table>
@@ -4351,38 +4371,50 @@ o desempenho do investimento.
 <tr>
 <td>extract_profile</td>
 <td>gpt-4.1</td>
-<td>1006/286</td>
+<td>1006/285</td>
 <td>0.0043</td>
 </tr>
 <tr>
 <td>macro_outlook</td>
 <td>gpt-4.1</td>
-<td>12556/1704</td>
-<td>0.0387</td>
+<td>12556/2022</td>
+<td>0.0413</td>
 </tr>
 <tr>
 <td>advise</td>
 <td>gpt-4.1</td>
-<td>3755/323</td>
-<td>0.0101</td>
+<td>4085/380</td>
+<td>0.0112</td>
 </tr>
 <tr>
 <td>write_letter</td>
 <td>gpt-4.1</td>
-<td>3368/793</td>
-<td>0.0131</td>
+<td>3506/800</td>
+<td>0.0134</td>
 </tr>
 <tr>
 <td>review_letter</td>
 <td>gpt-4.1</td>
-<td>3748/133</td>
-<td>0.0086</td>
+<td>3893/122</td>
+<td>0.0088</td>
+</tr>
+<tr>
+<td>write_letter</td>
+<td>gpt-4.1</td>
+<td>3612/797</td>
+<td>0.0136</td>
+</tr>
+<tr>
+<td>review_letter</td>
+<td>gpt-4.1</td>
+<td>3890/4</td>
+<td>0.0078</td>
 </tr>
 <tr>
 <td><strong>Total</strong></td>
 <td></td>
 <td></td>
-<td><strong>0.0941</strong></td>
+<td><strong>0.1197</strong></td>
 </tr>
 </tbody></table>
 <h2>7. Arquivos gerados</h2>
@@ -4393,7 +4425,7 @@ o desempenho do investimento.
 <li>facts_albert_2025-05-07.json</li>
 <li>run_log_albert_2025-05-07.json</li>
 </ul>
-</div></details><details class="file"><summary><span class="fname">Output/facts_albert_2025-05-07.json</span><span class="fdesc">FACTS usados pela carta e o texto final</span><span class="fsize">12 KB</span><a class="dl" href="../Output/facts_albert_2025-05-07.json" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><pre><code>{
+</div></details><details class="file"><summary><span class="fname">Output/facts_albert_2025-05-07.json</span><span class="fdesc">FACTS usados pela carta e o texto final</span><span class="fsize">13 KB</span><a class="dl" href="../Output/facts_albert_2025-05-07.json" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><pre><code>{
   &quot;facts&quot;: {
     &quot;client&quot;: {
       &quot;first_name&quot;: &quot;Albert&quot;,
@@ -4413,7 +4445,7 @@ o desempenho do investimento.
     &quot;profile&quot;: {
       &quot;label&quot;: &quot;moderado&quot;,
       &quot;horizon&quot;: &quot;médio a longo prazo&quot;,
-      &quot;summary&quot;: &quot;Albert possui perfil moderado, buscando equilíbrio entre segurança e retorno. Recomenda-se diversificação entre renda fixa de qualidade (mínimo BB+) e ações de empresas consolidadas com dividendos, sempre com acompanhamento periódico e foco no médio a longo prazo, evitando decisões precipitadas diante de oscilações de mercado.&quot;
+      &quot;summary&quot;: &quot;Albert possui perfil moderado, buscando equilíbrio entre segurança e retorno. Recomenda-se diversificação entre ações de empresas consolidadas com dividendos e renda fixa com rating BB+ ou superior, sempre monitorando e rebalanceando o portfólio conforme necessário, com foco em crescimento sustentável no médio e longo prazo.&quot;
     },
     &quot;wealth&quot;: {
       &quot;net_worth&quot;: &quot;R$ 386.858,82&quot;,
@@ -4524,8 +4556,8 @@ o desempenho do investimento.
     &quot;recommendations&quot;: [
       {
         &quot;priority&quot;: 1,
-        &quot;title&quot;: &quot;Reaplicar caixa em renda fixa e multimercado&quot;,
-        &quot;rationale&quot;: &quot;Reaplicação do caixa excedente em Tesouro Selic 2029, Tesouro IPCA+ 2029 e Ibiuna Hedge ST Advisory FIC FIM aumenta a diversificação, protege contra inflação e aproveita os juros elevados, alinhando a carteira ao perfil moderado e ao cenário macroeconômico atual.&quot;,
+        &quot;title&quot;: &quot;Reinvestir caixa em renda fixa e inflação&quot;,
+        &quot;rationale&quot;: &quot;Aplicação em Tesouro Selic 2029 e Tesouro IPCA+ 2029 coloca o caixa excedente para trabalhar, equilibra o portfólio e protege contra inflação e juros altos, alinhado ao perfil moderado e ao cenário macroeconômico atual.&quot;,
         &quot;moves&quot;: [
           {
             &quot;action&quot;: &quot;Aplicar&quot;,
@@ -4536,18 +4568,13 @@ o desempenho do investimento.
             &quot;action&quot;: &quot;Aplicar&quot;,
             &quot;asset&quot;: &quot;Tesouro IPCA+ 2029&quot;,
             &quot;amount&quot;: &quot;R$ 40.000,00&quot;
-          },
-          {
-            &quot;action&quot;: &quot;Aplicar&quot;,
-            &quot;asset&quot;: &quot;Ibiuna Hedge ST Advisory FIC FIM&quot;,
-            &quot;amount&quot;: &quot;R$ 27.000,00&quot;
           }
         ]
       },
       {
         &quot;priority&quot;: 2,
-        &quot;title&quot;: &quot;Ajuste qualitativo em ações&quot;,
-        &quot;rationale&quot;: &quot;Troca de MRFG3 e HAPV3 por ITUB4 e B3SA3 mantém a exposição em renda variável, mas privilegia empresas consolidadas e pagadoras de dividendos, conforme o perfil moderado e o foco em resiliência no cenário de juros altos.&quot;,
+        &quot;title&quot;: &quot;Ajuste em ações: foco em dividendos&quot;,
+        &quot;rationale&quot;: &quot;Troca de MRFG3 e HAPV3 por ITUB4 e B3SA3 reforça a exposição a empresas consolidadas e pagadoras de dividendos, conforme o perfil e a recomendação de qualidade em renda variável.&quot;,
         &quot;moves&quot;: [
           {
             &quot;action&quot;: &quot;Vender&quot;,
@@ -4570,11 +4597,23 @@ o desempenho do investimento.
             &quot;amount&quot;: &quot;R$ 10.000,00&quot;
           }
         ]
+      },
+      {
+        &quot;priority&quot;: 3,
+        &quot;title&quot;: &quot;Diversificação com multimercado&quot;,
+        &quot;rationale&quot;: &quot;Aporte no Ibiuna Hedge ST Advisory FIC FIM amplia a diversificação e busca fontes alternativas de retorno, importante em cenário de juros altos e volatilidade.&quot;,
+        &quot;moves&quot;: [
+          {
+            &quot;action&quot;: &quot;Aplicar&quot;,
+            &quot;asset&quot;: &quot;Ibiuna Hedge ST Advisory FIC FIM&quot;,
+            &quot;amount&quot;: &quot;R$ 27.000,00&quot;
+          }
+        ]
       }
     ],
     &quot;macro&quot;: {
       &quot;source&quot;: &quot;Brasil Macro Mensal: Pax brasileira ou calmaria antes de outra tempestade? (XP Macro Research, 06/02/2025)&quot;,
-      &quot;headline&quot;: &quot;Cenário de curto prazo equilibrado, mas inflação alta e juros elevados exigem cautela.&quot;,
+      &quot;headline&quot;: &quot;Cenário de curto prazo mais equilibrado, mas inflação alta, juros elevados e incertezas fiscais e externas exigem cautela.&quot;,
       &quot;projections&quot;: [
         {
           &quot;indicator&quot;: &quot;SELIC terminal&quot;,
@@ -4607,12 +4646,12 @@ o desempenho do investimento.
           &quot;horizon&quot;: &quot;2026 (P)&quot;
         },
         {
-          &quot;indicator&quot;: &quot;BRL/USD fim 2025&quot;,
+          &quot;indicator&quot;: &quot;BRL/USD 2025&quot;,
           &quot;value&quot;: &quot;6,20&quot;,
           &quot;horizon&quot;: &quot;2025 (P)&quot;
         },
         {
-          &quot;indicator&quot;: &quot;BRL/USD fim 2026&quot;,
+          &quot;indicator&quot;: &quot;BRL/USD 2026&quot;,
           &quot;value&quot;: &quot;6,40&quot;,
           &quot;horizon&quot;: &quot;2026 (P)&quot;
         },
@@ -4625,67 +4664,71 @@ o desempenho do investimento.
       &quot;themes&quot;: [
         {
           &quot;title&quot;: &quot;Inflação pressionada e disseminada em 2025&quot;,
-          &quot;summary&quot;: &quot;A inflação segue alta, com IPCA projetado em 6,1% em 2025, pressionada por serviços, alimentos e câmbio.&quot;
+          &quot;summary&quot;: &quot;A inflação segue alta e espalhada, com IPCA projetado em 6,1% para 2025, pressionada por serviços, alimentos e administrados.&quot;
         },
         {
           &quot;title&quot;: &quot;Política monetária restritiva e juros elevados&quot;,
-          &quot;summary&quot;: &quot;O Copom mantém tom duro e a Selic deve chegar a 15,50%, permanecendo alta por um bom tempo.&quot;
+          &quot;summary&quot;: &quot;O Copom mantém tom duro e a Selic deve chegar a 15,50%, permanecendo alta por tempo prolongado para conter inflação e câmbio.&quot;
         },
         {
           &quot;title&quot;: &quot;Desaceleração da atividade econômica&quot;,
-          &quot;summary&quot;: &quot;A economia mostra sinais claros de desaceleração, com PIB crescendo 2,0% em 2025 e 1,0% em 2026.&quot;
+          &quot;summary&quot;: &quot;A economia brasileira mostra sinais claros de desaceleração, com PIB projetado em 2,0% em 2025 e 1,0% em 2026.&quot;
         },
         {
-          &quot;title&quot;: &quot;Fiscal menos desafiador em 2025, mas preocupante em 2026&quot;,
-          &quot;summary&quot;: &quot;O governo deve cumprir a meta em 2025, mas a dívida pública segue em alta e pressiona o cenário.&quot;
+          &quot;title&quot;: &quot;Fragilidade fiscal e dívida pública em alta&quot;,
+          &quot;summary&quot;: &quot;Apesar de menor dificuldade para cumprir a meta em 2025, a dívida pública segue crescendo e preocupa a sustentabilidade fiscal.&quot;
         },
         {
-          &quot;title&quot;: &quot;Ambiente externo volátil e dólar valorizado&quot;,
-          &quot;summary&quot;: &quot;Juros nos EUA devem permanecer elevados e o real segue pressionado, com projeção de R$6,20/US$ em 2025.&quot;
+          &quot;title&quot;: &quot;Ambiente externo volátil e juros altos nos EUA&quot;,
+          &quot;summary&quot;: &quot;O cenário global melhorou pontualmente, mas a incerteza permanece alta, com juros americanos elevados e riscos de novas tensões comerciais.&quot;
+        },
+        {
+          &quot;title&quot;: &quot;Câmbio volátil e fundamentos frágeis para o real&quot;,
+          &quot;summary&quot;: &quot;A valorização recente do real tem bases frágeis e a projeção é de R$6,20/US$ no fim de 2025, com risco de nova desvalorização.&quot;
         }
       ],
       &quot;risks&quot;: [
-        &quot;Volatilidade global e política comercial dos EUA podem afetar ativos brasileiros.&quot;,
-        &quot;Pressão fiscal e incerteza eleitoral podem elevar o prêmio de risco e o câmbio.&quot;,
-        &quot;Inflação persistente pode exigir juros ainda mais altos.&quot;
+        &quot;Nova onda de aversão ao risco pode pressionar câmbio e inflação&quot;,
+        &quot;Desafios fiscais aumentam em 2026 e podem exigir novas medidas&quot;,
+        &quot;Inflação pode permanecer acima da meta por mais tempo&quot;
       ],
       &quot;implications&quot;: [
         {
           &quot;view&quot;: &quot;favorável&quot;,
-          &quot;summary&quot;: &quot;Com Selic elevada e inflação pressionada, pós-fixados continuam atrativos para proteção e rendimento.&quot;
-        },
-        {
-          &quot;view&quot;: &quot;neutra&quot;,
-          &quot;summary&quot;: &quot;Prefixados exigem cautela: inflação alta e incerteza fiscal podem gerar volatilidade, mas parte do prêmio já está nos preços.&quot;
-        },
-        {
-          &quot;view&quot;: &quot;favorável&quot;,
-          &quot;summary&quot;: &quot;Títulos atrelados à inflação são recomendados diante do IPCA acima da meta e cenário de preços pressionados.&quot;
-        },
-        {
-          &quot;view&quot;: &quot;neutra&quot;,
-          &quot;summary&quot;: &quot;Cenário de desaceleração e juros altos exige seletividade em crédito privado, priorizando emissores sólidos.&quot;
+          &quot;summary&quot;: &quot;Com Selic elevada e inflação pressionada, ativos pós-fixados continuam atrativos para proteção e rendimento.&quot;
         },
         {
           &quot;view&quot;: &quot;desfavorável&quot;,
-          &quot;summary&quot;: &quot;Juros altos, crescimento menor e incerteza fiscal limitam o potencial das ações brasileiras no curto prazo.&quot;
+          &quot;summary&quot;: &quot;O cenário de juros altos por mais tempo e inflação acima da meta aumenta o risco para prefixados, exigindo cautela.&quot;
+        },
+        {
+          &quot;view&quot;: &quot;favorável&quot;,
+          &quot;summary&quot;: &quot;Títulos atrelados à inflação ganham relevância diante do IPCA elevado e risco de inflação persistente.&quot;
         },
         {
           &quot;view&quot;: &quot;neutra&quot;,
-          &quot;summary&quot;: &quot;Alta volatilidade e prêmio de risco elevado sugerem cautela com exposição ao dólar, apesar do real depreciado.&quot;
+          &quot;summary&quot;: &quot;Desaceleração da economia e incerteza fiscal sugerem seletividade em crédito privado, priorizando emissores de alta qualidade.&quot;
+        },
+        {
+          &quot;view&quot;: &quot;neutra&quot;,
+          &quot;summary&quot;: &quot;Crescimento menor, juros altos e incerteza fiscal limitam o potencial das ações, mas valuations já refletem parte do cenário.&quot;
+        },
+        {
+          &quot;view&quot;: &quot;desfavorável&quot;,
+          &quot;summary&quot;: &quot;O real segue volátil, com fundamentos frágeis e risco de nova desvalorização, sugerindo cautela em exposição cambial.&quot;
         }
       ]
     }
   },
   &quot;letter&quot;: {
-    &quot;subject&quot;: &quot;Resultado positivo no período e foco em diversificação e resiliência&quot;,
+    &quot;subject&quot;: &quot;Resultado positivo no período e sugestões para rebalancear o portfólio&quot;,
     &quot;greeting&quot;: &quot;Prezado Albert,&quot;,
-    &quot;performance&quot;: &quot;No período de 07/04/2025 a 07/05/2025, a carteira de ações e fundos, que representa 87,0% do total investido, registrou retorno de +2,51%, equivalente a +R$ 6.650,04. Esse desempenho superou o CDI do período, que foi de +1,00%, com uma diferença de +1,51 p.p., mas ficou abaixo do Ibovespa, que avançou +6,22%. Os principais destaques positivos vieram de HAPV3, com alta de 76,44% (+R$ 2.660,84), LREN3, com valorização de 8,94% (+R$ 2.282,38), e do fundo Riza Lotus Plus, que contribuiu com +1,15% (+R$ 1.090,47). Por outro lado, a principal contribuição negativa foi de MRFG3, com queda de 16,38% (-R$ 3.023,04). No horizonte mais amplo, desde a aplicação, observa-se resultado positivo em fundos de investimento (+11,15%, +R$ 21.200,49) e renda fixa (+34,93%, +R$ 10.478,75), enquanto ações acumulam queda de 38,74% (-R$ 38.143,63), reforçando a importância do equilíbrio e da diversificação ao longo do tempo.&quot;,
-    &quot;outlook&quot;: &quot;A XP projeta um cenário de curto prazo equilibrado, porém com inflação elevada e juros altos exigindo cautela. O IPCA projetado para 2025 é de 6,1% e a Selic terminal deve atingir 15,50%, permanecendo em patamar elevado por um período prolongado. O crescimento econômico tende a desacelerar, com projeção de PIB de 2,0% em 2025 e 1,0% em 2026. O ambiente externo segue volátil, com juros nos EUA sem cortes previstos em 2025 e o real pressionado, projetando-se R$6,20/US$ no fim do ano. Entre os principais riscos, destacam-se a volatilidade global, incertezas fiscais e eleitorais e a possibilidade de inflação persistente. Na nossa leitura, entendemos que, com Selic elevada e inflação pressionada, pós-fixados continuam atrativos para proteção e rendimento. Títulos atrelados à inflação seguem recomendados diante do IPCA acima da meta. Já prefixados exigem cautela, pois a volatilidade pode se manter elevada. Para renda variável, juros altos e crescimento menor limitam o potencial das ações brasileiras no curto prazo, o que reforça a importância de seletividade e foco em empresas resilientes.&quot;,
-    &quot;recommendations&quot;: &quot;Diante desse cenário, sugerimos discutir a reaplicação do caixa excedente em Tesouro Selic 2029, Tesouro IPCA+ 2029 e Ibiuna Hedge ST Advisory FIC FIM, buscando maior diversificação, proteção contra inflação e aproveitamento dos juros elevados, alinhando a carteira ao perfil moderado. Além disso, propomos um ajuste qualitativo em ações, com a troca de MRFG3 e HAPV3 por ITUB4 e B3SA3, mantendo a exposição em renda variável, mas privilegiando empresas consolidadas e pagadoras de dividendos, em linha com o foco em resiliência no cenário atual. Os valores sugeridos para cada movimentação estão detalhados na tabela abaixo e todas as operações dependem da sua confirmação.&quot;,
-    &quot;closing&quot;: &quot;Fico à disposição para conversarmos sobre essas sugestões e esclarecer quaisquer dúvidas. Conte comigo para acompanharmos juntos a evolução da sua carteira.&quot;
+    &quot;performance&quot;: &quot;No período de 07/04/2025 a 07/05/2025, o portfólio de ações e fundos, que representa 87,0% do total investido, registrou retorno de +2,51%, equivalente a +R$ 6.650,04. Esse desempenho superou o CDI, que avançou +1,00% no mesmo intervalo (+1,51 p.p.), mas ficou abaixo do Ibovespa, que subiu +6,22% (-3,71 p.p.). Entre os principais destaques positivos, HAPV3 apresentou alta de 76,44% (+R$ 2.660,84), LREN3 avançou 8,94% (+R$ 2.282,38) e o fundo Riza Lotus Plus contribuiu com +1,15% (+R$ 1.090,47). O principal detrator foi MRFG3, com queda de 16,38% (-R$ 3.023,04). No horizonte mais longo, desde a aplicação, os fundos de investimento acumulam retorno de +11,15% (+R$ 21.200,49), enquanto as ações apresentam -38,74% (-R$ 38.143,63) e a renda fixa +34,93% (+R$ 10.478,75).&quot;,
+    &quot;outlook&quot;: &quot;A XP projeta, para 2025, um cenário de curto prazo mais equilibrado, mas com inflação pressionada (IPCA de 6,1%), juros elevados (Selic terminal em 15,50%) e crescimento econômico moderado (PIB de 2,0%). O Copom mantém tom restritivo, com juros elevados por tempo prolongado para conter inflação e câmbio, enquanto a dívida pública segue em alta e o ambiente externo permanece volátil, com juros altos nos EUA e riscos de novas tensões comerciais. Entendemos que, diante desse contexto, ativos pós-fixados continuam atrativos para proteção e rendimento, enquanto títulos atrelados à inflação ganham relevância. Por outro lado, o cenário de juros altos e inflação acima da meta aumenta o risco para prefixados, exigindo cautela. Na nossa leitura, a desaceleração da economia e a incerteza fiscal sugerem seletividade em crédito privado, priorizando emissores de alta qualidade. Para ações, crescimento menor, juros altos e incerteza fiscal limitam o potencial, mas parte desse cenário já está refletida nos preços. O real segue volátil, sugerindo cautela em exposição cambial.&quot;,
+    &quot;recommendations&quot;: &quot;Diante desse cenário, sugerimos discutir três movimentos para o portfólio. Primeiro, a aplicação do caixa excedente em Tesouro Selic 2029 e Tesouro IPCA+ 2029, buscando colocar os recursos para trabalhar, equilibrar o portfólio e proteger contra inflação e juros altos, em linha com o perfil moderado e o cenário macroeconômico. Em seguida, propomos a venda de MRFG3 e HAPV3 e a compra de ITUB4 e B3SA3, reforçando a exposição a empresas consolidadas e pagadoras de dividendos, conforme a recomendação de qualidade em renda variável. Por fim, sugerimos aporte no fundo Ibiuna Hedge ST Advisory FIC FIM, ampliando a diversificação e buscando fontes alternativas de retorno, importante em ambiente de juros altos e volatilidade. Os valores sugeridos para cada operação estão detalhados na tabela abaixo. Todas as movimentações dependem da sua confirmação para execução.&quot;,
+    &quot;closing&quot;: &quot;Estou à disposição para conversarmos sobre essas sugestões e ajustar o portfólio conforme suas preferências. Conte comigo para quaisquer dúvidas ou para agendarmos uma reunião.&quot;
   }
-}</code></pre></div></details><details class="file"><summary><span class="fname">Output/run_log_albert_2025-05-07.json</span><span class="fdesc">Tokens e custo de cada chamada ao LLM</span><span class="fsize">869 B</span><a class="dl" href="../Output/run_log_albert_2025-05-07.json" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><pre><code>[
+}</code></pre></div></details><details class="file"><summary><span class="fname">Output/run_log_albert_2025-05-07.json</span><span class="fdesc">Tokens e custo de cada chamada ao LLM</span><span class="fsize">1 KB</span><a class="dl" href="../Output/run_log_albert_2025-05-07.json" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><pre><code>[
   {
     &quot;graph&quot;: &quot;extract_portfolio&quot;,
     &quot;model&quot;: &quot;gpt-4.1&quot;,
@@ -4697,36 +4740,50 @@ o desempenho do investimento.
     &quot;graph&quot;: &quot;extract_profile&quot;,
     &quot;model&quot;: &quot;gpt-4.1&quot;,
     &quot;prompt_tokens&quot;: 1006,
-    &quot;completion_tokens&quot;: 286,
-    &quot;cost_usd&quot;: 0.0043
+    &quot;completion_tokens&quot;: 285,
+    &quot;cost_usd&quot;: 0.004292
   },
   {
     &quot;graph&quot;: &quot;macro_outlook&quot;,
     &quot;model&quot;: &quot;gpt-4.1&quot;,
     &quot;prompt_tokens&quot;: 12556,
-    &quot;completion_tokens&quot;: 1704,
-    &quot;cost_usd&quot;: 0.038744
+    &quot;completion_tokens&quot;: 2022,
+    &quot;cost_usd&quot;: 0.041288
   },
   {
     &quot;graph&quot;: &quot;advise&quot;,
     &quot;model&quot;: &quot;gpt-4.1&quot;,
-    &quot;prompt_tokens&quot;: 3755,
-    &quot;completion_tokens&quot;: 323,
-    &quot;cost_usd&quot;: 0.010094
+    &quot;prompt_tokens&quot;: 4085,
+    &quot;completion_tokens&quot;: 380,
+    &quot;cost_usd&quot;: 0.01121
   },
   {
     &quot;graph&quot;: &quot;write_letter&quot;,
     &quot;model&quot;: &quot;gpt-4.1&quot;,
-    &quot;prompt_tokens&quot;: 3368,
-    &quot;completion_tokens&quot;: 793,
-    &quot;cost_usd&quot;: 0.01308
+    &quot;prompt_tokens&quot;: 3506,
+    &quot;completion_tokens&quot;: 800,
+    &quot;cost_usd&quot;: 0.013412
   },
   {
     &quot;graph&quot;: &quot;review_letter&quot;,
     &quot;model&quot;: &quot;gpt-4.1&quot;,
-    &quot;prompt_tokens&quot;: 3748,
-    &quot;completion_tokens&quot;: 133,
-    &quot;cost_usd&quot;: 0.00856
+    &quot;prompt_tokens&quot;: 3893,
+    &quot;completion_tokens&quot;: 122,
+    &quot;cost_usd&quot;: 0.008762
+  },
+  {
+    &quot;graph&quot;: &quot;write_letter&quot;,
+    &quot;model&quot;: &quot;gpt-4.1&quot;,
+    &quot;prompt_tokens&quot;: 3612,
+    &quot;completion_tokens&quot;: 797,
+    &quot;cost_usd&quot;: 0.0136
+  },
+  {
+    &quot;graph&quot;: &quot;review_letter&quot;,
+    &quot;model&quot;: &quot;gpt-4.1&quot;,
+    &quot;prompt_tokens&quot;: 3890,
+    &quot;completion_tokens&quot;: 4,
+    &quot;cost_usd&quot;: 0.007812
   }
 ]</code></pre></div></details></section><section class="doc files" id="arquivos-v1" data-spy><h2>Primeira versão (v1)</h2><details class="file"><summary><span class="fname">Output/output_letter.docx</span><span class="fdesc">Carta gerada pela v1, intacta</span><span class="fsize">139 KB</span><a class="dl" href="../Output/output_letter.docx" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><p class="note">Formato sem prévia no navegador. Baixe o arquivo.</p></div></details></section><section class="doc files" id="arquivos-rivet" data-spy><h2>Workflow Rivet (v2)</h2><details class="file"><summary><span class="fname">enter_challenge.rivet-project</span><span class="fdesc">O projeto do Rivet: Main Graph, 2 loops, 6 grafos de LLM e o grafo original da v1 (gerado por src/build.mjs)</span><span class="fsize">375 KB</span><a class="dl" href="../enter_challenge.rivet-project" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><pre><code>version: 4
 data:
@@ -4979,7 +5036,7 @@ data:
             - 'statement_text-&gt;&quot;Loop Until: Extraction Attempt (max 2)&quot; monthly_letter__loop_extraction_attempt/statement_text'
             - 'word_budget-&gt;&quot;Loop Until: Letter Attempt (max 3)&quot; monthly_letter__loop_letter_attempt/word_budget'
         '[monthly_letter__market_data]:code &quot;Code: Market Data (CVM, BCB, Yahoo)&quot;':
-          visualData: 800/700/300/1//
+          visualData: 813/557/300/1//
           data:
             code: |-
               /* Ponte entre o código e o Rivet: lê o valor de uma porta de entrada e empacota as saídas no formato
@@ -5221,7 +5278,7 @@ data:
           outgoingConnections:
             - 'market-&gt;&quot;Code: Analyze Portfolio&quot; monthly_letter__analyze/market'
         '[monthly_letter__loop_extraction_attempt]:loopUntil &quot;Loop Until: Extraction Attempt (max 2)&quot;':
-          visualData: 800/0/300/1//
+          visualData: 865/-119/300/1//
           data:
             targetGraph: graph_extraction_attempt
             conditionType: inputEqual
@@ -5235,7 +5292,7 @@ data:
             - 'statement-&gt;&quot;Code: Analyze Portfolio&quot; monthly_letter__analyze/statement'
             - 'usage_log-&gt;&quot;Code: Publish (PDF, Brief, Log)&quot; monthly_letter__publish/extraction_log'
         '[monthly_letter__sub_extract_profile]:subGraph &quot;Subgraph: Extract Profile&quot;':
-          visualData: 800/380/280/1//
+          visualData: 823/301/280/1//
           data:
             graphId: graph_extract_profile
             useErrorOutput: false
@@ -5244,7 +5301,7 @@ data:
             - 'result-&gt;&quot;Code: Analyze Portfolio&quot; monthly_letter__analyze/profile'
             - 'usage-&gt;&quot;Code: Publish (PDF, Brief, Log)&quot; monthly_letter__publish/profile_usage'
         '[monthly_letter__sub_macro_outlook]:subGraph &quot;Subgraph: Macro Outlook&quot;':
-          visualData: 800/1000/280/1//
+          visualData: 843/985/280/1//
           data:
             graphId: graph_macro_outlook
             useErrorOutput: false
@@ -5253,7 +5310,7 @@ data:
             - 'result-&gt;&quot;Code: Check Macro Quotes&quot; monthly_letter__ground_macro/outlook'
             - 'usage-&gt;&quot;Code: Publish (PDF, Brief, Log)&quot; monthly_letter__publish/macro_usage'
         '[monthly_letter__ground_macro]:code &quot;Code: Check Macro Quotes&quot;':
-          visualData: 1240/1000/300/1//
+          visualData: 1270/632/300/1//
           data:
             code: |-
               /* Ponte entre o código e o Rivet: lê o valor de uma porta de entrada e empacota as saídas no formato
@@ -5781,9 +5838,155 @@ data:
               }
 
               function maturedFixedIncome(statement) {
-                return positionsOf(statement, 'fixed_i
+                return positionsOf(statement, 'fixed_
 
-[prévia cortada; baixe o arquivo para ver tudo]</code></pre></div></details><details class="file"><summary><span class="fname">src/build.mjs</span><span class="fdesc">Gera enter_challenge.rivet-project, o projeto do Rivet na raiz: os 6 grafos de LLM (prompts e schemas em src/prompts e src/schemas), os corpos dos dois loops e o Main …</span><span class="fsize">15 KB</span><a class="dl" href="../src/build.mjs" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><pre><code>/* Gera enter_challenge.rivet-project, o projeto do Rivet na raiz: os 6 grafos de LLM (prompts e schemas em
+[prévia cortada; baixe o arquivo para ver tudo]</code></pre></div></details><details class="file"><summary><span class="fname">src/README.md</span><span class="fdesc">O que tem em src/, como mexer e as regras do código dos nodes</span><span class="fsize">5 KB</span><a class="dl" href="../src/README.md" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><h1>src/</h1>
+<p>Tudo o que forma o projeto do Rivet, <code>enter_challenge.rivet-project</code>, na raiz do repositório. O projeto não é
+editado no app: ele é <strong>gerado</strong> a partir destes arquivos pelo <code>npm run build</code>. Assim o código, os prompts e os
+schemas ficam em arquivos que dá para revisar, versionar e testar.</p>
+<table>
+<thead>
+<tr>
+<th>Caminho</th>
+<th>O que tem</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>build.mjs</code></td>
+<td>Gera o <code>enter_challenge.rivet-project</code>. Monta os 6 subgrafos de LLM a partir de <code>prompts/</code> e <code>schemas/</code>, os dois corpos de loop, o <strong>Main Graph: Enter Challenge</strong> e os Code nodes a partir de <code>code/</code>. Define os nomes dos grafos na lateral e os títulos dos nodes. Mantém os grafos que não gera, como o <strong>V1 Graph: Original Challenge (unchanged)</strong></td>
+</tr>
+<tr>
+<td><code>code/nodes.mjs</code></td>
+<td>Catálogo dos Code nodes: título, bibliotecas, portas de entrada e saída, permissões do executor. A função <code>assembleCode()</code> monta o texto que vai dentro de cada node</td>
+</tr>
+<tr>
+<td><code>code/*.js</code></td>
+<td>O corpo de cada um dos 10 Code nodes</td>
+</tr>
+<tr>
+<td><code>code/lib/*.js</code></td>
+<td>As 14 bibliotecas compartilhadas, coladas antes do corpo de cada node que as usa</td>
+</tr>
+<tr>
+<td><code>prompts/&lt;grafo&gt;.system.md</code>, <code>&lt;grafo&gt;.user.md</code></td>
+<td>Os prompts de cada subgrafo de LLM, em inglês. <code>{{facts_json}}</code>, <code>{{word_budget}}</code> e afins são preenchidos pelas entradas do grafo</td>
+</tr>
+<tr>
+<td><code>schemas/&lt;grafo&gt;.json</code></td>
+<td>O JSON schema estrito que a resposta de cada subgrafo de LLM precisa seguir</td>
+</tr>
+<tr>
+<td><code>tests/</code></td>
+<td>Testes que rodam o código dos nodes sem chamar o LLM (abaixo)</td>
+</tr>
+</tbody></table>
+<h2>Os Code nodes</h2>
+<table>
+<thead>
+<tr>
+<th>Título no app</th>
+<th>Arquivo</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Code: Load Inputs</td>
+<td><code>code/load_inputs.js</code></td>
+</tr>
+<tr>
+<td>Code: Market Data (CVM, BCB, Yahoo)</td>
+<td><code>code/market_data.js</code></td>
+</tr>
+<tr>
+<td>Code: Reconcile Statement</td>
+<td><code>code/reconcile.js</code></td>
+</tr>
+<tr>
+<td>Code: Check Macro Quotes</td>
+<td><code>code/ground_macro.js</code></td>
+</tr>
+<tr>
+<td>Code: Analyze Portfolio</td>
+<td><code>code/analyze.js</code></td>
+</tr>
+<tr>
+<td>Code: Build FACTS</td>
+<td><code>code/build_facts.js</code></td>
+</tr>
+<tr>
+<td>Code: Fact-check Figures</td>
+<td><code>code/check_numbers.js</code></td>
+</tr>
+<tr>
+<td>Code: Decide Letter Version</td>
+<td><code>code/decide_letter.js</code></td>
+</tr>
+<tr>
+<td>Code: Render Letter (HTML)</td>
+<td><code>code/render_letter.js</code></td>
+</tr>
+<tr>
+<td>Code: Publish (PDF, Brief, Log)</td>
+<td><code>code/publish.js</code></td>
+</tr>
+</tbody></table>
+<p>O que cada um faz e quais bibliotecas usa está em <code>docs/04_arquitetura_e_codigo.md</code> e no cabeçalho de cada arquivo.</p>
+<h2>Como mexer</h2>
+<ol>
+<li>Edite o arquivo: prompt, schema, corpo de node ou biblioteca.</li>
+<li><code>npm test</code>, para conferir que os números não mudaram sem querer.</li>
+<li><code>npm run build</code>, para regravar o <code>enter_challenge.rivet-project</code>.</li>
+<li>Se o projeto estiver aberto no app do Rivet, feche sem salvar e abra de novo. Salvar a versão antiga grava por
+cima do arquivo novo; se acontecer, rode <code>npm run build</code> outra vez.</li>
+</ol>
+<h2>Regras do código dos nodes</h2>
+<p>O Rivet executa o texto de um Code node como o corpo de uma função assíncrona. Por isso:</p>
+<ul>
+<li><strong>O arquivo não tem <code>import</code> nem <code>export</code>.</strong> As bibliotecas são funções soltas que o <code>build.mjs</code> cola antes do
+corpo. Um node pode usar <code>await</code> direto e termina com <code>return</code>.</li>
+<li><strong>Entradas e saídas passam por <code>lib/io.js</code>:</strong> <code>input(inputs, &#39;nome&#39;)</code> lê uma porta, e <code>typed({ ... })</code> empacota as
+saídas no formato do Rivet.</li>
+<li><strong>Nunca declare <code>context</code> nem <code>graphInputs</code>:</strong> o Rivet já usa esses nomes, e o node quebra. A configuração se
+chama <code>setup</code>.</li>
+<li><strong>Nunca marque <em>Allow require</em>:</strong> no executor Node do app desktop isso quebra o node. Para ler arquivos ou usar
+pacotes, use <code>projectRequire()</code> de <code>lib/modules.js</code>.</li>
+<li><strong>O código editado dentro do app se perde</strong> no próximo build. Edite sempre aqui.</li>
+<li><strong>As posições dos nodes também vêm do <code>build.mjs</code>.</strong> Se reorganizar um grafo no app e salvar, copie as novas
+posições (o <code>visualData</code> de cada node no <code>.rivet-project</code>) para as chamadas do <code>build.mjs</code>, ou o próximo build
+desfaz o layout.</li>
+</ul>
+<p>Os ids dos grafos (<code>graph_monthly_letter</code>, <code>graph_advise</code>…) são fixos, porque as ligações entre os grafos usam
+esses ids. Os nomes que aparecem na lateral podem mudar à vontade em <code>build.mjs</code>.</p>
+<h2>Testes</h2>
+<p><code>npm test</code> roda os 8 testes em cerca de 1 segundo, sem chave de API e sem internet.</p>
+<table>
+<thead>
+<tr>
+<th>Arquivo</th>
+<th>O que é</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>tests/pipeline.test.mjs</code></td>
+<td>Os testes: leitura do PDF, reconciliação, rentabilidade, candidatos e IR, citações do macro, FACTS, fact-check e HTML da carta</td>
+</tr>
+<tr>
+<td><code>tests/harness.mjs</code></td>
+<td>Executa o código de um node do mesmo jeito que o executor Node do Rivet, com os mesmos parâmetros e sem <code>require</code></td>
+</tr>
+<tr>
+<td><code>tests/fixtures/albert_statement.json</code></td>
+<td>O extrato do Albert transcrito à mão: o gabarito da extração</td>
+</tr>
+<tr>
+<td><code>tests/fixtures/llm_*.json</code></td>
+<td>Respostas reais do LLM (perfil, macro e advise), para testar sem chamar a API</td>
+</tr>
+<tr>
+<td><code>tests/fixtures/python_facts_and_letter.json</code></td>
+<td>Os FACTS e a carta da versão Python (branch <code>main</code>), para garantir que os números são os mesmos</td>
+</tr>
+</tbody></table>
+</div></details><details class="file"><summary><span class="fname">src/build.mjs</span><span class="fdesc">Gera enter_challenge.rivet-project, o projeto do Rivet na raiz: os 6 grafos de LLM (prompts e schemas em src/prompts e src/schemas), os corpos dos dois loops e o Main …</span><span class="fsize">15 KB</span><a class="dl" href="../src/build.mjs" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><pre><code>/* Gera enter_challenge.rivet-project, o projeto do Rivet na raiz: os 6 grafos de LLM (prompts e schemas em
    src/prompts e src/schemas), os corpos dos dois loops e o Main Graph, que roda tudo e termina com a carta
    em HTML e PDF. O código dos nodes vem de src/code. Grafos que não são gerados aqui, como o original da
    v1, são mantidos. Rode depois de editar qualquer prompt, schema ou código: npm run build. */
@@ -5984,17 +6187,17 @@ function monthlyLetter() {
   const g = new Graph('monthly_letter', 'Runs the whole monthly letter inside Rivet: read, extract, check, compute, advise, write, review, publish.');
   const repo = g.input('repo_dir', 0, 300, 'string', REPO);
   const load = g.code('load_inputs', 360, 300);
-  const market = g.code('market_data', 800, 700);
-  const extraction = g.loop('extraction_attempt', 'Loop Until: Extraction Attempt (max 2)', 800, 0, 2);
-  const profile = g.subgraph('extract_profile', 800, 380);
-  const macro = g.subgraph('macro_outlook', 800, 1000);
-  const ground = g.code('ground_macro', 1240, 1000);
+  const market = g.code('market_data', 813, 557);
+  const extraction = g.loop('extraction_attempt', 'Loop Until: Extraction Attempt (max 2)', 865, -119, 2);
+  const profile = g.subgraph('extract_profile', 823, 301);
+  const macro = g.subgraph('macro_outlook', 843, 985);
+  const ground = g.code('ground_macro', 1270, 632);
   const analyze = g.code('analyze', 1680, 300);
-  const advise = g.subgraph('advise', 2120, 300);
-  const facts = g.code('build_facts', 2560, 300);
-  const letter = g.loop('letter_attempt', 'Loop Until: Letter Attempt (max 3)', 3000, 300, 3);
-  const render = g.code('render_letter', 3440, 100);
-  const publish = g.code('publish', 3880, 300);
+  const advise = g.subgraph('advise', 2058, 336);
+  const facts = g.code('build_facts', 2407, 346);
+  const letter = g.loop('letter_attempt', 'Loop Until: Letter Attempt (max 3)', 2804, 228, 3);
+  const render = g.code('render_letter', 3224, 399);
+  const publish = g.code('publish', 3796, 253);
   g.link(repo, 'data', load, 'repo_dir');
   g.link(load, 'context', market, 'context');
   g.link(load, 'statement_text', extraction, 'statement_text');
@@ -6040,7 +6243,7 @@ function monthlyLetter() {
   publishInputs.forEach(([node, port, target]) =&gt; g.link(node, port, publish, target));
   g.link(publish, 'pdf_path', g.output('pdf_path', 4320, 200), 'value');
   g.link(publish, 'status', g.output('status', 4320, 400), 'value');
-  g.link(publish, 'brief', g.output('brief', 4320, 600), 'value');
+  g.link(publish, 'brief', g.output('brief', 4322, 590), 'value');
   return g;
 }
 
@@ -8111,7 +8314,241 @@ function stockSwapCandidates(statement, shelf, prices, step) {
     }
   }
 }
-</code></pre></div></details></section><section class="doc files" id="arquivos-config" data-spy><h2>Configuração</h2><details class="file"><summary><span class="fname">config/settings.yaml</span><span class="fdesc">Entradas, período, modelos, preços por token, limites, logo e navegadores do PDF</span><span class="fsize">1 KB</span><a class="dl" href="../config/settings.yaml" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><pre><code># Run configuration for one client letter: inputs, reference period, models and thresholds.
+</code></pre></div></details></section><section class="doc files" id="arquivos-config" data-spy><h2>Configuração</h2><details class="file"><summary><span class="fname">config/README.md</span><span class="fdesc">Para que serve cada arquivo e cada campo de config/</span><span class="fsize">6 KB</span><a class="dl" href="../config/README.md" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><h1>config/</h1>
+<p>Parâmetros da execução e regras de negócio da carta, separados do código. O código diz <strong>como</strong> calcular; estes
+arquivos dizem <strong>com quais números e regras</strong>. Ninguém gera esses arquivos: eles são editados à mão.</p>
+<p>Quem lê os quatro arquivos é o primeiro node do grafo, <strong>Code: Load Inputs</strong>, a cada execução, e repassa tudo aos
+outros nodes. Por isso uma mudança aqui vale na próxima execução, sem <code>npm run build</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Arquivo</th>
+<th>O que decide</th>
+<th>Exemplo com o Albert</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>settings.yaml</code></td>
+<td>Qual carta gerar e como: arquivos do cliente, período, logo, modelos, custos, limites da carta e dos alertas</td>
+<td>O período 07/04 a 07/05/2025 e o limite de 5% de caixa, que gera o alerta &quot;29,8% do patrimônio parado&quot;</td>
+</tr>
+<tr>
+<td><code>allocation_moderate.yaml</code></td>
+<td>As faixas de alocação do perfil moderado</td>
+<td>Renda fixa em 43,7% (faixa 50% a 70%) e caixa em 29,8% (máximo 5%) viram R$ 40 mil em Tesouro Selic, R$ 40 mil em Tesouro IPCA+ e R$ 27 mil em multimercado</td>
+</tr>
+<tr>
+<td><code>research_shelf.yaml</code></td>
+<td>O que o motor pode recomendar: produtos e a lista de ações</td>
+<td>HAPV3 e MRFG3 estão fora do perfil e viram venda; ITUB4 e B3SA3 estão na lista de compra</td>
+</tr>
+<tr>
+<td><code>fund_registry.yaml</code></td>
+<td>O cadastro dos fundos do extrato</td>
+<td>O CNPJ de cada fundo é o que acha a cota dele nos dados da CVM</td>
+</tr>
+</tbody></table>
+<p><code>allocation_moderate.yaml</code> e <code>research_shelf.yaml</code> são <strong>ilustrativos</strong>, e dizem isso no próprio arquivo. Em
+produção, viriam da carteira recomendada oficial do XP Research.</p>
+<h2>settings.yaml</h2>
+<table>
+<thead>
+<tr>
+<th>Chave</th>
+<th>Para que serve</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>client.id</code></td>
+<td>Nome do cliente nos arquivos de saída (<code>carta_albert_…</code>)</td>
+</tr>
+<tr>
+<td><code>client.portfolio_pdf</code>, <code>client.risk_profile_txt</code></td>
+<td>Extrato e perfil de risco do cliente, em <code>Input/</code></td>
+</tr>
+<tr>
+<td><code>research.macro_pdf</code></td>
+<td>Relatório macro da XP usado no cenário e nas justificativas</td>
+</tr>
+<tr>
+<td><code>research.prices_csv</code></td>
+<td>Preços atual e do mês anterior das ações</td>
+</tr>
+<tr>
+<td><code>brand.logo</code></td>
+<td>Logo no cabeçalho da carta (JPG ou PNG)</td>
+</tr>
+<tr>
+<td><code>period.start</code>, <code>period.end</code></td>
+<td>Janela do retorno do período: ações, fundos, CDI e Ibovespa usam as mesmas datas</td>
+</tr>
+<tr>
+<td><code>paths.output_dir</code>, <code>paths.data_dir</code></td>
+<td>Onde a carta é gravada (<code>Output/</code>) e onde ficam os dados salvos (<code>data/</code>)</td>
+</tr>
+<tr>
+<td><code>pdf.browsers</code></td>
+<td>Navegadores tentados, em ordem, para imprimir a carta em PDF (a variável <code>BROWSER_PATH</code> vem antes)</td>
+</tr>
+<tr>
+<td><code>rivet.project</code></td>
+<td>Arquivo que o <code>npm run build</code> grava: <code>enter_challenge.rivet-project</code></td>
+</tr>
+<tr>
+<td><code>models.extraction</code>, <code>models.writing</code></td>
+<td>Modelo da OpenAI na leitura dos documentos e na escrita</td>
+</tr>
+<tr>
+<td><code>pricing_usd_per_million_tokens</code></td>
+<td>Preço de cada modelo, para o custo por chamada que aparece no brief</td>
+</tr>
+<tr>
+<td><code>letter.word_budget</code></td>
+<td>Limite de palavras da carta</td>
+</tr>
+<tr>
+<td><code>letter.max_pages</code></td>
+<td>Máximo de páginas do PDF; acima disso a carta sai bloqueada</td>
+</tr>
+<tr>
+<td><code>thresholds.idle_cash_pct</code></td>
+<td>Caixa e renda fixa vencida acima deste % do patrimônio geram alerta</td>
+</tr>
+<tr>
+<td><code>thresholds.single_stock_pct</code></td>
+<td>Uma ação acima deste % do patrimônio gera alerta de concentração</td>
+</tr>
+<tr>
+<td><code>thresholds.large_monthly_move_pct</code></td>
+<td>Variação no período acima deste % pede verificação de evento corporativo</td>
+</tr>
+<tr>
+<td><code>thresholds.stale_quote_days</code></td>
+<td>Cotas do extrato mais velhas que isso geram alerta</td>
+</tr>
+<tr>
+<td><code>thresholds.research_age_days</code></td>
+<td>Relatório macro mais velho que isso gera alerta</td>
+</tr>
+<tr>
+<td><code>thresholds.reconciliation_brl</code>, <code>reconciliation_pct</code></td>
+<td>Hoje não são lidas: a tolerância da reconciliação está fixa em <code>src/code/reconcile.js</code></td>
+</tr>
+</tbody></table>
+<h2>allocation_moderate.yaml</h2>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Para que serve</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>buckets</code></td>
+<td>Para cada classe (renda fixa, multimercado, renda variável, caixa), o mínimo, o alvo e o máximo em % do patrimônio</td>
+</tr>
+<tr>
+<td><code>surplus_bucket</code></td>
+<td>Classe que recebe o caixa que sobra depois de levar as outras ao alvo</td>
+</tr>
+<tr>
+<td><code>fixed_income_split</code></td>
+<td>Como o valor de renda fixa se divide entre pós-fixado e inflação</td>
+</tr>
+<tr>
+<td><code>rounding_brl</code></td>
+<td>Os valores sugeridos são arredondados para baixo neste múltiplo (R$ 1.000)</td>
+</tr>
+<tr>
+<td><code>profile</code>, <code>source</code></td>
+<td>Informativos: não são lidos pelo código</td>
+</tr>
+</tbody></table>
+<p>A regra: o caixa acima do alvo de caixa é distribuído entre as classes abaixo do alvo, na proporção do que falta a
+cada uma, e o que sobrar vai para <code>surplus_bucket</code>.</p>
+<h2>research_shelf.yaml</h2>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Para que serve</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>products</code></td>
+<td>Produto sugerido para cada tipo de aplicação (pós-fixado, inflação, multimercado), com a classe e a tese que aparece na carta</td>
+</tr>
+<tr>
+<td><code>stocks.&lt;ticker&gt;.profile_fit</code></td>
+<td><code>false</code> torna a ação candidata à venda</td>
+</tr>
+<tr>
+<td><code>stocks.&lt;ticker&gt;.buy_list</code></td>
+<td><code>true</code> torna a ação candidata à compra, com o valor das vendas</td>
+</tr>
+<tr>
+<td><code>stocks.&lt;ticker&gt;.renamed_to</code></td>
+<td>Ticker novo; gera o alerta de ticker renomeado (ARZZ3 → AZZA3)</td>
+</tr>
+<tr>
+<td><code>stocks.&lt;ticker&gt;.dividend_payer</code> e <code>source</code> (no topo)</td>
+<td>Informativos: não são lidos pelo código</td>
+</tr>
+</tbody></table>
+<p>O LLM (<strong>Subgraph: Advise</strong>) só escolhe entre os candidatos que saem destas regras; ele não pode inventar um ativo.</p>
+<h2>fund_registry.yaml</h2>
+<p>Uma entrada por fundo do extrato. O mapa foi conferido à mão, porque os nomes do extrato não batem com o cadastro
+da CVM (ver <code>docs/05_dados_externos.md</code>).</p>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Para que serve</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>statement_name</code></td>
+<td>Nome exatamente como aparece no extrato: é a chave que liga o fundo às outras informações</td>
+</tr>
+<tr>
+<td><code>display_name</code></td>
+<td>Nome curto que a carta usa</td>
+</tr>
+<tr>
+<td><code>cnpj</code></td>
+<td>Usado para achar as cotas do fundo em <code>data/market/cvm_inf_diario_subset.csv</code></td>
+</tr>
+<tr>
+<td><code>bucket</code></td>
+<td>Classe do fundo na conta de alocação contra o perfil</td>
+</tr>
+<tr>
+<td><code>credit_private</code></td>
+<td><code>true</code> soma o fundo no alerta de crédito privado sem rating conferido</td>
+</tr>
+<tr>
+<td><code>registry_note</code></td>
+<td>Mudança de cadastro que vira alerta (o Brave, que virou FIDC)</td>
+</tr>
+<tr>
+<td><code>monthly_estimate</code></td>
+<td>Retorno estimado para fundo sem cota diária, com o método, que o brief mostra</td>
+</tr>
+<tr>
+<td><code>cvm_name</code>, <code>strategy</code></td>
+<td>Informativos: registram o nome oficial e a estratégia, mas não são lidos pelo código</td>
+</tr>
+</tbody></table>
+<h2>Mudanças comuns</h2>
+<ul>
+<li><strong>Outro cliente ou outro mês:</strong> troque os arquivos em <code>client</code> e <code>research</code> e as datas em <code>period</code>. Para outro
+mês, o recorte das cotas da CVM em <code>data/market/</code> também precisa ser atualizado.</li>
+<li><strong>Outro perfil:</strong> crie <code>allocation_&lt;perfil&gt;.yaml</code> e acrescente o perfil no <code>bands</code> de <code>src/code/load_inputs.js</code>,
+que hoje carrega só o moderado.</li>
+<li><strong>Fundo novo no extrato:</strong> acrescente uma entrada em <code>fund_registry.yaml</code> com o CNPJ conferido.</li>
+<li><strong>Recomendar outro produto ou ação:</strong> edite <code>research_shelf.yaml</code>.</li>
+</ul>
+</div></details><details class="file"><summary><span class="fname">config/settings.yaml</span><span class="fdesc">Entradas, período, modelos, preços por token, limites, logo e navegadores do PDF</span><span class="fsize">1 KB</span><a class="dl" href="../config/settings.yaml" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><pre><code># Run configuration for one client letter: inputs, reference period, models and thresholds.
 client:
   id: albert
   portfolio_pdf: &quot;Input/XP - Albert_s portfolio.pdf&quot;
@@ -10042,6 +10479,8 @@ npm run docs             # rebuilds docs/index.html from docs/*.md and the lates
 environment, and runs the project&#39;s main graph. Set <code>BROWSER_PATH</code> if Edge or Chrome is not in its default
 location, or edit <code>pdf.browsers</code> in <code>config/settings.yaml</code>.</p>
 <h2>Where things are</h2>
+<p><code>config/</code>, <code>data/</code>, <code>docs/</code> and <code>src/</code> each have a README (in Portuguese) explaining what the folder holds and
+what it is for.</p>
 <table>
 <thead>
 <tr>
@@ -10160,6 +10599,102 @@ the mistake when shown the failed check (see <code>data/evidence/</code>), so ex
 became a FIDC, which has no daily quota, so its return is an estimate prorated from the monthly FIDC report and
 flagged as such. The statement&#39;s dates also disagree (fund quotes from 04/04/2024, CDB matured 05/09/2024,
 statement 07/05/2025, macro report 06/02/2025); the brief lists each inconsistency.</p>
+</div></details><details class="file"><summary><span class="fname">docs/README.md</span><span class="fdesc">O que tem em docs/: as fontes do site, o site gerado e o gerador</span><span class="fsize">3 KB</span><a class="dl" href="../docs/README.md" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><h1>docs/</h1>
+<p>A documentação da entrega, em português, e o site que a reúne. Os <code>.md</code> são a <strong>fonte</strong>; o <code>index.html</code> é
+<strong>gerado</strong> a partir deles e não deve ser editado à mão.</p>
+<h2>O site</h2>
+<p>Abra <code>docs/index.html</code> no navegador. É uma página única, com a barra lateral por tópicos:</p>
+<table>
+<thead>
+<tr>
+<th>Tópico</th>
+<th>Seções (arquivo de origem)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>01 Apresentação</td>
+<td>Visão geral (<code>01_visao_geral.md</code>) e A carta e o brief (a carta da v1 ao lado da v2, lida de <code>Output/</code>)</td>
+</tr>
+<tr>
+<td>02 O trabalho</td>
+<td>Diagnóstico da v1 (<code>02</code>), Melhorias implementadas (<code>03</code>), Arquitetura e código (<code>04</code>), Dados externos (<code>05</code>), Qualidade e travas (<code>06</code>)</td>
+</tr>
+<tr>
+<td>03 Uso</td>
+<td>Como usar (<code>07_como_usar.md</code>)</td>
+</tr>
+<tr>
+<td>04 Arquivos</td>
+<td>Prévia e download de cada arquivo do projeto, montados pelo gerador</td>
+</tr>
+</tbody></table>
+<p>Os números do topo (retorno, custo, alertas, testes) são lidos da última carta em <code>Output/</code> e do
+<code>enter_challenge.rivet-project</code>, então mudam a cada execução.</p>
+<p>O site usa o Mermaid e as fontes da internet. Sem conexão, o texto aparece, mas os diagramas não.</p>
+<h2>Os arquivos</h2>
+<table>
+<thead>
+<tr>
+<th>Arquivo</th>
+<th>O que tem</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>01_visao_geral.md</code></td>
+<td>O desafio, o que foi entregue, a ideia central e os resultados do Albert</td>
+</tr>
+<tr>
+<td><code>02_diagnostico_v1.md</code></td>
+<td>Os problemas da primeira versão, com a prova de cada um</td>
+</tr>
+<tr>
+<td><code>03_melhorias_implementadas.md</code></td>
+<td>As três áreas pedidas: rentabilidade, compra e venda, formatação</td>
+</tr>
+<tr>
+<td><code>04_arquitetura_e_codigo.md</code></td>
+<td>O Main Graph, os subgrafos, os Code nodes e como o projeto é gerado</td>
+</tr>
+<tr>
+<td><code>05_dados_externos.md</code></td>
+<td>Por que e de onde vêm os dados da CVM, do Banco Central e do Yahoo</td>
+</tr>
+<tr>
+<td><code>06_qualidade_e_travas.md</code></td>
+<td>As travas contra erro do LLM, com as evidências reais, e os testes</td>
+</tr>
+<tr>
+<td><code>07_como_usar.md</code></td>
+<td>Instalar, rodar pelo app ou pelo terminal, trocar o logo, outro cliente ou mês</td>
+</tr>
+<tr>
+<td><code>index.html</code></td>
+<td>O site, gerado; não editar</td>
+</tr>
+<tr>
+<td><code>site/build.mjs</code></td>
+<td>Gera o <code>index.html</code>: escolhe as seções de cada tópico, a carta e o catálogo de arquivos</td>
+</tr>
+<tr>
+<td><code>site/layout.mjs</code></td>
+<td>O layout da página: barra lateral, tópicos, paginação, CSS e JS embutidos</td>
+</tr>
+<tr>
+<td><code>site/markdown.mjs</code></td>
+<td>Converte os <code>.md</code> em HTML e prepara os diagramas Mermaid</td>
+</tr>
+<tr>
+<td><code>site/style.css</code>, <code>site/app.js</code>, <code>site/mermaid.js</code></td>
+<td>Visual, navegação e desenho dos diagramas, embutidos no <code>index.html</code></td>
+</tr>
+</tbody></table>
+<h2>Como atualizar</h2>
+<p>Edite o <code>.md</code> e rode:</p>
+<pre><code class="language-powershell">npm run docs
+</code></pre>
+<p>Rode também depois de gerar uma carta nova (<code>npm run letter</code> ou Run no app), para o site mostrar a carta e os
+números mais recentes. Os links entre os <code>.md</code> (por exemplo, <code>[Dados externos](05_dados_externos.md)</code>) viram
+links para a seção correspondente do site.</p>
 </div></details><details class="file"><summary><span class="fname">package.json</span><span class="fdesc">Scripts npm e dependências (rivet-cli, pdf-parse, yaml; marked e mammoth para o site)</span><span class="fsize">617 B</span><a class="dl" href="../package.json" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><pre><code>{
   &quot;name&quot;: &quot;xp-monthly-letter&quot;,
   &quot;private&quot;: true,
@@ -10253,7 +10788,7 @@ if (filter) {
     document.querySelectorAll('details.file').forEach((d) =&gt; { d.style.display = d.textContent.toLowerCase().includes(query) ? '' : 'none'; });
   });
 }
-</code></pre></div></details><details class="file"><summary><span class="fname">docs/site/build.mjs</span><span class="fdesc">Gera docs/index.html, o site de entrega do desafio, no visual da Enter (getenter.ai): quatro tópicos (Apresentação, O trabalho, Uso, Arquivos), seções vindas de docs/0…</span><span class="fsize">15 KB</span><a class="dl" href="../docs/site/build.mjs" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><pre><code>/* Gera docs/index.html, o site de entrega do desafio, no visual da Enter (getenter.ai): quatro tópicos
+</code></pre></div></details><details class="file"><summary><span class="fname">docs/site/build.mjs</span><span class="fdesc">Gera docs/index.html, o site de entrega do desafio, no visual da Enter (getenter.ai): quatro tópicos (Apresentação, O trabalho, Uso, Arquivos), seções vindas de docs/0…</span><span class="fsize">16 KB</span><a class="dl" href="../docs/site/build.mjs" download onclick="event.stopPropagation()">Baixar</a></summary><div class="preview"><pre><code>/* Gera docs/index.html, o site de entrega do desafio, no visual da Enter (getenter.ai): quatro tópicos
    (Apresentação, O trabalho, Uso, Arquivos), seções vindas de docs/0*.md, a carta da v1 ao lado da v2, os
    números da última execução lidos de Output/ e a prévia de cada arquivo. O layout vem de layout.mjs e a
    página abre sozinha. Rode depois de gerar a carta: npm run docs. */
@@ -10356,6 +10891,7 @@ const FILE_GROUPS = [
   ]],
   ['arquivos-rivet', 'Workflow Rivet (v2)', [
     ['enter_challenge.rivet-project', 'O projeto do Rivet: Main Graph, 2 loops, 6 grafos de LLM e o grafo original da v1 (gerado por src/build.mjs)'],
+    ['src/README.md', 'O que tem em src/, como mexer e as regras do código dos nodes'],
     ['src/build.mjs', headerSummary],
     ['src/code/nodes.mjs', headerSummary],
     ...listing('src/code', /\.js$/, headerSummary),
@@ -10364,6 +10900,7 @@ const FILE_GROUPS = [
     ...listing('src/schemas', /\.json$/, 'JSON schema da resposta'),
   ]],
   ['arquivos-config', 'Configuração', [
+    ['config/README.md', 'Para que serve cada arquivo e cada campo de config/'],
     ['config/settings.yaml', 'Entradas, período, modelos, preços por token, limites, logo e navegadores do PDF'],
     ['config/allocation_moderate.yaml', 'Faixas de alocação do perfil moderado (ilustrativas)'],
     ['config/research_shelf.yaml', 'Produtos e ações que o motor pode recomendar (ilustrativos)'],
@@ -10381,6 +10918,7 @@ const FILE_GROUPS = [
   ]],
   ['arquivos-repo', 'Repositório e documentação', [
     ['README.md', 'README do repositório (em inglês)'],
+    ['docs/README.md', 'O que tem em docs/: as fontes do site, o site gerado e o gerador'],
     ['package.json', 'Scripts npm e dependências (rivet-cli, pdf-parse, yaml; marked e mammoth para o site)'],
     ...listing('docs/site', /\.(mjs|js|css)$/, headerSummary),
   ]],

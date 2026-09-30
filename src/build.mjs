@@ -199,17 +199,17 @@ function monthlyLetter() {
   const g = new Graph('monthly_letter', 'Runs the whole monthly letter inside Rivet: read, extract, check, compute, advise, write, review, publish.');
   const repo = g.input('repo_dir', 0, 300, 'string', REPO);
   const load = g.code('load_inputs', 360, 300);
-  const market = g.code('market_data', 800, 700);
-  const extraction = g.loop('extraction_attempt', 'Loop Until: Extraction Attempt (max 2)', 800, 0, 2);
-  const profile = g.subgraph('extract_profile', 800, 380);
-  const macro = g.subgraph('macro_outlook', 800, 1000);
-  const ground = g.code('ground_macro', 1240, 1000);
+  const market = g.code('market_data', 813, 557);
+  const extraction = g.loop('extraction_attempt', 'Loop Until: Extraction Attempt (max 2)', 865, -119, 2);
+  const profile = g.subgraph('extract_profile', 823, 301);
+  const macro = g.subgraph('macro_outlook', 843, 985);
+  const ground = g.code('ground_macro', 1270, 632);
   const analyze = g.code('analyze', 1680, 300);
-  const advise = g.subgraph('advise', 2120, 300);
-  const facts = g.code('build_facts', 2560, 300);
-  const letter = g.loop('letter_attempt', 'Loop Until: Letter Attempt (max 3)', 3000, 300, 3);
-  const render = g.code('render_letter', 3440, 100);
-  const publish = g.code('publish', 3880, 300);
+  const advise = g.subgraph('advise', 2058, 336);
+  const facts = g.code('build_facts', 2407, 346);
+  const letter = g.loop('letter_attempt', 'Loop Until: Letter Attempt (max 3)', 2804, 228, 3);
+  const render = g.code('render_letter', 3224, 399);
+  const publish = g.code('publish', 3796, 253);
   g.link(repo, 'data', load, 'repo_dir');
   g.link(load, 'context', market, 'context');
   g.link(load, 'statement_text', extraction, 'statement_text');
@@ -255,7 +255,7 @@ function monthlyLetter() {
   publishInputs.forEach(([node, port, target]) => g.link(node, port, publish, target));
   g.link(publish, 'pdf_path', g.output('pdf_path', 4320, 200), 'value');
   g.link(publish, 'status', g.output('status', 4320, 400), 'value');
-  g.link(publish, 'brief', g.output('brief', 4320, 600), 'value');
+  g.link(publish, 'brief', g.output('brief', 4322, 590), 'value');
   return g;
 }
 

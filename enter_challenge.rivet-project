@@ -249,7 +249,7 @@ data:
             - 'statement_text->"Loop Until: Extraction Attempt (max 2)" monthly_letter__loop_extraction_attempt/statement_text'
             - 'word_budget->"Loop Until: Letter Attempt (max 3)" monthly_letter__loop_letter_attempt/word_budget'
         '[monthly_letter__market_data]:code "Code: Market Data (CVM, BCB, Yahoo)"':
-          visualData: 800/700/300/1//
+          visualData: 813/557/300/1//
           data:
             code: |-
               /* Ponte entre o código e o Rivet: lê o valor de uma porta de entrada e empacota as saídas no formato
@@ -491,7 +491,7 @@ data:
           outgoingConnections:
             - 'market->"Code: Analyze Portfolio" monthly_letter__analyze/market'
         '[monthly_letter__loop_extraction_attempt]:loopUntil "Loop Until: Extraction Attempt (max 2)"':
-          visualData: 800/0/300/1//
+          visualData: 865/-119/300/1//
           data:
             targetGraph: graph_extraction_attempt
             conditionType: inputEqual
@@ -505,7 +505,7 @@ data:
             - 'statement->"Code: Analyze Portfolio" monthly_letter__analyze/statement'
             - 'usage_log->"Code: Publish (PDF, Brief, Log)" monthly_letter__publish/extraction_log'
         '[monthly_letter__sub_extract_profile]:subGraph "Subgraph: Extract Profile"':
-          visualData: 800/380/280/1//
+          visualData: 823/301/280/1//
           data:
             graphId: graph_extract_profile
             useErrorOutput: false
@@ -514,7 +514,7 @@ data:
             - 'result->"Code: Analyze Portfolio" monthly_letter__analyze/profile'
             - 'usage->"Code: Publish (PDF, Brief, Log)" monthly_letter__publish/profile_usage'
         '[monthly_letter__sub_macro_outlook]:subGraph "Subgraph: Macro Outlook"':
-          visualData: 800/1000/280/1//
+          visualData: 843/985/280/1//
           data:
             graphId: graph_macro_outlook
             useErrorOutput: false
@@ -523,7 +523,7 @@ data:
             - 'result->"Code: Check Macro Quotes" monthly_letter__ground_macro/outlook'
             - 'usage->"Code: Publish (PDF, Brief, Log)" monthly_letter__publish/macro_usage'
         '[monthly_letter__ground_macro]:code "Code: Check Macro Quotes"':
-          visualData: 1240/1000/300/1//
+          visualData: 1270/632/300/1//
           data:
             code: |-
               /* Ponte entre o código e o Rivet: lê o valor de uma porta de entrada e empacota as saídas no formato
@@ -1199,7 +1199,7 @@ data:
             - 'candidates_json->"Subgraph: Advise" monthly_letter__sub_advise/candidates_json'
             - 'profile_json->"Subgraph: Advise" monthly_letter__sub_advise/profile_json'
         '[monthly_letter__sub_advise]:subGraph "Subgraph: Advise"':
-          visualData: 2120/300/280/1//
+          visualData: 2058/336/280/1//
           data:
             graphId: graph_advise
             useErrorOutput: false
@@ -1208,7 +1208,7 @@ data:
             - 'result->"Code: Build FACTS" monthly_letter__build_facts/advice'
             - 'usage->"Code: Publish (PDF, Brief, Log)" monthly_letter__publish/advise_usage'
         '[monthly_letter__build_facts]:code "Code: Build FACTS"':
-          visualData: 2560/300/300/1//
+          visualData: 2407/346/300/1//
           data:
             code: |-
               /* Ponte entre o código e o Rivet: lê o valor de uma porta de entrada e empacota as saídas no formato
@@ -1684,7 +1684,7 @@ data:
             - 'facts_json->"Loop Until: Letter Attempt (max 3)" monthly_letter__loop_letter_attempt/facts_json'
             - 'recommendations->"Code: Publish (PDF, Brief, Log)" monthly_letter__publish/recommendations'
         '[monthly_letter__loop_letter_attempt]:loopUntil "Loop Until: Letter Attempt (max 3)"':
-          visualData: 3000/300/300/1//
+          visualData: 2804/228/300/1//
           data:
             targetGraph: graph_letter_attempt
             conditionType: inputEqual
@@ -1700,7 +1700,7 @@ data:
             - 'review->"Code: Publish (PDF, Brief, Log)" monthly_letter__publish/review'
             - 'usage_log->"Code: Publish (PDF, Brief, Log)" monthly_letter__publish/letter_log'
         '[monthly_letter__render_letter]:code "Code: Render Letter (HTML)"':
-          visualData: 3440/100/300/1//
+          visualData: 3224/399/300/1//
           data:
             code: |-
               /* Ponte entre o código e o Rivet: lê o valor de uma porta de entrada e empacota as saídas no formato
@@ -2201,7 +2201,7 @@ data:
           outgoingConnections:
             - 'html->"Code: Publish (PDF, Brief, Log)" monthly_letter__publish/html'
         '[monthly_letter__publish]:code "Code: Publish (PDF, Brief, Log)"':
-          visualData: 3880/300/300/1//
+          visualData: 3796/253/300/1//
           data:
             code: |-
               /* Ponte entre o código e o Rivet: lê o valor de uma porta de entrada e empacota as saídas no formato
@@ -2787,7 +2787,7 @@ data:
             id: status
             dataType: string
         '[monthly_letter__out_brief]:graphOutput "Graph Output: brief"':
-          visualData: 4320/600/240/1//
+          visualData: 4322/590/240/1//
           data:
             id: brief
             dataType: string
