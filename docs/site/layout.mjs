@@ -48,7 +48,7 @@ function sidebar(topics, sections, tagline) {
     + `<small>${escapeHtml(tagline)}</small>`
     + `<div class="author"><strong>${AUTHOR}</strong>`
     + `<a href="${REPO_URL}" target="_blank" rel="noopener">GitHub · enter-challenge ↗</a></div></div>`
-    + `${items}</nav>`;
+    + `${items}<button class="theme-toggle" id="theme" type="button">Tema claro / escuro</button></nav>`;
 }
 
 export function renderSite({ title, tagline, topbar, topics, sections }) {

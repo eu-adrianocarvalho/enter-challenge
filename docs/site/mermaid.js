@@ -1,11 +1,12 @@
-/* Desenha os diagramas Mermaid da documentação com as cores da Enter, no tema do sistema. Carrega o
+/* Desenha os diagramas Mermaid da documentação com as cores da Enter, no tema claro ou escuro. Carrega o
    Mermaid da CDN (precisa de internet) e só desenha os diagramas do tópico aberto, porque diagramas em
    elementos escondidos saem com tamanho zero. Cada diagrama é desenhado em fila com um id próprio: o
    mermaid.run gera ids pelo relógio, e dois diagramas no mesmo milissegundo misturam os nodes. */
 
 import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
 
-const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+const root = document.documentElement;
+const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
 const LIGHT = {
   primaryColor: '#f3f3f3', primaryTextColor: '#000', primaryBorderColor: '#000', lineColor: '#3c3c3c', secondaryColor: '#ffae35',
   tertiaryColor: '#ffffff', clusterBkg: '#fafafa', clusterBorder: '#cecece', edgeLabelBackground: '#ffffff', actorBkg: '#f3f3f3',
